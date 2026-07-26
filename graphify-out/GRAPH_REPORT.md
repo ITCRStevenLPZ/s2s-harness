@@ -1,16 +1,16 @@
 # Graph Report - s2s-harness  (2026-07-26)
 
 ## Corpus Check
-- 42 files · ~54,239 words
+- 42 files · ~54,996 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 454 nodes · 439 edges · 43 communities (35 shown, 8 thin omitted)
+- 457 nodes · 442 edges · 43 communities (35 shown, 8 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `ab414863`
+- Built from commit: `d69d104c`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -59,7 +59,7 @@
 - [[_COMMUNITY_Community 41|Community 41]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `Team Findings: Wave 1` - 34 edges
+1. `Team Findings: Wave 1` - 35 edges
 2. `Project criteria — source of truth` - 23 edges
 3. `2. Nodes` - 19 edges
 4. `5. `draft` — the justification builder` - 19 edges
@@ -71,8 +71,8 @@
 10. `Build plan` - 11 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `SideObservation` --inherits--> `BaseModel`  [EXTRACTED]
-  src/s2s_harness/models/state.py →   _Bridges community 29 → community 34_
+- `ErrorClusterEntry` --inherits--> `BaseModel`  [EXTRACTED]
+  src/s2s_harness/rules/catalog.py →   _Bridges community 29 → community 34_
 
 ## Import Cycles
 - None detected.
@@ -181,11 +181,11 @@ Nodes (3): Accuracy details, Constraints, What you are building
 
 ### Community 29 - "Community 29"
 Cohesion: 0.08
-Nodes (31): BaseModel, ErrorClusterKey, Mode, EvaluationState, Finding, Picks, Preflight, Pydantic state schema for the S2S Arena harness.  Transcribed field-for-field fr (+23 more)
+Nodes (27): BaseModel, bool, EvaluationState, Finding, Picks, Preflight, Pydantic state schema for the S2S Arena harness.  Transcribed field-for-field fr, One recognized word with optional timing. STT_SPEC section 2. (+19 more)
 
 ### Community 30 - "Community 30"
 Cohesion: 0.06
-Nodes (34): [lead] Baseline reconnaissance (pre-wave), [T1] CLI_SPEC nit fixed; [T1 -> T4-ci-dev] requesting the --version contract directly (SendMessage still unavailable to me), [T1] Confirmed T2's catalog.py already cites the RULE-n IDs I assigned, [T1] ID-scheme conventions adopted (stated at top of each file, per-file), [T1] Lead approved all three Phase-1 decisions; declining T2's RULES_SPEC wording-tightening suggestion, [T1] No Bash tool in this session — cannot run `graphify update .`, [T1] Phase 1 complete — diff summary and rationale, awaiting lead review, [T1] Phase 1 fully closed — CLI-16 filled, final report to lead (+26 more)
+Nodes (35): [lead] Baseline reconnaissance (pre-wave), [T1] CLI_SPEC nit fixed; [T1 -> T4-ci-dev] requesting the --version contract directly (SendMessage still unavailable to me), [T1] Confirmed T2's catalog.py already cites the RULE-n IDs I assigned, [T1] ID-scheme conventions adopted (stated at top of each file, per-file), [T1] Lead approved all three Phase-1 decisions; declining T2's RULES_SPEC wording-tightening suggestion, [T1] No Bash tool in this session — cannot run `graphify update .`, [T1] Phase 1 complete — diff summary and rationale, awaiting lead review, [T1] Phase 1 fully closed — CLI-16 filled, final report to lead (+27 more)
 
 ### Community 31 - "Community 31"
 Cohesion: 0.22
@@ -200,8 +200,8 @@ Cohesion: 0.18
 Nodes (10): 1. Deployment target, 2. Network posture, 3. Authentication, 4. Secrets, 5. IAM, 6. Supply chain, 7. Privacy, 8. What is still deliberately absent (+2 more)
 
 ### Community 34 - "Community 34"
-Cohesion: 0.18
-Nodes (8): bool, The only sanctioned way to populate the derived fields.          For use by `rul, Reject unknown catalogue keys. Fail-closed: with no context at         all, this, The only sanctioned way to populate the derived fields.          For use by `rul, SideObservation, int, str, ValidationInfo
+Cohesion: 0.15
+Nodes (14): ErrorClusterKey, Mode, _clusters_for(), ErrorClusterEntry, ModeProfile, profile_for(), Rules catalogues: the closed vocabulary of error clusters and threshold breaches, One row of a threshold catalogue (utility or audio).      Threshold tables in RU (+6 more)
 
 ### Community 35 - "Community 35"
 Cohesion: 0.33
@@ -216,7 +216,7 @@ Cohesion: 0.29
 Nodes (6): Cross-package invariants that only a test can enforce.  CLAUDE.md design rule 1, `rules.catalog.Mode` and `models.state.Mode` must never drift apart.      Both p, `rules.catalog.Mode` and `models.state.Mode` must never drift apart.      Both p, `models.state`'s hardcoded fail-closed default key sets must never     drift fro, test_catalogue_key_defaults_identical_across_layers(), test_mode_literal_identical_across_layers()
 
 ## Knowledge Gaps
-- **307 isolated node(s):** `$schema`, `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS`, `defaultMode`, `PreToolUse`, `superpowers@claude-plugins-official` (+302 more)
+- **308 isolated node(s):** `$schema`, `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS`, `defaultMode`, `PreToolUse`, `superpowers@claude-plugins-official` (+303 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **8 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -228,7 +228,7 @@ _Questions this graph is uniquely positioned to answer:_
 - **Why does `5. `draft` — the justification builder` connect `Community 9` to `Community 1`?**
   _High betweenness centrality (0.007) - this node is a cross-community bridge._
 - **What connects `$schema`, `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS`, `defaultMode` to the rest of the system?**
-  _337 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _340 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
   _Cohesion score 0.09523809523809523 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**

@@ -100,8 +100,8 @@
     "semantic_hash": ""
   },
   "/Users/stevenlpz/LabelerGuideAgents/s2s-harness/docs/CLI_SPEC.md": {
-    "mtime": 1785055877.0806608,
-    "ast_hash": "2e15f53611c2fccd3df795c18e5d56d6",
+    "mtime": 1785056481.775777,
+    "ast_hash": "991d08d98e52f5dd5aeafd3674fde590",
     "semantic_hash": ""
   },
   "/Users/stevenlpz/LabelerGuideAgents/s2s-harness/docs/EVAL_SPEC.md": {
@@ -170,8 +170,8 @@
     "semantic_hash": ""
   },
   "/Users/stevenlpz/LabelerGuideAgents/s2s-harness/src/s2s_harness/models/state.py": {
-    "mtime": 1785056036.1949213,
-    "ast_hash": "aa8343f9fe86541c7cb7bacd357a53f2",
+    "mtime": 1785056362.4942884,
+    "ast_hash": "2b0c8f6c07631e75c728ed70955a31b6",
     "semantic_hash": ""
   },
   "/Users/stevenlpz/LabelerGuideAgents/s2s-harness/src/s2s_harness/rules/__init__.py": {
@@ -185,13 +185,13 @@
     "semantic_hash": ""
   },
   "/Users/stevenlpz/LabelerGuideAgents/s2s-harness/tests/test_layering.py": {
-    "mtime": 1785056078.2378085,
-    "ast_hash": "4570e8a2989784601a79e9d74856c5a5",
+    "mtime": 1785056364.920683,
+    "ast_hash": "d4e9f359026e00f6cad68198eef70f8e",
     "semantic_hash": ""
   },
   "/Users/stevenlpz/LabelerGuideAgents/s2s-harness/.claude/team-runs/2026-07-26-foundations-and-deploy/team_findings.md": {
-    "mtime": 1785056317.0885558,
-    "ast_hash": "dfa86a5dca8076bd11a0ffb0785f79cf",
+    "mtime": 1785056516.4668612,
+    "ast_hash": "3d5a46af222cda6e4b1e9e202f656976",
     "semantic_hash": ""
   },
   "/Users/stevenlpz/LabelerGuideAgents/s2s-harness/.claude/team-runs/2026-07-26-foundations-and-deploy/team_plan.md": {
@@ -200,8 +200,8 @@
     "semantic_hash": ""
   },
   "/Users/stevenlpz/LabelerGuideAgents/s2s-harness/.claude/team-runs/2026-07-26-foundations-and-deploy/team_progress.md": {
-    "mtime": 1785056317.0914378,
-    "ast_hash": "6c1259b7f89a704fb7a5abcf9897c86e",
+    "mtime": 1785056550.9038014,
+    "ast_hash": "708ea57a4c6e3d59060375aa6a7bf68f",
     "semantic_hash": ""
   },
   "/Users/stevenlpz/LabelerGuideAgents/s2s-harness/.pre-commit-config.yaml": {
@@ -225,8 +225,8 @@
     "semantic_hash": ""
   },
   "/Users/stevenlpz/LabelerGuideAgents/s2s-harness/.github/workflows/ci.yml": {
-    "mtime": 1785056002.1595633,
-    "ast_hash": "dd88680dd0dababcdc3a426895821501",
+    "mtime": 1785056503.0719345,
+    "ast_hash": "99b84b434f3ff1c6a23b8c0160e5b1ec",
     "semantic_hash": ""
   },
   "/Users/stevenlpz/LabelerGuideAgents/s2s-harness/.github/workflows/tier2.yml": {
@@ -235,8 +235,8 @@
     "semantic_hash": ""
   },
   "/Users/stevenlpz/LabelerGuideAgents/s2s-harness/.github/workflows/release.yml": {
-    "mtime": 1785056070.473975,
-    "ast_hash": "6b46c1b32ed6a7e84b41ea9b1f3f8ddf",
+    "mtime": 1785056498.0237966,
+    "ast_hash": "da6b59dc3a44822729b0f628d1b2a32e",
     "semantic_hash": ""
   }
 }

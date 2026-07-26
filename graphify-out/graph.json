@@ -387,7 +387,7 @@
       "source_file": "src/s2s_harness/models/state.py",
       "source_location": "L198",
       "id": "models_state_sideobservation",
-      "community": 34,
+      "community": 29,
       "norm_label": "sideobservation"
     },
     {
@@ -396,7 +396,7 @@
       "source_file": "src/s2s_harness/models/state.py",
       "source_location": "L219",
       "id": "models_state_sideobservation_turns_non_negative",
-      "community": 34,
+      "community": 29,
       "norm_label": "._turns_non_negative()"
     },
     {
@@ -405,7 +405,7 @@
       "source_file": "src/s2s_harness/models/state.py",
       "source_location": "L219",
       "id": "src_s2s_harness_models_state_py_int",
-      "community": 34,
+      "community": 29,
       "norm_label": "int"
     },
     {
@@ -414,7 +414,7 @@
       "source_file": "src/s2s_harness/models/state.py",
       "source_location": "L225",
       "id": "models_state_sideobservation_reject_derived_on_input",
-      "community": 34,
+      "community": 29,
       "norm_label": "._reject_derived_on_input()"
     },
     {
@@ -423,7 +423,7 @@
       "source_file": "src/s2s_harness/models/state.py",
       "source_location": "L225",
       "id": "validationinfo",
-      "community": 34,
+      "community": 29,
       "norm_label": "validationinfo"
     },
     {
@@ -432,41 +432,41 @@
       "source_file": "src/s2s_harness/models/state.py",
       "source_location": "L238",
       "id": "models_state_sideobservation_flag_keys_known",
-      "community": 34,
+      "community": 29,
       "norm_label": "._flag_keys_known()"
     },
     {
       "label": ".with_derived()",
       "file_type": "code",
       "source_file": "src/s2s_harness/models/state.py",
-      "source_location": "L270",
+      "source_location": "L269",
       "id": "models_state_sideobservation_with_derived",
-      "community": 34,
+      "community": 29,
       "norm_label": ".with_derived()"
     },
     {
       "label": "str",
       "file_type": "code",
       "source_file": "src/s2s_harness/models/state.py",
-      "source_location": "L270",
+      "source_location": "L269",
       "id": "src_s2s_harness_models_state_py_str",
-      "community": 34,
+      "community": 29,
       "norm_label": "str"
     },
     {
       "label": "bool",
       "file_type": "code",
       "source_file": "src/s2s_harness/models/state.py",
-      "source_location": "L270",
+      "source_location": "L269",
       "id": "bool",
-      "community": 34,
+      "community": 29,
       "norm_label": "bool"
     },
     {
       "label": "Preflight",
       "file_type": "code",
       "source_file": "src/s2s_harness/models/state.py",
-      "source_location": "L302",
+      "source_location": "L301",
       "id": "models_state_preflight",
       "community": 29,
       "norm_label": "preflight"
@@ -475,7 +475,7 @@
       "label": "TaskContext",
       "file_type": "code",
       "source_file": "src/s2s_harness/models/state.py",
-      "source_location": "L316",
+      "source_location": "L315",
       "id": "models_state_taskcontext",
       "community": 29,
       "norm_label": "taskcontext"
@@ -484,7 +484,7 @@
       "label": "Picks",
       "file_type": "code",
       "source_file": "src/s2s_harness/models/state.py",
-      "source_location": "L329",
+      "source_location": "L328",
       "id": "models_state_picks",
       "community": 29,
       "norm_label": "picks"
@@ -493,7 +493,7 @@
       "label": "Verdict",
       "file_type": "code",
       "source_file": "src/s2s_harness/models/state.py",
-      "source_location": "L338",
+      "source_location": "L337",
       "id": "models_state_verdict",
       "community": 29,
       "norm_label": "verdict"
@@ -502,7 +502,7 @@
       "label": "Finding",
       "file_type": "code",
       "source_file": "src/s2s_harness/models/state.py",
-      "source_location": "L348",
+      "source_location": "L347",
       "id": "models_state_finding",
       "community": 29,
       "norm_label": "finding"
@@ -511,7 +511,7 @@
       "label": "Suggestion",
       "file_type": "code",
       "source_file": "src/s2s_harness/models/state.py",
-      "source_location": "L357",
+      "source_location": "L356",
       "id": "models_state_suggestion",
       "community": 29,
       "norm_label": "suggestion"
@@ -520,7 +520,7 @@
       "label": "EvaluationState",
       "file_type": "code",
       "source_file": "src/s2s_harness/models/state.py",
-      "source_location": "L366",
+      "source_location": "L365",
       "id": "models_state_evaluationstate",
       "community": 29,
       "norm_label": "evaluationstate"
@@ -558,24 +558,24 @@
       "source_file": "src/s2s_harness/models/state.py",
       "source_location": "L239",
       "id": "models_state_rationale_239",
-      "community": 34,
+      "community": 29,
       "norm_label": "reject unknown catalogue keys. fail-closed: with no context at         all, this"
     },
     {
       "label": "The only sanctioned way to populate the derived fields.          For use by `rul",
       "file_type": "rationale",
       "source_file": "src/s2s_harness/models/state.py",
-      "source_location": "L278",
-      "id": "models_state_rationale_278",
-      "community": 34,
+      "source_location": "L277",
+      "id": "models_state_rationale_277",
+      "community": 29,
       "norm_label": "the only sanctioned way to populate the derived fields.          for use by `rul"
     },
     {
       "label": "Conversation mode only.",
       "file_type": "rationale",
       "source_file": "src/s2s_harness/models/state.py",
-      "source_location": "L303",
-      "id": "models_state_rationale_303",
+      "source_location": "L302",
+      "id": "models_state_rationale_302",
       "community": 29,
       "norm_label": "conversation mode only."
     },
@@ -603,7 +603,7 @@
       "source_file": "src/s2s_harness/rules/catalog.py",
       "source_location": "L1",
       "id": "rules_catalog",
-      "community": 29,
+      "community": 34,
       "norm_label": "catalog.py"
     },
     {
@@ -612,7 +612,7 @@
       "source_file": "src/s2s_harness/rules/catalog.py",
       "source_location": "L73",
       "id": "rules_catalog_errorclusterentry",
-      "community": 29,
+      "community": 34,
       "norm_label": "errorclusterentry"
     },
     {
@@ -621,7 +621,7 @@
       "source_file": "src/s2s_harness/rules/catalog.py",
       "source_location": "L97",
       "id": "rules_catalog_errorclusterentry_display",
-      "community": 29,
+      "community": 34,
       "norm_label": ".display()"
     },
     {
@@ -630,7 +630,7 @@
       "source_file": "src/s2s_harness/rules/catalog.py",
       "source_location": "L97",
       "id": "mode",
-      "community": 29,
+      "community": 34,
       "norm_label": "mode"
     },
     {
@@ -639,7 +639,7 @@
       "source_file": "src/s2s_harness/rules/catalog.py",
       "source_location": "L97",
       "id": "src_s2s_harness_rules_catalog_py_str",
-      "community": 29,
+      "community": 34,
       "norm_label": "str"
     },
     {
@@ -648,7 +648,7 @@
       "source_file": "src/s2s_harness/rules/catalog.py",
       "source_location": "L102",
       "id": "rules_catalog_thresholdentry",
-      "community": 29,
+      "community": 34,
       "norm_label": "thresholdentry"
     },
     {
@@ -657,7 +657,7 @@
       "source_file": "src/s2s_harness/rules/catalog.py",
       "source_location": "L332",
       "id": "rules_catalog_modeprofile",
-      "community": 29,
+      "community": 34,
       "norm_label": "modeprofile"
     },
     {
@@ -666,7 +666,7 @@
       "source_file": "src/s2s_harness/rules/catalog.py",
       "source_location": "L350",
       "id": "rules_catalog_clusters_for",
-      "community": 29,
+      "community": 34,
       "norm_label": "_clusters_for()"
     },
     {
@@ -675,7 +675,7 @@
       "source_file": "src/s2s_harness/rules/catalog.py",
       "source_location": "L350",
       "id": "errorclusterkey",
-      "community": 29,
+      "community": 34,
       "norm_label": "errorclusterkey"
     },
     {
@@ -684,7 +684,7 @@
       "source_file": "src/s2s_harness/rules/catalog.py",
       "source_location": "L374",
       "id": "rules_catalog_profile_for",
-      "community": 29,
+      "community": 34,
       "norm_label": "profile_for()"
     },
     {
@@ -693,7 +693,7 @@
       "source_file": "src/s2s_harness/rules/catalog.py",
       "source_location": "L1",
       "id": "rules_catalog_rationale_1",
-      "community": 29,
+      "community": 34,
       "norm_label": "rules catalogues: the closed vocabulary of error clusters and threshold breaches"
     },
     {
@@ -702,7 +702,7 @@
       "source_file": "src/s2s_harness/rules/catalog.py",
       "source_location": "L74",
       "id": "rules_catalog_rationale_74",
-      "community": 29,
+      "community": 34,
       "norm_label": "one row of rules_spec section 1, \"error clusters -- shared\" table.      `display"
     },
     {
@@ -711,7 +711,7 @@
       "source_file": "src/s2s_harness/rules/catalog.py",
       "source_location": "L98",
       "id": "rules_catalog_rationale_98",
-      "community": 29,
+      "community": 34,
       "norm_label": "return the display string for the requested mode."
     },
     {
@@ -720,7 +720,7 @@
       "source_file": "src/s2s_harness/rules/catalog.py",
       "source_location": "L103",
       "id": "rules_catalog_rationale_103",
-      "community": 29,
+      "community": 34,
       "norm_label": "one row of a threshold catalogue (utility or audio).      threshold tables in ru"
     },
     {
@@ -729,7 +729,7 @@
       "source_file": "src/s2s_harness/rules/catalog.py",
       "source_location": "L333",
       "id": "rules_catalog_rationale_333",
-      "community": 29,
+      "community": 34,
       "norm_label": "the catalogue entries visible to a given mode.      graph_spec section 5, \"mode"
     },
     {
@@ -738,7 +738,7 @@
       "source_file": "src/s2s_harness/rules/catalog.py",
       "source_location": "L375",
       "id": "rules_catalog_rationale_375",
-      "community": 29,
+      "community": 34,
       "norm_label": "return the catalogue profile for `mode`."
     },
     {
@@ -1658,6 +1658,15 @@
       "id": "2026_07_26_foundations_and_deploy_team_findings_t4_real_ci_run_result_and_branch_protection_blocker",
       "community": 30,
       "norm_label": "[t4] real ci run result and branch-protection blocker"
+    },
+    {
+      "label": "[T4 <-> T5-gcp-deploy] WIF/registry contract, T4 side confirmed",
+      "file_type": "document",
+      "source_file": ".claude/team-runs/2026-07-26-foundations-and-deploy/team_findings.md",
+      "source_location": "L315",
+      "id": "2026_07_26_foundations_and_deploy_team_findings_t4_t5_gcp_deploy_wif_registry_contract_t4_side_confirmed",
+      "community": 30,
+      "norm_label": "[t4 <-> t5-gcp-deploy] wif/registry contract, t4 side confirmed"
     },
     {
       "label": "team_plan.md",
@@ -3505,6 +3514,24 @@
       "norm_label": "front ends"
     },
     {
+      "label": "The only sanctioned way to populate the derived fields.          For use by `rul",
+      "file_type": "rationale",
+      "source_file": "src/s2s_harness/models/state.py",
+      "source_location": "L278",
+      "community": 29,
+      "norm_label": "the only sanctioned way to populate the derived fields.          for use by `rul",
+      "id": "models_state_rationale_278"
+    },
+    {
+      "label": "Conversation mode only.",
+      "file_type": "rationale",
+      "source_file": "src/s2s_harness/models/state.py",
+      "source_location": "L303",
+      "community": 29,
+      "norm_label": "conversation mode only.",
+      "id": "models_state_rationale_303"
+    },
+    {
       "label": "`rules.catalog.Mode` and `models.state.Mode` must never drift apart.      Both p",
       "file_type": "rationale",
       "source_file": "tests/test_layering.py",
@@ -3536,7 +3563,7 @@
       "file_type": "rationale",
       "source_file": "src/s2s_harness/models/state.py",
       "source_location": "L213",
-      "community": 34,
+      "community": 29,
       "norm_label": "the only sanctioned way to populate the derived fields.          for use by `rul",
       "id": "models_state_rationale_213"
     },
@@ -4924,6 +4951,16 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "src/s2s_harness/models/state.py",
+      "source_location": "L277",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "models_state_rationale_277",
+      "target": "models_state_sideobservation_with_derived"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/s2s_harness/models/state.py",
       "source_location": "L278",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -4960,6 +4997,16 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "models_state_rationale_238",
+      "target": "models_state_preflight"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/s2s_harness/models/state.py",
+      "source_location": "L302",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "models_state_rationale_302",
       "target": "models_state_preflight"
     },
     {
@@ -5984,8 +6031,18 @@
       "source_file": ".claude/team-runs/2026-07-26-foundations-and-deploy/team_findings.md",
       "source_location": "L307",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_07_26_foundations_and_deploy_team_findings_team_findings_wave_1",
-      "target": "2026_07_26_foundations_and_deploy_team_findings_t4_real_ci_run_result_and_branch_protection_blocker",
+      "target": "2026_07_26_foundations_and_deploy_team_findings_t4_real_ci_run_result_and_branch_protection_blocker"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/team-runs/2026-07-26-foundations-and-deploy/team_findings.md",
+      "source_location": "L315",
+      "weight": 1.0,
+      "source": "2026_07_26_foundations_and_deploy_team_findings_team_findings_wave_1",
+      "target": "2026_07_26_foundations_and_deploy_team_findings_t4_t5_gcp_deploy_wif_registry_contract_t4_side_confirmed",
       "confidence_score": 1.0
     },
     {
@@ -8510,5 +8567,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "ab41486327025325ddb1e5b59bc21ccd46bcdbfa"
+  "built_at_commit": "d69d104ce94a70d125ab90f113f2b7441db2827b"
 }
