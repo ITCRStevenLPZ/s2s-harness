@@ -22,6 +22,17 @@ name: release
 # protect. They are unset until gcp-deploy's project exists; every gcloud
 # step below will fail loudly (not silently) until then, which is correct:
 # a release tag pushed before the deployment project exists should fail.
+#
+# Contract confirmed with gcp-deploy (team_findings.md "[T5 <-> T4-ci-dev]
+# WIF and registry naming confirmed"), when these are set:
+#   GCP_WIF_PROVIDER          = projects/<PROJECT_NUMBER>/locations/global/workloadIdentityPools/github-pool/providers/github-provider
+#                                (project NUMBER, not project ID -- GCP requires
+#                                the numeric form here; Terraform exposes it as
+#                                output "workload_identity_provider")
+#   GCP_DEPLOYER_SA_EMAIL     = s2s-deployer@<project-id>.iam.gserviceaccount.com
+#   GCP_ARTIFACT_REGISTRY_PATH = <region>-docker.pkg.dev/<project-id>/s2s-harness/bridge
+#   GCP_PROJECT_ID            = the GCP project id (not number)
+#   GCP_REGION                = e.g. us-central1
 on:
   push:
     tags:
