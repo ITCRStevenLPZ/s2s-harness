@@ -1,0 +1,4328 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "settings.json",
+      "file_type": "code",
+      "source_file": ".claude/settings.json",
+      "source_location": "L1",
+      "id": "claude_settings",
+      "community": 2,
+      "norm_label": "settings.json"
+    },
+    {
+      "label": "$schema",
+      "file_type": "code",
+      "source_file": ".claude/settings.json",
+      "source_location": "L2",
+      "id": "claude_settings_schema",
+      "community": 2,
+      "norm_label": "$schema"
+    },
+    {
+      "label": "env",
+      "file_type": "code",
+      "source_file": ".claude/settings.json",
+      "source_location": "L3",
+      "id": "claude_settings_env",
+      "community": 2,
+      "norm_label": "env"
+    },
+    {
+      "label": "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS",
+      "file_type": "code",
+      "source_file": ".claude/settings.json",
+      "source_location": "L4",
+      "id": "claude_settings_env_claude_code_experimental_agent_teams",
+      "community": 2,
+      "norm_label": "claude_code_experimental_agent_teams"
+    },
+    {
+      "label": "permissions",
+      "file_type": "code",
+      "source_file": ".claude/settings.json",
+      "source_location": "L6",
+      "id": "claude_settings_permissions",
+      "community": 2,
+      "norm_label": "permissions"
+    },
+    {
+      "label": "defaultMode",
+      "file_type": "code",
+      "source_file": ".claude/settings.json",
+      "source_location": "L7",
+      "id": "claude_settings_permissions_defaultmode",
+      "community": 2,
+      "norm_label": "defaultmode"
+    },
+    {
+      "label": "hooks",
+      "file_type": "code",
+      "source_file": ".claude/settings.json",
+      "source_location": "L9",
+      "id": "claude_settings_hooks",
+      "community": 2,
+      "norm_label": "hooks"
+    },
+    {
+      "label": "PreToolUse",
+      "file_type": "code",
+      "source_file": ".claude/settings.json",
+      "source_location": "L10",
+      "id": "claude_settings_hooks_pretooluse",
+      "community": 2,
+      "norm_label": "pretooluse"
+    },
+    {
+      "label": "enabledPlugins",
+      "file_type": "code",
+      "source_file": ".claude/settings.json",
+      "source_location": "L22",
+      "id": "claude_settings_enabledplugins",
+      "community": 2,
+      "norm_label": "enabledplugins"
+    },
+    {
+      "label": "superpowers@claude-plugins-official",
+      "file_type": "code",
+      "source_file": ".claude/settings.json",
+      "source_location": "L23",
+      "id": "claude_settings_enabledplugins_superpowers_claude_plugins_official",
+      "community": 2,
+      "norm_label": "superpowers@claude-plugins-official"
+    },
+    {
+      "label": "supabase@claude-plugins-official",
+      "file_type": "code",
+      "source_file": ".claude/settings.json",
+      "source_location": "L24",
+      "id": "claude_settings_enabledplugins_supabase_claude_plugins_official",
+      "community": 2,
+      "norm_label": "supabase@claude-plugins-official"
+    },
+    {
+      "label": "planning-with-teams@planning-with-teams",
+      "file_type": "code",
+      "source_file": ".claude/settings.json",
+      "source_location": "L25",
+      "id": "claude_settings_enabledplugins_planning_with_teams_planning_with_teams",
+      "community": 2,
+      "norm_label": "planning-with-teams@planning-with-teams"
+    },
+    {
+      "label": "playwright@claude-plugins-official",
+      "file_type": "code",
+      "source_file": ".claude/settings.json",
+      "source_location": "L26",
+      "id": "claude_settings_enabledplugins_playwright_claude_plugins_official",
+      "community": 2,
+      "norm_label": "playwright@claude-plugins-official"
+    },
+    {
+      "label": "frontend-design@claude-plugins-official",
+      "file_type": "code",
+      "source_file": ".claude/settings.json",
+      "source_location": "L27",
+      "id": "claude_settings_enabledplugins_frontend_design_claude_plugins_official",
+      "community": 2,
+      "norm_label": "frontend-design@claude-plugins-official"
+    },
+    {
+      "label": "teammateMode",
+      "file_type": "code",
+      "source_file": ".claude/settings.json",
+      "source_location": "L29",
+      "id": "claude_settings_teammatemode",
+      "community": 2,
+      "norm_label": "teammatemode"
+    },
+    {
+      "label": "preferences",
+      "file_type": "code",
+      "source_file": ".claude/settings.json",
+      "source_location": "L30",
+      "id": "claude_settings_preferences",
+      "community": 2,
+      "norm_label": "preferences"
+    },
+    {
+      "label": "tmuxSplitPanes",
+      "file_type": "code",
+      "source_file": ".claude/settings.json",
+      "source_location": "L31",
+      "id": "claude_settings_preferences_tmuxsplitpanes",
+      "community": 2,
+      "norm_label": "tmuxsplitpanes"
+    },
+    {
+      "label": "bridge-dev.md",
+      "file_type": "document",
+      "source_file": ".claude/agents/bridge-dev.md",
+      "source_location": "L1",
+      "id": "agents_bridge_dev",
+      "community": 18,
+      "norm_label": "bridge-dev.md"
+    },
+    {
+      "label": "The point of this work",
+      "file_type": "document",
+      "source_file": ".claude/agents/bridge-dev.md",
+      "source_location": "L10",
+      "id": "agents_bridge_dev_the_point_of_this_work",
+      "community": 18,
+      "norm_label": "the point of this work"
+    },
+    {
+      "label": "Porting checklist",
+      "file_type": "document",
+      "source_file": ".claude/agents/bridge-dev.md",
+      "source_location": "L16",
+      "id": "agents_bridge_dev_porting_checklist",
+      "community": 18,
+      "norm_label": "porting checklist"
+    },
+    {
+      "label": "Constraints",
+      "file_type": "document",
+      "source_file": ".claude/agents/bridge-dev.md",
+      "source_location": "L22",
+      "id": "agents_bridge_dev_constraints",
+      "community": 18,
+      "norm_label": "constraints"
+    },
+    {
+      "label": "cli-dev.md",
+      "file_type": "document",
+      "source_file": ".claude/agents/cli-dev.md",
+      "source_location": "L1",
+      "id": "agents_cli_dev",
+      "community": 19,
+      "norm_label": "cli-dev.md"
+    },
+    {
+      "label": "The one rule that shapes everything",
+      "file_type": "document",
+      "source_file": ".claude/agents/cli-dev.md",
+      "source_location": "L10",
+      "id": "agents_cli_dev_the_one_rule_that_shapes_everything",
+      "community": 19,
+      "norm_label": "the one rule that shapes everything"
+    },
+    {
+      "label": "Flow",
+      "file_type": "document",
+      "source_file": ".claude/agents/cli-dev.md",
+      "source_location": "L14",
+      "id": "agents_cli_dev_flow",
+      "community": 19,
+      "norm_label": "flow"
+    },
+    {
+      "label": "Rendering",
+      "file_type": "document",
+      "source_file": ".claude/agents/cli-dev.md",
+      "source_location": "L18",
+      "id": "agents_cli_dev_rendering",
+      "community": 19,
+      "norm_label": "rendering"
+    },
+    {
+      "label": "criteria-keeper.md",
+      "file_type": "document",
+      "source_file": ".claude/agents/criteria-keeper.md",
+      "source_location": "L1",
+      "id": "agents_criteria_keeper",
+      "community": 20,
+      "norm_label": "criteria-keeper.md"
+    },
+    {
+      "label": "Your responsibilities",
+      "file_type": "document",
+      "source_file": ".claude/agents/criteria-keeper.md",
+      "source_location": "L12",
+      "id": "agents_criteria_keeper_your_responsibilities",
+      "community": 20,
+      "norm_label": "your responsibilities"
+    },
+    {
+      "label": "Distinctions you must hold firmly",
+      "file_type": "document",
+      "source_file": ".claude/agents/criteria-keeper.md",
+      "source_location": "L19",
+      "id": "agents_criteria_keeper_distinctions_you_must_hold_firmly",
+      "community": 20,
+      "norm_label": "distinctions you must hold firmly"
+    },
+    {
+      "label": "How you work",
+      "file_type": "document",
+      "source_file": ".claude/agents/criteria-keeper.md",
+      "source_location": "L26",
+      "id": "agents_criteria_keeper_how_you_work",
+      "community": 20,
+      "norm_label": "how you work"
+    },
+    {
+      "label": "eval-runner.md",
+      "file_type": "document",
+      "source_file": ".claude/agents/eval-runner.md",
+      "source_location": "L1",
+      "id": "agents_eval_runner",
+      "community": 21,
+      "norm_label": "eval-runner.md"
+    },
+    {
+      "label": "Commands",
+      "file_type": "document",
+      "source_file": ".claude/agents/eval-runner.md",
+      "source_location": "L10",
+      "id": "agents_eval_runner_commands",
+      "community": 21,
+      "norm_label": "commands"
+    },
+    {
+      "label": "Reporting",
+      "file_type": "document",
+      "source_file": ".claude/agents/eval-runner.md",
+      "source_location": "L19",
+      "id": "agents_eval_runner_reporting",
+      "community": 21,
+      "norm_label": "reporting"
+    },
+    {
+      "label": "The rule you enforce",
+      "file_type": "document",
+      "source_file": ".claude/agents/eval-runner.md",
+      "source_location": "L23",
+      "id": "agents_eval_runner_the_rule_you_enforce",
+      "community": 21,
+      "norm_label": "the rule you enforce"
+    },
+    {
+      "label": "graph-architect.md",
+      "file_type": "document",
+      "source_file": ".claude/agents/graph-architect.md",
+      "source_location": "L1",
+      "id": "agents_graph_architect",
+      "community": 22,
+      "norm_label": "graph-architect.md"
+    },
+    {
+      "label": "Constraints",
+      "file_type": "document",
+      "source_file": ".claude/agents/graph-architect.md",
+      "source_location": "L10",
+      "id": "agents_graph_architect_constraints",
+      "community": 22,
+      "norm_label": "constraints"
+    },
+    {
+      "label": "The polish node",
+      "file_type": "document",
+      "source_file": ".claude/agents/graph-architect.md",
+      "source_location": "L17",
+      "id": "agents_graph_architect_the_polish_node",
+      "community": 22,
+      "norm_label": "the polish node"
+    },
+    {
+      "label": "Checkpointing",
+      "file_type": "document",
+      "source_file": ".claude/agents/graph-architect.md",
+      "source_location": "L25",
+      "id": "agents_graph_architect_checkpointing",
+      "community": 22,
+      "norm_label": "checkpointing"
+    },
+    {
+      "label": "rules-engine-dev.md",
+      "file_type": "document",
+      "source_file": ".claude/agents/rules-engine-dev.md",
+      "source_location": "L1",
+      "id": "agents_rules_engine_dev",
+      "community": 23,
+      "norm_label": "rules-engine-dev.md"
+    },
+    {
+      "label": "Hard constraints",
+      "file_type": "document",
+      "source_file": ".claude/agents/rules-engine-dev.md",
+      "source_location": "L10",
+      "id": "agents_rules_engine_dev_hard_constraints",
+      "community": 23,
+      "norm_label": "hard constraints"
+    },
+    {
+      "label": "Working order",
+      "file_type": "document",
+      "source_file": ".claude/agents/rules-engine-dev.md",
+      "source_location": "L17",
+      "id": "agents_rules_engine_dev_working_order",
+      "community": 23,
+      "norm_label": "working order"
+    },
+    {
+      "label": "Details that matter",
+      "file_type": "document",
+      "source_file": ".claude/agents/rules-engine-dev.md",
+      "source_location": "L21",
+      "id": "agents_rules_engine_dev_details_that_matter",
+      "community": 23,
+      "norm_label": "details that matter"
+    },
+    {
+      "label": "stt-engineer.md",
+      "file_type": "document",
+      "source_file": ".claude/agents/stt-engineer.md",
+      "source_location": "L1",
+      "id": "agents_stt_engineer",
+      "community": 24,
+      "norm_label": "stt-engineer.md"
+    },
+    {
+      "label": "What you are building",
+      "file_type": "document",
+      "source_file": ".claude/agents/stt-engineer.md",
+      "source_location": "L10",
+      "id": "agents_stt_engineer_what_you_are_building",
+      "community": 24,
+      "norm_label": "what you are building"
+    },
+    {
+      "label": "Constraints",
+      "file_type": "document",
+      "source_file": ".claude/agents/stt-engineer.md",
+      "source_location": "L14",
+      "id": "agents_stt_engineer_constraints",
+      "community": 24,
+      "norm_label": "constraints"
+    },
+    {
+      "label": "Accuracy details",
+      "file_type": "document",
+      "source_file": ".claude/agents/stt-engineer.md",
+      "source_location": "L21",
+      "id": "agents_stt_engineer_accuracy_details",
+      "community": 24,
+      "norm_label": "accuracy details"
+    },
+    {
+      "label": "SKILL.md",
+      "file_type": "document",
+      "source_file": ".claude/skills/audit-justification/SKILL.md",
+      "source_location": "L1",
+      "id": "audit_justification_skill",
+      "community": 17,
+      "norm_label": "skill.md"
+    },
+    {
+      "label": "Audit a written justification",
+      "file_type": "document",
+      "source_file": ".claude/skills/audit-justification/SKILL.md",
+      "source_location": "L6",
+      "id": "audit_justification_skill_audit_a_written_justification",
+      "community": 17,
+      "norm_label": "audit a written justification"
+    },
+    {
+      "label": "Inputs",
+      "file_type": "document",
+      "source_file": ".claude/skills/audit-justification/SKILL.md",
+      "source_location": "L10",
+      "id": "audit_justification_skill_inputs",
+      "community": 17,
+      "norm_label": "inputs"
+    },
+    {
+      "label": "What to check",
+      "file_type": "document",
+      "source_file": ".claude/skills/audit-justification/SKILL.md",
+      "source_location": "L14",
+      "id": "audit_justification_skill_what_to_check",
+      "community": 17,
+      "norm_label": "what to check"
+    },
+    {
+      "label": "Output",
+      "file_type": "document",
+      "source_file": ".claude/skills/audit-justification/SKILL.md",
+      "source_location": "L28",
+      "id": "audit_justification_skill_output",
+      "community": 17,
+      "norm_label": "output"
+    },
+    {
+      "label": "Reference",
+      "file_type": "document",
+      "source_file": ".claude/skills/audit-justification/SKILL.md",
+      "source_location": "L34",
+      "id": "audit_justification_skill_reference",
+      "community": 17,
+      "norm_label": "reference"
+    },
+    {
+      "label": "SKILL.md",
+      "file_type": "document",
+      "source_file": ".claude/skills/criteria-reference/SKILL.md",
+      "source_location": "L1",
+      "id": "criteria_reference_skill",
+      "community": 25,
+      "norm_label": "skill.md"
+    },
+    {
+      "label": "Project criteria reference",
+      "file_type": "document",
+      "source_file": ".claude/skills/criteria-reference/SKILL.md",
+      "source_location": "L6",
+      "id": "criteria_reference_skill_project_criteria_reference",
+      "community": 25,
+      "norm_label": "project criteria reference"
+    },
+    {
+      "label": "Distinctions people get wrong",
+      "file_type": "document",
+      "source_file": ".claude/skills/criteria-reference/SKILL.md",
+      "source_location": "L16",
+      "id": "criteria_reference_skill_distinctions_people_get_wrong",
+      "community": 25,
+      "norm_label": "distinctions people get wrong"
+    },
+    {
+      "label": "SKILL.md",
+      "file_type": "document",
+      "source_file": ".claude/skills/dictate-notes/SKILL.md",
+      "source_location": "L1",
+      "id": "dictate_notes_skill",
+      "community": 15,
+      "norm_label": "skill.md"
+    },
+    {
+      "label": "Dictate rating notes",
+      "file_type": "document",
+      "source_file": ".claude/skills/dictate-notes/SKILL.md",
+      "source_location": "L6",
+      "id": "dictate_notes_skill_dictate_rating_notes",
+      "community": 15,
+      "norm_label": "dictate rating notes"
+    },
+    {
+      "label": "Capture",
+      "file_type": "document",
+      "source_file": ".claude/skills/dictate-notes/SKILL.md",
+      "source_location": "L10",
+      "id": "dictate_notes_skill_capture",
+      "community": 15,
+      "norm_label": "capture"
+    },
+    {
+      "label": "What to say",
+      "file_type": "document",
+      "source_file": ".claude/skills/dictate-notes/SKILL.md",
+      "source_location": "L19",
+      "id": "dictate_notes_skill_what_to_say",
+      "community": 15,
+      "norm_label": "what to say"
+    },
+    {
+      "label": "Setup",
+      "file_type": "document",
+      "source_file": ".claude/skills/dictate-notes/SKILL.md",
+      "source_location": "L25",
+      "id": "dictate_notes_skill_setup",
+      "community": 15,
+      "norm_label": "setup"
+    },
+    {
+      "label": "Boundaries",
+      "file_type": "document",
+      "source_file": ".claude/skills/dictate-notes/SKILL.md",
+      "source_location": "L36",
+      "id": "dictate_notes_skill_boundaries",
+      "community": 15,
+      "norm_label": "boundaries"
+    },
+    {
+      "label": "Reference",
+      "file_type": "document",
+      "source_file": ".claude/skills/dictate-notes/SKILL.md",
+      "source_location": "L42",
+      "id": "dictate_notes_skill_reference",
+      "community": 15,
+      "norm_label": "reference"
+    },
+    {
+      "label": "SKILL.md",
+      "file_type": "document",
+      "source_file": ".claude/skills/evaluate-clips/SKILL.md",
+      "source_location": "L1",
+      "id": "evaluate_clips_skill",
+      "community": 13,
+      "norm_label": "skill.md"
+    },
+    {
+      "label": "Evaluate a clip comparison",
+      "file_type": "document",
+      "source_file": ".claude/skills/evaluate-clips/SKILL.md",
+      "source_location": "L6",
+      "id": "evaluate_clips_skill_evaluate_a_clip_comparison",
+      "community": 13,
+      "norm_label": "evaluate a clip comparison"
+    },
+    {
+      "label": "1. The prompt",
+      "file_type": "document",
+      "source_file": ".claude/skills/evaluate-clips/SKILL.md",
+      "source_location": "L10",
+      "id": "evaluate_clips_skill_1_the_prompt",
+      "community": 13,
+      "norm_label": "1. the prompt"
+    },
+    {
+      "label": "2. Observations, per clip",
+      "file_type": "document",
+      "source_file": ".claude/skills/evaluate-clips/SKILL.md",
+      "source_location": "L14",
+      "id": "evaluate_clips_skill_2_observations_per_clip",
+      "community": 13,
+      "norm_label": "2. observations, per clip"
+    },
+    {
+      "label": "3. Picks",
+      "file_type": "document",
+      "source_file": ".claude/skills/evaluate-clips/SKILL.md",
+      "source_location": "L24",
+      "id": "evaluate_clips_skill_3_picks",
+      "community": 13,
+      "norm_label": "3. picks"
+    },
+    {
+      "label": "4. Check and report",
+      "file_type": "document",
+      "source_file": ".claude/skills/evaluate-clips/SKILL.md",
+      "source_location": "L28",
+      "id": "evaluate_clips_skill_4_check_and_report",
+      "community": 13,
+      "norm_label": "4. check and report"
+    },
+    {
+      "label": "5. Draft",
+      "file_type": "document",
+      "source_file": ".claude/skills/evaluate-clips/SKILL.md",
+      "source_location": "L36",
+      "id": "evaluate_clips_skill_5_draft",
+      "community": 13,
+      "norm_label": "5. draft"
+    },
+    {
+      "label": "Reference",
+      "file_type": "document",
+      "source_file": ".claude/skills/evaluate-clips/SKILL.md",
+      "source_location": "L40",
+      "id": "evaluate_clips_skill_reference",
+      "community": 13,
+      "norm_label": "reference"
+    },
+    {
+      "label": "SKILL.md",
+      "file_type": "document",
+      "source_file": ".claude/skills/evaluate-conversation/SKILL.md",
+      "source_location": "L1",
+      "id": "evaluate_conversation_skill",
+      "community": 11,
+      "norm_label": "skill.md"
+    },
+    {
+      "label": "Evaluate a conversation task",
+      "file_type": "document",
+      "source_file": ".claude/skills/evaluate-conversation/SKILL.md",
+      "source_location": "L6",
+      "id": "evaluate_conversation_skill_evaluate_a_conversation_task",
+      "community": 11,
+      "norm_label": "evaluate a conversation task"
+    },
+    {
+      "label": "Order of operations",
+      "file_type": "document",
+      "source_file": ".claude/skills/evaluate-conversation/SKILL.md",
+      "source_location": "L10",
+      "id": "evaluate_conversation_skill_order_of_operations",
+      "community": 11,
+      "norm_label": "order of operations"
+    },
+    {
+      "label": "1. Context",
+      "file_type": "document",
+      "source_file": ".claude/skills/evaluate-conversation/SKILL.md",
+      "source_location": "L14",
+      "id": "evaluate_conversation_skill_1_context",
+      "community": 11,
+      "norm_label": "1. context"
+    },
+    {
+      "label": "2. Observations, per model",
+      "file_type": "document",
+      "source_file": ".claude/skills/evaluate-conversation/SKILL.md",
+      "source_location": "L20",
+      "id": "evaluate_conversation_skill_2_observations_per_model",
+      "community": 11,
+      "norm_label": "2. observations, per model"
+    },
+    {
+      "label": "3. Picks",
+      "file_type": "document",
+      "source_file": ".claude/skills/evaluate-conversation/SKILL.md",
+      "source_location": "L28",
+      "id": "evaluate_conversation_skill_3_picks",
+      "community": 11,
+      "norm_label": "3. picks"
+    },
+    {
+      "label": "4. Check and report",
+      "file_type": "document",
+      "source_file": ".claude/skills/evaluate-conversation/SKILL.md",
+      "source_location": "L32",
+      "id": "evaluate_conversation_skill_4_check_and_report",
+      "community": 11,
+      "norm_label": "4. check and report"
+    },
+    {
+      "label": "5. Draft",
+      "file_type": "document",
+      "source_file": ".claude/skills/evaluate-conversation/SKILL.md",
+      "source_location": "L45",
+      "id": "evaluate_conversation_skill_5_draft",
+      "community": 11,
+      "norm_label": "5. draft"
+    },
+    {
+      "label": "Reference",
+      "file_type": "document",
+      "source_file": ".claude/skills/evaluate-conversation/SKILL.md",
+      "source_location": "L49",
+      "id": "evaluate_conversation_skill_reference",
+      "community": 11,
+      "norm_label": "reference"
+    },
+    {
+      "label": "CLAUDE.md",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "L1",
+      "id": "claude",
+      "community": 0,
+      "norm_label": "claude.md"
+    },
+    {
+      "label": "S2S Arena Harness \u2014 project guidance",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "L1",
+      "id": "claude_s2s_arena_harness_project_guidance",
+      "community": 0,
+      "norm_label": "s2s arena harness \u2014 project guidance"
+    },
+    {
+      "label": "Status",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "L16",
+      "id": "claude_status",
+      "community": 0,
+      "norm_label": "status"
+    },
+    {
+      "label": "Non-negotiable design rules",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "L24",
+      "id": "claude_non_negotiable_design_rules",
+      "community": 0,
+      "norm_label": "non-negotiable design rules"
+    },
+    {
+      "label": "The criteria, in one screen",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "L50",
+      "id": "claude_the_criteria_in_one_screen",
+      "community": 0,
+      "norm_label": "the criteria, in one screen"
+    },
+    {
+      "label": "Pure Orchestrator Mandate (zero-write policy)",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "L68",
+      "id": "claude_pure_orchestrator_mandate_zero_write_policy",
+      "community": 0,
+      "norm_label": "pure orchestrator mandate (zero-write policy)"
+    },
+    {
+      "label": "Mandatory knowledge graph protocol (graphify)",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "L80",
+      "id": "claude_mandatory_knowledge_graph_protocol_graphify",
+      "community": 0,
+      "norm_label": "mandatory knowledge graph protocol (graphify)"
+    },
+    {
+      "label": "Graph freshness mandate (definition of done)",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "L91",
+      "id": "claude_graph_freshness_mandate_definition_of_done",
+      "community": 0,
+      "norm_label": "graph freshness mandate (definition of done)"
+    },
+    {
+      "label": "Mandatory agent team communication protocol",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "L98",
+      "id": "claude_mandatory_agent_team_communication_protocol",
+      "community": 0,
+      "norm_label": "mandatory agent team communication protocol"
+    },
+    {
+      "label": "Deterministic effort calculation and delegation",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "L116",
+      "id": "claude_deterministic_effort_calculation_and_delegation",
+      "community": 0,
+      "norm_label": "deterministic effort calculation and delegation"
+    },
+    {
+      "label": "Operational routing logic",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "L128",
+      "id": "claude_operational_routing_logic",
+      "community": 0,
+      "norm_label": "operational routing logic"
+    },
+    {
+      "label": "Model routing matrix",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "L137",
+      "id": "claude_model_routing_matrix",
+      "community": 0,
+      "norm_label": "model routing matrix"
+    },
+    {
+      "label": "Operational plugin and skill triage matrix",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "L149",
+      "id": "claude_operational_plugin_and_skill_triage_matrix",
+      "community": 0,
+      "norm_label": "operational plugin and skill triage matrix"
+    },
+    {
+      "label": "Specs first and guarded subsystem contract",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "L165",
+      "id": "claude_specs_first_and_guarded_subsystem_contract",
+      "community": 0,
+      "norm_label": "specs first and guarded subsystem contract"
+    },
+    {
+      "label": "Two-tier test gate (mandatory)",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "L189",
+      "id": "claude_two_tier_test_gate_mandatory",
+      "community": 0,
+      "norm_label": "two-tier test gate (mandatory)"
+    },
+    {
+      "label": "Workspace layout and subsystem registry",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "L204",
+      "id": "claude_workspace_layout_and_subsystem_registry",
+      "community": 0,
+      "norm_label": "workspace layout and subsystem registry"
+    },
+    {
+      "label": "Graph conventions",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "L221",
+      "id": "claude_graph_conventions",
+      "community": 0,
+      "norm_label": "graph conventions"
+    },
+    {
+      "label": "Agent roster",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "L231",
+      "id": "claude_agent_roster",
+      "community": 0,
+      "norm_label": "agent roster"
+    },
+    {
+      "label": "Working in this repo",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "L250",
+      "id": "claude_working_in_this_repo",
+      "community": 0,
+      "norm_label": "working in this repo"
+    },
+    {
+      "label": "Do not",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "L258",
+      "id": "claude_do_not",
+      "community": 0,
+      "norm_label": "do not"
+    },
+    {
+      "label": "Technical constraints",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "L272",
+      "id": "claude_technical_constraints",
+      "community": 0,
+      "norm_label": "technical constraints"
+    },
+    {
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "id": "readme",
+      "community": 16,
+      "norm_label": "readme.md"
+    },
+    {
+      "label": "S2S Arena Harness",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "id": "readme_s2s_arena_harness",
+      "community": 16,
+      "norm_label": "s2s arena harness"
+    },
+    {
+      "label": "What it does",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L12",
+      "id": "readme_what_it_does",
+      "community": 16,
+      "norm_label": "what it does"
+    },
+    {
+      "label": "Quick start",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L23",
+      "id": "readme_quick_start",
+      "community": 16,
+      "norm_label": "quick start"
+    },
+    {
+      "label": "Cost",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L46",
+      "id": "readme_cost",
+      "community": 16,
+      "norm_label": "cost"
+    },
+    {
+      "label": "Documentation",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L50",
+      "id": "readme_documentation",
+      "community": 16,
+      "norm_label": "documentation"
+    },
+    {
+      "label": "Status",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L65",
+      "id": "readme_status",
+      "community": 16,
+      "norm_label": "status"
+    },
+    {
+      "label": "project-criteria.md",
+      "file_type": "document",
+      "source_file": "criteria/project-criteria.md",
+      "source_location": "L1",
+      "id": "criteria_project_criteria",
+      "community": 4,
+      "norm_label": "project-criteria.md"
+    },
+    {
+      "label": "Project criteria \u2014 source of truth",
+      "file_type": "document",
+      "source_file": "criteria/project-criteria.md",
+      "source_location": "L1",
+      "id": "criteria_project_criteria_project_criteria_source_of_truth",
+      "community": 4,
+      "norm_label": "project criteria \u2014 source of truth"
+    },
+    {
+      "label": "North Star",
+      "file_type": "document",
+      "source_file": "criteria/project-criteria.md",
+      "source_location": "L9",
+      "id": "criteria_project_criteria_north_star",
+      "community": 4,
+      "norm_label": "north star"
+    },
+    {
+      "label": "Hierarchy",
+      "file_type": "document",
+      "source_file": "criteria/project-criteria.md",
+      "source_location": "L15",
+      "id": "criteria_project_criteria_hierarchy",
+      "community": 4,
+      "norm_label": "hierarchy"
+    },
+    {
+      "label": "Dimensions",
+      "file_type": "document",
+      "source_file": "criteria/project-criteria.md",
+      "source_location": "L23",
+      "id": "criteria_project_criteria_dimensions",
+      "community": 4,
+      "norm_label": "dimensions"
+    },
+    {
+      "label": "Threshold breaches",
+      "file_type": "document",
+      "source_file": "criteria/project-criteria.md",
+      "source_location": "L35",
+      "id": "criteria_project_criteria_threshold_breaches",
+      "community": 4,
+      "norm_label": "threshold breaches"
+    },
+    {
+      "label": "Audio tolerance",
+      "file_type": "document",
+      "source_file": "criteria/project-criteria.md",
+      "source_location": "L45",
+      "id": "criteria_project_criteria_audio_tolerance",
+      "community": 4,
+      "norm_label": "audio tolerance"
+    },
+    {
+      "label": "Error clusters",
+      "file_type": "document",
+      "source_file": "criteria/project-criteria.md",
+      "source_location": "L53",
+      "id": "criteria_project_criteria_error_clusters",
+      "community": 4,
+      "norm_label": "error clusters"
+    },
+    {
+      "label": "Scenario awareness",
+      "file_type": "document",
+      "source_file": "criteria/project-criteria.md",
+      "source_location": "L70",
+      "id": "criteria_project_criteria_scenario_awareness",
+      "community": 4,
+      "norm_label": "scenario awareness"
+    },
+    {
+      "label": "Conversation-mode requirements",
+      "file_type": "document",
+      "source_file": "criteria/project-criteria.md",
+      "source_location": "L76",
+      "id": "criteria_project_criteria_conversation_mode_requirements",
+      "community": 4,
+      "norm_label": "conversation-mode requirements"
+    },
+    {
+      "label": "Justification contract",
+      "file_type": "document",
+      "source_file": "criteria/project-criteria.md",
+      "source_location": "L86",
+      "id": "criteria_project_criteria_justification_contract",
+      "community": 4,
+      "norm_label": "justification contract"
+    },
+    {
+      "label": "Common failures",
+      "file_type": "document",
+      "source_file": "criteria/project-criteria.md",
+      "source_location": "L96",
+      "id": "criteria_project_criteria_common_failures",
+      "community": 4,
+      "norm_label": "common failures"
+    },
+    {
+      "label": "Final review",
+      "file_type": "document",
+      "source_file": "criteria/project-criteria.md",
+      "source_location": "L104",
+      "id": "criteria_project_criteria_final_review",
+      "community": 4,
+      "norm_label": "final review"
+    },
+    {
+      "label": "worked-examples.md",
+      "file_type": "document",
+      "source_file": "criteria/worked-examples.md",
+      "source_location": "L1",
+      "id": "criteria_worked_examples",
+      "community": 14,
+      "norm_label": "worked-examples.md"
+    },
+    {
+      "label": "Worked examples",
+      "file_type": "document",
+      "source_file": "criteria/worked-examples.md",
+      "source_location": "L1",
+      "id": "criteria_worked_examples_worked_examples",
+      "community": 14,
+      "norm_label": "worked examples"
+    },
+    {
+      "label": "Example 1 \u2014 Naturalness vs over-structured utility",
+      "file_type": "document",
+      "source_file": "criteria/worked-examples.md",
+      "source_location": "L7",
+      "id": "criteria_worked_examples_example_1_naturalness_vs_over_structured_utility",
+      "community": 14,
+      "norm_label": "example 1 \u2014 naturalness vs over-structured utility"
+    },
+    {
+      "label": "Example 2 \u2014 Abrupt audio cutoff",
+      "file_type": "document",
+      "source_file": "criteria/worked-examples.md",
+      "source_location": "L18",
+      "id": "criteria_worked_examples_example_2_abrupt_audio_cutoff",
+      "community": 14,
+      "norm_label": "example 2 \u2014 abrupt audio cutoff"
+    },
+    {
+      "label": "Example 3 \u2014 Benign false premise",
+      "file_type": "document",
+      "source_file": "criteria/worked-examples.md",
+      "source_location": "L29",
+      "id": "criteria_worked_examples_example_3_benign_false_premise",
+      "community": 14,
+      "norm_label": "example 3 \u2014 benign false premise"
+    },
+    {
+      "label": "Example 4 \u2014 Error clusters must be reported",
+      "file_type": "document",
+      "source_file": "criteria/worked-examples.md",
+      "source_location": "L40",
+      "id": "criteria_worked_examples_example_4_error_clusters_must_be_reported",
+      "community": 14,
+      "norm_label": "example 4 \u2014 error clusters must be reported"
+    },
+    {
+      "label": "Audit exercise \u2014 charisma versus interaction failure",
+      "file_type": "document",
+      "source_file": "criteria/worked-examples.md",
+      "source_location": "L57",
+      "id": "criteria_worked_examples_audit_exercise_charisma_versus_interaction_failure",
+      "community": 14,
+      "norm_label": "audit exercise \u2014 charisma versus interaction failure"
+    },
+    {
+      "label": "ARCHITECTURE.md",
+      "file_type": "document",
+      "source_file": "docs/ARCHITECTURE.md",
+      "source_location": "L1",
+      "id": "docs_architecture",
+      "community": 12,
+      "norm_label": "architecture.md"
+    },
+    {
+      "label": "Architecture",
+      "file_type": "document",
+      "source_file": "docs/ARCHITECTURE.md",
+      "source_location": "L1",
+      "id": "docs_architecture_architecture",
+      "community": 12,
+      "norm_label": "architecture"
+    },
+    {
+      "label": "Shape",
+      "file_type": "document",
+      "source_file": "docs/ARCHITECTURE.md",
+      "source_location": "L3",
+      "id": "docs_architecture_shape",
+      "community": 12,
+      "norm_label": "shape"
+    },
+    {
+      "label": "Why the token boundary sits there",
+      "file_type": "document",
+      "source_file": "docs/ARCHITECTURE.md",
+      "source_location": "L40",
+      "id": "docs_architecture_why_the_token_boundary_sits_there",
+      "community": 12,
+      "norm_label": "why the token boundary sits there"
+    },
+    {
+      "label": "Draft-hash caching",
+      "file_type": "document",
+      "source_file": "docs/ARCHITECTURE.md",
+      "source_location": "L52",
+      "id": "docs_architecture_draft_hash_caching",
+      "community": 12,
+      "norm_label": "draft-hash caching"
+    },
+    {
+      "label": "Layer boundaries",
+      "file_type": "document",
+      "source_file": "docs/ARCHITECTURE.md",
+      "source_location": "L56",
+      "id": "docs_architecture_layer_boundaries",
+      "community": 12,
+      "norm_label": "layer boundaries"
+    },
+    {
+      "label": "Data flow in one sentence",
+      "file_type": "document",
+      "source_file": "docs/ARCHITECTURE.md",
+      "source_location": "L68",
+      "id": "docs_architecture_data_flow_in_one_sentence",
+      "community": 12,
+      "norm_label": "data flow in one sentence"
+    },
+    {
+      "label": "What is deliberately absent",
+      "file_type": "document",
+      "source_file": "docs/ARCHITECTURE.md",
+      "source_location": "L72",
+      "id": "docs_architecture_what_is_deliberately_absent",
+      "community": 12,
+      "norm_label": "what is deliberately absent"
+    },
+    {
+      "label": "BRIDGE_SPEC.md",
+      "file_type": "document",
+      "source_file": "docs/BRIDGE_SPEC.md",
+      "source_location": "L1",
+      "id": "docs_bridge_spec",
+      "community": 5,
+      "norm_label": "bridge_spec.md"
+    },
+    {
+      "label": "Bridge specification",
+      "file_type": "document",
+      "source_file": "docs/BRIDGE_SPEC.md",
+      "source_location": "L1",
+      "id": "docs_bridge_spec_bridge_specification",
+      "community": 5,
+      "norm_label": "bridge specification"
+    },
+    {
+      "label": "Why keep the HTML at all",
+      "file_type": "document",
+      "source_file": "docs/BRIDGE_SPEC.md",
+      "source_location": "L5",
+      "id": "docs_bridge_spec_why_keep_the_html_at_all",
+      "community": 5,
+      "norm_label": "why keep the html at all"
+    },
+    {
+      "label": "Migration of the existing artifacts",
+      "file_type": "document",
+      "source_file": "docs/BRIDGE_SPEC.md",
+      "source_location": "L11",
+      "id": "docs_bridge_spec_migration_of_the_existing_artifacts",
+      "community": 5,
+      "norm_label": "migration of the existing artifacts"
+    },
+    {
+      "label": "Endpoints",
+      "file_type": "document",
+      "source_file": "docs/BRIDGE_SPEC.md",
+      "source_location": "L23",
+      "id": "docs_bridge_spec_endpoints",
+      "community": 5,
+      "norm_label": "endpoints"
+    },
+    {
+      "label": "`POST /evaluate`",
+      "file_type": "document",
+      "source_file": "docs/BRIDGE_SPEC.md",
+      "source_location": "L25",
+      "id": "docs_bridge_spec_post_evaluate",
+      "community": 5,
+      "norm_label": "`post /evaluate`"
+    },
+    {
+      "label": "`POST /polish`",
+      "file_type": "document",
+      "source_file": "docs/BRIDGE_SPEC.md",
+      "source_location": "L44",
+      "id": "docs_bridge_spec_post_polish",
+      "community": 5,
+      "norm_label": "`post /polish`"
+    },
+    {
+      "label": "`POST /transcribe`",
+      "file_type": "document",
+      "source_file": "docs/BRIDGE_SPEC.md",
+      "source_location": "L47",
+      "id": "docs_bridge_spec_post_transcribe",
+      "community": 5,
+      "norm_label": "`post /transcribe`"
+    },
+    {
+      "label": "`GET /criteria/{topic}`",
+      "file_type": "document",
+      "source_file": "docs/BRIDGE_SPEC.md",
+      "source_location": "L50",
+      "id": "docs_bridge_spec_get_criteria_topic",
+      "community": 5,
+      "norm_label": "`get /criteria/{topic}`"
+    },
+    {
+      "label": "`GET /health`",
+      "file_type": "document",
+      "source_file": "docs/BRIDGE_SPEC.md",
+      "source_location": "L53",
+      "id": "docs_bridge_spec_get_health",
+      "community": 5,
+      "norm_label": "`get /health`"
+    },
+    {
+      "label": "Security posture",
+      "file_type": "document",
+      "source_file": "docs/BRIDGE_SPEC.md",
+      "source_location": "L56",
+      "id": "docs_bridge_spec_security_posture",
+      "community": 5,
+      "norm_label": "security posture"
+    },
+    {
+      "label": "Static serving",
+      "file_type": "document",
+      "source_file": "docs/BRIDGE_SPEC.md",
+      "source_location": "L63",
+      "id": "docs_bridge_spec_static_serving",
+      "community": 5,
+      "norm_label": "static serving"
+    },
+    {
+      "label": "Parity requirement",
+      "file_type": "document",
+      "source_file": "docs/BRIDGE_SPEC.md",
+      "source_location": "L67",
+      "id": "docs_bridge_spec_parity_requirement",
+      "community": 5,
+      "norm_label": "parity requirement"
+    },
+    {
+      "label": "BUILD_PLAN.md",
+      "file_type": "document",
+      "source_file": "docs/BUILD_PLAN.md",
+      "source_location": "L1",
+      "id": "docs_build_plan",
+      "community": 6,
+      "norm_label": "build_plan.md"
+    },
+    {
+      "label": "Build plan",
+      "file_type": "document",
+      "source_file": "docs/BUILD_PLAN.md",
+      "source_location": "L1",
+      "id": "docs_build_plan_build_plan",
+      "community": 6,
+      "norm_label": "build plan"
+    },
+    {
+      "label": "Phase 1 \u2014 Criteria and catalogues \u00b7 `criteria-keeper`",
+      "file_type": "document",
+      "source_file": "docs/BUILD_PLAN.md",
+      "source_location": "L9",
+      "id": "docs_build_plan_phase_1_criteria_and_catalogues_criteria_keeper",
+      "community": 6,
+      "norm_label": "phase 1 \u2014 criteria and catalogues \u00b7 `criteria-keeper`"
+    },
+    {
+      "label": "Phase 2 \u2014 State schema \u00b7 `graph-architect`",
+      "file_type": "document",
+      "source_file": "docs/BUILD_PLAN.md",
+      "source_location": "L18",
+      "id": "docs_build_plan_phase_2_state_schema_graph_architect",
+      "community": 6,
+      "norm_label": "phase 2 \u2014 state schema \u00b7 `graph-architect`"
+    },
+    {
+      "label": "Phase 3 \u2014 The engine \u00b7 `rules-engine-dev`",
+      "file_type": "document",
+      "source_file": "docs/BUILD_PLAN.md",
+      "source_location": "L26",
+      "id": "docs_build_plan_phase_3_the_engine_rules_engine_dev",
+      "community": 6,
+      "norm_label": "phase 3 \u2014 the engine \u00b7 `rules-engine-dev`"
+    },
+    {
+      "label": "Phase 4 \u2014 Graph \u00b7 `graph-architect`",
+      "file_type": "document",
+      "source_file": "docs/BUILD_PLAN.md",
+      "source_location": "L38",
+      "id": "docs_build_plan_phase_4_graph_graph_architect",
+      "community": 6,
+      "norm_label": "phase 4 \u2014 graph \u00b7 `graph-architect`"
+    },
+    {
+      "label": "Phase 5 \u2014 CLI \u00b7 `cli-dev`",
+      "file_type": "document",
+      "source_file": "docs/BUILD_PLAN.md",
+      "source_location": "L48",
+      "id": "docs_build_plan_phase_5_cli_cli_dev",
+      "community": 6,
+      "norm_label": "phase 5 \u2014 cli \u00b7 `cli-dev`"
+    },
+    {
+      "label": "Phase 6 \u2014 STT \u00b7 `stt-engineer`",
+      "file_type": "document",
+      "source_file": "docs/BUILD_PLAN.md",
+      "source_location": "L54",
+      "id": "docs_build_plan_phase_6_stt_stt_engineer",
+      "community": 6,
+      "norm_label": "phase 6 \u2014 stt \u00b7 `stt-engineer`"
+    },
+    {
+      "label": "Phase 7 \u2014 Bridge and front ends \u00b7 `bridge-dev`",
+      "file_type": "document",
+      "source_file": "docs/BUILD_PLAN.md",
+      "source_location": "L62",
+      "id": "docs_build_plan_phase_7_bridge_and_front_ends_bridge_dev",
+      "community": 6,
+      "norm_label": "phase 7 \u2014 bridge and front ends \u00b7 `bridge-dev`"
+    },
+    {
+      "label": "Phase 8 \u2014 Hardening \u00b7 `eval-runner` + `token-auditor`",
+      "file_type": "document",
+      "source_file": "docs/BUILD_PLAN.md",
+      "source_location": "L70",
+      "id": "docs_build_plan_phase_8_hardening_eval_runner_token_auditor",
+      "community": 6,
+      "norm_label": "phase 8 \u2014 hardening \u00b7 `eval-runner` + `token-auditor`"
+    },
+    {
+      "label": "Sequencing notes",
+      "file_type": "document",
+      "source_file": "docs/BUILD_PLAN.md",
+      "source_location": "L78",
+      "id": "docs_build_plan_sequencing_notes",
+      "community": 6,
+      "norm_label": "sequencing notes"
+    },
+    {
+      "label": "Definition of done for the whole project",
+      "file_type": "document",
+      "source_file": "docs/BUILD_PLAN.md",
+      "source_location": "L84",
+      "id": "docs_build_plan_definition_of_done_for_the_whole_project",
+      "community": 6,
+      "norm_label": "definition of done for the whole project"
+    },
+    {
+      "label": "CLI_SPEC.md",
+      "file_type": "document",
+      "source_file": "docs/CLI_SPEC.md",
+      "source_location": "L1",
+      "id": "docs_cli_spec",
+      "community": 10,
+      "norm_label": "cli_spec.md"
+    },
+    {
+      "label": "CLI specification",
+      "file_type": "document",
+      "source_file": "docs/CLI_SPEC.md",
+      "source_location": "L1",
+      "id": "docs_cli_spec_cli_specification",
+      "community": 10,
+      "norm_label": "cli specification"
+    },
+    {
+      "label": "Commands",
+      "file_type": "document",
+      "source_file": "docs/CLI_SPEC.md",
+      "source_location": "L5",
+      "id": "docs_cli_spec_commands",
+      "community": 10,
+      "norm_label": "commands"
+    },
+    {
+      "label": "Global options",
+      "file_type": "document",
+      "source_file": "docs/CLI_SPEC.md",
+      "source_location": "L16",
+      "id": "docs_cli_spec_global_options",
+      "community": 10,
+      "norm_label": "global options"
+    },
+    {
+      "label": "Interactive flow",
+      "file_type": "document",
+      "source_file": "docs/CLI_SPEC.md",
+      "source_location": "L30",
+      "id": "docs_cli_spec_interactive_flow",
+      "community": 10,
+      "norm_label": "interactive flow"
+    },
+    {
+      "label": "Output",
+      "file_type": "document",
+      "source_file": "docs/CLI_SPEC.md",
+      "source_location": "L42",
+      "id": "docs_cli_spec_output",
+      "community": 10,
+      "norm_label": "output"
+    },
+    {
+      "label": "`s2s audit`",
+      "file_type": "document",
+      "source_file": "docs/CLI_SPEC.md",
+      "source_location": "L69",
+      "id": "docs_cli_spec_s2s_audit",
+      "community": 10,
+      "norm_label": "`s2s audit`"
+    },
+    {
+      "label": "`s2s criteria`",
+      "file_type": "document",
+      "source_file": "docs/CLI_SPEC.md",
+      "source_location": "L73",
+      "id": "docs_cli_spec_s2s_criteria",
+      "community": 10,
+      "norm_label": "`s2s criteria`"
+    },
+    {
+      "label": "Exit codes",
+      "file_type": "document",
+      "source_file": "docs/CLI_SPEC.md",
+      "source_location": "L77",
+      "id": "docs_cli_spec_exit_codes",
+      "community": 10,
+      "norm_label": "exit codes"
+    },
+    {
+      "label": "EVAL_SPEC.md",
+      "file_type": "document",
+      "source_file": "docs/EVAL_SPEC.md",
+      "source_location": "L1",
+      "id": "docs_eval_spec",
+      "community": 8,
+      "norm_label": "eval_spec.md"
+    },
+    {
+      "label": "Evaluation and regression specification",
+      "file_type": "document",
+      "source_file": "docs/EVAL_SPEC.md",
+      "source_location": "L1",
+      "id": "docs_eval_spec_evaluation_and_regression_specification",
+      "community": 8,
+      "norm_label": "evaluation and regression specification"
+    },
+    {
+      "label": "Golden fixtures",
+      "file_type": "document",
+      "source_file": "docs/EVAL_SPEC.md",
+      "source_location": "L5",
+      "id": "docs_eval_spec_golden_fixtures",
+      "community": 8,
+      "norm_label": "golden fixtures"
+    },
+    {
+      "label": "Required fixtures",
+      "file_type": "document",
+      "source_file": "docs/EVAL_SPEC.md",
+      "source_location": "L43",
+      "id": "docs_eval_spec_required_fixtures",
+      "community": 8,
+      "norm_label": "required fixtures"
+    },
+    {
+      "label": "Adversarial fixtures",
+      "file_type": "document",
+      "source_file": "docs/EVAL_SPEC.md",
+      "source_location": "L54",
+      "id": "docs_eval_spec_adversarial_fixtures",
+      "community": 8,
+      "norm_label": "adversarial fixtures"
+    },
+    {
+      "label": "Regression policy",
+      "file_type": "document",
+      "source_file": "docs/EVAL_SPEC.md",
+      "source_location": "L66",
+      "id": "docs_eval_spec_regression_policy",
+      "community": 8,
+      "norm_label": "regression policy"
+    },
+    {
+      "label": "Determinism test",
+      "file_type": "document",
+      "source_file": "docs/EVAL_SPEC.md",
+      "source_location": "L72",
+      "id": "docs_eval_spec_determinism_test",
+      "community": 8,
+      "norm_label": "determinism test"
+    },
+    {
+      "label": "Token-boundary test",
+      "file_type": "document",
+      "source_file": "docs/EVAL_SPEC.md",
+      "source_location": "L76",
+      "id": "docs_eval_spec_token_boundary_test",
+      "community": 8,
+      "norm_label": "token-boundary test"
+    },
+    {
+      "label": "STT tests",
+      "file_type": "document",
+      "source_file": "docs/EVAL_SPEC.md",
+      "source_location": "L80",
+      "id": "docs_eval_spec_stt_tests",
+      "community": 8,
+      "norm_label": "stt tests"
+    },
+    {
+      "label": "What is not tested",
+      "file_type": "document",
+      "source_file": "docs/EVAL_SPEC.md",
+      "source_location": "L84",
+      "id": "docs_eval_spec_what_is_not_tested",
+      "community": 8,
+      "norm_label": "what is not tested"
+    },
+    {
+      "label": "GRAPH_SPEC.md",
+      "file_type": "document",
+      "source_file": "docs/GRAPH_SPEC.md",
+      "source_location": "L1",
+      "id": "docs_graph_spec",
+      "community": 3,
+      "norm_label": "graph_spec.md"
+    },
+    {
+      "label": "Graph specification",
+      "file_type": "document",
+      "source_file": "docs/GRAPH_SPEC.md",
+      "source_location": "L1",
+      "id": "docs_graph_spec_graph_specification",
+      "community": 3,
+      "norm_label": "graph specification"
+    },
+    {
+      "label": "1. State schema",
+      "file_type": "document",
+      "source_file": "docs/GRAPH_SPEC.md",
+      "source_location": "L5",
+      "id": "docs_graph_spec_1_state_schema",
+      "community": 3,
+      "norm_label": "1. state schema"
+    },
+    {
+      "label": "2. Nodes",
+      "file_type": "document",
+      "source_file": "docs/GRAPH_SPEC.md",
+      "source_location": "L106",
+      "id": "docs_graph_spec_2_nodes",
+      "community": 3,
+      "norm_label": "2. nodes"
+    },
+    {
+      "label": "`ingest`",
+      "file_type": "document",
+      "source_file": "docs/GRAPH_SPEC.md",
+      "source_location": "L120",
+      "id": "docs_graph_spec_ingest",
+      "community": 3,
+      "norm_label": "`ingest`"
+    },
+    {
+      "label": "`transcribe`",
+      "file_type": "document",
+      "source_file": "docs/GRAPH_SPEC.md",
+      "source_location": "L123",
+      "id": "docs_graph_spec_transcribe",
+      "community": 3,
+      "norm_label": "`transcribe`"
+    },
+    {
+      "label": "`scan`",
+      "file_type": "document",
+      "source_file": "docs/GRAPH_SPEC.md",
+      "source_location": "L126",
+      "id": "docs_graph_spec_scan",
+      "community": 3,
+      "norm_label": "`scan`"
+    },
+    {
+      "label": "`normalize`",
+      "file_type": "document",
+      "source_file": "docs/GRAPH_SPEC.md",
+      "source_location": "L129",
+      "id": "docs_graph_spec_normalize",
+      "community": 3,
+      "norm_label": "`normalize`"
+    },
+    {
+      "label": "`decide`",
+      "file_type": "document",
+      "source_file": "docs/GRAPH_SPEC.md",
+      "source_location": "L136",
+      "id": "docs_graph_spec_decide",
+      "community": 3,
+      "norm_label": "`decide`"
+    },
+    {
+      "label": "`audit`",
+      "file_type": "document",
+      "source_file": "docs/GRAPH_SPEC.md",
+      "source_location": "L139",
+      "id": "docs_graph_spec_audit",
+      "community": 3,
+      "norm_label": "`audit`"
+    },
+    {
+      "label": "`draft`",
+      "file_type": "document",
+      "source_file": "docs/GRAPH_SPEC.md",
+      "source_location": "L142",
+      "id": "docs_graph_spec_draft",
+      "community": 3,
+      "norm_label": "`draft`"
+    },
+    {
+      "label": "`polish`",
+      "file_type": "document",
+      "source_file": "docs/GRAPH_SPEC.md",
+      "source_location": "L145",
+      "id": "docs_graph_spec_polish",
+      "community": 3,
+      "norm_label": "`polish`"
+    },
+    {
+      "label": "`render`",
+      "file_type": "document",
+      "source_file": "docs/GRAPH_SPEC.md",
+      "source_location": "L154",
+      "id": "docs_graph_spec_render",
+      "community": 3,
+      "norm_label": "`render`"
+    },
+    {
+      "label": "3. Edges",
+      "file_type": "document",
+      "source_file": "docs/GRAPH_SPEC.md",
+      "source_location": "L157",
+      "id": "docs_graph_spec_3_edges",
+      "community": 3,
+      "norm_label": "3. edges"
+    },
+    {
+      "label": "4. Checkpointing",
+      "file_type": "document",
+      "source_file": "docs/GRAPH_SPEC.md",
+      "source_location": "L174",
+      "id": "docs_graph_spec_4_checkpointing",
+      "community": 3,
+      "norm_label": "4. checkpointing"
+    },
+    {
+      "label": "5. Mode differences",
+      "file_type": "document",
+      "source_file": "docs/GRAPH_SPEC.md",
+      "source_location": "L180",
+      "id": "docs_graph_spec_5_mode_differences",
+      "community": 3,
+      "norm_label": "5. mode differences"
+    },
+    {
+      "label": "RULES_SPEC.md",
+      "file_type": "document",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L1",
+      "id": "docs_rules_spec",
+      "community": 1,
+      "norm_label": "rules_spec.md"
+    },
+    {
+      "label": "Rules specification",
+      "file_type": "document",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L1",
+      "id": "docs_rules_spec_rules_specification",
+      "community": 1,
+      "norm_label": "rules specification"
+    },
+    {
+      "label": "1. Catalogues",
+      "file_type": "document",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L9",
+      "id": "docs_rules_spec_1_catalogues",
+      "community": 1,
+      "norm_label": "1. catalogues"
+    },
+    {
+      "label": "Error clusters \u2014 shared",
+      "file_type": "document",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L13",
+      "id": "docs_rules_spec_error_clusters_shared",
+      "community": 1,
+      "norm_label": "error clusters \u2014 shared"
+    },
+    {
+      "label": "Threshold \u2014 utility",
+      "file_type": "document",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L29",
+      "id": "docs_rules_spec_threshold_utility",
+      "community": 1,
+      "norm_label": "threshold \u2014 utility"
+    },
+    {
+      "label": "Threshold \u2014 audio",
+      "file_type": "document",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L38",
+      "id": "docs_rules_spec_threshold_audio",
+      "community": 1,
+      "norm_label": "threshold \u2014 audio"
+    },
+    {
+      "label": "2. Normalization",
+      "file_type": "document",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L50",
+      "id": "docs_rules_spec_2_normalization",
+      "community": 1,
+      "norm_label": "2. normalization"
+    },
+    {
+      "label": "3. `decide` \u2014 the hierarchy walk",
+      "file_type": "document",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L65",
+      "id": "docs_rules_spec_3_decide_the_hierarchy_walk",
+      "community": 1,
+      "norm_label": "3. `decide` \u2014 the hierarchy walk"
+    },
+    {
+      "label": "Step 1 \u2014 threshold gate",
+      "file_type": "document",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L73",
+      "id": "docs_rules_spec_step_1_threshold_gate",
+      "community": 1,
+      "norm_label": "step 1 \u2014 threshold gate"
+    },
+    {
+      "label": "Step 2 \u2014 hierarchy",
+      "file_type": "document",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L93",
+      "id": "docs_rules_spec_step_2_hierarchy",
+      "community": 1,
+      "norm_label": "step 2 \u2014 hierarchy"
+    },
+    {
+      "label": "4. `audit` \u2014 findings",
+      "file_type": "document",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L113",
+      "id": "docs_rules_spec_4_audit_findings",
+      "community": 1,
+      "norm_label": "4. `audit` \u2014 findings"
+    },
+    {
+      "label": "4.1 Setup and consistency \u2014 conversation mode only",
+      "file_type": "document",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L121",
+      "id": "docs_rules_spec_4_1_setup_and_consistency_conversation_mode_only",
+      "community": 1,
+      "norm_label": "4.1 setup and consistency \u2014 conversation mode only"
+    },
+    {
+      "label": "4.2 Evidence \u2014 both modes",
+      "file_type": "document",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L135",
+      "id": "docs_rules_spec_4_2_evidence_both_modes",
+      "community": 1,
+      "norm_label": "4.2 evidence \u2014 both modes"
+    },
+    {
+      "label": "4.3 Scenario inversion",
+      "file_type": "document",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L145",
+      "id": "docs_rules_spec_4_3_scenario_inversion",
+      "community": 1,
+      "norm_label": "4.3 scenario inversion"
+    },
+    {
+      "label": "4.4 Audio",
+      "file_type": "document",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L157",
+      "id": "docs_rules_spec_4_4_audio",
+      "community": 1,
+      "norm_label": "4.4 audio"
+    },
+    {
+      "label": "4.5 Utility",
+      "file_type": "document",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L166",
+      "id": "docs_rules_spec_4_5_utility",
+      "community": 1,
+      "norm_label": "4.5 utility"
+    },
+    {
+      "label": "4.6 Overall coherence",
+      "file_type": "document",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L172",
+      "id": "docs_rules_spec_4_6_overall_coherence",
+      "community": 1,
+      "norm_label": "4.6 overall coherence"
+    },
+    {
+      "label": "4.7 Error clusters",
+      "file_type": "document",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L184",
+      "id": "docs_rules_spec_4_7_error_clusters",
+      "community": 1,
+      "norm_label": "4.7 error clusters"
+    },
+    {
+      "label": "4.8 Skip",
+      "file_type": "document",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L193",
+      "id": "docs_rules_spec_4_8_skip",
+      "community": 1,
+      "norm_label": "4.8 skip"
+    },
+    {
+      "label": "5. `draft` \u2014 the justification builder",
+      "file_type": "document",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L201",
+      "id": "docs_rules_spec_5_draft_the_justification_builder",
+      "community": 9,
+      "norm_label": "5. `draft` \u2014 the justification builder"
+    },
+    {
+      "label": "Early returns",
+      "file_type": "document",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L211",
+      "id": "docs_rules_spec_early_returns",
+      "community": 9,
+      "norm_label": "early returns"
+    },
+    {
+      "label": "Sentence 1 \u2014 preference and primary reason",
+      "file_type": "document",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L215",
+      "id": "docs_rules_spec_sentence_1_preference_and_primary_reason",
+      "community": 9,
+      "norm_label": "sentence 1 \u2014 preference and primary reason"
+    },
+    {
+      "label": "Sentence 2 \u2014 hierarchy reference",
+      "file_type": "document",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L227",
+      "id": "docs_rules_spec_sentence_2_hierarchy_reference",
+      "community": 9,
+      "norm_label": "sentence 2 \u2014 hierarchy reference"
+    },
+    {
+      "label": "Sentence 3 \u2014 evidence from both sides",
+      "file_type": "document",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L234",
+      "id": "docs_rules_spec_sentence_3_evidence_from_both_sides",
+      "community": 9,
+      "norm_label": "sentence 3 \u2014 evidence from both sides"
+    },
+    {
+      "label": "Sentence 4 \u2014 error clusters",
+      "file_type": "document",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L247",
+      "id": "docs_rules_spec_sentence_4_error_clusters",
+      "community": 9,
+      "norm_label": "sentence 4 \u2014 error clusters"
+    },
+    {
+      "label": "Sentence 5 \u2014 audio statement",
+      "file_type": "document",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L253",
+      "id": "docs_rules_spec_sentence_5_audio_statement",
+      "community": 9,
+      "norm_label": "sentence 5 \u2014 audio statement"
+    },
+    {
+      "label": "Sentence 6 \u2014 scenario inversion",
+      "file_type": "document",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L258",
+      "id": "docs_rules_spec_sentence_6_scenario_inversion",
+      "community": 9,
+      "norm_label": "sentence 6 \u2014 scenario inversion"
+    },
+    {
+      "label": "Sentence 7 \u2014 threshold statement",
+      "file_type": "document",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L264",
+      "id": "docs_rules_spec_sentence_7_threshold_statement",
+      "community": 9,
+      "norm_label": "sentence 7 \u2014 threshold statement"
+    },
+    {
+      "label": "Sentence 8 \u2014 close",
+      "file_type": "document",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L269",
+      "id": "docs_rules_spec_sentence_8_close",
+      "community": 9,
+      "norm_label": "sentence 8 \u2014 close"
+    },
+    {
+      "label": "6. `scan` \u2014 bilingual signal detection",
+      "file_type": "document",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L274",
+      "id": "docs_rules_spec_6_scan_bilingual_signal_detection",
+      "community": 1,
+      "norm_label": "6. `scan` \u2014 bilingual signal detection"
+    },
+    {
+      "label": "7. Invariants for the golden fixtures",
+      "file_type": "document",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L306",
+      "id": "docs_rules_spec_7_invariants_for_the_golden_fixtures",
+      "community": 1,
+      "norm_label": "7. invariants for the golden fixtures"
+    },
+    {
+      "label": "STT_SPEC.md",
+      "file_type": "document",
+      "source_file": "docs/STT_SPEC.md",
+      "source_location": "L1",
+      "id": "docs_stt_spec",
+      "community": 7,
+      "norm_label": "stt_spec.md"
+    },
+    {
+      "label": "Speech-to-text specification",
+      "file_type": "document",
+      "source_file": "docs/STT_SPEC.md",
+      "source_location": "L1",
+      "id": "docs_stt_spec_speech_to_text_specification",
+      "community": 7,
+      "norm_label": "speech-to-text specification"
+    },
+    {
+      "label": "1. Scope",
+      "file_type": "document",
+      "source_file": "docs/STT_SPEC.md",
+      "source_location": "L9",
+      "id": "docs_stt_spec_1_scope",
+      "community": 7,
+      "norm_label": "1. scope"
+    },
+    {
+      "label": "2. Provider interface",
+      "file_type": "document",
+      "source_file": "docs/STT_SPEC.md",
+      "source_location": "L19",
+      "id": "docs_stt_spec_2_provider_interface",
+      "community": 7,
+      "norm_label": "2. provider interface"
+    },
+    {
+      "label": "3. `GeminiTranscriber`",
+      "file_type": "document",
+      "source_file": "docs/STT_SPEC.md",
+      "source_location": "L52",
+      "id": "docs_stt_spec_3_geminitranscriber",
+      "community": 7,
+      "norm_label": "3. `geminitranscriber`"
+    },
+    {
+      "label": "4. `GoogleCloudSTT`",
+      "file_type": "document",
+      "source_file": "docs/STT_SPEC.md",
+      "source_location": "L62",
+      "id": "docs_stt_spec_4_googlecloudstt",
+      "community": 7,
+      "norm_label": "4. `googlecloudstt`"
+    },
+    {
+      "label": "5. Phrase hints",
+      "file_type": "document",
+      "source_file": "docs/STT_SPEC.md",
+      "source_location": "L70",
+      "id": "docs_stt_spec_5_phrase_hints",
+      "community": 7,
+      "norm_label": "5. phrase hints"
+    },
+    {
+      "label": "6. What the STT layer must not do",
+      "file_type": "document",
+      "source_file": "docs/STT_SPEC.md",
+      "source_location": "L82",
+      "id": "docs_stt_spec_6_what_the_stt_layer_must_not_do",
+      "community": 7,
+      "norm_label": "6. what the stt layer must not do"
+    },
+    {
+      "label": "7. Audio capture",
+      "file_type": "document",
+      "source_file": "docs/STT_SPEC.md",
+      "source_location": "L94",
+      "id": "docs_stt_spec_7_audio_capture",
+      "community": 7,
+      "norm_label": "7. audio capture"
+    },
+    {
+      "label": "8. Failure behavior",
+      "file_type": "document",
+      "source_file": "docs/STT_SPEC.md",
+      "source_location": "L104",
+      "id": "docs_stt_spec_8_failure_behavior",
+      "community": 7,
+      "norm_label": "8. failure behavior"
+    },
+    {
+      "label": "9. Cost note",
+      "file_type": "document",
+      "source_file": "docs/STT_SPEC.md",
+      "source_location": "L115",
+      "id": "docs_stt_spec_9_cost_note",
+      "community": 7,
+      "norm_label": "9. cost note"
+    },
+    {
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "src/s2s_harness/README.md",
+      "source_location": "L1",
+      "id": "s2s_harness_readme",
+      "community": 27,
+      "norm_label": "readme.md"
+    },
+    {
+      "label": "Implementation target",
+      "file_type": "document",
+      "source_file": "src/s2s_harness/README.md",
+      "source_location": "L1",
+      "id": "s2s_harness_readme_implementation_target",
+      "community": 27,
+      "norm_label": "implementation target"
+    },
+    {
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "tests/golden/README.md",
+      "source_location": "L1",
+      "id": "golden_readme",
+      "community": 26,
+      "norm_label": "readme.md"
+    },
+    {
+      "label": "Golden fixtures",
+      "file_type": "document",
+      "source_file": "tests/golden/README.md",
+      "source_location": "L1",
+      "id": "golden_readme_golden_fixtures",
+      "community": 26,
+      "norm_label": "golden fixtures"
+    },
+    {
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "web/README.md",
+      "source_location": "L1",
+      "id": "web_readme",
+      "community": 28,
+      "norm_label": "readme.md"
+    },
+    {
+      "label": "Front ends",
+      "file_type": "document",
+      "source_file": "web/README.md",
+      "source_location": "L1",
+      "id": "web_readme_front_ends",
+      "community": 28,
+      "norm_label": "front ends"
+    }
+  ],
+  "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/settings.json",
+      "source_location": "L22",
+      "weight": 1.0,
+      "source": "claude_settings",
+      "target": "claude_settings_enabledplugins",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/settings.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "claude_settings",
+      "target": "claude_settings_env",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/settings.json",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "claude_settings",
+      "target": "claude_settings_hooks",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/settings.json",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "claude_settings",
+      "target": "claude_settings_permissions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/settings.json",
+      "source_location": "L30",
+      "weight": 1.0,
+      "source": "claude_settings",
+      "target": "claude_settings_preferences",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/settings.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "claude_settings",
+      "target": "claude_settings_schema",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/settings.json",
+      "source_location": "L29",
+      "weight": 1.0,
+      "source": "claude_settings",
+      "target": "claude_settings_teammatemode",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/settings.json",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "claude_settings_env",
+      "target": "claude_settings_env_claude_code_experimental_agent_teams",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/settings.json",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "claude_settings_permissions",
+      "target": "claude_settings_permissions_defaultmode",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/settings.json",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "claude_settings_hooks",
+      "target": "claude_settings_hooks_pretooluse",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/settings.json",
+      "source_location": "L27",
+      "weight": 1.0,
+      "source": "claude_settings_enabledplugins",
+      "target": "claude_settings_enabledplugins_frontend_design_claude_plugins_official",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/settings.json",
+      "source_location": "L25",
+      "weight": 1.0,
+      "source": "claude_settings_enabledplugins",
+      "target": "claude_settings_enabledplugins_planning_with_teams_planning_with_teams",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/settings.json",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "claude_settings_enabledplugins",
+      "target": "claude_settings_enabledplugins_playwright_claude_plugins_official",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/settings.json",
+      "source_location": "L24",
+      "weight": 1.0,
+      "source": "claude_settings_enabledplugins",
+      "target": "claude_settings_enabledplugins_supabase_claude_plugins_official",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/settings.json",
+      "source_location": "L23",
+      "weight": 1.0,
+      "source": "claude_settings_enabledplugins",
+      "target": "claude_settings_enabledplugins_superpowers_claude_plugins_official",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/settings.json",
+      "source_location": "L31",
+      "weight": 1.0,
+      "source": "claude_settings_preferences",
+      "target": "claude_settings_preferences_tmuxsplitpanes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/agents/bridge-dev.md",
+      "source_location": "L22",
+      "weight": 1.0,
+      "source": "agents_bridge_dev",
+      "target": "agents_bridge_dev_constraints",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/agents/bridge-dev.md",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "agents_bridge_dev",
+      "target": "agents_bridge_dev_porting_checklist",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/agents/bridge-dev.md",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "agents_bridge_dev",
+      "target": "agents_bridge_dev_the_point_of_this_work",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/agents/cli-dev.md",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "agents_cli_dev",
+      "target": "agents_cli_dev_flow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/agents/cli-dev.md",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "agents_cli_dev",
+      "target": "agents_cli_dev_rendering",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/agents/cli-dev.md",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "agents_cli_dev",
+      "target": "agents_cli_dev_the_one_rule_that_shapes_everything",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/agents/criteria-keeper.md",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "agents_criteria_keeper",
+      "target": "agents_criteria_keeper_distinctions_you_must_hold_firmly",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/agents/criteria-keeper.md",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "agents_criteria_keeper",
+      "target": "agents_criteria_keeper_how_you_work",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/agents/criteria-keeper.md",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "agents_criteria_keeper",
+      "target": "agents_criteria_keeper_your_responsibilities",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/agents/eval-runner.md",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "agents_eval_runner",
+      "target": "agents_eval_runner_commands",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/agents/eval-runner.md",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "agents_eval_runner",
+      "target": "agents_eval_runner_reporting",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/agents/eval-runner.md",
+      "source_location": "L23",
+      "weight": 1.0,
+      "source": "agents_eval_runner",
+      "target": "agents_eval_runner_the_rule_you_enforce",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/agents/graph-architect.md",
+      "source_location": "L25",
+      "weight": 1.0,
+      "source": "agents_graph_architect",
+      "target": "agents_graph_architect_checkpointing",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/agents/graph-architect.md",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "agents_graph_architect",
+      "target": "agents_graph_architect_constraints",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/agents/graph-architect.md",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "agents_graph_architect",
+      "target": "agents_graph_architect_the_polish_node",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/agents/rules-engine-dev.md",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "agents_rules_engine_dev",
+      "target": "agents_rules_engine_dev_details_that_matter",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/agents/rules-engine-dev.md",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "agents_rules_engine_dev",
+      "target": "agents_rules_engine_dev_hard_constraints",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/agents/rules-engine-dev.md",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "agents_rules_engine_dev",
+      "target": "agents_rules_engine_dev_working_order",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/agents/stt-engineer.md",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "agents_stt_engineer",
+      "target": "agents_stt_engineer_accuracy_details",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/agents/stt-engineer.md",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "agents_stt_engineer",
+      "target": "agents_stt_engineer_constraints",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/agents/stt-engineer.md",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "agents_stt_engineer",
+      "target": "agents_stt_engineer_what_you_are_building",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/audit-justification/SKILL.md",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "audit_justification_skill",
+      "target": "audit_justification_skill_audit_a_written_justification",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/audit-justification/SKILL.md",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "audit_justification_skill_audit_a_written_justification",
+      "target": "audit_justification_skill_inputs",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/audit-justification/SKILL.md",
+      "source_location": "L28",
+      "weight": 1.0,
+      "source": "audit_justification_skill_audit_a_written_justification",
+      "target": "audit_justification_skill_output",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/audit-justification/SKILL.md",
+      "source_location": "L34",
+      "weight": 1.0,
+      "source": "audit_justification_skill_audit_a_written_justification",
+      "target": "audit_justification_skill_reference",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/audit-justification/SKILL.md",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "audit_justification_skill_audit_a_written_justification",
+      "target": "audit_justification_skill_what_to_check",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/criteria-reference/SKILL.md",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "criteria_reference_skill",
+      "target": "criteria_reference_skill_project_criteria_reference",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/criteria-reference/SKILL.md",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "criteria_reference_skill_project_criteria_reference",
+      "target": "criteria_reference_skill_distinctions_people_get_wrong",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/dictate-notes/SKILL.md",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "dictate_notes_skill",
+      "target": "dictate_notes_skill_dictate_rating_notes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/dictate-notes/SKILL.md",
+      "source_location": "L36",
+      "weight": 1.0,
+      "source": "dictate_notes_skill_dictate_rating_notes",
+      "target": "dictate_notes_skill_boundaries",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/dictate-notes/SKILL.md",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "dictate_notes_skill_dictate_rating_notes",
+      "target": "dictate_notes_skill_capture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/dictate-notes/SKILL.md",
+      "source_location": "L42",
+      "weight": 1.0,
+      "source": "dictate_notes_skill_dictate_rating_notes",
+      "target": "dictate_notes_skill_reference",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/dictate-notes/SKILL.md",
+      "source_location": "L25",
+      "weight": 1.0,
+      "source": "dictate_notes_skill_dictate_rating_notes",
+      "target": "dictate_notes_skill_setup",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/dictate-notes/SKILL.md",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "dictate_notes_skill_dictate_rating_notes",
+      "target": "dictate_notes_skill_what_to_say",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/evaluate-clips/SKILL.md",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "evaluate_clips_skill",
+      "target": "evaluate_clips_skill_evaluate_a_clip_comparison",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/evaluate-clips/SKILL.md",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "evaluate_clips_skill_evaluate_a_clip_comparison",
+      "target": "evaluate_clips_skill_1_the_prompt",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/evaluate-clips/SKILL.md",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "evaluate_clips_skill_evaluate_a_clip_comparison",
+      "target": "evaluate_clips_skill_2_observations_per_clip",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/evaluate-clips/SKILL.md",
+      "source_location": "L24",
+      "weight": 1.0,
+      "source": "evaluate_clips_skill_evaluate_a_clip_comparison",
+      "target": "evaluate_clips_skill_3_picks",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/evaluate-clips/SKILL.md",
+      "source_location": "L28",
+      "weight": 1.0,
+      "source": "evaluate_clips_skill_evaluate_a_clip_comparison",
+      "target": "evaluate_clips_skill_4_check_and_report",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/evaluate-clips/SKILL.md",
+      "source_location": "L36",
+      "weight": 1.0,
+      "source": "evaluate_clips_skill_evaluate_a_clip_comparison",
+      "target": "evaluate_clips_skill_5_draft",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/evaluate-clips/SKILL.md",
+      "source_location": "L40",
+      "weight": 1.0,
+      "source": "evaluate_clips_skill_evaluate_a_clip_comparison",
+      "target": "evaluate_clips_skill_reference",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/evaluate-conversation/SKILL.md",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "evaluate_conversation_skill",
+      "target": "evaluate_conversation_skill_evaluate_a_conversation_task",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/evaluate-conversation/SKILL.md",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "evaluate_conversation_skill_evaluate_a_conversation_task",
+      "target": "evaluate_conversation_skill_1_context",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/evaluate-conversation/SKILL.md",
+      "source_location": "L20",
+      "weight": 1.0,
+      "source": "evaluate_conversation_skill_evaluate_a_conversation_task",
+      "target": "evaluate_conversation_skill_2_observations_per_model",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/evaluate-conversation/SKILL.md",
+      "source_location": "L28",
+      "weight": 1.0,
+      "source": "evaluate_conversation_skill_evaluate_a_conversation_task",
+      "target": "evaluate_conversation_skill_3_picks",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/evaluate-conversation/SKILL.md",
+      "source_location": "L32",
+      "weight": 1.0,
+      "source": "evaluate_conversation_skill_evaluate_a_conversation_task",
+      "target": "evaluate_conversation_skill_4_check_and_report",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/evaluate-conversation/SKILL.md",
+      "source_location": "L45",
+      "weight": 1.0,
+      "source": "evaluate_conversation_skill_evaluate_a_conversation_task",
+      "target": "evaluate_conversation_skill_5_draft",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/evaluate-conversation/SKILL.md",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "evaluate_conversation_skill_evaluate_a_conversation_task",
+      "target": "evaluate_conversation_skill_order_of_operations",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/skills/evaluate-conversation/SKILL.md",
+      "source_location": "L49",
+      "weight": 1.0,
+      "source": "evaluate_conversation_skill_evaluate_a_conversation_task",
+      "target": "evaluate_conversation_skill_reference",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CLAUDE.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "claude",
+      "target": "claude_s2s_arena_harness_project_guidance",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CLAUDE.md",
+      "source_location": "L231",
+      "weight": 1.0,
+      "source": "claude_s2s_arena_harness_project_guidance",
+      "target": "claude_agent_roster",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CLAUDE.md",
+      "source_location": "L116",
+      "weight": 1.0,
+      "source": "claude_s2s_arena_harness_project_guidance",
+      "target": "claude_deterministic_effort_calculation_and_delegation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CLAUDE.md",
+      "source_location": "L98",
+      "weight": 1.0,
+      "source": "claude_s2s_arena_harness_project_guidance",
+      "target": "claude_mandatory_agent_team_communication_protocol",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CLAUDE.md",
+      "source_location": "L80",
+      "weight": 1.0,
+      "source": "claude_s2s_arena_harness_project_guidance",
+      "target": "claude_mandatory_knowledge_graph_protocol_graphify",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CLAUDE.md",
+      "source_location": "L137",
+      "weight": 1.0,
+      "source": "claude_s2s_arena_harness_project_guidance",
+      "target": "claude_model_routing_matrix",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CLAUDE.md",
+      "source_location": "L24",
+      "weight": 1.0,
+      "source": "claude_s2s_arena_harness_project_guidance",
+      "target": "claude_non_negotiable_design_rules",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CLAUDE.md",
+      "source_location": "L149",
+      "weight": 1.0,
+      "source": "claude_s2s_arena_harness_project_guidance",
+      "target": "claude_operational_plugin_and_skill_triage_matrix",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CLAUDE.md",
+      "source_location": "L68",
+      "weight": 1.0,
+      "source": "claude_s2s_arena_harness_project_guidance",
+      "target": "claude_pure_orchestrator_mandate_zero_write_policy",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CLAUDE.md",
+      "source_location": "L165",
+      "weight": 1.0,
+      "source": "claude_s2s_arena_harness_project_guidance",
+      "target": "claude_specs_first_and_guarded_subsystem_contract",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CLAUDE.md",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "claude_s2s_arena_harness_project_guidance",
+      "target": "claude_status",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CLAUDE.md",
+      "source_location": "L272",
+      "weight": 1.0,
+      "source": "claude_s2s_arena_harness_project_guidance",
+      "target": "claude_technical_constraints",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CLAUDE.md",
+      "source_location": "L50",
+      "weight": 1.0,
+      "source": "claude_s2s_arena_harness_project_guidance",
+      "target": "claude_the_criteria_in_one_screen",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CLAUDE.md",
+      "source_location": "L189",
+      "weight": 1.0,
+      "source": "claude_s2s_arena_harness_project_guidance",
+      "target": "claude_two_tier_test_gate_mandatory",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CLAUDE.md",
+      "source_location": "L250",
+      "weight": 1.0,
+      "source": "claude_s2s_arena_harness_project_guidance",
+      "target": "claude_working_in_this_repo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CLAUDE.md",
+      "source_location": "L204",
+      "weight": 1.0,
+      "source": "claude_s2s_arena_harness_project_guidance",
+      "target": "claude_workspace_layout_and_subsystem_registry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CLAUDE.md",
+      "source_location": "L91",
+      "weight": 1.0,
+      "source": "claude_mandatory_knowledge_graph_protocol_graphify",
+      "target": "claude_graph_freshness_mandate_definition_of_done",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CLAUDE.md",
+      "source_location": "L128",
+      "weight": 1.0,
+      "source": "claude_deterministic_effort_calculation_and_delegation",
+      "target": "claude_operational_routing_logic",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CLAUDE.md",
+      "source_location": "L221",
+      "weight": 1.0,
+      "source": "claude_workspace_layout_and_subsystem_registry",
+      "target": "claude_graph_conventions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CLAUDE.md",
+      "source_location": "L258",
+      "weight": 1.0,
+      "source": "claude_working_in_this_repo",
+      "target": "claude_do_not",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "readme",
+      "target": "readme_s2s_arena_harness",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L46",
+      "weight": 1.0,
+      "source": "readme_s2s_arena_harness",
+      "target": "readme_cost",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L50",
+      "weight": 1.0,
+      "source": "readme_s2s_arena_harness",
+      "target": "readme_documentation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L23",
+      "weight": 1.0,
+      "source": "readme_s2s_arena_harness",
+      "target": "readme_quick_start",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L65",
+      "weight": 1.0,
+      "source": "readme_s2s_arena_harness",
+      "target": "readme_status",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "readme_s2s_arena_harness",
+      "target": "readme_what_it_does",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "criteria/project-criteria.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "criteria_project_criteria",
+      "target": "criteria_project_criteria_project_criteria_source_of_truth",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "criteria/project-criteria.md",
+      "source_location": "L45",
+      "weight": 1.0,
+      "source": "criteria_project_criteria_project_criteria_source_of_truth",
+      "target": "criteria_project_criteria_audio_tolerance",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "criteria/project-criteria.md",
+      "source_location": "L96",
+      "weight": 1.0,
+      "source": "criteria_project_criteria_project_criteria_source_of_truth",
+      "target": "criteria_project_criteria_common_failures",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "criteria/project-criteria.md",
+      "source_location": "L76",
+      "weight": 1.0,
+      "source": "criteria_project_criteria_project_criteria_source_of_truth",
+      "target": "criteria_project_criteria_conversation_mode_requirements",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "criteria/project-criteria.md",
+      "source_location": "L23",
+      "weight": 1.0,
+      "source": "criteria_project_criteria_project_criteria_source_of_truth",
+      "target": "criteria_project_criteria_dimensions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "criteria/project-criteria.md",
+      "source_location": "L53",
+      "weight": 1.0,
+      "source": "criteria_project_criteria_project_criteria_source_of_truth",
+      "target": "criteria_project_criteria_error_clusters",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "criteria/project-criteria.md",
+      "source_location": "L104",
+      "weight": 1.0,
+      "source": "criteria_project_criteria_project_criteria_source_of_truth",
+      "target": "criteria_project_criteria_final_review",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "criteria/project-criteria.md",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "criteria_project_criteria_project_criteria_source_of_truth",
+      "target": "criteria_project_criteria_hierarchy",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "criteria/project-criteria.md",
+      "source_location": "L86",
+      "weight": 1.0,
+      "source": "criteria_project_criteria_project_criteria_source_of_truth",
+      "target": "criteria_project_criteria_justification_contract",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "criteria/project-criteria.md",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "criteria_project_criteria_project_criteria_source_of_truth",
+      "target": "criteria_project_criteria_north_star",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "criteria/project-criteria.md",
+      "source_location": "L70",
+      "weight": 1.0,
+      "source": "criteria_project_criteria_project_criteria_source_of_truth",
+      "target": "criteria_project_criteria_scenario_awareness",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "criteria/project-criteria.md",
+      "source_location": "L35",
+      "weight": 1.0,
+      "source": "criteria_project_criteria_project_criteria_source_of_truth",
+      "target": "criteria_project_criteria_threshold_breaches",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "criteria/worked-examples.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "criteria_worked_examples",
+      "target": "criteria_worked_examples_worked_examples",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "criteria/worked-examples.md",
+      "source_location": "L57",
+      "weight": 1.0,
+      "source": "criteria_worked_examples_worked_examples",
+      "target": "criteria_worked_examples_audit_exercise_charisma_versus_interaction_failure",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "criteria/worked-examples.md",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "criteria_worked_examples_worked_examples",
+      "target": "criteria_worked_examples_example_1_naturalness_vs_over_structured_utility",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "criteria/worked-examples.md",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "criteria_worked_examples_worked_examples",
+      "target": "criteria_worked_examples_example_2_abrupt_audio_cutoff",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "criteria/worked-examples.md",
+      "source_location": "L29",
+      "weight": 1.0,
+      "source": "criteria_worked_examples_worked_examples",
+      "target": "criteria_worked_examples_example_3_benign_false_premise",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "criteria/worked-examples.md",
+      "source_location": "L40",
+      "weight": 1.0,
+      "source": "criteria_worked_examples_worked_examples",
+      "target": "criteria_worked_examples_example_4_error_clusters_must_be_reported",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/ARCHITECTURE.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "docs_architecture",
+      "target": "docs_architecture_architecture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/ARCHITECTURE.md",
+      "source_location": "L68",
+      "weight": 1.0,
+      "source": "docs_architecture_architecture",
+      "target": "docs_architecture_data_flow_in_one_sentence",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/ARCHITECTURE.md",
+      "source_location": "L56",
+      "weight": 1.0,
+      "source": "docs_architecture_architecture",
+      "target": "docs_architecture_layer_boundaries",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/ARCHITECTURE.md",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "docs_architecture_architecture",
+      "target": "docs_architecture_shape",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/ARCHITECTURE.md",
+      "source_location": "L72",
+      "weight": 1.0,
+      "source": "docs_architecture_architecture",
+      "target": "docs_architecture_what_is_deliberately_absent",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/ARCHITECTURE.md",
+      "source_location": "L40",
+      "weight": 1.0,
+      "source": "docs_architecture_architecture",
+      "target": "docs_architecture_why_the_token_boundary_sits_there",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/ARCHITECTURE.md",
+      "source_location": "L52",
+      "weight": 1.0,
+      "source": "docs_architecture_why_the_token_boundary_sits_there",
+      "target": "docs_architecture_draft_hash_caching",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/BRIDGE_SPEC.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "docs_bridge_spec",
+      "target": "docs_bridge_spec_bridge_specification",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/BRIDGE_SPEC.md",
+      "source_location": "L23",
+      "weight": 1.0,
+      "source": "docs_bridge_spec_bridge_specification",
+      "target": "docs_bridge_spec_endpoints",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/BRIDGE_SPEC.md",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "docs_bridge_spec_bridge_specification",
+      "target": "docs_bridge_spec_migration_of_the_existing_artifacts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/BRIDGE_SPEC.md",
+      "source_location": "L67",
+      "weight": 1.0,
+      "source": "docs_bridge_spec_bridge_specification",
+      "target": "docs_bridge_spec_parity_requirement",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/BRIDGE_SPEC.md",
+      "source_location": "L56",
+      "weight": 1.0,
+      "source": "docs_bridge_spec_bridge_specification",
+      "target": "docs_bridge_spec_security_posture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/BRIDGE_SPEC.md",
+      "source_location": "L63",
+      "weight": 1.0,
+      "source": "docs_bridge_spec_bridge_specification",
+      "target": "docs_bridge_spec_static_serving",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/BRIDGE_SPEC.md",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "docs_bridge_spec_bridge_specification",
+      "target": "docs_bridge_spec_why_keep_the_html_at_all",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/BRIDGE_SPEC.md",
+      "source_location": "L50",
+      "weight": 1.0,
+      "source": "docs_bridge_spec_endpoints",
+      "target": "docs_bridge_spec_get_criteria_topic",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/BRIDGE_SPEC.md",
+      "source_location": "L53",
+      "weight": 1.0,
+      "source": "docs_bridge_spec_endpoints",
+      "target": "docs_bridge_spec_get_health",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/BRIDGE_SPEC.md",
+      "source_location": "L25",
+      "weight": 1.0,
+      "source": "docs_bridge_spec_endpoints",
+      "target": "docs_bridge_spec_post_evaluate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/BRIDGE_SPEC.md",
+      "source_location": "L44",
+      "weight": 1.0,
+      "source": "docs_bridge_spec_endpoints",
+      "target": "docs_bridge_spec_post_polish",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/BRIDGE_SPEC.md",
+      "source_location": "L47",
+      "weight": 1.0,
+      "source": "docs_bridge_spec_endpoints",
+      "target": "docs_bridge_spec_post_transcribe",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/BUILD_PLAN.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "docs_build_plan",
+      "target": "docs_build_plan_build_plan",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/BUILD_PLAN.md",
+      "source_location": "L84",
+      "weight": 1.0,
+      "source": "docs_build_plan_build_plan",
+      "target": "docs_build_plan_definition_of_done_for_the_whole_project",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/BUILD_PLAN.md",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "docs_build_plan_build_plan",
+      "target": "docs_build_plan_phase_1_criteria_and_catalogues_criteria_keeper",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/BUILD_PLAN.md",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "docs_build_plan_build_plan",
+      "target": "docs_build_plan_phase_2_state_schema_graph_architect",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/BUILD_PLAN.md",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "docs_build_plan_build_plan",
+      "target": "docs_build_plan_phase_3_the_engine_rules_engine_dev",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/BUILD_PLAN.md",
+      "source_location": "L38",
+      "weight": 1.0,
+      "source": "docs_build_plan_build_plan",
+      "target": "docs_build_plan_phase_4_graph_graph_architect",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/BUILD_PLAN.md",
+      "source_location": "L48",
+      "weight": 1.0,
+      "source": "docs_build_plan_build_plan",
+      "target": "docs_build_plan_phase_5_cli_cli_dev",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/BUILD_PLAN.md",
+      "source_location": "L54",
+      "weight": 1.0,
+      "source": "docs_build_plan_build_plan",
+      "target": "docs_build_plan_phase_6_stt_stt_engineer",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/BUILD_PLAN.md",
+      "source_location": "L62",
+      "weight": 1.0,
+      "source": "docs_build_plan_build_plan",
+      "target": "docs_build_plan_phase_7_bridge_and_front_ends_bridge_dev",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/BUILD_PLAN.md",
+      "source_location": "L70",
+      "weight": 1.0,
+      "source": "docs_build_plan_build_plan",
+      "target": "docs_build_plan_phase_8_hardening_eval_runner_token_auditor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/BUILD_PLAN.md",
+      "source_location": "L78",
+      "weight": 1.0,
+      "source": "docs_build_plan_build_plan",
+      "target": "docs_build_plan_sequencing_notes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/CLI_SPEC.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "docs_cli_spec",
+      "target": "docs_cli_spec_cli_specification",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/CLI_SPEC.md",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "docs_cli_spec_cli_specification",
+      "target": "docs_cli_spec_commands",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/CLI_SPEC.md",
+      "source_location": "L77",
+      "weight": 1.0,
+      "source": "docs_cli_spec_cli_specification",
+      "target": "docs_cli_spec_exit_codes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/CLI_SPEC.md",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "docs_cli_spec_cli_specification",
+      "target": "docs_cli_spec_global_options",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/CLI_SPEC.md",
+      "source_location": "L30",
+      "weight": 1.0,
+      "source": "docs_cli_spec_cli_specification",
+      "target": "docs_cli_spec_interactive_flow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/CLI_SPEC.md",
+      "source_location": "L42",
+      "weight": 1.0,
+      "source": "docs_cli_spec_cli_specification",
+      "target": "docs_cli_spec_output",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/CLI_SPEC.md",
+      "source_location": "L69",
+      "weight": 1.0,
+      "source": "docs_cli_spec_cli_specification",
+      "target": "docs_cli_spec_s2s_audit",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/CLI_SPEC.md",
+      "source_location": "L73",
+      "weight": 1.0,
+      "source": "docs_cli_spec_cli_specification",
+      "target": "docs_cli_spec_s2s_criteria",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/EVAL_SPEC.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "docs_eval_spec",
+      "target": "docs_eval_spec_evaluation_and_regression_specification",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/EVAL_SPEC.md",
+      "source_location": "L72",
+      "weight": 1.0,
+      "source": "docs_eval_spec_evaluation_and_regression_specification",
+      "target": "docs_eval_spec_determinism_test",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/EVAL_SPEC.md",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "docs_eval_spec_evaluation_and_regression_specification",
+      "target": "docs_eval_spec_golden_fixtures",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/EVAL_SPEC.md",
+      "source_location": "L66",
+      "weight": 1.0,
+      "source": "docs_eval_spec_evaluation_and_regression_specification",
+      "target": "docs_eval_spec_regression_policy",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/EVAL_SPEC.md",
+      "source_location": "L80",
+      "weight": 1.0,
+      "source": "docs_eval_spec_evaluation_and_regression_specification",
+      "target": "docs_eval_spec_stt_tests",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/EVAL_SPEC.md",
+      "source_location": "L76",
+      "weight": 1.0,
+      "source": "docs_eval_spec_evaluation_and_regression_specification",
+      "target": "docs_eval_spec_token_boundary_test",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/EVAL_SPEC.md",
+      "source_location": "L84",
+      "weight": 1.0,
+      "source": "docs_eval_spec_evaluation_and_regression_specification",
+      "target": "docs_eval_spec_what_is_not_tested",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/EVAL_SPEC.md",
+      "source_location": "L54",
+      "weight": 1.0,
+      "source": "docs_eval_spec_golden_fixtures",
+      "target": "docs_eval_spec_adversarial_fixtures",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/EVAL_SPEC.md",
+      "source_location": "L43",
+      "weight": 1.0,
+      "source": "docs_eval_spec_golden_fixtures",
+      "target": "docs_eval_spec_required_fixtures",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/GRAPH_SPEC.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "docs_graph_spec",
+      "target": "docs_graph_spec_graph_specification",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/GRAPH_SPEC.md",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "docs_graph_spec_graph_specification",
+      "target": "docs_graph_spec_1_state_schema",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/GRAPH_SPEC.md",
+      "source_location": "L106",
+      "weight": 1.0,
+      "source": "docs_graph_spec_graph_specification",
+      "target": "docs_graph_spec_2_nodes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/GRAPH_SPEC.md",
+      "source_location": "L157",
+      "weight": 1.0,
+      "source": "docs_graph_spec_graph_specification",
+      "target": "docs_graph_spec_3_edges",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/GRAPH_SPEC.md",
+      "source_location": "L174",
+      "weight": 1.0,
+      "source": "docs_graph_spec_graph_specification",
+      "target": "docs_graph_spec_4_checkpointing",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/GRAPH_SPEC.md",
+      "source_location": "L180",
+      "weight": 1.0,
+      "source": "docs_graph_spec_graph_specification",
+      "target": "docs_graph_spec_5_mode_differences",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/GRAPH_SPEC.md",
+      "source_location": "L139",
+      "weight": 1.0,
+      "source": "docs_graph_spec_2_nodes",
+      "target": "docs_graph_spec_audit",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/GRAPH_SPEC.md",
+      "source_location": "L136",
+      "weight": 1.0,
+      "source": "docs_graph_spec_2_nodes",
+      "target": "docs_graph_spec_decide",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/GRAPH_SPEC.md",
+      "source_location": "L142",
+      "weight": 1.0,
+      "source": "docs_graph_spec_2_nodes",
+      "target": "docs_graph_spec_draft",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/GRAPH_SPEC.md",
+      "source_location": "L120",
+      "weight": 1.0,
+      "source": "docs_graph_spec_2_nodes",
+      "target": "docs_graph_spec_ingest",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/GRAPH_SPEC.md",
+      "source_location": "L129",
+      "weight": 1.0,
+      "source": "docs_graph_spec_2_nodes",
+      "target": "docs_graph_spec_normalize",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/GRAPH_SPEC.md",
+      "source_location": "L145",
+      "weight": 1.0,
+      "source": "docs_graph_spec_2_nodes",
+      "target": "docs_graph_spec_polish",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/GRAPH_SPEC.md",
+      "source_location": "L154",
+      "weight": 1.0,
+      "source": "docs_graph_spec_2_nodes",
+      "target": "docs_graph_spec_render",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/GRAPH_SPEC.md",
+      "source_location": "L126",
+      "weight": 1.0,
+      "source": "docs_graph_spec_2_nodes",
+      "target": "docs_graph_spec_scan",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/GRAPH_SPEC.md",
+      "source_location": "L123",
+      "weight": 1.0,
+      "source": "docs_graph_spec_2_nodes",
+      "target": "docs_graph_spec_transcribe",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "docs_rules_spec",
+      "target": "docs_rules_spec_rules_specification",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "docs_rules_spec_rules_specification",
+      "target": "docs_rules_spec_1_catalogues",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L50",
+      "weight": 1.0,
+      "source": "docs_rules_spec_rules_specification",
+      "target": "docs_rules_spec_2_normalization",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L65",
+      "weight": 1.0,
+      "source": "docs_rules_spec_rules_specification",
+      "target": "docs_rules_spec_3_decide_the_hierarchy_walk",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L113",
+      "weight": 1.0,
+      "source": "docs_rules_spec_rules_specification",
+      "target": "docs_rules_spec_4_audit_findings",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L201",
+      "weight": 1.0,
+      "source": "docs_rules_spec_rules_specification",
+      "target": "docs_rules_spec_5_draft_the_justification_builder",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L274",
+      "weight": 1.0,
+      "source": "docs_rules_spec_rules_specification",
+      "target": "docs_rules_spec_6_scan_bilingual_signal_detection",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L306",
+      "weight": 1.0,
+      "source": "docs_rules_spec_rules_specification",
+      "target": "docs_rules_spec_7_invariants_for_the_golden_fixtures",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "docs_rules_spec_1_catalogues",
+      "target": "docs_rules_spec_error_clusters_shared",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L38",
+      "weight": 1.0,
+      "source": "docs_rules_spec_1_catalogues",
+      "target": "docs_rules_spec_threshold_audio",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L29",
+      "weight": 1.0,
+      "source": "docs_rules_spec_1_catalogues",
+      "target": "docs_rules_spec_threshold_utility",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L73",
+      "weight": 1.0,
+      "source": "docs_rules_spec_3_decide_the_hierarchy_walk",
+      "target": "docs_rules_spec_step_1_threshold_gate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L93",
+      "weight": 1.0,
+      "source": "docs_rules_spec_3_decide_the_hierarchy_walk",
+      "target": "docs_rules_spec_step_2_hierarchy",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L121",
+      "weight": 1.0,
+      "source": "docs_rules_spec_4_audit_findings",
+      "target": "docs_rules_spec_4_1_setup_and_consistency_conversation_mode_only",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L135",
+      "weight": 1.0,
+      "source": "docs_rules_spec_4_audit_findings",
+      "target": "docs_rules_spec_4_2_evidence_both_modes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L145",
+      "weight": 1.0,
+      "source": "docs_rules_spec_4_audit_findings",
+      "target": "docs_rules_spec_4_3_scenario_inversion",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L157",
+      "weight": 1.0,
+      "source": "docs_rules_spec_4_audit_findings",
+      "target": "docs_rules_spec_4_4_audio",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L166",
+      "weight": 1.0,
+      "source": "docs_rules_spec_4_audit_findings",
+      "target": "docs_rules_spec_4_5_utility",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L172",
+      "weight": 1.0,
+      "source": "docs_rules_spec_4_audit_findings",
+      "target": "docs_rules_spec_4_6_overall_coherence",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L184",
+      "weight": 1.0,
+      "source": "docs_rules_spec_4_audit_findings",
+      "target": "docs_rules_spec_4_7_error_clusters",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L193",
+      "weight": 1.0,
+      "source": "docs_rules_spec_4_audit_findings",
+      "target": "docs_rules_spec_4_8_skip",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L211",
+      "weight": 1.0,
+      "source": "docs_rules_spec_5_draft_the_justification_builder",
+      "target": "docs_rules_spec_early_returns",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L215",
+      "weight": 1.0,
+      "source": "docs_rules_spec_5_draft_the_justification_builder",
+      "target": "docs_rules_spec_sentence_1_preference_and_primary_reason",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L227",
+      "weight": 1.0,
+      "source": "docs_rules_spec_5_draft_the_justification_builder",
+      "target": "docs_rules_spec_sentence_2_hierarchy_reference",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L234",
+      "weight": 1.0,
+      "source": "docs_rules_spec_5_draft_the_justification_builder",
+      "target": "docs_rules_spec_sentence_3_evidence_from_both_sides",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L247",
+      "weight": 1.0,
+      "source": "docs_rules_spec_5_draft_the_justification_builder",
+      "target": "docs_rules_spec_sentence_4_error_clusters",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L253",
+      "weight": 1.0,
+      "source": "docs_rules_spec_5_draft_the_justification_builder",
+      "target": "docs_rules_spec_sentence_5_audio_statement",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L258",
+      "weight": 1.0,
+      "source": "docs_rules_spec_5_draft_the_justification_builder",
+      "target": "docs_rules_spec_sentence_6_scenario_inversion",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L264",
+      "weight": 1.0,
+      "source": "docs_rules_spec_5_draft_the_justification_builder",
+      "target": "docs_rules_spec_sentence_7_threshold_statement",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/RULES_SPEC.md",
+      "source_location": "L269",
+      "weight": 1.0,
+      "source": "docs_rules_spec_5_draft_the_justification_builder",
+      "target": "docs_rules_spec_sentence_8_close",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/STT_SPEC.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "docs_stt_spec",
+      "target": "docs_stt_spec_speech_to_text_specification",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/STT_SPEC.md",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "docs_stt_spec_speech_to_text_specification",
+      "target": "docs_stt_spec_1_scope",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/STT_SPEC.md",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "docs_stt_spec_speech_to_text_specification",
+      "target": "docs_stt_spec_2_provider_interface",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/STT_SPEC.md",
+      "source_location": "L52",
+      "weight": 1.0,
+      "source": "docs_stt_spec_speech_to_text_specification",
+      "target": "docs_stt_spec_3_geminitranscriber",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/STT_SPEC.md",
+      "source_location": "L62",
+      "weight": 1.0,
+      "source": "docs_stt_spec_speech_to_text_specification",
+      "target": "docs_stt_spec_4_googlecloudstt",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/STT_SPEC.md",
+      "source_location": "L70",
+      "weight": 1.0,
+      "source": "docs_stt_spec_speech_to_text_specification",
+      "target": "docs_stt_spec_5_phrase_hints",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/STT_SPEC.md",
+      "source_location": "L82",
+      "weight": 1.0,
+      "source": "docs_stt_spec_speech_to_text_specification",
+      "target": "docs_stt_spec_6_what_the_stt_layer_must_not_do",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/STT_SPEC.md",
+      "source_location": "L94",
+      "weight": 1.0,
+      "source": "docs_stt_spec_speech_to_text_specification",
+      "target": "docs_stt_spec_7_audio_capture",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/STT_SPEC.md",
+      "source_location": "L104",
+      "weight": 1.0,
+      "source": "docs_stt_spec_speech_to_text_specification",
+      "target": "docs_stt_spec_8_failure_behavior",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/STT_SPEC.md",
+      "source_location": "L115",
+      "weight": 1.0,
+      "source": "docs_stt_spec_speech_to_text_specification",
+      "target": "docs_stt_spec_9_cost_note",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/s2s_harness/README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "s2s_harness_readme",
+      "target": "s2s_harness_readme_implementation_target",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/golden/README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "golden_readme",
+      "target": "golden_readme_golden_fixtures",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "web/README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "web_readme",
+      "target": "web_readme_front_ends",
+      "confidence_score": 1.0
+    }
+  ],
+  "hyperedges": []
+}

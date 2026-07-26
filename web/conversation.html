@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>S2S Arena — Rating Assistant &amp; Rulebook</title>
+<style>
+  :root{
+    --bg:#0e1014; --panel:#161a21; --panel2:#1c212a; --line:#2a313d;
+    --txt:#e7ecf3; --dim:#9aa5b5; --faint:#6b7686;
+    --acc:#6ea8fe; --acc2:#8be9c0; --warn:#f5c451; --err:#f2777a; --ok:#7dd3a0;
+    --a:#7aa2f7; --b:#c98bdb;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg); color:var(--txt);
+    font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--acc)}
+  .wrap{max-width:1400px;margin:0 auto;padding:20px 20px 80px}
+
+  header.top{
+    display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;
+    padding:16px 18px;background:linear-gradient(135deg,#1a2030,#141821);
+    border:1px solid var(--line);border-radius:14px;margin-bottom:14px;
+  }
+  header.top h1{margin:0;font-size:19px;letter-spacing:.2px}
+  header.top p{margin:3px 0 0;color:var(--dim);font-size:12.5px}
+  .badges{display:flex;gap:8px;flex-wrap:wrap}
+  .badge{font-size:11px;padding:5px 10px;border-radius:999px;border:1px solid var(--line);background:#11151c;color:var(--dim)}
+  .badge.on{color:var(--ok);border-color:#2f5a45;background:#12241c}
+  .badge.off{color:var(--warn);border-color:#5a4c22;background:#241f12}
+
+  .notice{
+    display:flex;gap:10px;align-items:flex-start;
+    background:#141c26;border:1px solid #2d4260;border-radius:12px;
+    padding:11px 14px;margin-bottom:16px;font-size:12.8px;color:#c3d4e8;
+  }
+  .notice b{color:#e3edfa}
+
+  .tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+  .tab{
+    padding:8px 14px;border-radius:10px;border:1px solid var(--line);
+    background:var(--panel);color:var(--dim);cursor:pointer;font-size:13px;font-weight:600;
+    transition:.12s;
+  }
+  .tab:hover{color:var(--txt);border-color:#3a4356}
+  .tab.active{background:var(--acc);color:#0b1220;border-color:var(--acc)}
+
+  .cols{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:16px;align-items:start}
+  @media (max-width:1080px){.cols{grid-template-columns:1fr}}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;margin-bottom:14px;overflow:hidden}
+  .card > h2{
+    margin:0;padding:13px 16px;font-size:13.5px;letter-spacing:.4px;text-transform:uppercase;
+    color:var(--dim);border-bottom:1px solid var(--line);background:#12161d;
+    display:flex;align-items:center;gap:9px;
+  }
+  .card > h2 .num{
+    width:21px;height:21px;border-radius:6px;background:var(--acc);color:#0b1220;
+    display:grid;place-items:center;font-size:11.5px;font-weight:800;
+  }
+  .card .body{padding:15px 16px}
+
+  label.f{display:block;font-size:12px;font-weight:700;color:var(--dim);margin:0 0 6px;letter-spacing:.2px}
+  .hint{font-size:11.5px;color:var(--faint);margin:5px 0 0;line-height:1.5}
+  input[type=text],input[type=number],textarea,select{
+    width:100%;background:#0d1117;border:1px solid var(--line);border-radius:9px;
+    color:var(--txt);padding:9px 11px;font:inherit;font-size:13.5px;outline:none;
+  }
+  textarea{min-height:96px;resize:vertical;line-height:1.55}
+  input:focus,textarea:focus,select:focus{border-color:var(--acc);box-shadow:0 0 0 3px rgba(110,168,254,.12)}
+  select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,#7f8b9c 50%),linear-gradient(135deg,#7f8b9c 50%,transparent 50%);
+    background-position:calc(100% - 17px) 50%,calc(100% - 12px) 50%;background-size:5px 5px,5px 5px;background-repeat:no-repeat;padding-right:32px}
+  .row{display:grid;gap:12px;margin-bottom:13px}
+  .row.two{grid-template-columns:1fr 1fr}
+  .row.three{grid-template-columns:1fr 1fr 1fr}
+  @media (max-width:640px){.row.two,.row.three{grid-template-columns:1fr}}
+
+  .modelgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media (max-width:900px){.modelgrid{grid-template-columns:1fr}}
+  .mbox{border:1px solid var(--line);border-radius:12px;padding:13px;background:var(--panel2)}
+  .mbox.a{border-top:3px solid var(--a)}
+  .mbox.b{border-top:3px solid var(--b)}
+  .mtitle{font-weight:800;font-size:13px;letter-spacing:.5px;margin:0 0 11px;display:flex;align-items:center;gap:8px}
+  .dot{width:9px;height:9px;border-radius:50%}
+  .dot.a{background:var(--a)} .dot.b{background:var(--b)}
+
+  .chk{display:flex;gap:9px;align-items:flex-start;padding:6px 7px;border-radius:7px;cursor:pointer;font-size:12.6px;line-height:1.4}
+  .chk:hover{background:#212734}
+  .chk input{margin:2px 0 0;accent-color:var(--acc);flex:0 0 auto;width:14px;height:14px}
+  .chk.thr:hover{background:#2b1e21}
+  .chk.thr input{accent-color:var(--err)}
+  .grouplabel{font-size:11px;font-weight:800;letter-spacing:.6px;color:var(--faint);margin:12px 0 5px;text-transform:uppercase}
+  .grouplabel.red{color:#d98a90}
+
+  .sig{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .sigchip{
+    font-size:11px;padding:4px 9px;border-radius:999px;border:1px dashed var(--line);
+    background:#0f141b;color:var(--dim);cursor:pointer;transition:.12s
+  }
+  .sigchip:hover{border-color:var(--acc);color:var(--txt)}
+  .sigchip b{color:var(--acc2);font-weight:700}
+
+  .btn{
+    border:1px solid var(--line);background:var(--panel2);color:var(--txt);
+    padding:9px 15px;border-radius:9px;font:inherit;font-size:13px;font-weight:650;cursor:pointer;transition:.12s
+  }
+  .btn:hover{border-color:var(--acc);background:#232a36}
+  .btn.pri{background:var(--acc);color:#0b1220;border-color:var(--acc)}
+  .btn.pri:hover{filter:brightness(1.08)}
+  .btn.gh{background:transparent}
+  .btn:disabled{opacity:.5;cursor:not-allowed}
+  .btnrow{display:flex;gap:9px;flex-wrap:wrap;margin-top:4px}
+
+  /* right panel */
+  .sticky{position:sticky;top:16px}
+  .verdict{padding:15px 16px;border-bottom:1px solid var(--line)}
+  .vhead{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+  .vpill{
+    font-size:22px;font-weight:800;letter-spacing:.5px;padding:7px 16px;border-radius:11px;
+    background:#0e1319;border:1px solid var(--line)
+  }
+  .vpill.A{color:var(--a);border-color:#33456e;background:#141a29}
+  .vpill.B{color:var(--b);border-color:#5c3a68;background:#1f1526}
+  .vpill.TIE{color:var(--warn);border-color:#5a4c22;background:#241f12}
+  .vsub{font-size:12px;color:var(--dim);margin-top:9px;line-height:1.6}
+
+  .trace{margin:12px 0 0;padding:0;list-style:none;font-size:12.3px}
+  .trace li{padding:7px 0 7px 22px;position:relative;color:var(--dim);border-top:1px dashed #232935}
+  .trace li:first-child{border-top:0}
+  .trace li::before{content:"→";position:absolute;left:2px;color:var(--acc);font-weight:700}
+  .trace li b{color:var(--txt)}
+
+  .issues{padding:6px 16px 14px}
+  .issue{display:flex;gap:10px;align-items:flex-start;padding:9px 11px;border-radius:9px;margin-top:8px;font-size:12.4px;line-height:1.5}
+  .issue .ic{font-weight:800;flex:0 0 auto;font-size:11px;padding:2px 7px;border-radius:5px;letter-spacing:.4px}
+  .issue.err{background:#251518;border:1px solid #58323a}
+  .issue.err .ic{background:var(--err);color:#26090d}
+  .issue.warn{background:#241f12;border:1px solid #5a4c22}
+  .issue.warn .ic{background:var(--warn);color:#231a02}
+  .issue.ok{background:#122019;border:1px solid #2c5341}
+  .issue.ok .ic{background:var(--ok);color:#062015}
+  .issue.info{background:#131a25;border:1px solid #2c3b56}
+  .issue.info .ic{background:var(--acc);color:#08121f}
+
+  .just{padding:14px 16px}
+  .justbox{
+    background:#0d1117;border:1px solid var(--line);border-radius:11px;padding:13px 14px;
+    font-size:13.4px;line-height:1.7;white-space:pre-wrap;min-height:120px;color:#dde5f0
+  }
+  .justbox em{color:var(--warn);font-style:normal;background:#2a2415;padding:0 4px;border-radius:4px}
+  .aiwrap{margin-top:11px}
+  .loading{color:var(--dim);font-size:12.5px;margin-top:9px}
+
+  .recgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:12px}
+  @media(max-width:640px){.recgrid{grid-template-columns:1fr 1fr}}
+  .rec{background:#0f141b;border:1px solid var(--line);border-radius:9px;padding:9px 10px}
+  .rec .k{font-size:10px;letter-spacing:.5px;text-transform:uppercase;color:var(--faint);font-weight:700}
+  .rec .v{font-size:14px;font-weight:800;margin-top:3px}
+  .rec .v.A{color:var(--a)} .rec .v.B{color:var(--b)} .rec .v.T{color:var(--warn)} .rec .v.N{color:var(--dim)}
+  .rec.mismatch{border-color:#6a4a20;background:#231c11}
+  .rec .mm{font-size:10.5px;color:var(--warn);margin-top:4px}
+
+  /* knowledge base */
+  .kb{display:none}
+  .kb.show{display:block}
+  .form{display:block}
+  .form.hide{display:none}
+  details.acc{border:1px solid var(--line);border-radius:11px;margin-bottom:9px;background:var(--panel);overflow:hidden}
+  details.acc>summary{
+    cursor:pointer;padding:12px 15px;font-weight:700;font-size:13.5px;list-style:none;
+    display:flex;align-items:center;gap:9px;background:#12161d
+  }
+  details.acc>summary::-webkit-details-marker{display:none}
+  details.acc>summary::before{content:"▸";color:var(--acc);font-size:12px;transition:.15s}
+  details.acc[open]>summary::before{transform:rotate(90deg)}
+  details.acc .inner{padding:14px 16px;border-top:1px solid var(--line);font-size:13.4px;line-height:1.65;color:#cfd8e5}
+  details.acc .inner h4{margin:16px 0 7px;font-size:13px;color:var(--acc2);letter-spacing:.3px}
+  details.acc .inner h4:first-child{margin-top:0}
+  details.acc .inner ul{margin:7px 0;padding-left:20px}
+  details.acc .inner li{margin:4px 0}
+  details.acc .inner code{background:#0d1117;border:1px solid var(--line);padding:1px 6px;border-radius:5px;font-size:12.3px}
+  .callout{border-left:3px solid var(--warn);background:#211d12;padding:10px 13px;border-radius:0 9px 9px 0;margin:11px 0;font-size:12.8px}
+  .callout.red{border-left-color:var(--err);background:#231619}
+  .callout.blue{border-left-color:var(--acc);background:#131a25}
+  .callout.green{border-left-color:var(--ok);background:#122019}
+  table.kbt{width:100%;border-collapse:collapse;margin:10px 0;font-size:12.8px}
+  table.kbt th,table.kbt td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+  table.kbt th{background:#12161d;color:var(--dim);font-size:11.5px;text-transform:uppercase;letter-spacing:.4px}
+  .ex{border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:11px 0;background:var(--panel2)}
+  .ex .exh{font-weight:800;color:var(--acc2);font-size:12.8px;margin-bottom:6px}
+  .ex .ans{display:inline-block;font-size:11.5px;font-weight:800;padding:3px 9px;border-radius:6px;background:#12241c;color:var(--ok);border:1px solid #2f5a45;margin:6px 0}
+  .ex blockquote{margin:8px 0 0;padding:10px 12px;background:#0d1117;border-left:3px solid var(--acc);border-radius:0 8px 8px 0;font-size:12.6px;line-height:1.65;color:#c9d4e2}
+  .flow{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;line-height:1.8;background:#0d1117;border:1px solid var(--line);border-radius:10px;padding:13px;overflow-x:auto;color:#b6c3d4}
+  .foot{color:var(--faint);font-size:11.5px;text-align:center;margin-top:26px;line-height:1.7}
+  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--acc);color:#0b1220;
+    padding:10px 20px;border-radius:10px;font-weight:700;font-size:13px;opacity:0;pointer-events:none;transition:.22s;z-index:99}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div>
+      <h1>S2S Arena — Rating Assistant &amp; Rulebook</h1>
+      <p>Live S2S Arena / Stereo Headphone Check Project · self-check your analysis against the project source of truth</p>
+    </div>
+    <div class="badges">
+      <span class="badge" id="aiBadge">AI assist: checking…</span>
+      <span class="badge">Hierarchy: Naturalness &gt; Utility &gt; Audio</span>
+      <span class="badge">Min 4 turns / model</span>
+    </div>
+  </header>
+
+  <div class="notice">
+    <span>🎓</span>
+    <div><b>Practice mode.</b> This is a training surface for learning how to <i>think</i> about the project: make your own call first, then let the engine walk the hierarchy step by step and show you where your reasoning holds up and where it breaks. The draft it writes is a structural scaffold — the more specific your notes, the more the wording becomes yours.</div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" data-view="form">Rating Workspace</button>
+    <button class="tab" data-view="kb">Rulebook &amp; Knowledge Base</button>
+  </div>
+
+  <!-- ================= FORM VIEW ================= -->
+  <div id="viewForm" class="form">
+  <div class="cols">
+
+    <!-- LEFT -->
+    <div>
+
+      <div class="card">
+        <h2><span class="num">0</span> Pre-flight</h2>
+        <div class="body">
+          <label class="chk"><input type="checkbox" id="pfHeadphones"> Phase-aligned <b>stereo headphones</b> in use (no speakers, no mono earbuds)</label>
+          <label class="chk"><input type="checkbox" id="pfPan"> Panning / audio-position check passed (Left · Center · Right)</label>
+          <label class="chk"><input type="checkbox" id="pfScenario"> Scenario &amp; persona read and understood before speaking</label>
+          <label class="chk"><input type="checkbox" id="pfIsolated"> Listened to each model's audio <b>in isolation</b> to judge Audio Quality</label>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2><span class="num">1</span> Task context</h2>
+        <div class="body">
+          <div class="row">
+            <div>
+              <label class="f" for="scenario">Scenario / persona as assigned</label>
+              <textarea id="scenario" placeholder="Paste or summarize the assigned scenario and the role you were asked to play. Example: 'You are a customer at a vintage watch shop asking the seller for advice on your first mechanical watch.'"></textarea>
+              <p class="hint">Scenarios are self-explanatory by design — there is no separate guide. Everything you need is in the task text itself.</p>
+            </div>
+          </div>
+          <div class="row three">
+            <div>
+              <label class="f" for="scenType">Scenario type</label>
+              <select id="scenType">
+                <option value="standard">Standard conversation</option>
+                <option value="redteam">Hallucination fishing / Redteam</option>
+                <option value="premise">False-premise probe</option>
+                <option value="instruction">Instruction-following / constraint test</option>
+                <option value="interrupt">Interruption / adaptability test</option>
+                <option value="emotional">Emotional / empathy scenario</option>
+                <option value="roleplay">Roleplay / persona-heavy</option>
+              </select>
+            </div>
+            <div>
+              <label class="f" for="turnsA">Turns with Model A</label>
+              <input type="number" id="turnsA" min="0" max="30" value="4">
+            </div>
+            <div>
+              <label class="f" for="turnsB">Turns with Model B</label>
+              <input type="number" id="turnsB" min="0" max="30" value="4">
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <label class="f" for="prompts">Prompts used (same or near-identical for both models)</label>
+              <textarea id="prompts" style="min-height:70px" placeholder="Turn 1: ...&#10;Turn 2: ...&#10;Turn 3: ...&#10;Turn 4: ..."></textarea>
+            </div>
+          </div>
+          <label class="chk"><input type="checkbox" id="pfEquiv"> Both models received prompts of <b>equal specificity</b>, same topic, same energy, same depth</label>
+          <label class="chk"><input type="checkbox" id="pfPersona"> I stayed in character and never talked about the prompt or the task with the models</label>
+          <label class="chk"><input type="checkbox" id="pfInterrupt"> I tested adaptability by interrupting / redirecting at least once with both models</label>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2><span class="num">2</span> Raw notes &amp; observed behavior</h2>
+        <div class="body">
+          <p class="hint" style="margin:0 0 12px">Write freely, in English or Spanish. Reference turn numbers and exact moments — the justification is only as strong as the specific evidence in here. The tool scans your notes and suggests flags below each box; click a suggestion to tick the matching checkbox.</p>
+          <div class="modelgrid">
+
+            <div class="mbox a">
+              <p class="mtitle"><span class="dot a"></span> MODEL A</p>
+              <label class="f" for="notesA">Raw notes</label>
+              <textarea id="notesA" placeholder="e.g. Turn 2 — warm laugh, picked up on my joke about the rain and ran with it. Turn 3 — gave a concrete tip (soak the beans overnight) instead of a list. Turn 4 — slight pause before answering but recovered."></textarea>
+              <div class="sig" id="sigA"></div>
+
+              <label class="f" style="margin-top:13px" for="bestA">Strongest specific moment (turn # + what happened)</label>
+              <input type="text" id="bestA" placeholder="Turn 3 — used a natural transition, 'ok pero espera', instead of restarting the answer">
+              <label class="f" style="margin-top:11px" for="worstA">Weakest specific moment</label>
+              <input type="text" id="worstA" placeholder="Turn 4 — began repeating the phrase 'that's a great question'">
+
+              <div class="grouplabel">Error clusters — Model A</div>
+              <label class="chk"><input type="checkbox" data-ec="A" value="repetitive phrasing across turns"> Repetitive words/phrases across turns</label>
+              <label class="chk"><input type="checkbox" data-ec="A" value="noticeable degradation as the conversation continued"> Responses degraded as the conversation continued</label>
+              <label class="chk"><input type="checkbox" data-ec="A" value="interrupting me / talking over my turn"> Interrupted me / talked over my turn</label>
+              <label class="chk"><input type="checkbox" data-ec="A" value="ignoring my attempts to interrupt or correct it"> Ignored my attempts to interrupt or correct it</label>
+              <label class="chk"><input type="checkbox" data-ec="A" value="awkward silences / failing to respond"> Awkward silence / failed to respond</label>
+              <label class="chk"><input type="checkbox" data-ec="A" value="embodied-experience claims"> Embodied-experience claim (offered to physically do something)</label>
+              <label class="chk"><input type="checkbox" data-ec="A" value="speech-recognition failures"> Speech recognition failure (misheard me)</label>
+
+              <div class="grouplabel red">Threshold issues — Model A</div>
+              <label class="chk thr"><input type="checkbox" data-th="A" data-kind="utility" value="hallucination / invented facts"> Hallucination / invented facts</label>
+              <label class="chk thr"><input type="checkbox" data-th="A" data-kind="utility" value="accepted a false premise instead of correcting it"> Accepted a false premise instead of correcting it</label>
+              <label class="chk thr"><input type="checkbox" data-th="A" data-kind="utility" value="refused or failed to follow my instructions"> Refused / failed to follow instructions</label>
+              <label class="chk thr"><input type="checkbox" data-th="A" data-kind="audio" value="audio cut off mid-word"> Audio cut off mid-word</label>
+              <label class="chk thr"><input type="checkbox" data-th="A" data-kind="audio" value="audible clicks or pops"> Audible clicks / pops</label>
+              <label class="chk thr"><input type="checkbox" data-th="A" data-kind="audio" value="distortion or robotic artifacts"> Distortion / robotic artifacts</label>
+              <label class="chk thr"><input type="checkbox" data-th="A" data-kind="audio" value="dropouts or lost audio"> Dropouts / lost audio</label>
+
+              <label class="f" style="margin-top:13px" for="roomA">Background noise character — Model A</label>
+              <select id="roomA">
+                <option value="clean">Clean — nothing to report</option>
+                <option value="slight">Slight room tone / "air" — acceptable, do not penalize</option>
+                <option value="notable">Notable &amp; distracting background noise — penalize</option>
+              </select>
+
+              <label class="f" style="margin-top:11px" for="pushA">Redteam behavior — Model A</label>
+              <select id="pushA">
+                <option value="na">Not applicable</option>
+                <option value="pushback">Pushed back / corrected the false claim (success)</option>
+                <option value="hedged">Hedged, neither accepted nor corrected</option>
+                <option value="accepted">Went along with the false claim (failure)</option>
+              </select>
+            </div>
+
+            <div class="mbox b">
+              <p class="mtitle"><span class="dot b"></span> MODEL B</p>
+              <label class="f" for="notesB">Raw notes</label>
+              <textarea id="notesB" placeholder="e.g. Turn 1 — answered in a bulleted, assistant-like list. Turn 3 — flat intonation, no reaction to my joke. Turn 4 — clean audio throughout."></textarea>
+              <div class="sig" id="sigB"></div>
+
+              <label class="f" style="margin-top:13px" for="bestB">Strongest specific moment (turn # + what happened)</label>
+              <input type="text" id="bestB" placeholder="Turn 2 — gave the most practical, concrete answer of the two">
+              <label class="f" style="margin-top:11px" for="worstB">Weakest specific moment</label>
+              <input type="text" id="worstB" placeholder="Turn 1 — structured 'assistant' delivery, three numbered points, no conversational flow">
+
+              <div class="grouplabel">Error clusters — Model B</div>
+              <label class="chk"><input type="checkbox" data-ec="B" value="repetitive phrasing across turns"> Repetitive words/phrases across turns</label>
+              <label class="chk"><input type="checkbox" data-ec="B" value="noticeable degradation as the conversation continued"> Responses degraded as the conversation continued</label>
+              <label class="chk"><input type="checkbox" data-ec="B" value="interrupting me / talking over my turn"> Interrupted me / talked over my turn</label>
+              <label class="chk"><input type="checkbox" data-ec="B" value="ignoring my attempts to interrupt or correct it"> Ignored my attempts to interrupt or correct it</label>
+              <label class="chk"><input type="checkbox" data-ec="B" value="awkward silences / failing to respond"> Awkward silence / failed to respond</label>
+              <label class="chk"><input type="checkbox" data-ec="B" value="embodied-experience claims"> Embodied-experience claim (offered to physically do something)</label>
+              <label class="chk"><input type="checkbox" data-ec="B" value="speech-recognition failures"> Speech recognition failure (misheard me)</label>
+
+              <div class="grouplabel red">Threshold issues — Model B</div>
+              <label class="chk thr"><input type="checkbox" data-th="B" data-kind="utility" value="hallucination / invented facts"> Hallucination / invented facts</label>
+              <label class="chk thr"><input type="checkbox" data-th="B" data-kind="utility" value="accepted a false premise instead of correcting it"> Accepted a false premise instead of correcting it</label>
+              <label class="chk thr"><input type="checkbox" data-th="B" data-kind="utility" value="refused or failed to follow my instructions"> Refused / failed to follow instructions</label>
+              <label class="chk thr"><input type="checkbox" data-th="B" data-kind="audio" value="audio cut off mid-word"> Audio cut off mid-word</label>
+              <label class="chk thr"><input type="checkbox" data-th="B" data-kind="audio" value="audible clicks or pops"> Audible clicks / pops</label>
+              <label class="chk thr"><input type="checkbox" data-th="B" data-kind="audio" value="distortion or robotic artifacts"> Distortion / robotic artifacts</label>
+              <label class="chk thr"><input type="checkbox" data-th="B" data-kind="audio" value="dropouts or lost audio"> Dropouts / lost audio</label>
+
+              <label class="f" style="margin-top:13px" for="roomB">Background noise character — Model B</label>
+              <select id="roomB">
+                <option value="clean">Clean — nothing to report</option>
+                <option value="slight">Slight room tone / "air" — acceptable, do not penalize</option>
+                <option value="notable">Notable &amp; distracting background noise — penalize</option>
+              </select>
+
+              <label class="f" style="margin-top:11px" for="pushB">Redteam behavior — Model B</label>
+              <select id="pushB">
+                <option value="na">Not applicable</option>
+                <option value="pushback">Pushed back / corrected the false claim (success)</option>
+                <option value="hedged">Hedged, neither accepted nor corrected</option>
+                <option value="accepted">Went along with the false claim (failure)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2><span class="num">3</span> Your picks</h2>
+        <div class="body">
+          <p class="hint" style="margin:0 0 12px">Choose these yourself first. The panel on the right compares them against what the rules imply and tells you where you contradict yourself.</p>
+          <div class="row two">
+            <div>
+              <label class="f" for="pickNat">Naturalness / Engagement / Aesthetics <span style="color:var(--acc)">— highest weight</span></label>
+              <select id="pickNat" class="pick"><option value="">— choose —</option><option value="A">Model A</option><option value="B">Model B</option><option value="TIE">Both Good</option><option value="BAD">Both Bad</option></select>
+            </div>
+            <div>
+              <label class="f" for="pickUti">Utility</label>
+              <select id="pickUti" class="pick"><option value="">— choose —</option><option value="A">Model A</option><option value="B">Model B</option><option value="TIE">Both Good</option><option value="BAD">Both Bad</option></select>
+            </div>
+          </div>
+          <div class="row two">
+            <div>
+              <label class="f" for="pickAud">Audio Quality</label>
+              <select id="pickAud" class="pick"><option value="">— choose —</option><option value="A">Model A</option><option value="B">Model B</option><option value="TIE">Both Good</option><option value="BAD">Both Bad</option></select>
+            </div>
+            <div>
+              <label class="f" for="pickOvr">Overall Preference</label>
+              <select id="pickOvr" class="pick"><option value="">— choose —</option><option value="A">Model A</option><option value="B">Model B</option><option value="TIE">Both Good</option><option value="BAD">Both Bad</option></select>
+            </div>
+          </div>
+          <div class="row two">
+            <div>
+              <label class="f" for="successA">Task success — Model A</label>
+              <select id="successA"><option value="pass">Pass</option><option value="partial">Partial</option><option value="fail">Fail</option></select>
+            </div>
+            <div>
+              <label class="f" for="successB">Task success — Model B</label>
+              <select id="successB"><option value="pass">Pass</option><option value="partial">Partial</option><option value="fail">Fail</option></select>
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <label class="f" for="skipNote">Technical issue → Skip? (leave empty if not skipping)</label>
+              <input type="text" id="skipNote" placeholder="e.g. Model B froze at turn 2 and never reconnected">
+              <p class="hint">Skip is for genuine technical failures — freeze, no response, connection loss. Never for poor performance.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT -->
+    <div>
+      <div class="sticky">
+        <div class="card">
+          <h2><span class="num">✓</span> Rule check &amp; recommendation</h2>
+
+          <div class="verdict">
+            <div class="vhead">
+              <div>
+                <div style="font-size:11px;letter-spacing:.6px;color:var(--faint);font-weight:700;text-transform:uppercase">Rules imply overall</div>
+                <div style="margin-top:6px"><span class="vpill TIE" id="vPill">—</span></div>
+              </div>
+              <div style="text-align:right;max-width:240px">
+                <div style="font-size:11px;letter-spacing:.6px;color:var(--faint);font-weight:700;text-transform:uppercase">Deciding dimension</div>
+                <div style="font-size:13.5px;font-weight:700;margin-top:6px" id="vDriver">—</div>
+              </div>
+            </div>
+            <div class="vsub" id="vSub">Fill in the notes and flags on the left to get a recommendation.</div>
+            <ul class="trace" id="vTrace"></ul>
+            <div class="recgrid" id="recGrid"></div>
+          </div>
+
+          <div class="issues" id="issues"></div>
+        </div>
+
+        <div class="card">
+          <h2><span class="num">✎</span> Justification draft (English)</h2>
+          <div class="just">
+            <div class="justbox" id="justBox">Complete the form to generate a draft.</div>
+            <div class="btnrow" style="margin-top:11px">
+              <button class="btn pri" id="btnAI">Generate with AI assist</button>
+              <button class="btn" id="btnRule">Rebuild from rules</button>
+              <button class="btn gh" id="btnCopy">Copy</button>
+            </div>
+            <div class="loading" id="loading" style="display:none">Drafting…</div>
+            <p class="hint" id="aiNote">Any text in <em style="background:#2a2415;color:var(--warn);padding:0 4px;border-radius:4px">highlight</em> is a gap you must fill with your own observation before submitting.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2><span class="num">☑</span> Final review</h2>
+          <div class="body">
+            <label class="chk"><input type="checkbox" class="fin"> Which conversation would I rather continue? — I can answer this in one sentence.</label>
+            <label class="chk"><input type="checkbox" class="fin"> I evaluated the <b>entire</b> interaction, not just the first turn.</label>
+            <label class="chk"><input type="checkbox" class="fin"> I identified whether either model noticeably broke down.</label>
+            <label class="chk"><input type="checkbox" class="fin"> My dimension picks and my written justification point the same way.</label>
+            <label class="chk"><input type="checkbox" class="fin"> Every claim in my justification cites a specific, observable moment.</label>
+            <label class="chk"><input type="checkbox" class="fin"> The justification is written in English.</label>
+            <div class="btnrow" style="margin-top:12px">
+              <button class="btn gh" id="btnSummary">Copy full task summary</button>
+              <button class="btn gh" id="btnReset">Reset form</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  </div>
+
+  <!-- ================= KNOWLEDGE BASE VIEW ================= -->
+  <div id="viewKb" class="kb">
+
+    <details class="acc" open>
+      <summary>North Star — what the project actually wants</summary>
+      <div class="inner">
+        <p>Your primary goal is a <b>spontaneous, natural, aesthetically pleasing conversation</b> with both Model A and Model B. It should feel like chatting with a friend or an acquaintance — not like querying an assistant.</p>
+        <ul>
+          <li><b>Adopt the persona.</b> Actively assume the assigned role and step into the situation. Use natural transitions ("that's a fair point, but what if…") instead of firing question after question. Let yourself go a little and actually converse.</li>
+          <li><b>Keep 1:1 consistency.</b> Both models must be evaluated under identical conditions: same energy, same depth, same topic, same number of turns. If you spend 4 turns on vintage watches with Model A, do the same with Model B.</li>
+          <li><b>Turns.</b> Minimum 4 turns per model. Extend beyond that when you need more evidence for a fair comparison.</li>
+          <li><b>Stay in character.</b> Never discuss the prompt or the task itself while interacting with the models.</li>
+        </ul>
+        <div class="callout blue"><b>Language note.</b> Instructions and your written justification are in English. Your spoken conversation with the voice model happens in whichever language you are authorized to work in (Spanish, French, Chinese, etc.).</div>
+        <div class="callout"><b>Turn-count reconciliation.</b> Project training material mentions both "2–6 turns" and "minimum 4 turns". Treat <b>4 as the hard floor</b> and 4–6 as the working target; go longer whenever the comparison is not yet decidable.</div>
+      </div>
+    </details>
+
+    <details class="acc">
+      <summary>Workflow — the five steps</summary>
+      <div class="inner">
+        <table class="kbt">
+          <tr><th>Stage</th><th>Action</th><th>Core requirement</th></tr>
+          <tr><td>Step 1</td><td>Audio setup</td><td>Phase-aligned stereo headphones (no speakers / mono earbuds); pass the panning test</td></tr>
+          <tr><td>Step 2</td><td>Voice conversation</td><td>Review the assigned scenario / persona and plan your conversation</td></tr>
+          <tr><td>Step 3</td><td>Model interactions</td><td>Minimum 4 turns with Model A and with Model B independently, using the same or very similar prompts and the same turn count</td></tr>
+          <tr><td>Step 4</td><td>Evaluate</td><td>Score both models on the project criteria (hierarchy + dimensions) and write a justification explaining which was better and why</td></tr>
+          <tr><td>Step 5</td><td>Submit vote</td><td>Review your evaluation details and submit</td></tr>
+        </table>
+        <h4>Audio position check</h4>
+        <p>Listen to the full clip and select <b>Left</b> (louder in the left ear), <b>Center</b> (equal in both), or <b>Right</b> (louder in the right). The difference is subtle and audio is still present in both ears.</p>
+        <h4>Testing adaptability via interruptions</h4>
+        <p>Interrupt mid-response by changing your mind, adding a constraint, or redirecting. Observe whether the model <b>acknowledges</b> the interruption, <b>adapts</b> appropriately, and <b>remains coherent</b>.</p>
+        <h4>Skip (technical issue)</h4>
+        <p>Use Skip only when the model freezes, gives no response, or the connection fails. Include a brief description. Skip is never for poor performance.</p>
+        <div class="flow">Step 1 Audio Setup
+   └─ Step 2 Voice Conversation ──┬─ Technical issue? ─ yes ─→ Skip with description
+                                  └─ no ─→ Step 3 Model Interactions
+                                             └─ Step 4 Rate Conversation
+                                                  └─ Step 5 Submit Vote</div>
+      </div>
+    </details>
+
+    <details class="acc">
+      <summary>Rating hierarchy &amp; the four dimensions</summary>
+      <div class="inner">
+        <div class="callout green" style="font-size:14px;text-align:center;font-weight:800">Naturalness / Engagement &nbsp;&gt;&nbsp; Utility &nbsp;&gt;&nbsp; Audio Quality</div>
+        <p>Utility and Audio Quality carry less weight, but both must still clear a <b>basic satisfaction threshold</b>: no misinformation, no hallucination, no jarring audio errors.</p>
+        <table class="kbt">
+          <tr><th>Dimension</th><th>The question you are answering</th></tr>
+          <tr><td><b>Naturalness / Engagement / Aesthetics</b></td><td>Which model sounded more human, expressive and warm? Score robotic intonation and unnatural rhythm lower.</td></tr>
+          <tr><td><b>Utility</b></td><td>Which response was genuinely more useful, practical and grounded in real facts?</td></tr>
+          <tr><td><b>Audio Quality</b></td><td>Which model delivered greater clarity, without distortion, clicks, pops or noticeable cutoffs?</td></tr>
+          <tr><td><b>Overall Preference</b></td><td>All things considered, which conversation would you rather continue — A or B?</td></tr>
+        </table>
+        <p><b>Task success:</b> Pass / Partial / Fail, recorded per model.</p>
+        <div class="callout"><b>Audio Quality tolerance.</b> Small imperfections are acceptable. Do <b>not</b> penalize a model for light background noise that sounds like the audio was "recorded in a normal room/office" (slight room impulse), or for a faint "air" sound in the recording — as long as it is not jarring or annoying. When relevant, state in your justification whether you penalized Audio Quality or not.</div>
+        <div class="flow">Compare both models
+   └─ Baseline met?
+        ├─ Misinformation / major failure ─→ do NOT prefer that model
+        └─ Baseline OK ─→ Naturalness &amp; Engagement ─→ Utility ─→ Audio Quality ─→ Submit Vote</div>
+      </div>
+    </details>
+
+    <details class="acc">
+      <summary>Error clusters you must report</summary>
+      <div class="inner">
+        <ul>
+          <li>Repetitive words or phrases across turns.</li>
+          <li>Responses degrading noticeably as the conversation continues.</li>
+          <li>The model interrupting you, or ignoring your attempts to interrupt it.</li>
+          <li>Awkward silences (failing to respond).</li>
+          <li>References to <b>embodied experiences</b> — a digital AI offering to do something that requires a physical body, such as grabbing a cup of coffee, knocking on a door, or handling objects.</li>
+          <li>Speech recognition failures.</li>
+          <li>Refusal to follow instructions.</li>
+        </ul>
+        <div class="callout green"><b>Important nuance.</b> Even with one of these errors present, a clip that sounds very natural by the project's North Star can still be selected as the better one. If you do that, you must explain it clearly and with evidence in your justification.</div>
+      </div>
+    </details>
+
+    <details class="acc">
+      <summary>Critical mistakes to avoid</summary>
+      <div class="inner">
+        <h4>🚫 AI language</h4>
+        <p>Do not speak to the model like a generic "helpful assistant". Avoid prompts that start with "As an AI…" — they destroy the flow and the aesthetics of the conversation.</p>
+        <h4>🚫 Mis-rating Audio Quality</h4>
+        <p>Do not choose <b>"Both Good"</b> for Audio Quality if one model has noticeable background noise, clicks, cutoffs or similar problems that are clearly bothersome. Listen to each model's audio in isolation on stereo headphones to catch these.</p>
+        <h4>🚫 Contradictory or missing justifications</h4>
+        <p>Every task requires a detailed, accurate justification. If you decide Model A was better overall, your dimension selections and your written text must align logically with that choice. Name the exact moment where the problem occurs and describe each model's specific behaviors whenever possible.</p>
+        <h4>🚫 Misreading the scenario context</h4>
+        <p>Pay attention to what the scenario asks for. In a <b>Hallucination Fishing / Redteam</b> scenario — where you deliberately state false information and the model is supposed to catch it — a model that successfully refuses or disagrees with the false facts is a <b>success signal, not a failure</b>.</p>
+        <div class="callout blue">There is no separate guide explaining each scenario, because there are endless cases. Every scenario is self-explanatory: reading the one assigned to your task is all you need.</div>
+      </div>
+    </details>
+
+    <details class="acc">
+      <summary>How to write a strong justification</summary>
+      <div class="inner">
+        <p>A strong justification does more than say which clip "sounds better". It explains the choice using the project's rating hierarchy.</p>
+        <ol>
+          <li><b>Clear preference</b> — state which clip/interaction is better overall.</li>
+          <li><b>Hierarchy reference</b> — explain whether the decision rests on naturalness, utility or audio quality.</li>
+          <li><b>Specific evidence</b> — cite observable details from <b>both</b> clips. Always provide concrete examples from wherever the evidence originates.</li>
+          <li><b>Threshold rules</b> — watch for hallucinations, false information, cutoffs, distortion, annoying artifacts or major instruction-following problems. Naturalness is the most important dimension, but every clip must clear the minimum threshold before naturalness can carry its full weight. If there are threshold problems, naturalness can be displaced by those errors when they are considerable.</li>
+          <li><b>Error clusters</b> — if present, name the problem explicitly: interruption, failed correction, repetitive phrasing, embodied-experience claims.</li>
+        </ol>
+        <h4>Template</h4>
+        <blockquote>"I prefer Clip A <b>overall because</b> ___. Under the project hierarchy, ___ <b>matters most here because</b> ___. <b>Clip A showed this through</b> ___, while Clip B <b>was weaker because</b> ___. I also did / did not observe any threshold-level issues such as hallucination, audio cutoff, distortion, or failed instruction-following. Therefore, Clip A is the stronger fit for the project's North Star."</blockquote>
+      </div>
+    </details>
+
+    <details class="acc">
+      <summary>Worked examples (4)</summary>
+      <div class="inner">
+
+        <div class="ex">
+          <div class="exh">Example 1 — Naturalness vs. over-structured Utility</div>
+          <p><b>Context:</b> the user asks why a common houseplant can make an apartment feel cozier.</p>
+          <div class="ans">Correct answer: Clip A</div>
+          <blockquote>I prefer Clip A overall because it better matches the project's North Star of spontaneous, natural, aesthetically pleasing conversation. Under the rating hierarchy, Naturalness / Engagement matters most here because both clips are understandable and useful enough, and neither has a major audio issue. Clip A feels warm and conversational, with specific imagery like noticing a new leaf and moving the plant closer to the window. Clip B is useful, but it sounds more like a structured assistant response than a natural voice conversation. Therefore, Clip A is the stronger overall fit.</blockquote>
+        </div>
+
+        <div class="ex">
+          <div class="exh">Example 2 — Abrupt audio cutoff</div>
+          <p><b>Context:</b> the user asks for advice on relaxing before an intense workday. <b>Audio note:</b> Clip B cuts off abruptly at the end and has a small pop.</p>
+          <div class="ans">Correct answer: Clip A</div>
+          <blockquote>I prefer Clip A overall because Clip B has a clear audio quality issue that crosses the project's threshold. Clip B cuts off mid-word at the end and includes an audible pop, so it should not be treated as "Both Good" for audio quality. While Clip B is still somewhat useful, the cutoff makes the response feel incomplete and objectively weaker. Clip A gives a complete, calm, natural response with no obvious audio artifacts. Because audio cutoffs and jarring artifacts must be flagged, Clip A is the better choice.</blockquote>
+        </div>
+
+        <div class="ex">
+          <div class="exh">Example 3 — Benign false premise</div>
+          <p><b>Context:</b> the user asks "why do owls sleep upside down like bats?"</p>
+          <div class="ans">Correct answer: Clip B</div>
+          <blockquote>I prefer Clip B overall because Clip A fails the utility threshold by accepting a false premise and inventing an explanation. The project prioritizes naturalness and engagement, but factual accuracy still has to meet a basic threshold. Clip A sounds fluent, but it incorrectly claims that owls sleep upside down like bats. Clip B is still conversational while appropriately correcting the premise and giving the accurate alternative. Because hallucinations and false-premise acceptance are objective issues, Clip B is stronger.</blockquote>
+        </div>
+
+        <div class="ex">
+          <div class="exh">Example 4 — Error clusters must be reported</div>
+          <p><b>Context:</b> the user asks for help drafting a polite message to a neighbor about noise. <b>Behavior note:</b> Clip A also keeps talking briefly when the user tries to interrupt.</p>
+          <div class="ans">Correct answer: both choices are defensible, but Clip A's errors must be flagged</div>
+          <p style="margin-top:10px;font-size:12.5px;color:var(--dim)"><b>Choosing Clip A:</b></p>
+          <blockquote>I prefer Clip A overall because it is more natural, polite, and useful for the neighbor-message scenario. Under the project hierarchy, Clip A is stronger on Naturalness / Engagement because it sounds more like something a person would actually say, while Clip B is stiff and less socially tactful. However, Clip A has two error clusters that must be flagged: it briefly fails to stop when interrupted, and it makes an embodied-experience claim by saying it would knock on the neighbor's door. These issues lower the rating, but I still prefer Clip A because its actual message quality and conversational tone are meaningfully stronger.</blockquote>
+          <p style="margin-top:10px;font-size:12.5px;color:var(--dim)"><b>Choosing Clip B:</b></p>
+          <blockquote>I prefer Clip B overall because Clip A contains objective error clusters that affect the interaction quality. Clip A is warmer and more natural, but it talks over the user during an attempted interruption and makes an embodied-experience claim about knocking on the neighbor's door. Those issues should be explicitly flagged. Clip B is less engaging, but it avoids those interaction errors and still provides a usable message. Because the errors in Clip A are concrete and observable, Clip B can be defended as the safer overall choice.</blockquote>
+        </div>
+
+      </div>
+    </details>
+
+    <details class="acc">
+      <summary>Memory hooks — self-quiz</summary>
+      <div class="inner">
+        <ul>
+          <li><b>What audio hardware is required, and what is banned?</b> Phase-aligned stereo headphones are required; speakers and mono earbuds are both prohibited.</li>
+          <li><b>What are the three audio-position options?</b> Left (louder in left ear), Center (equal in both), Right (louder in right ear) — and the difference is subtle.</li>
+          <li><b>What is the preference ranking order?</b> Naturalness &amp; Engagement, then Utility, then Audio Quality.</li>
+          <li><b>What is the prompt consistency rule?</b> Both models must get prompts of the same level of specificity — giving one model a more detailed prompt is a disqualifying error.</li>
+          <li><b>What three behaviors do you watch for when you interrupt?</b> Whether it acknowledges the interruption, adapts appropriately, and remains coherent.</li>
+          <li><b>When do you use Skip?</b> Only for technical failures — freeze, no response, connection issues — never for poor performance, and always with a brief description.</li>
+          <li><b>What is the turn count?</b> Minimum 4 per model, 4–6 as the working target; go longer when you need more evidence.</li>
+          <li><b>Name four flaggable issues.</b> Repetitive language, degradation across turns, interrupting the user, awkward silence, ignoring interruptions or corrections, speech recognition failures, impossible real-world (embodied) references, refusal to follow instructions.</li>
+          <li><b>What are the four evaluation categories?</b> Overall preference, utility, naturalness &amp; engagement, audio quality — plus task success (pass / partial / fail).</li>
+          <li><b>When must a very natural model NOT be preferred?</b> When it has obvious misinformation, severe audio issues, or major failures — utility and audio quality still have to meet a baseline.</li>
+          <li><b>What four questions do you ask before submitting?</b> Which conversation would I rather continue; did I evaluate the entire interaction; did either model noticeably break down; can I clearly explain my preference.</li>
+        </ul>
+      </div>
+    </details>
+
+  </div>
+
+  <p class="foot">
+    Rating Assistant for the Live S2S Arena / Stereo Headphone Check Project.<br>
+    A practice surface built on the project's own rules — run a task through it, compare your instinct against the hierarchy, and the reasoning becomes second nature.
+  </p>
+</div>
+
+<div class="toast" id="toast">Copied</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var LABEL = {A:"Model A", B:"Model B", TIE:"Both Good", BAD:"Both Bad"};
+  var DIMNAME = {nat:"Naturalness / Engagement", uti:"Utility", aud:"Audio Quality"};
+
+  /* ---------- tabs ---------- */
+  document.querySelectorAll(".tab").forEach(function(t){
+    t.addEventListener("click", function(){
+      document.querySelectorAll(".tab").forEach(function(x){x.classList.remove("active");});
+      t.classList.add("active");
+      var v = t.dataset.view;
+      document.getElementById("viewForm").classList.toggle("hide", v!=="form");
+      document.getElementById("viewKb").classList.toggle("show", v==="kb");
+      window.scrollTo({top:0,behavior:"smooth"});
+    });
+  });
+
+  /* ---------- helpers ---------- */
+  function $(id){ return document.getElementById(id); }
+  function val(id){ var e=$(id); return e ? e.value.trim() : ""; }
+  function num(id){ var e=$(id); return e ? parseInt(e.value||"0",10) : 0; }
+  function chk(id){ var e=$(id); return !!(e && e.checked); }
+  function boxes(attr, model){
+    return Array.prototype.slice.call(document.querySelectorAll('input[data-'+attr+'="'+model+'"]:checked'));
+  }
+  function listOf(attr, model){ return boxes(attr,model).map(function(b){return b.value;}); }
+  function thrOf(model, kind){
+    return boxes("th",model).filter(function(b){return b.dataset.kind===kind;}).map(function(b){return b.value;});
+  }
+  function joinNat(arr){
+    if(!arr.length) return "";
+    if(arr.length===1) return arr[0];
+    return arr.slice(0,-1).join(", ") + " and " + arr[arr.length-1];
+  }
+  function toast(m){
+    var t=$("toast"); t.textContent=m||"Copied"; t.classList.add("show");
+    setTimeout(function(){t.classList.remove("show");},1500);
+  }
+  function copy(text){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){toast("Copied");},function(){fallbackCopy(text);});
+    } else fallbackCopy(text);
+  }
+  function fallbackCopy(text){
+    var ta=document.createElement("textarea"); ta.value=text;
+    ta.style.position="fixed"; ta.style.opacity="0"; document.body.appendChild(ta);
+    ta.select();
+    try{ document.execCommand("copy"); toast("Copied"); }catch(e){ toast("Copy failed"); }
+    document.body.removeChild(ta);
+  }
+  function gap(text){ return "【" + text + "】"; }
+
+  /* ---------- keyword scanner ---------- */
+  var SIGNALS = [
+    {k:"repetitive phrasing across turns", attr:"ec", re:/\b(repit|repet|repeat|misma frase|same phrase|muletill|otra vez lo mismo|over and over)/i, label:"repetitive phrasing"},
+    {k:"noticeable degradation as the conversation continued", attr:"ec", re:/\b(degrad|empeor|got worse|se puso peor|declin|fell apart|se cay[oó]|deteriora)/i, label:"degradation across turns"},
+    {k:"interrupting me / talking over my turn", attr:"ec", re:/\b(interrump|interrupt|talked over|habl[oó] encima|me pis[oó]|no me dej[oó] hablar|spoke over)/i, label:"interruption behavior"},
+    {k:"ignoring my attempts to interrupt or correct it", attr:"ec", re:/\b(ignor|no hizo caso|kept going|sigui[oó] hablando|didn'?t stop|no par[oó])/i, label:"ignored my interruption"},
+    {k:"awkward silences / failing to respond", attr:"ec", re:/\b(silenc|no respondi|pausa larga|awkward|long pause|dead air|se qued[oó] callad|no contest)/i, label:"awkward silence"},
+    {k:"embodied-experience claims", attr:"ec", re:/\b(caf[eé]|coffee|agarr|grab a|physically|f[ií]sicamente|tocar la puerta|knock on|con mis manos|my hands|walk over|ir a buscar|te lo traigo|salir a)/i, label:"embodied-experience claim"},
+    {k:"speech-recognition failures", attr:"ec", re:/\b(no me entendi|misheard|no escuch[oó] bien|entendi[oó] mal|misunderstood what i said|reconocimiento)/i, label:"speech recognition failure"},
+    {k:"hallucination / invented facts", attr:"th", re:/\b(alucin|hallucin|invent[oó]|made up|se lo invent|dato falso|wrong fact|factually wrong|incorrect|equivocad|mentir)/i, label:"hallucination / invented fact"},
+    {k:"accepted a false premise instead of correcting it", attr:"th", re:/\b(premisa|false premise|acept[oó] la|went along|sigui[oó] la corriente|no corrigi|didn'?t correct|se la crey)/i, label:"accepted a false premise"},
+    {k:"refused or failed to follow my instructions", attr:"th", re:/\b(no sigui[oó] la instrucci|refus|se neg[oó]|ignored my request|didn'?t follow|no hizo lo que ped)/i, label:"instruction-following failure"},
+    {k:"audio cut off mid-word", attr:"th", re:/\b(cort[oó]|corte|cut ?off|cut out|se corta|truncat|mid-?word|a media palabra)/i, label:"audio cutoff"},
+    {k:"audible clicks or pops", attr:"th", re:/\b(click|clic|chasquid|pop\b|pops\b|crackl|est[aá]tica|static)/i, label:"clicks / pops"},
+    {k:"distortion or robotic artifacts", attr:"th", re:/\b(distorsi|distort|met[aá]lic|metallic|artifact|artefact|glitch|garbl|entrecortad)/i, label:"distortion / artifacts"},
+    {k:"dropouts or lost audio", attr:"th", re:/\b(dropout|drop out|se perdi[oó] el audio|lost audio|audio se fue|se mut)/i, label:"audio dropout"}
+  ];
+  var TONE = [
+    {re:/\b(c[aá]lid|warm|natural|expresiv|expressive|humano|human|friendly|cercano|risa|laugh|se ri[oó]|chispa|fluid|flu[ií]d)/i, label:"warmth / naturalness cue", tone:"pos"},
+    {re:/\b(rob[oó]tic|robotic|monoton|mon[oó]ton|plano|flat|r[ií]gid|stiff|estructurad|structured|lista|bullet|numerad|assistant-like|acartonad|formal)/i, label:"robotic / over-structured cue", tone:"neg"},
+    {re:/\b(ruido leve|slight noise|room tone|aire|air\b|de fondo|background)/i, label:"possible slight room tone — usually not penalized", tone:"info"}
+  ];
+
+  function scanSignals(model){
+    var text = val(model==="A" ? "notesA" : "notesB");
+    var host = $(model==="A" ? "sigA" : "sigB");
+    if(!text){ host.innerHTML = ""; host.dataset.sig = ""; return; }
+    var found = [];
+    SIGNALS.forEach(function(s){
+      if(s.re.test(text)){
+        var box = Array.prototype.slice.call(document.querySelectorAll('input[data-'+s.attr+'="'+model+'"]'))
+          .filter(function(b){ return b.value === s.k; })[0];
+        if(box && !box.checked) found.push({label:s.label, box:box});
+      }
+    });
+    TONE.forEach(function(t){ if(t.re.test(text)) found.push({label:t.label, box:null, tone:t.tone}); });
+    // Only touch the DOM when the suggestion set actually changed, otherwise a blur-triggered
+    // recompute would destroy the chip the user is in the middle of clicking.
+    var sig = found.map(function(f){ return (f.box?"1":"0") + f.label; }).join("|");
+    if(host.dataset.sig === sig) return;
+    host.dataset.sig = sig;
+    host.innerHTML = "";
+    if(!found.length) return;
+    found.forEach(function(f){
+      var c = document.createElement("span");
+      c.className = "sigchip";
+      c.innerHTML = f.box ? ("detected: <b>"+f.label+"</b> — click to flag") : ("noted: <b>"+f.label+"</b>");
+      if(f.box){
+        c.addEventListener("click", function(){ f.box.checked = true; recompute(); });
+      } else { c.style.cursor = "default"; }
+      host.appendChild(c);
+    });
+  }
+
+  /* ---------- state ---------- */
+  function readState(){
+    var s = {
+      scenario: val("scenario"),
+      scenType: val("scenType"),
+      turnsA: num("turnsA"), turnsB: num("turnsB"),
+      prompts: val("prompts"),
+      pf:{
+        headphones:chk("pfHeadphones"), pan:chk("pfPan"), scenario:chk("pfScenario"),
+        isolated:chk("pfIsolated"), equiv:chk("pfEquiv"),
+        persona:chk("pfPersona"), interrupt:chk("pfInterrupt")
+      },
+      A:{
+        notes: val("notesA"), best: val("bestA"), worst: val("worstA"),
+        ec: listOf("ec","A"),
+        thrU: thrOf("A","utility"), thrAud: thrOf("A","audio"),
+        room: val("roomA"), push: val("pushA"), success: val("successA")
+      },
+      B:{
+        notes: val("notesB"), best: val("bestB"), worst: val("worstB"),
+        ec: listOf("ec","B"),
+        thrU: thrOf("B","utility"), thrAud: thrOf("B","audio"),
+        room: val("roomB"), push: val("pushB"), success: val("successB")
+      },
+      pick:{ nat: val("pickNat"), uti: val("pickUti"), aud: val("pickAud"), ovr: val("pickOvr") },
+      skip: val("skipNote")
+    };
+    ["A","B"].forEach(function(m){
+      var x = s[m];
+      if(x.room === "notable") x.thrAud = x.thrAud.concat(["notable, distracting background noise"]);
+      // Redteam: going along with a false claim is a utility threshold failure
+      if((s.scenType==="redteam"||s.scenType==="premise") && x.push==="accepted"){
+        if(x.thrU.indexOf("accepted a false premise instead of correcting it") === -1){
+          x.thrU = x.thrU.concat(["acceptance of the false claim it was supposed to challenge"]);
+        }
+      }
+      x.thrAll = x.thrU.concat(x.thrAud);
+      x.audioPenalized = x.thrAud.length > 0;
+    });
+    return s;
+  }
+
+  /* ---------- rules engine ---------- */
+  function decide(s){
+    var trace = [], A = s.A, B = s.B;
+    var nat = s.pick.nat, uti = s.pick.uti, aud = s.pick.aud;
+
+    var thA = A.thrAll.length, thB = B.thrAll.length;
+    function gateName(m){
+      var x = s[m];
+      if(x.thrU.length && x.thrAud.length) return "Threshold — Utility & Audio Quality";
+      return "Threshold — " + (x.thrU.length ? "Utility" : "Audio Quality");
+    }
+
+    // Step 1 — threshold gate
+    if(thA && !thB){
+      trace.push("<b>Threshold gate:</b> Model A crosses the minimum threshold ("+joinNat(A.thrAll)+"); Model B is clean. Under the rules a model with misinformation, severe audio problems or major failures must not be preferred while the other is clean.");
+      if(nat === "A"){
+        trace.push("Model A is the more natural of the two, so naturalness pulls one way and the threshold pulls the other. Naturalness can still win <b>only if</b> A's threshold issues are minor and you argue that explicitly with evidence. Default recommendation stays with <b>Model B</b>.");
+      }
+      return {overall:"B", driver:gateName("A"), trace:trace, gated:true, gatedModel:"A", contested:(nat==="A")};
+    }
+    if(thB && !thA){
+      trace.push("<b>Threshold gate:</b> Model B crosses the minimum threshold ("+joinNat(B.thrAll)+"); Model A is clean. Under the rules a model with misinformation, severe audio problems or major failures must not be preferred while the other is clean.");
+      if(nat === "B"){
+        trace.push("Model B is the more natural of the two, so naturalness pulls one way and the threshold pulls the other. Naturalness can still win <b>only if</b> B's threshold issues are minor and you argue that explicitly with evidence. Default recommendation stays with <b>Model A</b>.");
+      }
+      return {overall:"A", driver:gateName("B"), trace:trace, gated:true, gatedModel:"B", contested:(nat==="B")};
+    }
+    if(thA && thB){
+      trace.push("<b>Threshold gate:</b> both models cross the threshold — A with "+joinNat(A.thrAll)+", B with "+joinNat(B.thrAll)+". Neither is clean, so the comparison falls back to the hierarchy, and 'Both Bad' becomes defensible on the affected dimensions.");
+    } else {
+      trace.push("<b>Threshold gate passed:</b> neither model shows hallucination, false-premise acceptance, instruction-following failure, or jarring audio problems. Naturalness can therefore carry its full weight.");
+    }
+
+    // Step 2 — hierarchy
+    if(nat === "A" || nat === "B"){
+      trace.push("<b>Naturalness / Engagement</b> is the highest-weight dimension and it points to <b>Model "+nat+"</b>. That decides the overall preference.");
+      return {overall:nat, driver:"Naturalness / Engagement", trace:trace, gated:false, contested:false};
+    }
+    if(nat === "" ){
+      trace.push("Naturalness has not been chosen yet — pick it first, it is the dimension that normally decides the vote.");
+      return {overall:"", driver:"—", trace:trace, gated:false, contested:false};
+    }
+    trace.push("Naturalness is a tie ("+LABEL[nat]+"), so the decision drops to the next level of the hierarchy.");
+
+    if(uti === "A" || uti === "B"){
+      trace.push("<b>Utility</b> breaks the tie in favour of <b>Model "+uti+"</b>.");
+      return {overall:uti, driver:"Utility", trace:trace, gated:false, contested:false};
+    }
+    if(uti) trace.push("Utility is also a tie ("+LABEL[uti]+"), so the decision drops to Audio Quality.");
+
+    if(aud === "A" || aud === "B"){
+      trace.push("<b>Audio Quality</b> is the last tiebreaker and favours <b>Model "+aud+"</b>.");
+      return {overall:aud, driver:"Audio Quality", trace:trace, gated:false, contested:false};
+    }
+    trace.push("All three dimensions are tied. Either extend the conversation to gather more evidence, or record the overall preference as a tie and say so plainly in the justification.");
+    return {overall:(nat==="BAD"?"BAD":"TIE"), driver:"No separating evidence", trace:trace, gated:false, contested:false};
+  }
+
+  /* ---------- validation ---------- */
+  function validate(s, v){
+    var out = [], A=s.A, B=s.B;
+
+    // hard blockers
+    if(!s.pf.headphones) out.push(["err","SETUP","Stereo headphone confirmation is unchecked. Phase-aligned stereo headphones are mandatory — speakers and mono earbuds invalidate the audio judgment."]);
+    if(!s.pf.pan) out.push(["warn","SETUP","Panning / audio-position check not confirmed."]);
+    if(!s.pf.isolated && (s.pick.aud || A.thrAud.length || B.thrAud.length)) out.push(["warn","AUDIO","You have not confirmed listening to each model in isolation. Audio Quality problems are hard to catch otherwise."]);
+
+    if(s.turnsA < 4 || s.turnsB < 4){
+      out.push(["err","TURNS","Minimum is 4 turns per model — you have A="+s.turnsA+", B="+s.turnsB+". A shorter conversation is not enough evidence for a valid vote."+
+        (s.turnsA !== s.turnsB ? " The counts also differ, which breaks the 1:1 consistency requirement." : "")]);
+    } else if(s.turnsA !== s.turnsB){
+      out.push(["err","1:1","Turn counts differ (A="+s.turnsA+", B="+s.turnsB+"). Both models must be evaluated under identical conditions — same topic, same energy, same depth, same number of turns."]);
+    } else {
+      out.push(["ok","1:1","Turn counts match at "+s.turnsA+" per model and clear the 4-turn minimum."]);
+    }
+    if(!s.pf.equiv) out.push(["err","PROMPTS","Prompt-equivalence is unconfirmed. Giving one model a more specific prompt than the other is a disqualifying error."]);
+    if(!s.pf.persona) out.push(["warn","PERSONA","You have not confirmed staying in character. Discussing the prompt or the task with the models breaks the North Star."]);
+    if(!s.pf.interrupt) out.push(["info","ADAPTABILITY","No interruption test recorded. Interrupting mid-response is the cleanest way to see whether a model acknowledges, adapts and stays coherent."]);
+
+    // notes / evidence
+    if(!A.notes || !B.notes) out.push(["err","EVIDENCE","Raw notes are missing for "+(!A.notes && !B.notes ? "both models" : (!A.notes?"Model A":"Model B"))+". Without observed detail, the justification cannot cite specific evidence — the most common rejection reason."]);
+    if(A.notes && B.notes){
+      var la = A.notes.length, lb = B.notes.length, hi = Math.max(la,lb), lo = Math.min(la,lb);
+      if(hi > 120 && lo < hi * 0.35) out.push(["warn","BALANCE","Your notes are far more detailed for one model than the other. A justification must describe observable behavior in <b>both</b>, not just the winner."]);
+    }
+    if(!A.best || !B.best) out.push(["warn","EVIDENCE","Fill the 'strongest specific moment' field for both models. Naming the exact turn where something happened is what separates an accepted justification from a rejected one."]);
+
+    // scenario awareness
+    if(s.scenType==="redteam" || s.scenType==="premise"){
+      ["A","B"].forEach(function(m){
+        var x=s[m];
+        if(x.push==="pushback"){
+          out.push(["ok","SCENARIO","Model "+m+" pushed back on the false claim. In a hallucination-fishing / false-premise scenario this is a <b>success signal, not a failure</b> — do not penalize it, and say so in the justification."]);
+          if(x.ec.indexOf("refused or failed to follow my instructions")>-1 || x.thrU.length){
+            out.push(["warn","SCENARIO","You flagged Model "+m+" negatively while also recording that it correctly rejected the false claim. Make sure you are not penalizing correct pushback."]);
+          }
+        }
+        if(x.push==="accepted") out.push(["err","THRESHOLD","Model "+m+" went along with the false claim. In this scenario that is a utility-threshold failure and it must be reflected in your Utility pick and your justification."]);
+      });
+      if(A.push==="na" && B.push==="na") out.push(["info","SCENARIO","Scenario is redteam / false-premise but you recorded no pushback behavior for either model — that is the central thing this scenario tests."]);
+    }
+
+    // audio rules
+    var anyAudioIssue = A.thrAud.length || B.thrAud.length;
+    if(s.pick.aud === "TIE" && anyAudioIssue){
+      out.push(["err","AUDIO","You selected <b>Both Good</b> for Audio Quality, but you flagged "+(A.thrAud.length?("Model A: "+joinNat(A.thrAud)):"")+(A.thrAud.length&&B.thrAud.length?"; ":"")+(B.thrAud.length?("Model B: "+joinNat(B.thrAud)):"")+". 'Both Good' is explicitly not allowed when one model has noticeable clicks, cutoffs, distortion or bothersome noise."]);
+    }
+    if(A.thrAud.length && !B.thrAud.length && s.pick.aud === "A") out.push(["err","AUDIO","Audio Quality is set to Model A, but Model A is the one with "+joinNat(A.thrAud)+" while Model B is clean. This contradicts your own flags."]);
+    if(B.thrAud.length && !A.thrAud.length && s.pick.aud === "B") out.push(["err","AUDIO","Audio Quality is set to Model B, but Model B is the one with "+joinNat(B.thrAud)+" while Model A is clean. This contradicts your own flags."]);
+    ["A","B"].forEach(function(m){
+      if(s[m].room === "slight") out.push(["ok","AUDIO","Model "+m+" has only slight room tone / 'air'. Per the project note this is <b>not</b> penalized — mention explicitly in the justification that you chose not to penalize it."]);
+    });
+    if(!anyAudioIssue && !s.pick.aud) out.push(["info","AUDIO","No audio problems flagged on either side — 'Both Good' for Audio Quality is defensible here."]);
+
+    // dimension vs picks coherence
+    if(A.thrU.length && (s.pick.uti === "A")) out.push(["err","UTILITY","Utility is set to Model A, but you flagged Model A with "+joinNat(A.thrU)+". Accuracy failures are objective and cannot sit under a Utility win."]);
+    if(B.thrU.length && (s.pick.uti === "B")) out.push(["err","UTILITY","Utility is set to Model B, but you flagged Model B with "+joinNat(B.thrU)+". Accuracy failures are objective and cannot sit under a Utility win."]);
+
+    // overall coherence
+    if(s.pick.ovr){
+      if(v.overall && s.pick.ovr !== v.overall){
+        if(v.gated && s.pick.ovr === v.gatedModel){
+          out.push(["err","CONTRADICTION","Your overall preference is Model "+s.pick.ovr+", but that model crossed a threshold ("+joinNat(s[v.gatedModel].thrAll)+") while the other did not. This is the single most-cited rejection reason. Either change the vote, or argue explicitly and with evidence why those issues are minor enough that naturalness still wins."]);
+        } else {
+          out.push(["warn","CONTRADICTION","Your overall preference (Model "+s.pick.ovr+") differs from what the hierarchy implies (Model "+v.overall+", driven by "+v.driver+"). That can be defensible, but the justification must say out loud why you departed from the hierarchy."]);
+        }
+      } else if(v.overall && s.pick.ovr === v.overall){
+        out.push(["ok","COHERENT","Your overall preference matches the hierarchy outcome."]);
+      }
+      var ov = s.pick.ovr;
+      if((ov==="A"||ov==="B")){
+        var loser = ov==="A" ? "B" : "A";
+        var natOpp = s.pick.nat===loser, utiOpp = s.pick.uti===loser, audOpp = s.pick.aud===loser;
+        var oppCount = (natOpp?1:0)+(utiOpp?1:0)+(audOpp?1:0);
+        if(oppCount >= 2 && !v.gated){
+          out.push(["err","CONTRADICTION","You prefer Model "+ov+" overall, yet you gave Model "+loser+" the edge on "+oppCount+" of the three dimensions. Dimension picks and overall preference must align logically."]);
+        }
+        if(natOpp && !v.gated){
+          out.push(["warn","HIERARCHY","Naturalness — the highest-weight dimension — favours Model "+loser+", but you prefer Model "+ov+" overall and no threshold issue justifies the reversal. Either revisit the vote or explain the reversal explicitly."]);
+        }
+      }
+      if(s[ov==="A"?"A":"B"] && (ov==="A"||ov==="B")){
+        var w = s[ov];
+        if(w.success === "fail") out.push(["err","TASK SUCCESS","You marked Model "+ov+" as Fail on task success but prefer it overall. Reconcile these two."]);
+      }
+    } else {
+      out.push(["info","PENDING","Overall preference not selected yet."]);
+    }
+
+    // task success vs thresholds
+    ["A","B"].forEach(function(m){
+      if(s[m].thrU.length && s[m].success === "pass"){
+        out.push(["warn","TASK SUCCESS","Model "+m+" is marked Pass but has utility-threshold flags ("+joinNat(s[m].thrU)+"). Partial or Fail is usually the honest rating."]);
+      }
+    });
+
+    // error clusters must be reported
+    ["A","B"].forEach(function(m){
+      if(s[m].ec.length){
+        out.push(["info","ERROR CLUSTERS","Model "+m+" — flag these explicitly in the justification: "+joinNat(s[m].ec)+". Naming them by name is required even when you still prefer that model."]);
+      }
+    });
+    if(s.pick.ovr && (s.pick.ovr==="A"||s.pick.ovr==="B") && s[s.pick.ovr].ec.length){
+      out.push(["warn","ERROR CLUSTERS","You prefer Model "+s.pick.ovr+" while it carries error clusters. That is allowed by the rules, but the justification must name each one and explain why naturalness still outweighs them."]);
+    }
+
+    if(s.skip){
+      out.push(["warn","SKIP","You recorded a technical issue. If the model froze, gave no response or lost connection, use <b>Skip (Technical Issue)</b> with this description instead of voting. Skip is never for poor performance."]);
+    }
+
+    var order = {err:0, warn:1, info:2, ok:3};
+    out.sort(function(a,b){ return order[a[0]] - order[b[0]]; });
+    return out;
+  }
+
+  /* ---------- deterministic justification ---------- */
+  function buildJustification(s, v){
+    var ov = s.pick.ovr || v.overall;
+    if(!ov) return "Choose at least the Naturalness dimension and your overall preference to generate a draft.";
+    if(ov==="TIE" || ov==="BAD"){
+      return "The two conversations did not separate on any dimension. Under the project hierarchy, Naturalness / Engagement should decide, but "+
+             gap("describe what made them equivalent, turn by turn")+". Before submitting a tie, consider extending the conversation with both models to gather more evidence — the rules allow going beyond the minimum turn count precisely for this.";
+    }
+    var W = ov, L = (ov==="A" ? "B" : "A");
+    var w = s[W], l = s[L];
+    var p = [];
+
+    // 1 — preference + primary reason
+    var primary;
+    if(v.gated && v.gatedModel === L){
+      primary = "Model "+L+" crosses the project's minimum threshold with "+joinNat(l.thrAll)+", and a model with issues of that kind should not be preferred while the other one is clean";
+    } else if(v.gated && v.gatedModel === W){
+      primary = "even though Model "+W+" shows "+joinNat(w.thrAll)+", its conversational quality is meaningfully stronger and I judged those issues minor enough not to displace naturalness";
+    } else if(v.driver === "Naturalness / Engagement"){
+      primary = "it better matches the project's North Star of a spontaneous, natural, aesthetically pleasing conversation";
+    } else if(v.driver === "Utility"){
+      primary = "both conversations were comparably natural, and Model "+W+" gave the genuinely more useful and practical answers";
+    } else if(v.driver === "Audio Quality"){
+      primary = "naturalness and utility were comparable, and Model "+W+" delivered clearly cleaner audio";
+    } else {
+      primary = gap("state in one sentence why this conversation is the one you would rather continue");
+    }
+    p.push("I prefer Model "+W+" overall because "+primary+".");
+
+    // 2 — hierarchy reference
+    var gm = (v.gatedModel === L ? l : w);
+    var dimName = v.gated
+      ? ("the threshold requirement on " + (gm.thrU.length && gm.thrAud.length ? "Utility and Audio Quality" : (gm.thrU.length ? "Utility" : "Audio Quality")))
+      : v.driver;
+    var why;
+    if(v.gated){
+      why = "naturalness only carries its full weight once both models clear the minimum bar for accuracy and audio, and here one of them does not";
+    } else if(v.driver === "Naturalness / Engagement"){
+      why = "both conversations were understandable and useful enough and neither had a threshold-level audio problem, so the deciding factor is which one felt more like talking to a person";
+    } else {
+      why = "naturalness did not separate the two conversations, so the decision moves down the hierarchy";
+    }
+    p.push("Under the project hierarchy of Naturalness / Engagement over Utility over Audio Quality, "+dimName+" matters most here because "+why+".");
+
+    // 3 — specific evidence, both sides
+    var evW = w.best || gap("name the exact turn and behavior that made Model "+W+" stronger");
+    var evL = l.worst || (l.best ? ("its stronger moment was "+l.best+", but it still fell short — "+gap("say exactly where")) : gap("name the exact turn and behavior where Model "+L+" fell short"));
+    if(v.gated && v.gatedModel === L){
+      if(s.pick.nat === L){
+        p.push("Model "+L+" was arguably the more natural of the two — "+(l.best || gap("name the turn where Model "+L+" felt more natural"))+
+               " — but that advantage cannot outweigh a threshold failure, and its weak point was "+evL+
+               ". Model "+W+" stayed clean while still holding the conversation together through "+evW+".");
+      } else {
+        p.push("Model "+W+" stayed within the threshold and was the stronger conversation on its own merits — "+evW+" — while Model "+L+" was weaker because "+evL+".");
+      }
+    } else if(v.gated && v.gatedModel === W){
+      p.push("Model "+W+" showed this through "+evW+", while Model "+L+" was weaker because "+evL+", which is why the errors on Model "+W+" did not flip my vote.");
+    } else {
+      p.push("Model "+W+" showed this through "+evW+", while Model "+L+" was weaker because "+evL+".");
+    }
+
+    // 4 — error clusters
+    var ecw = w.ec, ecl = l.ec;
+    if(ecw.length || ecl.length){
+      var ecSent = [];
+      if(ecl.length) ecSent.push("Model "+L+" showed "+joinNat(ecl));
+      if(ecw.length) ecSent.push("Model "+W+" showed "+joinNat(ecw));
+      var sent = "I am flagging the following error clusters: "+ecSent.join("; ")+".";
+      if(ecw.length){
+        sent += " These lower Model "+W+"'s rating, but I still prefer it because "+
+          (v.driver==="Naturalness / Engagement"
+            ? "its conversational tone and message quality are meaningfully stronger"
+            : gap("explain why it still wins despite these errors"))+".";
+      }
+      p.push(sent);
+    }
+
+    // 5 — audio statement
+    var audParts = [];
+    if(w.thrAud.length) audParts.push("Model "+W+" had "+joinNat(w.thrAud));
+    if(l.thrAud.length) audParts.push("Model "+L+" had "+joinNat(l.thrAud));
+    if(audParts.length){
+      p.push("On Audio Quality I penalized accordingly: "+audParts.join(" and ")+", so 'Both Good' is not appropriate for this task.");
+    } else {
+      var slight = [];
+      if(w.room==="slight") slight.push("Model "+W);
+      if(l.room==="slight") slight.push("Model "+L);
+      if(slight.length){
+        p.push("On Audio Quality, "+joinNat(slight)+" had only a slight room tone / 'air' in the recording, which is not jarring, so I did not penalize it under the project's audio note.");
+      }
+    }
+
+    // 6 — scenario note
+    if(s.scenType==="redteam" || s.scenType==="premise"){
+      if(w.push==="pushback") p.push("This is a false-premise / hallucination-fishing scenario, so Model "+W+" disagreeing with the false claim counts as a success, not a refusal to help.");
+      if(l.push==="accepted") p.push("Model "+L+" went along with the false claim instead of correcting it, which is exactly the failure this scenario is designed to surface.");
+    }
+
+    // 7 — threshold statement + close
+    var anyThr = w.thrAll.length || l.thrAll.length;
+    if(!anyThr){
+      p.push("I did not observe any threshold-level issues such as hallucination, audio cutoff, distortion, or failed instruction-following in either conversation.");
+    } else if(v.gated && v.gatedModel === L && !w.thrAll.length){
+      p.push("Beyond that, I observed no other threshold-level issues such as hallucination, audio cutoff, distortion, or failed instruction-following.");
+    } else {
+      p.push("The threshold-level issues I observed were "+
+        (l.thrAll.length ? ("Model "+L+": "+joinNat(l.thrAll)) : "")+
+        (l.thrAll.length && w.thrAll.length ? "; " : "")+
+        (w.thrAll.length ? ("Model "+W+": "+joinNat(w.thrAll)) : "")+
+        ", and I weighed them before deciding.");
+    }
+    p.push("Therefore, Model "+W+" is the stronger fit for the project's North Star.");
+
+    return p.join(" ");
+  }
+
+  /* ---------- AI prompt ---------- */
+  var RULES_DIGEST =
+    "PROJECT: Live S2S Arena / Stereo Headphone Check. A human rater holds a voice conversation with two AI voice models (A and B) under identical conditions and votes on which is better.\n"+
+    "NORTH STAR: a spontaneous, natural, aesthetically pleasing conversation that feels like talking to a friend.\n"+
+    "HIERARCHY: Naturalness/Engagement/Aesthetics > Utility > Audio Quality. Utility and Audio Quality still must clear a minimum threshold (no misinformation, no hallucination, no jarring audio errors). If a model crosses that threshold and the other is clean, it should not be preferred — unless the rater explicitly argues with evidence that the issues are minor and naturalness still wins.\n"+
+    "AUDIO NOTE: slight room tone or faint 'air' in the recording is NOT penalized; clicks, pops, cutoffs, distortion and dropouts ARE. Never select 'Both Good' for Audio Quality when one model has noticeable problems. State explicitly whether audio was penalized.\n"+
+    "ERROR CLUSTERS to name explicitly when present: repetitive phrasing across turns; degradation as the conversation continues; interrupting the user or ignoring the user's interruptions; awkward silences; embodied-experience claims (a digital AI offering to do something physical); speech-recognition failures; refusal to follow instructions.\n"+
+    "SCENARIO AWARENESS: in hallucination-fishing / redteam / false-premise scenarios, a model that rejects or corrects the false claim is SUCCEEDING, not failing.\n"+
+    "JUSTIFICATION STRUCTURE (required): 1) clear overall preference; 2) which level of the hierarchy drove the decision and why; 3) specific observable evidence from BOTH conversations, citing exact turns/moments; 4) an explicit statement about threshold issues (hallucination, cutoff, distortion, instruction-following) observed or not observed; 5) explicit naming of any error clusters. Written in English, first person, 5-9 sentences, plain prose, no bullet points, no headings.";
+
+  function buildAIPrompt(s, v, ruleDraft){
+    function block(m){
+      var x = s[m];
+      return "MODEL "+m+"\n"+
+        "  Raw notes: "+(x.notes || "(none provided)")+"\n"+
+        "  Strongest moment: "+(x.best || "(not specified)")+"\n"+
+        "  Weakest moment: "+(x.worst || "(not specified)")+"\n"+
+        "  Error clusters flagged: "+(x.ec.length ? x.ec.join(", ") : "none")+"\n"+
+        "  Utility-threshold issues: "+(x.thrU.length ? x.thrU.join(", ") : "none")+"\n"+
+        "  Audio-threshold issues: "+(x.thrAud.length ? x.thrAud.join(", ") : "none")+"\n"+
+        "  Background noise: "+x.room+"\n"+
+        "  Redteam behavior: "+x.push+"\n"+
+        "  Task success: "+x.success+"\n";
+    }
+    return RULES_DIGEST+"\n\n=== THIS TASK ===\n"+
+      "Scenario: "+(s.scenario || "(not provided)")+"\n"+
+      "Scenario type: "+s.scenType+"\n"+
+      "Turns: A="+s.turnsA+", B="+s.turnsB+"\n"+
+      "Prompts used: "+(s.prompts || "(not provided)")+"\n\n"+
+      block("A")+"\n"+block("B")+"\n"+
+      "RATER'S PICKS — Naturalness: "+(LABEL[s.pick.nat]||"unset")+
+      "; Utility: "+(LABEL[s.pick.uti]||"unset")+
+      "; Audio Quality: "+(LABEL[s.pick.aud]||"unset")+
+      "; Overall: "+(LABEL[s.pick.ovr]||"unset")+"\n"+
+      "RULE-ENGINE OUTCOME — overall "+(v.overall||"undetermined")+", driven by "+v.driver+".\n\n"+
+      "RULE-BASED DRAFT (use as the skeleton; improve the prose, do not add facts):\n"+ruleDraft+"\n\n"+
+      "=== YOUR TASK ===\n"+
+      "Rewrite the draft into one polished English justification paragraph that follows the required structure above. "+
+      "Use ONLY the observations supplied — never invent a detail, a turn number, a quote or a behavior that is not in the notes. "+
+      "Where the rater has not supplied a needed observation, leave a bracketed placeholder in the exact form 【like this】 describing what they must add themselves. "+
+      "Keep the rater's voice: first person, plain, specific, no marketing language. Return only the paragraph, nothing else.";
+  }
+
+  var aiAvailable = false;
+  function detectAI(){
+    aiAvailable = !!(window.claude && typeof window.claude.complete === "function");
+    var b = $("aiBadge");
+    b.textContent = aiAvailable ? "AI assist: available" : "AI assist: unavailable — rule engine only";
+    b.className = "badge " + (aiAvailable ? "on" : "off");
+    $("btnAI").textContent = aiAvailable ? "Generate with AI assist" : "AI assist unavailable — use rules";
+    $("btnAI").disabled = !aiAvailable;
+  }
+
+  /* ---------- render ---------- */
+  function esc(t){ return String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+  function hlGaps(t){
+    return esc(t).replace(/【([^】]*)】/g, function(_,g){ return '<em>'+g+'</em>'; });
+  }
+
+  var lastDraft = "";
+
+  function recompute(){
+    scanSignals("A"); scanSignals("B");
+    var s = readState();
+    var v = decide(s);
+    var issues = validate(s, v);
+
+    // verdict pill
+    var pill = $("vPill");
+    var key = (v.overall==="A"||v.overall==="B") ? v.overall : "TIE";
+    pill.className = "vpill " + key;
+    pill.textContent = v.overall ? (LABEL[v.overall] || v.overall) : "—";
+    $("vDriver").textContent = v.driver;
+
+    var sub = "";
+    if(!v.overall){
+      sub = "Select the Naturalness / Engagement dimension to start the hierarchy walk — it is the dimension that normally decides the vote.";
+    } else if(s.pick.ovr && s.pick.ovr !== v.overall){
+      sub = "⚠ Your pick is <b>"+LABEL[s.pick.ovr]+"</b>; the rules point to <b>"+LABEL[v.overall]+"</b>. Read the contradiction notes below before submitting.";
+    } else if(s.pick.ovr){
+      sub = "✓ Your pick agrees with the rules.";
+    } else {
+      sub = "Make your own overall pick above, then compare it against this.";
+    }
+    $("vSub").innerHTML = sub;
+
+    $("vTrace").innerHTML = v.trace.map(function(t){ return "<li>"+t+"</li>"; }).join("");
+
+    // recommended vs picked grid
+    var rec = {
+      nat: s.pick.nat,
+      uti: s.pick.uti,
+      aud: (function(){
+        var aA=s.A.thrAud.length, aB=s.B.thrAud.length;
+        if(aA && !aB) return "B";
+        if(aB && !aA) return "A";
+        if(aA && aB) return "BAD";
+        return "TIE";
+      })(),
+      ovr: v.overall
+    };
+    var cells = [
+      ["Naturalness", s.pick.nat, null],
+      ["Utility", s.pick.uti, null],
+      ["Audio", s.pick.aud, rec.aud],
+      ["Overall", s.pick.ovr, rec.ovr]
+    ];
+    $("recGrid").innerHTML = cells.map(function(c){
+      var name=c[0], picked=c[1], suggested=c[2];
+      var cls = picked==="A"?"A":picked==="B"?"B":picked?"T":"N";
+      var mismatch = suggested && picked && suggested!==picked;
+      return '<div class="rec'+(mismatch?" mismatch":"")+'">'+
+             '<div class="k">'+name+'</div>'+
+             '<div class="v '+cls+'">'+(picked?LABEL[picked]:"—")+'</div>'+
+             (suggested ? '<div class="mm" style="color:'+(mismatch?"var(--warn)":"var(--faint)")+'">rules: '+(LABEL[suggested]||suggested)+'</div>' : '')+
+             '</div>';
+    }).join("");
+
+    // issues
+    $("issues").innerHTML = issues.map(function(i){
+      return '<div class="issue '+i[0]+'"><span class="ic">'+i[1]+'</span><div>'+i[2]+'</div></div>';
+    }).join("") || '<div class="issue info"><span class="ic">READY</span><div>Nothing to flag yet.</div></div>';
+
+    // draft
+    lastDraft = buildJustification(s, v);
+    $("justBox").innerHTML = hlGaps(lastDraft);
+  }
+
+  /* ---------- AI generation ---------- */
+  async function generateAI(){
+    if(!aiAvailable) return;
+    var s = readState(), v = decide(s);
+    var ruleDraft = buildJustification(s, v);
+    $("loading").style.display = "block";
+    $("btnAI").disabled = true;
+    try{
+      var out = await window.claude.complete(buildAIPrompt(s, v, ruleDraft));
+      if(out && String(out).trim()){
+        lastDraft = String(out).trim();
+        $("justBox").innerHTML = hlGaps(lastDraft);
+        toast("Draft generated");
+      } else {
+        throw new Error("empty");
+      }
+    }catch(e){
+      lastDraft = ruleDraft;
+      $("justBox").innerHTML = hlGaps(ruleDraft);
+      toast("AI unavailable — used rule engine");
+    }finally{
+      $("loading").style.display = "none";
+      $("btnAI").disabled = false;
+    }
+  }
+
+  /* ---------- summary ---------- */
+  function fullSummary(){
+    var s = readState(), v = decide(s);
+    function mb(m){
+      var x=s[m];
+      return "MODEL "+m+"\n"+
+        "  Turns: "+(m==="A"?s.turnsA:s.turnsB)+"\n"+
+        "  Notes: "+(x.notes||"—")+"\n"+
+        "  Strongest: "+(x.best||"—")+"\n"+
+        "  Weakest: "+(x.worst||"—")+"\n"+
+        "  Error clusters: "+(x.ec.length?x.ec.join("; "):"none")+"\n"+
+        "  Threshold — utility: "+(x.thrU.length?x.thrU.join("; "):"none")+"\n"+
+        "  Threshold — audio: "+(x.thrAud.length?x.thrAud.join("; "):"none")+"\n"+
+        "  Background noise: "+x.room+"\n"+
+        "  Task success: "+x.success+"\n";
+    }
+    return "=== S2S ARENA TASK SUMMARY ===\n"+
+      "Scenario: "+(s.scenario||"—")+"\n"+
+      "Scenario type: "+s.scenType+"\n\n"+
+      "Prompts used:\n"+(s.prompts||"—")+"\n\n"+
+      mb("A")+"\n"+mb("B")+"\n"+
+      "PICKS — Naturalness: "+(LABEL[s.pick.nat]||"unset")+
+      " | Utility: "+(LABEL[s.pick.uti]||"unset")+
+      " | Audio: "+(LABEL[s.pick.aud]||"unset")+
+      " | Overall: "+(LABEL[s.pick.ovr]||"unset")+"\n"+
+      "RULES IMPLY: "+(v.overall?LABEL[v.overall]:"undetermined")+" (driver: "+v.driver+")\n\n"+
+      "JUSTIFICATION DRAFT:\n"+lastDraft+"\n";
+  }
+
+  /* ---------- wiring ---------- */
+  document.addEventListener("input", function(e){
+    if(e.target.closest("#viewForm")) recompute();
+  });
+  document.addEventListener("change", function(e){
+    if(e.target.closest("#viewForm")) recompute();
+  });
+
+  $("btnRule").addEventListener("click", function(){ recompute(); toast("Rebuilt from rules"); });
+  $("btnAI").addEventListener("click", generateAI);
+  $("btnCopy").addEventListener("click", function(){ copy(lastDraft); });
+  $("btnSummary").addEventListener("click", function(){ copy(fullSummary()); });
+  $("btnReset").addEventListener("click", function(){
+    document.querySelectorAll("#viewForm input[type=text], #viewForm textarea").forEach(function(e){e.value="";});
+    document.querySelectorAll("#viewForm input[type=checkbox]").forEach(function(e){e.checked=false;});
+    document.querySelectorAll("#viewForm select").forEach(function(e){e.selectedIndex=0;});
+    $("turnsA").value=4; $("turnsB").value=4;
+    recompute(); toast("Form reset");
+  });
+
+  detectAI();
+  recompute();
+})();
+</script>
+</body>
+</html>

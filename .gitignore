@@ -1,0 +1,13 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+.s2s-cache/
+runs/
+*.wav
+*.m4a
+*.mp3
+!tests/**/fixtures/*.wav
+.pytest_cache/
+.ruff_cache/
+dist/
