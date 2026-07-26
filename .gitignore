@@ -11,3 +11,13 @@ runs/
 .pytest_cache/
 .ruff_cache/
 dist/
+
+# Terraform (deploy/terraform) -- provider plugin cache and any local state/plan
+# artifacts. The lock file (.terraform.lock.hcl) is intentionally NOT ignored; it is
+# meant to be committed so provider version selection is reproducible.
+deploy/terraform/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+crash.log
+crash.*.log

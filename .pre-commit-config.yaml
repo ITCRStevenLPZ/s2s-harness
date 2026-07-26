@@ -1,0 +1,72 @@
+# Pre-commit gates for s2s-harness. See CLAUDE.md "Two-tier test gate" and
+# "Working in this repo". Every hook here must pass on the current tree,
+# including the still-mostly-empty parts, per the wave lead's instruction:
+# a hook that errors because a directory does not exist yet is a broken hook.
+
+# CLAUDE.md is operator-managed (CLAUDE.md "Settings lock" / orchestrator
+# zero-write policy) -- no hook may rewrite it, not even a whitespace fixer.
+# graphify-out/ is a generated, content-addressed cache with its own update
+# path (`graphify update .`); pre-commit has no business touching it.
+exclude: ^(CLAUDE\.md|graphify-out/)
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-added-large-files
+        # criteria/, docs/ and web/ carry no audio; .gitignore already blocks
+        # committed .wav/.m4a/.mp3, this is the size-based backstop.
+        args: ["--maxkb=1024"]
+      - id: check-yaml
+      - id: check-toml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.30.1
+    hooks:
+      # Docker variant, not the default `gitleaks` hook: the default is
+      # language: golang and requires a local Go toolchain to build, which
+      # is not part of this repo's confirmed toolchain. Docker is.
+      - id: gitleaks-docker
+
+  - repo: local
+    hooks:
+      - id: ruff-check
+        name: ruff check (src, tests, scripts)
+        language: system
+        entry: uv run ruff check
+        types: [python]
+        files: ^(src|tests|scripts)/
+        require_serial: true
+
+      - id: ruff-format
+        name: ruff format --check (src, tests, scripts)
+        language: system
+        entry: uv run ruff format --check
+        types: [python]
+        files: ^(src|tests|scripts)/
+        require_serial: true
+
+      - id: mypy
+        name: mypy (strict flags, src + scripts)
+        language: system
+        entry: uv run mypy
+        pass_filenames: false
+        types: [python]
+        files: ^(src|scripts)/
+
+      - id: token-boundary
+        name: token-boundary check (RULE-1 / RULE-2, no LLM SDK outside nodes/polish.py)
+        language: system
+        entry: uv run python scripts/token_boundary_check.py
+        pass_filenames: true
+        types: [python]
+        files: ^src/s2s_harness/
+
+      - id: golden-tier1-on-rules-change
+        name: Tier 1 golden fixtures (EVAL_SPEC.md, on any src/s2s_harness/rules/ change)
+        language: system
+        entry: uv run test-golden
+        pass_filenames: false
+        files: ^src/s2s_harness/rules/

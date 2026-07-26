@@ -19,17 +19,61 @@ stt-gemini = ["google-genai>=0.3"]
 stt-gcp = ["google-cloud-speech>=2.26"]
 audio = ["sounddevice>=0.4", "soundfile>=0.12"]
 polish = ["anthropic>=0.34"]
-dev = ["pytest>=8.2", "pytest-asyncio>=0.23", "ruff>=0.5", "httpx>=0.27"]
+
+# PEP 735 dependency group, not an extra: `uv sync` installs it by default
+# (unless run with --no-dev), so `uv run lint` / `uv run mypy` work out of a
+# fresh clone without callers needing to know about --extra dev.
+[dependency-groups]
+dev = [
+    "pytest>=8.2",
+    "pytest-asyncio>=0.23",
+    "pytest-socket>=0.7",
+    "ruff>=0.5",
+    "httpx>=0.27",
+    "mypy>=1.13",
+]
 
 [project.scripts]
 s2s = "s2s_harness.cli.main:app"
+lint = "scripts.tasks:lint"
+"test-golden" = "scripts.tasks:test_golden"
+"test-golden-real" = "scripts.tasks:test_golden_real"
+"test-golden-all" = "scripts.tasks:test_golden_all"
+
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+# scripts/ is repo tooling (uv run task shims), not part of the s2s_harness
+# package. See VERSIONING.md and team_findings.md [T4] for why it exists:
+# uv has no native task runner and `[project.scripts]` names cannot contain
+# colons, so the literal `uv run test:golden` form from CLAUDE.md cannot be
+# implemented; these hyphenated entry points are the closest working form.
+packages = ["src/s2s_harness", "scripts"]
 
 [tool.ruff]
 target-version = "py312"
 line-length = 100
 
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+markers = [
+    "tier2: requires live network and real provider credentials; excluded from Tier 1",
+]
+
+[tool.mypy]
+python_version = "3.12"
+files = ["src", "scripts"]
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+warn_return_any = true
+strict_equality = true
+warn_unused_ignores = true
+no_implicit_optional = true
 
 # The rules layer must stay pure. See CLAUDE.md and tests/test_token_boundary.py.
 [tool.s2s]

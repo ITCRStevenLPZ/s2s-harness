@@ -1,0 +1,22 @@
+# CODEOWNERS
+#
+# The guarded set (CLAUDE.md "Specs first and guarded subsystem contract")
+# requires review regardless of who authored the change. GitHub branch
+# protection enforces "Require review from Code Owners" against this file.
+#
+# Last match wins, so more specific paths are listed after broader ones.
+
+* @ITCRStevenLPZ
+
+# Guarded set: criteria and the golden fixtures that encode them as a
+# regression contract. Never merge a change here without a human in the loop.
+/criteria/ @ITCRStevenLPZ
+/tests/golden/ @ITCRStevenLPZ
+
+# The single sanctioned LLM call site. A change here is a change to the
+# token-boundary invariant itself.
+/src/s2s_harness/nodes/polish.py @ITCRStevenLPZ
+
+# Operator-managed, never edited by an agent.
+/CLAUDE.md @ITCRStevenLPZ
+/.claude/settings.json @ITCRStevenLPZ

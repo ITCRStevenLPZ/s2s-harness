@@ -1,0 +1,48 @@
+name: tier2
+
+# CLAUDE.md "Two-tier test gate", Tier 2: the full path against the real
+# Anthropic API and the real Gemini/GCP speech provider. Pre-merge gate
+# only, required on PRs to main (branch protection configures this by
+# workflow/job name -- see VERSIONING.md release procedure and
+# team_progress.md for the branch-protection command that was run).
+#
+# Hard rule from CLAUDE.md: a genuine 429 or quota exhaustion is
+# "re-run when quota recovers", NOT a code defect, and must NEVER be a
+# reason to skip this gate, merge anyway, or weaken the assertion to
+# tolerate it. Do not add continue-on-error. Do not add retry-on-429 logic
+# that converts a real failure into a pass. If this job is red, the PR does
+# not merge, full stop -- rerun it once quota recovers instead.
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  tier2-golden:
+    name: tier2
+    runs-on: ubuntu-latest
+    # Environment "tier2" holds the real credentials (ANTHROPIC_API_KEY,
+    # GEMINI_API_KEY, and/or GOOGLE_APPLICATION_CREDENTIALS for GCP STT).
+    # Created and populated manually in repository settings -- an agent
+    # must never generate or store real provider credentials. Fork PRs will
+    # not receive these secrets by GitHub's own design; that is a known,
+    # accepted limitation of this gate, not something to route around.
+    environment: tier2
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          enable-cache: true
+      - run: uv sync
+
+      - name: uv run test-golden-real
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_PATH }}
+          GCP_PROJECT_ID: ${{ vars.GCP_PROJECT_ID }}
+          S2S_STT_PROVIDER: gemini
+          S2S_NO_LLM: "0"
+        run: uv run test-golden-real
