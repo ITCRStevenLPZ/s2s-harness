@@ -1,5 +1,8 @@
 # Architecture
 
+Version: 1.1.0
+Last updated: 2026-07-26
+
 ## Shape
 
 One LangGraph graph, two entry schemas. The mode (`conversation` | `clips`) selects which validations run and which vocabulary the renderer uses ("Model A" vs "Clip A", turns vs no turns). Everything downstream of `normalize` is mode-agnostic.
@@ -72,6 +75,6 @@ Raw observations (typed or spoken) become a validated `EvaluationState`; the eng
 ## What is deliberately absent
 
 - **No database.** Each evaluation is a run. Records are written as JSON + markdown to `runs/` if the rater asks; nothing persists otherwise.
-- **No auth, no multi-user.** Single rater, local machine.
-- **No clip audio analysis in the default path.** See `docs/STT_SPEC.md` §6.
+- **Deprecated (local-only scope; superseded for hosted deployment by `docs/DEPLOY_SPEC.md` DEPLOY-9 through DEPLOY-15).** Originally: "No auth, no multi-user. Single rater, local machine." This remains exactly true when the bridge runs locally via `s2s serve` — nothing about local usage changed. It is superseded only for the Cloud Run hosted deployment, which is still single-rater (multi-user support is still absent, see `docs/DEPLOY_SPEC.md` DEPLOY-26) but requires an app-level API key because the surface is no longer loopback-only. See `docs/DEPLOY_SPEC.md` for the full hosted-deployment auth and network posture.
+- **No clip audio analysis in the default path.** See `docs/STT_SPEC.md` §6. Unchanged by hosting; `docs/DEPLOY_SPEC.md` DEPLOY-26 confirms this stays binding in the deployed configuration.
 - **No agent framework at runtime.** The `.claude/agents/` roster is for *building* this repo with Claude Code. The shipped application is a graph, not an agent swarm — agents add nondeterminism and cost to a problem that has neither.

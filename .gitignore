@@ -21,3 +21,11 @@ deploy/terraform/.terraform/
 *.tfplan
 crash.log
 crash.*.log
+
+# graphify-out/cache/ is a content-addressed AST cache that regenerates
+# (and partially churns) on every `graphify update .` -- every teammate
+# runs that as part of their definition of done, so tracking it buries real
+# diffs in cache noise on every commit. graph.json, GRAPH_REPORT.md and
+# manifest.json (the actual index) stay tracked; only the cache is ignored.
+# See team_findings.md [T4] for the discussion.
+graphify-out/cache/

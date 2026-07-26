@@ -1,16 +1,16 @@
 # Graph Report - s2s-harness  (2026-07-26)
 
 ## Corpus Check
-- 42 files · ~54,996 words
+- 42 files · ~55,427 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 457 nodes · 442 edges · 43 communities (35 shown, 8 thin omitted)
+- 458 nodes · 443 edges · 44 communities (36 shown, 8 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `d69d104c`
+- Built from commit: `5a61c195`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -57,9 +57,10 @@
 - [[_COMMUNITY_Community 39|Community 39]]
 - [[_COMMUNITY_Community 40|Community 40]]
 - [[_COMMUNITY_Community 41|Community 41]]
+- [[_COMMUNITY_Community 43|Community 43]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `Team Findings: Wave 1` - 35 edges
+1. `Team Findings: Wave 1` - 36 edges
 2. `Project criteria — source of truth` - 23 edges
 3. `2. Nodes` - 19 edges
 4. `5. `draft` — the justification builder` - 19 edges
@@ -77,15 +78,15 @@
 ## Import Cycles
 - None detected.
 
-## Communities (43 total, 8 thin omitted)
+## Communities (44 total, 8 thin omitted)
 
 ### Community 0 - "Community 0"
 Cohesion: 0.10
 Nodes (20): Agent roster, Deterministic effort calculation and delegation, Do not, Graph conventions, Graph freshness mandate (definition of done), Mandatory agent team communication protocol, Mandatory knowledge graph protocol (graphify), Model routing matrix (+12 more)
 
 ### Community 1 - "Community 1"
-Cohesion: 0.06
-Nodes (32): 1. Catalogues, 2. Normalization, 3. `decide` — the hierarchy walk, 4.1 Setup and consistency — conversation mode only, 4.1 Setup and consistency — conversation mode only {RULE-16}, 4.2 Evidence — both modes, 4.2 Evidence — both modes {RULE-17}, 4.3 Scenario inversion (+24 more)
+Cohesion: 0.12
+Nodes (17): 4.1 Setup and consistency — conversation mode only, 4.1 Setup and consistency — conversation mode only {RULE-16}, 4.2 Evidence — both modes, 4.2 Evidence — both modes {RULE-17}, 4.3 Scenario inversion, 4.3 Scenario inversion {RULE-18}, 4.4 Audio, 4.4 Audio {RULE-19} (+9 more)
 
 ### Community 2 - "Community 2"
 Cohesion: 0.12
@@ -184,8 +185,8 @@ Cohesion: 0.08
 Nodes (27): BaseModel, bool, EvaluationState, Finding, Picks, Preflight, Pydantic state schema for the S2S Arena harness.  Transcribed field-for-field fr, One recognized word with optional timing. STT_SPEC section 2. (+19 more)
 
 ### Community 30 - "Community 30"
-Cohesion: 0.06
-Nodes (35): [lead] Baseline reconnaissance (pre-wave), [T1] CLI_SPEC nit fixed; [T1 -> T4-ci-dev] requesting the --version contract directly (SendMessage still unavailable to me), [T1] Confirmed T2's catalog.py already cites the RULE-n IDs I assigned, [T1] ID-scheme conventions adopted (stated at top of each file, per-file), [T1] Lead approved all three Phase-1 decisions; declining T2's RULES_SPEC wording-tightening suggestion, [T1] No Bash tool in this session — cannot run `graphify update .`, [T1] Phase 1 complete — diff summary and rationale, awaiting lead review, [T1] Phase 1 fully closed — CLI-16 filled, final report to lead (+27 more)
+Cohesion: 0.05
+Nodes (36): [lead] Baseline reconnaissance (pre-wave), [T1] CLI_SPEC nit fixed; [T1 -> T4-ci-dev] requesting the --version contract directly (SendMessage still unavailable to me), [T1] Confirmed T2's catalog.py already cites the RULE-n IDs I assigned, [T1] ID-scheme conventions adopted (stated at top of each file, per-file), [T1] Lead approved all three Phase-1 decisions; declining T2's RULES_SPEC wording-tightening suggestion, [T1] No Bash tool in this session — cannot run `graphify update .`, [T1] Phase 1 complete — diff summary and rationale, awaiting lead review, [T1] Phase 1 fully closed — CLI-16 filled, final report to lead (+28 more)
 
 ### Community 31 - "Community 31"
 Cohesion: 0.22
@@ -215,25 +216,29 @@ Nodes (5): Pre-1.0 note, Release procedure, Scheme, Versioning, What bumps which
 Cohesion: 0.29
 Nodes (6): Cross-package invariants that only a test can enforce.  CLAUDE.md design rule 1, `rules.catalog.Mode` and `models.state.Mode` must never drift apart.      Both p, `rules.catalog.Mode` and `models.state.Mode` must never drift apart.      Both p, `models.state`'s hardcoded fail-closed default key sets must never     drift fro, test_catalogue_key_defaults_identical_across_layers(), test_mode_literal_identical_across_layers()
 
+### Community 43 - "Community 43"
+Cohesion: 0.12
+Nodes (15): 1. Catalogues, 2. Normalization, 3. `decide` — the hierarchy walk, 6. `scan` — bilingual signal detection, 7. Invariants for the golden fixtures, Error clusters — shared, Error clusters — shared {RULE-1}, Rules specification (+7 more)
+
 ## Knowledge Gaps
-- **308 isolated node(s):** `$schema`, `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS`, `defaultMode`, `PreToolUse`, `superpowers@claude-plugins-official` (+303 more)
+- **309 isolated node(s):** `$schema`, `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS`, `defaultMode`, `PreToolUse`, `superpowers@claude-plugins-official` (+304 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **8 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Rules specification` connect `Community 1` to `Community 9`?**
+- **Why does `Rules specification` connect `Community 43` to `Community 1`, `Community 9`?**
   _High betweenness centrality (0.009) - this node is a cross-community bridge._
-- **Why does `5. `draft` — the justification builder` connect `Community 9` to `Community 1`?**
+- **Why does `5. `draft` — the justification builder` connect `Community 9` to `Community 43`?**
+  _High betweenness centrality (0.007) - this node is a cross-community bridge._
+- **Why does `4. `audit` — findings` connect `Community 1` to `Community 43`?**
   _High betweenness centrality (0.007) - this node is a cross-community bridge._
 - **What connects `$schema`, `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS`, `defaultMode` to the rest of the system?**
-  _340 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _341 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
   _Cohesion score 0.09523809523809523 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**
-  _Cohesion score 0.06060606060606061 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.11764705882352941 - nodes in this community are weakly interconnected._
 - **Should `Community 2` be split into smaller, more focused modules?**
   _Cohesion score 0.11764705882352941 - nodes in this community are weakly interconnected._
-- **Should `Community 3` be split into smaller, more focused modules?**
-  _Cohesion score 0.07407407407407407 - nodes in this community are weakly interconnected._
