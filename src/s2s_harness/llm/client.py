@@ -348,25 +348,39 @@ def _build_provider(name: LLMProviderName) -> Provider:
     raise LLMConfigError(f"unreachable: unhandled provider {name!r}")  # pragma: no cover
 
 
-_MODEL_ENV_VAR = "S2S_LLM_MODEL"
+MODEL_ENV_VAR = "S2S_LLM_MODEL"
 
 # Judgment call, flagged for T5: no per-role model selection this wave, one
 # model per provider for all four roles. `S2S_LLM_MODEL` overrides either
 # default. Model names drift fast; treat these two as placeholders to
 # revisit, not a considered recommendation.
-_DEFAULT_MODEL: dict[LLMProviderName, str] = {
+DEFAULT_MODEL: dict[LLMProviderName, str] = {
     "openrouter": "openai/gpt-4o-mini",
     "gemini": "gemini-2.5-flash",
 }
 
 
-def _resolve_model(provider_name: LLMProviderName, override: str | None) -> str:
+def resolve_model(provider_name: LLMProviderName, override: str | None = None) -> str:
+    """Resolve which model string to send for `provider_name`: `override`
+    if given, else `S2S_LLM_MODEL` if set, else the placeholder default
+    above.
+
+    Public on purpose. `LLMClient.complete()`'s own `model` argument has
+    no default -- deliberately, so a direct sync caller (T2's
+    `suggest`/`judge`/`polish` now take an explicit `model: str` param
+    with no default of their own either) is never silently surprised by
+    which model ran. The async `complete()` facade below calls this
+    internally so *its* callers get a default for free; a caller using
+    `LLMClient` directly (T3's node wrappers, T4's CLI wiring) should call
+    this themselves to get the same resolution instead of hardcoding or
+    re-guessing a default model string.
+    """
     if override:
         return override
-    env_override = os.environ.get(_MODEL_ENV_VAR, "").strip()
+    env_override = os.environ.get(MODEL_ENV_VAR, "").strip()
     if env_override:
         return env_override
-    return _DEFAULT_MODEL[provider_name]
+    return DEFAULT_MODEL[provider_name]
 
 
 class LlmDegraded(Exception):
@@ -475,7 +489,7 @@ async def complete(
     if client is None:
         raise LlmDegraded("disabled", "no LLM provider configured (S2S_LLM_PROVIDER unset)")
 
-    resolved_model = _resolve_model(client.provider_name, model)
+    resolved_model = resolve_model(client.provider_name, model)
     outcome = await asyncio.to_thread(
         client.complete,
         role=role,

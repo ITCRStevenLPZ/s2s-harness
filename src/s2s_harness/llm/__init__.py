@@ -11,6 +11,8 @@ from this package -- see CLAUDE.md design rule 1 (amended Wave 3b) and
 """
 
 from s2s_harness.llm.client import (
+    DEFAULT_MODEL,
+    MODEL_ENV_VAR,
     CompletionResult,
     LLMCache,
     LLMClient,
@@ -32,9 +34,12 @@ from s2s_harness.llm.client import (
     build_client_from_env,
     complete,
     reset_client_cache,
+    resolve_model,
 )
 
 __all__ = [
+    "DEFAULT_MODEL",
+    "MODEL_ENV_VAR",
     "CompletionResult",
     "LLMCache",
     "LLMClient",
@@ -56,4 +61,5 @@ __all__ = [
     "build_client_from_env",
     "complete",
     "reset_client_cache",
+    "resolve_model",
 ]
