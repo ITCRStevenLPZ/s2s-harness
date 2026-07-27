@@ -255,8 +255,8 @@
     "semantic_hash": ""
   },
   "/Users/stevenlpz/LabelerGuideAgents/s2s-harness/.claude/team-runs/2026-07-27-phase3-engine/team_findings.md": {
-    "mtime": 1785127092.3123806,
-    "ast_hash": "bacd3b8516e28936ed7c9fbaee3b9689",
+    "mtime": 1785127179.7670028,
+    "ast_hash": "cb5371a1d9164e2b87486e943a291102",
     "semantic_hash": ""
   },
   "/Users/stevenlpz/LabelerGuideAgents/s2s-harness/.claude/team-runs/2026-07-27-phase3-engine/team_plan.md": {
@@ -265,8 +265,8 @@
     "semantic_hash": ""
   },
   "/Users/stevenlpz/LabelerGuideAgents/s2s-harness/.claude/team-runs/2026-07-27-phase3-engine/team_progress.md": {
-    "mtime": 1785127103.089161,
-    "ast_hash": "74d994168aab0dc71e7eca0e5099fd4c",
+    "mtime": 1785127167.1150181,
+    "ast_hash": "35239b076dcde5e5cb6afc4f1d6e6730",
     "semantic_hash": ""
   },
   "/Users/stevenlpz/LabelerGuideAgents/s2s-harness/src/s2s_harness/rules/draft.py": {
@@ -364,29 +364,29 @@
     "ast_hash": "031663dbe4f40853daa70968b7b4ebcb",
     "semantic_hash": ""
   },
-  "/Users/stevenlpz/LabelerGuideAgents/s2s-harness/tests/golden/audio_pick_contradicts.yaml": {
-    "mtime": 1785127079.2905254,
-    "ast_hash": "7255af554fa2557c9fc3066a4d725e7b",
-    "semantic_hash": ""
-  },
   "/Users/stevenlpz/LabelerGuideAgents/s2s-harness/tests/golden/hierarchy_audio_decides.yaml": {
-    "mtime": 1785127111.6320698,
-    "ast_hash": "cddb750f611502b3374b3ea5f5c3b6b7",
+    "mtime": 1785127188.9584963,
+    "ast_hash": "6577ff6bcfba5e29bcbc075a42b33bbb",
     "semantic_hash": ""
   },
-  "/Users/stevenlpz/LabelerGuideAgents/s2s-harness/tests/golden/preflight_setup_and_turns_mismatch.yaml": {
-    "mtime": 1785127068.9470851,
-    "ast_hash": "364c9701fed7fc4b56a6134b2e632bba",
+  "/Users/stevenlpz/LabelerGuideAgents/s2s-harness/tests/golden/contradiction_audio_pick.yaml": {
+    "mtime": 1785127170.4398904,
+    "ast_hash": "c66e3a21eee1f3e492c19000bb57cecb",
     "semantic_hash": ""
   },
-  "/Users/stevenlpz/LabelerGuideAgents/s2s-harness/tests/golden/success_fail_preferred.yaml": {
-    "mtime": 1785127099.3240082,
-    "ast_hash": "b52f8ee5fda7c7b2f15d6158822d86c7",
+  "/Users/stevenlpz/LabelerGuideAgents/s2s-harness/tests/golden/contradiction_preflight_and_turns.yaml": {
+    "mtime": 1785127162.6419258,
+    "ast_hash": "21aa640501842ffecd713cb54eac3024",
     "semantic_hash": ""
   },
-  "/Users/stevenlpz/LabelerGuideAgents/s2s-harness/tests/golden/utility_pick_contradicts.yaml": {
-    "mtime": 1785127086.6848843,
-    "ast_hash": "46a35799de8d42d8c8ff557e4fc1824d",
+  "/Users/stevenlpz/LabelerGuideAgents/s2s-harness/tests/golden/contradiction_success_fail_preferred.yaml": {
+    "mtime": 1785127183.2150788,
+    "ast_hash": "bd241e6faf8bca443403b683c729df00",
+    "semantic_hash": ""
+  },
+  "/Users/stevenlpz/LabelerGuideAgents/s2s-harness/tests/golden/contradiction_utility_pick.yaml": {
+    "mtime": 1785127176.5681527,
+    "ast_hash": "5861d478bfd80600a63da956690fa1f4",
     "semantic_hash": ""
   }
 }

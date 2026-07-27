@@ -1089,7 +1089,7 @@
       "source_file": "src/s2s_harness/rules/decide.py",
       "source_location": "L144",
       "id": "picks",
-      "community": 49,
+      "community": 29,
       "norm_label": "picks"
     },
     {
@@ -1098,7 +1098,7 @@
       "source_file": "src/s2s_harness/rules/decide.py",
       "source_location": "L144",
       "id": "src_s2s_harness_rules_decide_py_verdict",
-      "community": 49,
+      "community": 29,
       "norm_label": "verdict"
     },
     {
@@ -1125,7 +1125,7 @@
       "source_file": "src/s2s_harness/rules/decide.py",
       "source_location": "L257",
       "id": "rules_decide_decide",
-      "community": 49,
+      "community": 29,
       "norm_label": "decide()"
     },
     {
@@ -1215,7 +1215,7 @@
       "source_file": "src/s2s_harness/rules/decide.py",
       "source_location": "L258",
       "id": "rules_decide_rationale_258",
-      "community": 49,
+      "community": 29,
       "norm_label": "rules_spec section 3, the full `decide` procedure. {rule-10}..{rule-15}      {ru"
     },
     {
@@ -3514,6 +3514,15 @@
       "norm_label": "[t1] user ruled on the coverage-honesty question \u2014 @t7-fixtures-adversarial @t6-fixtures-required, `eval_spec.md` now 1.3.0"
     },
     {
+      "label": "[T1] Filename reconciliation needed \u2014 @T7-fixtures-adversarial, please confirm or correct",
+      "file_type": "document",
+      "source_file": ".claude/team-runs/2026-07-27-phase3-engine/team_findings.md",
+      "source_location": "L440",
+      "id": "2026_07_27_phase3_engine_team_findings_t1_filename_reconciliation_needed_t7_fixtures_adversarial_please_confirm_or_correct",
+      "community": 46,
+      "norm_label": "[t1] filename reconciliation needed \u2014 @t7-fixtures-adversarial, please confirm or correct"
+    },
+    {
       "label": "team_plan.md",
       "file_type": "document",
       "source_file": ".claude/team-runs/2026-07-27-phase3-engine/team_plan.md",
@@ -5570,7 +5579,7 @@
       "file_type": "rationale",
       "source_file": "src/s2s_harness/rules/decide.py",
       "source_location": "L259",
-      "community": 49,
+      "community": 29,
       "norm_label": "rules_spec section 3, the full `decide` procedure. {rule-10}..{rule-15}      {ru",
       "id": "rules_decide_rationale_259"
     },
@@ -13759,6 +13768,16 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": ".claude/team-runs/2026-07-27-phase3-engine/team_findings.md",
+      "source_location": "L440",
+      "weight": 1.0,
+      "source": "2026_07_27_phase3_engine_team_findings_team_findings_phase_3",
+      "target": "2026_07_27_phase3_engine_team_findings_t1_filename_reconciliation_needed_t7_fixtures_adversarial_please_confirm_or_correct",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/team-runs/2026-07-27-phase3-engine/team_findings.md",
       "source_location": "L62",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -13831,9 +13850,9 @@
       "source_file": ".claude/team-runs/2026-07-27-phase3-engine/team_findings.md",
       "source_location": "L421",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_07_27_phase3_engine_team_findings_team_findings_phase_3",
-      "target": "2026_07_27_phase3_engine_team_findings_t1_user_ruled_on_the_coverage_honesty_question_t7_fixtures_adversarial_t6_fixtures_required_eval_spec_md_now_1_3_0",
-      "confidence_score": 1.0
+      "target": "2026_07_27_phase3_engine_team_findings_t1_user_ruled_on_the_coverage_honesty_question_t7_fixtures_adversarial_t6_fixtures_required_eval_spec_md_now_1_3_0"
     },
     {
       "relation": "contains",
@@ -13921,9 +13940,9 @@
       "source_file": ".claude/team-runs/2026-07-27-phase3-engine/team_findings.md",
       "source_location": "L253",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_07_27_phase3_engine_team_findings_team_findings_phase_3",
-      "target": "2026_07_27_phase3_engine_team_findings_t6_lead_caught_a_real_coverage_md_drift_audited_all_45_claims_fixed_the_one_wrong_one",
-      "confidence_score": 1.0
+      "target": "2026_07_27_phase3_engine_team_findings_t6_lead_caught_a_real_coverage_md_drift_audited_all_45_claims_fixed_the_one_wrong_one"
     },
     {
       "relation": "contains",
@@ -15321,9 +15340,9 @@
       "source_file": "docs/EVAL_SPEC.md",
       "source_location": "L82",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "docs_eval_spec_evaluation_and_regression_specification",
-      "target": "docs_eval_spec_coverage_threshold_eval_24",
-      "confidence_score": 1.0
+      "target": "docs_eval_spec_coverage_threshold_eval_24"
     },
     {
       "relation": "contains",
@@ -16577,5 +16596,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "58ff00add7ac868f7023a0113512f73c790c01bc"
+  "built_at_commit": "a95e3dd743287c4cd00045c5a360e5dec68188f3"
 }

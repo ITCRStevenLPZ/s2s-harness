@@ -1,8 +1,6 @@
-# Coverage-threshold fixture (new user requirement, CLAUDE.md "Two-tier
-# test gate": every error-severity finding code needs a fixture). Provisional
-# id, EVAL-19 -- T1-spec-gaps is writing the normative EVAL_SPEC rows for
-# this batch; swap this for T1's assigned id once broadcast in
-# team_findings.md, do not treat this number as final.
+# Coverage-threshold fixture ({EVAL-24}, docs/EVAL_SPEC.md 1.3.0), id and
+# filename per T1-spec-gaps's broadcast in team_findings.md
+# ("contradiction_preflight_and_turns", EVAL-19).
 #
 # Exercises the three RULES_SPEC section 4.1 {RULE-16} error-severity codes
 # that had no fixture: SETUP_HEADPHONES, TURNS_MISMATCH, PROMPTS_NOT_EQUIVALENT.
@@ -18,7 +16,7 @@
 # branch fires instead ({RULE-16}'s own "exactly one of the three" design).
 # panning_check / listened_isolated / stayed_in_character / interruption_tested
 # are left true so only the three codes under test fire from section 4.1.
-id: preflight_setup_and_turns_mismatch
+id: contradiction_preflight_and_turns
 mode: conversation
 context:
   scenario: "casual chat about weekend plans, used to probe setup compliance"

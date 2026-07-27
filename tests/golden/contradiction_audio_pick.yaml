@@ -1,5 +1,6 @@
-# Coverage-threshold fixture (new user requirement). Provisional id EVAL-20
-# -- swap for T1-spec-gaps's assigned id once broadcast in team_findings.md.
+# Coverage-threshold fixture ({EVAL-24}, docs/EVAL_SPEC.md 1.3.0), id and
+# filename per T1-spec-gaps's broadcast in team_findings.md
+# ("contradiction_audio_pick", EVAL-20).
 #
 # Exercises `AUDIO_PICK_CONTRADICTS` {RULE-19}, section 4.4: "the side picked
 # for Audio is the one with `threshold_audio` while the other is clean."
@@ -10,7 +11,7 @@
 # `picks.overall` is set to the clean side (B) specifically so
 # `OVERALL_PREFERS_GATED` stays silent and only the audio-pick contradiction
 # is under test.
-id: audio_pick_contradicts
+id: contradiction_audio_pick
 mode: clips
 context:
   prompt: "explain the steps to reset a home wifi router"

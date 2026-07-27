@@ -1,5 +1,6 @@
-# Coverage-threshold fixture (new user requirement). Provisional id EVAL-22
-# -- swap for T1-spec-gaps's assigned id once broadcast in team_findings.md.
+# Coverage-threshold fixture ({EVAL-24}, docs/EVAL_SPEC.md 1.3.0), id and
+# filename per T1-spec-gaps's broadcast in team_findings.md
+# ("contradiction_success_fail_preferred", EVAL-22).
 #
 # Exercises `SUCCESS_FAIL_PREFERRED` {RULE-21}, section 4.6: "conversation
 # mode, preferred side marked `fail`." No threshold flags on either side and
@@ -10,7 +11,7 @@
 # still be legal input (state.py has no cross-field validator forbidding it;
 # that is exactly why this needs an audit-level finding rather than a
 # schema-level rejection).
-id: success_fail_preferred
+id: contradiction_success_fail_preferred
 mode: conversation
 context:
   scenario: "asking for step-by-step directions to a nearby park"

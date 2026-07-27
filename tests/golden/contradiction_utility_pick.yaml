@@ -1,12 +1,13 @@
-# Coverage-threshold fixture (new user requirement). Provisional id EVAL-21
-# -- swap for T1-spec-gaps's assigned id once broadcast in team_findings.md.
+# Coverage-threshold fixture ({EVAL-24}, docs/EVAL_SPEC.md 1.3.0), id and
+# filename per T1-spec-gaps's broadcast in team_findings.md
+# ("contradiction_utility_pick", EVAL-21).
 #
 # Exercises `UTILITY_PICK_CONTRADICTS` {RULE-20}, section 4.5: "the side
 # picked for Utility carries `threshold_utility` flags." Clip A's
 # `instruction_failure` flag also gates the overall verdict via Step 1
 # (RULE-10); `picks.overall` is the clean side (B) so `OVERALL_PREFERS_GATED`
 # stays silent and only the utility-pick contradiction is under test.
-id: utility_pick_contradicts
+id: contradiction_utility_pick
 mode: clips
 context:
   prompt: "summarize the plot of a short story in three sentences"
