@@ -41,9 +41,8 @@ def _unavailable_finding(reason: str) -> Finding:
 
 def _agreement_finding(agree: bool, a_overall: str | None, b_overall: str) -> Finding:
     code = "TRACK_COMPARE_AGREE" if agree else "TRACK_COMPARE_DISAGREE"
-    message = (
-        f"Track A picked {a_overall}; Track B's judge picked {b_overall}. "
-        + ("The two agree." if agree else "The two disagree -- surfaced, not resolved.")
+    message = f"Track A picked {a_overall}; Track B's judge picked {b_overall}. " + (
+        "The two agree." if agree else "The two disagree -- surfaced, not resolved."
     )
     return Finding(severity="info", code=code, label="COMPARE", message=message)
 

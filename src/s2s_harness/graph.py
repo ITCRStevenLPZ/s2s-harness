@@ -306,25 +306,52 @@ def memory_checkpointer() -> MemorySaver:
     return MemorySaver()
 
 
-def sqlite_checkpointer(db_path: Path | None = None) -> Any:
+async def sqlite_checkpointer(db_path: Path | None = None) -> Any:
     """Behind `--resume`, per `{GRAPH-12}`. `.s2s-cache/checkpoints.db` by
-    default.
+    default. **`async def`, not `def`** -- two real bugs found and fixed
+    here in sequence while proving this function end to end (not just
+    type-checked), both worth recording so they are not reintroduced:
 
-    `langgraph-checkpoint-sqlite` is not in `pyproject.toml` yet (flagged
-    to T5 in team_findings.md [T3]) -- this raises a clearly-named error
-    rather than failing at import time, so every non-`--resume` path
-    (including the entire golden suite) is unaffected by the missing
-    dependency.
+    1. First cut returned `SqliteSaver.from_conn_string(str(path))`
+       directly. That classmethod returns a context manager
+       (`Iterator[SqliteSaver]`, meant for `with ... as saver:`), not a
+       saver -- `compile_graph(checkpointer=<that context manager>)`
+       would compile against an object that does not implement the
+       checkpointer protocol at all. Would not have failed until
+       `--resume` was actually exercised at runtime.
+    2. Fixing (1) by constructing `SqliteSaver(conn)` directly (its own
+       public, non-context-manager constructor) still breaks: this
+       graph runs via `.ainvoke()` (Track B's four LLM-role nodes are
+       coroutines), and the synchronous `SqliteSaver`'s async methods
+       (`aget_tuple`, etc.) unconditionally raise `NotImplementedError`
+       ("Consider using AsyncSqliteSaver instead") -- confirmed by
+       actually running a fixture through `compile_graph(checkpointer=
+       SqliteSaver(...))` with `.ainvoke()`, not just importing it.
+       `AsyncSqliteSaver` is the correct type; its `__init__` calls
+       `asyncio.get_running_loop()` unconditionally, so it can only be
+       constructed inside a running event loop -- which is why this
+       function is now `async def` rather than `def`. Callers (CLI-*)
+       must `await sqlite_checkpointer(...)` from inside their own
+       `async def` entry point (already true here -- the graph itself
+       is only ever driven via `.ainvoke()`).
+
+    `aiosqlite` (an `AsyncSqliteSaver` runtime dependency, distinct from
+    `langgraph-checkpoint-sqlite` itself) resolves as a transitive
+    dependency in this environment; if that ever stops being true in a
+    fresh install, add it to `pyproject.toml` alongside
+    `langgraph-checkpoint-sqlite` (flagged in team_findings.md [T3]).
     """
     try:
-        from langgraph.checkpoint.sqlite import SqliteSaver  # type: ignore[import-not-found]
+        import aiosqlite
+        from langgraph.checkpoint.sqlite.aio import AsyncSqliteSaver
     except ImportError as exc:
         raise RuntimeError(
-            "langgraph-checkpoint-sqlite is not installed; --resume requires "
-            "it. Add `langgraph-checkpoint-sqlite` to pyproject.toml "
-            "(see team_findings.md [T3])."
+            "langgraph-checkpoint-sqlite / aiosqlite is not installed; "
+            "--resume requires both (should be declared in pyproject.toml "
+            "-- see team_findings.md [T3])."
         ) from exc
 
     path = db_path if db_path is not None else _CHECKPOINT_DB_PATH
     path.parent.mkdir(parents=True, exist_ok=True)
-    return SqliteSaver.from_conn_string(str(path))
+    conn = await aiosqlite.connect(str(path))
+    return AsyncSqliteSaver(conn)

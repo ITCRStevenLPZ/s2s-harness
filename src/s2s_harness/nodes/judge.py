@@ -42,8 +42,7 @@ def _judge_finding(overall: str, driver: str, confidence: float, reasoning: str)
         code="LLM_JUDGE_VERDICT",
         label="LLM JUDGE",
         message=(
-            f"Track B judge picked {overall} on {driver} "
-            f"(confidence {confidence:.2f}): {reasoning}"
+            f"Track B judge picked {overall} on {driver} (confidence {confidence:.2f}): {reasoning}"
         ),
     )
 

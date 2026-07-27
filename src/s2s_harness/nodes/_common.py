@@ -47,9 +47,7 @@ def _suggestion_key(suggestion: Suggestion) -> tuple[str, str, str, str]:
     return (suggestion.side, suggestion.target, suggestion.kind, suggestion.evidence)
 
 
-def merge_suggestions(
-    existing: list[Suggestion], additional: list[Suggestion]
-) -> list[Suggestion]:
+def merge_suggestions(existing: list[Suggestion], additional: list[Suggestion]) -> list[Suggestion]:
     """Merge two `Suggestion` lists, deduplicating by `(side, target, kind,
     evidence)`. First occurrence wins; `existing`'s order is preserved and
     `additional` entries are appended in their own order. Used to combine

@@ -6,14 +6,24 @@ CLAUDE.md design rule 6 -- the rater's own dictated notes only, never the
 model clips).
 
 Only reached via the `has_audio` conditional edge (`graph.py`), i.e. only
-when `state.audio_inputs` is non-empty. `src/s2s_harness/stt/` does not
-exist yet this wave (no teammate owns it in `team_plan.md`'s ownership
-table -- see `team_findings.md` [T3]), so this raises a clearly-named
-error rather than failing silently or guessing at an adapter shape. No
-golden fixture sets `audio_inputs`, so Track A's tested path never
-reaches this branch; this is a documented gap for whoever picks up
-`STT-*` next, not a defect in the Track A / dual-track guarantee this
-wave is responsible for.
+when `state.audio_inputs` is non-empty. `src/s2s_harness/stt/` is Phase 6
+(`docs/BUILD_PLAN.md`), explicitly deferred this wave -- no teammate owns
+it in `team_plan.md`'s ownership table (see `team_findings.md` [T3]).
+
+Deliberately does **not** import a module that does not exist. An
+earlier version of this node did (`from s2s_harness.stt import
+get_provider`, guarded by `try`/`except ImportError`), which the team
+lead correctly flagged: a broken import inside a `try` still needs to be
+distinguished from "this deliberately isn't built yet," and a real STT
+package landing later with a *different* shape than guessed here would
+have silently produced a confusing `ImportError` instead of this
+function's own clear message. This version raises `NotImplementedError`
+directly, naming the gap, with no import attempt of any kind -- `{GRAPH-2}`
+and the `has_audio` conditional edge stay structurally intact (the node
+exists, is reachable, and is exercised by nothing today since no golden
+fixture sets `audio_inputs`), and there is nothing to break when Phase 6
+actually lands: whoever builds `src/s2s_harness/stt/` replaces the body
+of this function, not its signature or its place in the graph.
 """
 
 from __future__ import annotations
@@ -27,30 +37,8 @@ def transcribe(state: EvaluationState) -> dict[str, Any]:
     if not state.audio_inputs:
         return {}
 
-    try:
-        from s2s_harness.stt import get_provider  # type: ignore[import-untyped]  # STT-*, not built
-    except ImportError as exc:
-        raise RuntimeError(
-            "state.audio_inputs is non-empty but src/s2s_harness/stt/ is not "
-            "implemented yet this wave; dictated notes are unsupported until "
-            "the STT-* adapters land (see team_findings.md [T3])"
-        ) from exc
-
-    provider = get_provider()
-    transcripts = dict(state.transcripts)
-    a_notes = state.a.notes
-    b_notes = state.b.notes
-
-    for side_key, path in state.audio_inputs.items():
-        transcript = provider.transcribe(path)
-        transcripts[side_key] = transcript
-        if side_key == "a":
-            a_notes = f"{a_notes}\n{transcript.text}".strip()
-        elif side_key == "b":
-            b_notes = f"{b_notes}\n{transcript.text}".strip()
-
-    return {
-        "transcripts": transcripts,
-        "a": state.a.model_copy(update={"notes": a_notes}),
-        "b": state.b.model_copy(update={"notes": b_notes}),
-    }
+    raise NotImplementedError(
+        "state.audio_inputs is non-empty but src/s2s_harness/stt/ (Phase 6, "
+        "docs/BUILD_PLAN.md) is not implemented yet; dictated notes are "
+        "unsupported until the STT-* adapters land (see team_findings.md [T3])"
+    )
