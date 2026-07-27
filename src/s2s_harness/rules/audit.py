@@ -202,6 +202,15 @@ def _setup_and_consistency(state: EvaluationState) -> list[Finding]:
     # that is both short and mismatched produces exactly one finding, per
     # {EVAL-10} ("turns_short_and_mismatched": one error carrying both
     # facts, not two).
+    #
+    # INFERENCE, not spec text: {RULE-16}'s condition is literally
+    # `a.turns < 4 or b.turns < 4`, which assumes an int. `turns` is
+    # `int | None` on `SideObservation`. Treating `turns is None` as
+    # failing the minimum (rather than skipping the check) is a judgment
+    # call made here -- "the bar cannot be confirmed cleared if it was
+    # never recorded" -- not a literal reading of {RULE-16}. Do not "fix"
+    # this to skip `None` without checking whether that changes an
+    # existing fixture's expected findings first.
     turns_a, turns_b = a.turns, b.turns
     below_min = turns_a is None or turns_b is None or turns_a < 4 or turns_b < 4
     if below_min:
