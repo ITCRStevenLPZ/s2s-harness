@@ -1,0 +1,34 @@
+# Adversarial {EVAL-12}: the truly blank state -- the shape the bridge's
+# debounced POST /evaluate produces before a rater has typed anything.
+# `decide` must return overall=None and raise nothing (RULE-40, Step 2's
+# `picks.naturalness is None` branch). Per the ratified reconciliation note
+# under RULES_SPEC section 7 ({RULE-43}, Wave 2): the invariant "zero error
+# findings" is scoped to the flag/pick-derived checks in sections 4.4-4.6
+# only. NOTES_MISSING (section 4.2, unconditional) is *expected* to fire on
+# genuinely blank input and belongs in findings_include, not
+# findings_exclude -- do not paper over it with placeholder notes. See
+# _custom_checks in test_golden.py for the scoped-error-code assertion this
+# schema's findings_include/exclude keys cannot express precisely on their
+# own.
+id: empty_state
+mode: clips
+context: {}
+a: {}
+b: {}
+picks: {}
+expect:
+  verdict:
+    overall: null
+    driver: "—"
+    gated: false
+    gated_side: null
+  findings_include: [NOTES_MISSING]
+  findings_exclude:
+    - AUDIO_BOTH_GOOD_ILLEGAL
+    - AUDIO_PICK_CONTRADICTS
+    - UTILITY_PICK_CONTRADICTS
+    - OVERALL_PREFERS_GATED
+    - DIMENSIONS_CONTRADICT
+    - PREMISE_ACCEPTED
+  draft_contains:
+    - "Choose at least the Naturalness dimension to generate a draft."

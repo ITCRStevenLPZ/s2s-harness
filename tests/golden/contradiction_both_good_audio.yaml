@@ -1,0 +1,33 @@
+# Adversarial {EVAL-7}: AUDIO_BOTH_GOOD_ILLEGAL {RULE-19} fires whenever the
+# rater picks "Both Good" (Pick.TIE) for Audio Quality while either side
+# carries a threshold_audio flag -- per criteria/project-criteria.md "Audio
+# tolerance" {CRIT-5}: "Do not select Both Good for Audio Quality when
+# either side has noticeable background noise, clicks, cutoffs or similar."
+id: contradiction_both_good_audio
+mode: clips
+context:
+  prompt: "describe a good morning routine"
+  scenario_type: standard
+a:
+  notes: "Clip A was clean and steady throughout, no issues heard."
+  best: "clean delivery with no audio issues"
+  worst: "a little plain"
+b:
+  notes: "Clip B dio una respuesta útil pero tiene chasquidos audibles a lo largo de toda la respuesta."
+  best: "still a useful answer despite the noise"
+  worst: "audible clicks throughout the response"
+  threshold_audio: [clicks]
+picks: {naturalness: TIE, utility: A, audio: TIE, overall: A}
+expect:
+  verdict:
+    overall: A
+    driver: "Threshold — Audio Quality"
+    gated: true
+    gated_side: B
+  findings_include: [AUDIO_BOTH_GOOD_ILLEGAL]
+  findings_exclude: [OVERALL_PREFERS_GATED]
+  draft_contains:
+    - "has a clear issue that crosses the project's threshold"
+    - "so 'Both Good' is not appropriate here."
+  draft_excludes:
+    - "【"

@@ -1,0 +1,46 @@
+# Adversarial {EVAL-10}: turns below the 4-minimum AND mismatched between
+# sides must produce ONE finding carrying both facts (TURNS_BELOW_MIN, with
+# the appended "counts also differ" sentence per RULE-16), not two separate
+# findings -- TURNS_MISMATCH's own condition ("counts differ, both >= 4")
+# cannot fire when one side is below 4, so this is one error by
+# construction, not a special case. See _custom_checks in test_golden.py
+# for the exact-count/message assertion this schema's findings_include /
+# findings_exclude keys cannot express on their own.
+id: turns_short_and_mismatched
+mode: conversation
+context:
+  scenario: "casual catch-up about weekend plans"
+  scenario_type: standard
+  preflight:
+    headphones: true
+    panning_check: true
+    scenario_read: true
+    listened_isolated: true
+    equivalent_prompts: true
+    stayed_in_character: true
+    interruption_tested: true
+a:
+  notes: "La conversación con el Modelo A se sintió corta, terminó antes de lo esperado."
+  best: "warm tone for the few turns it got"
+  worst: "conversation ended before it really got going"
+  turns: 3
+  task_success: partial
+b:
+  notes: "Model B's conversation ran longer and covered more ground."
+  best: "sustained a natural back-and-forth for several turns"
+  worst: "a bit repetitive toward the end"
+  turns: 5
+  task_success: pass
+picks: {naturalness: B, utility: TIE, audio: TIE, overall: B}
+expect:
+  verdict:
+    overall: B
+    driver: "Naturalness / Engagement"
+    gated: false
+    gated_side: null
+  findings_include: [TURNS_BELOW_MIN]
+  findings_exclude: [TURNS_MISMATCH, TURNS_OK]
+  draft_contains:
+    - "I prefer Model B overall"
+  draft_excludes:
+    - "【"

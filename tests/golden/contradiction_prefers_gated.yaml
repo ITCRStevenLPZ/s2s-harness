@@ -1,0 +1,33 @@
+# Adversarial {EVAL-8}: OVERALL_PREFERS_GATED {RULE-21} fires as an error
+# when the rater's overall pick is the side that crossed the threshold
+# gate, per criteria/project-criteria.md {CRIT-4}: "A side that breaches
+# while the other is clean should not be preferred." picks.overall = "A"
+# here even though A is the gated (hallucinating) side.
+id: contradiction_prefers_gated
+mode: clips
+context:
+  prompt: "explain how a home water filter works"
+  scenario_type: standard
+a:
+  notes: "El Clip A sonó fluido, pero se inventó un dato que no tiene respaldo."
+  best: "confident, fluent delivery"
+  worst: "it invents a detail not supported by anything said"
+  threshold_utility: [hallucination]
+b:
+  notes: "Clip B stuck to accurate, verifiable information and explained it clearly."
+  best: "sticks to accurate, verifiable information"
+  worst: "a little dry in tone"
+picks: {naturalness: TIE, utility: TIE, audio: TIE, overall: A}
+expect:
+  verdict:
+    overall: B
+    driver: "Threshold — Utility"
+    gated: true
+    gated_side: A
+  findings_include: [OVERALL_PREFERS_GATED]
+  findings_exclude: [OVERALL_COHERENT, OVERALL_DIVERGES]
+  draft_contains:
+    - "Clip A has a clear issue that crosses the project's threshold — hallucination or invented facts — and a side with that kind of problem should not be preferred while the other one is clean."
+    - "Therefore, Clip B is the stronger fit for the project's North Star."
+  draft_excludes:
+    - "【"

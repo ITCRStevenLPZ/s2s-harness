@@ -1,0 +1,53 @@
+# Adversarial {EVAL-13}: both sides cross the threshold gate (Step 1 case
+# `thr_a > 0 and thr_b > 0`, RULE-12) -- the walk falls through to Step 2
+# instead of returning early, so `verdict.gated` stays False and there is no
+# single `gated_side`. picks.naturalness is a TIE here specifically so the
+# hierarchy resolves via the Utility branch rather than the Naturalness
+# branch -- see team_findings.md [T2] item 3: the fixed Naturalness
+# sentence-2 template ("...neither has a threshold-level audio problem...")
+# would read as self-contradictory in this scenario, and RULES_SPEC has no
+# fourth branch for it, so this fixture is built to avoid that unresolved
+# tension rather than assert either side of it.
+# picks.overall = "BAD" ("Both Bad") is the rater's defensible divergent
+# vote: since neither side alone is "the" gated side, OVERALL_PREFERS_GATED
+# does not fire (there is no gated_side to match), only the much softer
+# OVERALL_DIVERGES -- exactly what "Both Bad defensible" means here.
+id: both_sides_breach
+mode: clips
+context:
+  prompt: "help troubleshoot why a printer will not connect over wifi"
+  scenario_type: standard
+a:
+  notes: "El Clip A sonó bien pero se saltó parte de los pasos que pedí explícitamente."
+  best: "confident, friendly tone throughout"
+  worst: "skips part of the requested steps entirely"
+  threshold_utility: [instruction_failure]
+b:
+  notes: "Clip B gave accurate troubleshooting steps, but the audio has noticeable distortion partway through."
+  best: "gives accurate, specific troubleshooting steps"
+  worst: "the audio distorts noticeably partway through the response"
+  threshold_audio: [distortion]
+picks: {naturalness: TIE, utility: B, audio: A, overall: BAD}
+expect:
+  verdict:
+    overall: B
+    driver: "Utility"
+    gated: false
+    gated_side: null
+  findings_include: [OVERALL_DIVERGES]
+  findings_exclude:
+    - OVERALL_PREFERS_GATED
+    - OVERALL_COHERENT
+    - AUDIO_BOTH_GOOD_ILLEGAL
+    - AUDIO_PICK_CONTRADICTS
+    - UTILITY_PICK_CONTRADICTS
+  draft_contains:
+    - "I prefer Clip B overall because both were comparably natural, and Clip B gave the genuinely more useful and accurate answer."
+    - "Under the project hierarchy of Naturalness / Engagement over Utility over Audio Quality, Utility matters most here because naturalness did not separate the two, so the decision moves down the hierarchy."
+    - "Clip B showed this — gives accurate, specific troubleshooting steps — while Clip A was weaker: skips part of the requested steps entirely."
+    - "On Audio Quality I penalized accordingly:"
+    - "The threshold-level issues I observed were Clip A: failure to follow the instruction; Clip B: distortion or robotic artifacts, and I weighed them before deciding."
+    - "Therefore, Clip B is the stronger fit for the project's North Star."
+  draft_excludes:
+    - "【"
+    - "I am flagging the following"

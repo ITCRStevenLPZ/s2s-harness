@@ -1,16 +1,16 @@
 # Graph Report - s2s-harness  (2026-07-26)
 
 ## Corpus Check
-- 42 files · ~56,890 words
+- 54 files · ~83,814 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 462 nodes · 447 edges · 44 communities (36 shown, 8 thin omitted)
-- Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
+- 702 nodes · 989 edges · 52 communities (43 shown, 9 thin omitted)
+- Extraction: 90% EXTRACTED · 10% INFERRED · 0% AMBIGUOUS · INFERRED: 101 edges (avg confidence: 0.51)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `6ac2d6fc`
+- Built from commit: `0a550fac`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -58,35 +58,51 @@
 - [[_COMMUNITY_Community 40|Community 40]]
 - [[_COMMUNITY_Community 41|Community 41]]
 - [[_COMMUNITY_Community 43|Community 43]]
+- [[_COMMUNITY_Community 44|Community 44]]
+- [[_COMMUNITY_Community 45|Community 45]]
+- [[_COMMUNITY_Community 46|Community 46]]
+- [[_COMMUNITY_Community 47|Community 47]]
+- [[_COMMUNITY_Community 48|Community 48]]
+- [[_COMMUNITY_Community 49|Community 49]]
+- [[_COMMUNITY_Community 50|Community 50]]
+- [[_COMMUNITY_Community 51|Community 51]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `Team Findings: Wave 1` - 39 edges
-2. `Project criteria — source of truth` - 23 edges
-3. `2. Nodes` - 19 edges
-4. `5. `draft` — the justification builder` - 19 edges
-5. `Speech-to-text specification` - 18 edges
-6. `4. `audit` — findings` - 17 edges
-7. `S2S Arena Harness — project guidance` - 16 edges
-8. `Evaluation and regression specification` - 12 edges
-9. `Worked examples` - 11 edges
-10. `Build plan` - 11 edges
+1. `Team Findings: Wave 1` - 41 edges
+2. `SideObservation` - 34 edges
+3. `str` - 25 edges
+4. `EvaluationState` - 23 edges
+5. `Project criteria — source of truth` - 23 edges
+6. `Team Findings: Phase 3` - 22 edges
+7. `Verdict` - 21 edges
+8. `2. Nodes` - 19 edges
+9. `5. `draft` — the justification builder` - 19 edges
+10. `4. `audit` — findings` - 18 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `ErrorClusterEntry` --inherits--> `BaseModel`  [EXTRACTED]
-  src/s2s_harness/rules/catalog.py →   _Bridges community 29 → community 34_
+- `run_pipeline()` --calls--> `audit()`  [INFERRED]
+  tests/golden/_golden_lib.py → src/s2s_harness/rules/audit.py
+- `run_pipeline()` --calls--> `build_draft()`  [INFERRED]
+  tests/golden/_golden_lib.py → src/s2s_harness/rules/draft.py
+- `Finding` --uses--> `SideObservation`  [INFERRED]
+  tests/golden/_golden_lib.py → src/s2s_harness/models/state.py
+- `Any` --uses--> `SideObservation`  [INFERRED]
+  tests/golden/_golden_lib.py → src/s2s_harness/models/state.py
+- `EvaluationState` --uses--> `SideObservation`  [INFERRED]
+  tests/golden/_golden_lib.py → src/s2s_harness/models/state.py
 
 ## Import Cycles
 - None detected.
 
-## Communities (44 total, 8 thin omitted)
+## Communities (52 total, 9 thin omitted)
 
 ### Community 0 - "Community 0"
 Cohesion: 0.10
 Nodes (20): Agent roster, Deterministic effort calculation and delegation, Do not, Graph conventions, Graph freshness mandate (definition of done), Mandatory agent team communication protocol, Mandatory knowledge graph protocol (graphify), Model routing matrix (+12 more)
 
 ### Community 1 - "Community 1"
-Cohesion: 0.12
-Nodes (17): 4.1 Setup and consistency — conversation mode only, 4.1 Setup and consistency — conversation mode only {RULE-16}, 4.2 Evidence — both modes, 4.2 Evidence — both modes {RULE-17}, 4.3 Scenario inversion, 4.3 Scenario inversion {RULE-18}, 4.4 Audio, 4.4 Audio {RULE-19} (+9 more)
+Cohesion: 0.11
+Nodes (18): 4.1 Setup and consistency — conversation mode only, 4.1 Setup and consistency — conversation mode only {RULE-16}, 4.2 Evidence — both modes, 4.2 Evidence — both modes {RULE-17}, 4.3 Scenario inversion, 4.3 Scenario inversion {RULE-18}, 4.4 Audio, 4.4 Audio {RULE-19} (+10 more)
 
 ### Community 2 - "Community 2"
 Cohesion: 0.12
@@ -117,8 +133,8 @@ Cohesion: 0.13
 Nodes (14): Adversarial fixtures, Determinism test, Determinism test {EVAL-15}, Evaluation and regression specification, Golden fixtures, Regression policy, Regression policy {EVAL-14}, Required fixtures (+6 more)
 
 ### Community 9 - "Community 9"
-Cohesion: 0.11
-Nodes (19): 5. `draft` — the justification builder, Early returns, Early returns {RULE-25}, Sentence 1 — preference and primary reason, Sentence 1 — preference and primary reason {RULE-26}, Sentence 2 — hierarchy reference, Sentence 2 — hierarchy reference {RULE-27}, Sentence 3 — evidence from both sides (+11 more)
+Cohesion: 0.06
+Nodes (34): 1. Catalogues, 2. Normalization, 3. `decide` — the hierarchy walk, 5. `draft` — the justification builder, 6. `scan` — bilingual signal detection, 7. Invariants for the golden fixtures, Early returns, Early returns {RULE-25} (+26 more)
 
 ### Community 10 - "Community 10"
 Cohesion: 0.22
@@ -181,12 +197,12 @@ Cohesion: 0.50
 Nodes (3): Accuracy details, Constraints, What you are building
 
 ### Community 29 - "Community 29"
-Cohesion: 0.08
-Nodes (27): BaseModel, bool, EvaluationState, Finding, Picks, Preflight, Pydantic state schema for the S2S Arena harness.  Transcribed field-for-field fr, One recognized word with optional timing. STT_SPEC section 2. (+19 more)
+Cohesion: 0.06
+Nodes (76): BaseModel, Finding, build_initial_state(), load_fixture(), Shared golden-fixture loading and execution helpers.  Owned by T7-fixtures-adver, `EvaluationState` per docs/EVAL_SPEC.md's fixture schema.      Top-level `mode`, `EvaluationState` per docs/EVAL_SPEC.md's fixture schema.      Top-level `mode`, normalize -> decide -> audit -> build_draft, per GRAPH_SPEC section 2's     node (+68 more)
 
 ### Community 30 - "Community 30"
 Cohesion: 0.05
-Nodes (39): [lead] Baseline reconnaissance (pre-wave), [T1] CLI_SPEC nit fixed; [T1 -> T4-ci-dev] requesting the --version contract directly (SendMessage still unavailable to me), [T1] Confirmed T2's catalog.py already cites the RULE-n IDs I assigned, [T1] ID-scheme conventions adopted (stated at top of each file, per-file), [T1] Lead approved all three Phase-1 decisions; declining T2's RULES_SPEC wording-tightening suggestion, [T1 -> lead] BLOCKED on git commit/push — no Bash tool this session, cannot fabricate a SHA, [T1] No Bash tool in this session — cannot run `graphify update .`, [T1] Phase 1 complete — diff summary and rationale, awaiting lead review (+31 more)
+Nodes (41): [lead] Baseline reconnaissance (pre-wave), [lead] Two corrections to the record (self-reported, not deliverable-affecting), [T1] CLI_SPEC nit fixed; [T1 -> T4-ci-dev] requesting the --version contract directly (SendMessage still unavailable to me), [T1] Confirmed T2's catalog.py already cites the RULE-n IDs I assigned, [T1] ID-scheme conventions adopted (stated at top of each file, per-file), [T1] Lead approved all three Phase-1 decisions; declining T2's RULES_SPEC wording-tightening suggestion, [T1 -> lead] BLOCKED on git commit/push — no Bash tool this session, cannot fabricate a SHA, [T1 -> lead] Inconsistency fixed; STILL BLOCKED on commit/push — restating plainly, this is not evasion (+33 more)
 
 ### Community 31 - "Community 31"
 Cohesion: 0.22
@@ -201,8 +217,8 @@ Cohesion: 0.18
 Nodes (10): 1. Deployment target, 2. Network posture, 3. Authentication, 4. Secrets, 5. IAM, 6. Supply chain, 7. Privacy, 8. What is still deliberately absent (+2 more)
 
 ### Community 34 - "Community 34"
-Cohesion: 0.15
-Nodes (14): ErrorClusterKey, Mode, _clusters_for(), ErrorClusterEntry, ModeProfile, profile_for(), Rules catalogues: the closed vocabulary of error clusters and threshold breaches, One row of a threshold catalogue (utility or audio).      Threshold tables in RU (+6 more)
+Cohesion: 0.29
+Nodes (6): bool, The only sanctioned way to populate the derived fields.          For use by `rul, The only sanctioned way to populate the derived fields.          For use by `rul, The only sanctioned way to populate the derived fields.          For use by `rul, bool, str
 
 ### Community 35 - "Community 35"
 Cohesion: 0.33
@@ -217,28 +233,56 @@ Cohesion: 0.29
 Nodes (6): Cross-package invariants that only a test can enforce.  CLAUDE.md design rule 1, `rules.catalog.Mode` and `models.state.Mode` must never drift apart.      Both p, `rules.catalog.Mode` and `models.state.Mode` must never drift apart.      Both p, `models.state`'s hardcoded fail-closed default key sets must never     drift fro, test_catalogue_key_defaults_identical_across_layers(), test_mode_literal_identical_across_layers()
 
 ### Community 43 - "Community 43"
+Cohesion: 0.20
+Nodes (31): EvaluationState, _audio(), audit(), _error_clusters(), _evidence(), _finding(), _joined_clusters(), _joined_thresholds() (+23 more)
+
+### Community 44 - "Community 44"
+Cohesion: 0.15
+Nodes (15): ErrorClusterKey, Mode, _clusters_for(), ErrorClusterEntry, ModeProfile, profile_for(), Rules catalogues: the closed vocabulary of error clusters and threshold breaches, One row of a threshold catalogue (utility or audio).      Threshold tables in RU (+7 more)
+
+### Community 45 - "Community 45"
 Cohesion: 0.12
-Nodes (15): 1. Catalogues, 2. Normalization, 3. `decide` — the hierarchy walk, 6. `scan` — bilingual signal detection, 7. Invariants for the golden fixtures, Error clusters — shared, Error clusters — shared {RULE-1}, Rules specification (+7 more)
+Nodes (15): Correction carried from reconnaissance, Current Status, Goal, Ground rules for every teammate, Non-negotiable design rules (from CLAUDE.md), Phase A: Close the spec gaps [T1] — blocks others, do first, Phase B: Fixtures [T2], Phase C: normalize + decide [T3] (+7 more)
+
+### Community 46 - "Community 46"
+Cohesion: 0.09
+Nodes (22): [lead] Carried over from Wave 1, [lead] Reconnaissance corrections, [T1] CONFLICT RESOLVED — @T2-fixtures @T4-audit — `{RULE-43}` vs `NOTES_MISSING`, RULES_SPEC/EVAL_SPEC now 1.2.0, [T1] CONFLICT RESOLVED — @T3-normalize-decide's `{pick}` vs `{RULE-41}` purity, [T1] Gap 2 CLOSED — Step 2 hierarchy-walk trace strings (RULES_SPEC §3, still under `{RULE-15}`), [T1] Gap 3 CLOSED — both-sides-breach trace (RULES_SPEC §3, `{RULE-12}`), [T1] Gap 4 CLOSED — @T4-audit and @T2-fixtures, `Finding.label` (RULES_SPEC new §4.9, new `{RULE-46}`), [T1] Gap 7 (new, surfaced by T3) CLOSED — `joined()` list-join format, new `{RULE-47}` (+14 more)
+
+### Community 48 - "Community 48"
+Cohesion: 0.09
+Nodes (52): _artifact_noun(), build_draft(), _clusters_display(), frag(), gap(), _interaction_noun(), _join_english(), _joined_threshold() (+44 more)
+
+### Community 49 - "Community 49"
+Cohesion: 0.19
+Nodes (15): _compile(), _entry(), _flag_already_set(), _mode_allows(), Bilingual signal detection: `scan(state) -> list[Suggestion]`.  Implements `docs, {RULE-36}: "a suggestion is produced only when the corresponding     flag is cur, {RULE-36}: "a suggestion is produced only when the corresponding     flag is cur, Error-cluster catalogue keys are mode-scoped (RULES_SPEC section 1     `Modes` c (+7 more)
+
+### Community 50 - "Community 50"
+Cohesion: 0.14
+Nodes (13): 4.1 Setup and consistency — conversation mode only (`{RULE-16}`), 4.2 Evidence — both modes (`{RULE-17}`), 4.3 Scenario inversion (`{RULE-18}`), 4.4 Audio (`{RULE-19}`), 4.5 Utility (`{RULE-20}`), 4.6 Overall coherence (`{RULE-21}`), 4.7 Error clusters (`{RULE-22}`), 4.8 Skip (`{RULE-23}`) (+5 more)
+
+### Community 51 - "Community 51"
+Cohesion: 0.13
+Nodes (20): fixture_paths(), All golden fixtures, sorted for a deterministic collection order., All golden fixtures, sorted for a deterministic collection order., _check_draft(), _check_findings(), _check_verdict(), _custom_checks(), _fixture_id() (+12 more)
 
 ## Knowledge Gaps
-- **313 isolated node(s):** `$schema`, `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS`, `defaultMode`, `PreToolUse`, `superpowers@claude-plugins-official` (+308 more)
+- **368 isolated node(s):** `$schema`, `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS`, `defaultMode`, `PreToolUse`, `superpowers@claude-plugins-official` (+363 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **8 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **9 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Rules specification` connect `Community 43` to `Community 1`, `Community 9`?**
-  _High betweenness centrality (0.009) - this node is a cross-community bridge._
-- **Why does `5. `draft` — the justification builder` connect `Community 9` to `Community 43`?**
-  _High betweenness centrality (0.007) - this node is a cross-community bridge._
+- **Why does `SideObservation` connect `Community 29` to `Community 48`, `Community 49`, `Community 34`, `Community 43`?**
+  _High betweenness centrality (0.036) - this node is a cross-community bridge._
+- **Why does `str` connect `Community 48` to `Community 29`?**
+  _High betweenness centrality (0.020) - this node is a cross-community bridge._
+- **Why does `run_pipeline()` connect `Community 29` to `Community 48`, `Community 51`, `Community 43`?**
+  _High betweenness centrality (0.018) - this node is a cross-community bridge._
+- **Are the 27 inferred relationships involving `SideObservation` (e.g. with `Finding` and `Pattern`) actually correct?**
+  _`SideObservation` has 27 INFERRED edges - model-reasoned connections that need verification._
+- **Are the 3 inferred relationships involving `str` (e.g. with `EvaluationState` and `SideObservation`) actually correct?**
+  _`str` has 3 INFERRED edges - model-reasoned connections that need verification._
+- **Are the 20 inferred relationships involving `EvaluationState` (e.g. with `Finding` and `Pattern`) actually correct?**
+  _`EvaluationState` has 20 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `$schema`, `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS`, `defaultMode` to the rest of the system?**
-  _345 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `Community 0` be split into smaller, more focused modules?**
-  _Cohesion score 0.09523809523809523 - nodes in this community are weakly interconnected._
-- **Should `Community 1` be split into smaller, more focused modules?**
-  _Cohesion score 0.11764705882352941 - nodes in this community are weakly interconnected._
-- **Should `Community 2` be split into smaller, more focused modules?**
-  _Cohesion score 0.11764705882352941 - nodes in this community are weakly interconnected._
-- **Should `Community 3` be split into smaller, more focused modules?**
-  _Cohesion score 0.07407407407407407 - nodes in this community are weakly interconnected._
+  _463 weakly-connected nodes found - possible documentation gaps or missing edges._

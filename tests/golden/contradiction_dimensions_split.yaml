@@ -1,0 +1,36 @@
+# Adversarial {EVAL-9}: DIMENSIONS_CONTRADICT {RULE-21} fires when the
+# rater's overall pick contradicts >= 2 of the 3 dimension picks, with no
+# threshold gate to justify the reversal. Here B wins Naturalness and
+# Utility (2 of 3), Audio is a TIE, yet the rater's overall pick is A --
+# a logically incoherent vote per criteria/project-criteria.md {CRIT-10},
+# "A justification that contradicts the dimension picks."
+# Note: build_draft always follows verdict.overall (computed from the
+# hierarchy walk, here B via the Naturalness pick), not the rater's raw
+# overall pick -- the contradiction itself is reported as a Finding, not
+# rewritten into the draft.
+id: contradiction_dimensions_split
+mode: clips
+context:
+  prompt: "recommend a beginner recipe for a weeknight dinner"
+  scenario_type: standard
+a:
+  notes: "Clip A gave a confident, direct answer but sounded a bit like a manual."
+  best: "confident and direct answer"
+  worst: "reads a little like an instruction manual"
+b:
+  notes: "El Clip B sonó más cálido y natural, y la receta que dio era más precisa y fácil de seguir."
+  best: "warmer delivery and a more accurate, easier-to-follow recipe"
+  worst: "slightly longer than necessary"
+picks: {naturalness: B, utility: B, audio: TIE, overall: A}
+expect:
+  verdict:
+    overall: B
+    driver: "Naturalness / Engagement"
+    gated: false
+    gated_side: null
+  findings_include: [DIMENSIONS_CONTRADICT]
+  findings_exclude: [OVERALL_COHERENT, OVERALL_PREFERS_GATED]
+  draft_contains:
+    - "I prefer Clip B overall because it better matches the project's North Star of a spontaneous, natural, aesthetically pleasing response."
+  draft_excludes:
+    - "【"

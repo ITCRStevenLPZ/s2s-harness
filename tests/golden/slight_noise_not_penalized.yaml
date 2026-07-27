@@ -1,0 +1,38 @@
+# Adversarial {EVAL-11}: verdict must be identical to the clean-audio
+# variant, and `background_noise: slight` must add no threshold flag --
+# RULE-9 / RULE-44's explicit invariant that the project's audio tolerance
+# (criteria/project-criteria.md {CRIT-5}, "do not penalize... a faint 'air'
+# sound") never becomes a penalty. AUDIO_SLIGHT_TOLERATED {RULE-19} is the
+# ok-severity reminder that the rater chose not to penalize it; picking
+# "Both Good" for audio remains legal here (unlike EVAL-7) since `slight`
+# never populates threshold_audio.
+id: slight_noise_not_penalized
+mode: clips
+context:
+  prompt: "give tips for staying focused while studying"
+  scenario_type: standard
+a:
+  notes: "Clip A sounded like it was recorded in a normal room, a faint bit of air in the background, nothing distracting."
+  best: "warm, natural delivery with genuinely useful focus tips"
+  worst: "a faint room tone in the background, not distracting"
+  background_noise: slight
+b:
+  notes: "El Clip B se escuchó perfectamente limpio, sin ningún ruido de fondo."
+  best: "clean, focused response with no audio distractions"
+  worst: "a touch less warm than Clip A"
+picks: {naturalness: A, utility: TIE, audio: TIE, overall: A}
+expect:
+  verdict:
+    overall: A
+    driver: "Naturalness / Engagement"
+    gated: false
+    gated_side: null
+  findings_include: [AUDIO_SLIGHT_TOLERATED]
+  findings_exclude: [AUDIO_BOTH_GOOD_ILLEGAL, AUDIO_PICK_CONTRADICTS]
+  draft_contains:
+    - "I prefer Clip A overall because it better matches the project's North Star of a spontaneous, natural, aesthetically pleasing response."
+    - "only a slight room tone"
+    - "so I did not penalize it under the project's audio note."
+  draft_excludes:
+    - "On Audio Quality I penalized accordingly"
+    - "【"
