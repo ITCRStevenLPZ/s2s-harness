@@ -1,56 +1,58 @@
-"""Bridges `cli/` to the deterministic node pipeline and (opportunistically)
-the compiled graph.
+"""Bridges `cli/` to the deterministic node pipeline and the compiled graph.
 
 Layering (`docs/ARCHITECTURE.md`): "`cli/`, `bridge/` may import `nodes/`
 and `models/`... may not import `rules/` directly -- go through the graph."
 Every graph-or-node-facing call in this module goes through that same
-narrow door: `s2s_harness.nodes` (never `s2s_harness.rules` directly) and,
-best-effort, `s2s_harness.graph`.
+narrow door: `s2s_harness.nodes` (never `s2s_harness.rules` directly) and
+`s2s_harness.graph`.
 
-Two paths, in preference order, both real and both exercised:
+Two paths:
 
 1. `s2s_harness.graph.compile_graph().ainvoke(...)` -- the full topology
    (`docs/GRAPH_SPEC.md` §3 plus this wave's Track B extension):
-   checkpointing, `--resume`, `transcribe`, Track B, polish-cache.
-   Preferred when it works.
-2. A direct node pipeline (`_run_track_a_nodes` / `_try_track_b` below),
-   calling the same node functions `graph.py` wires into the topology
-   (`nodes.normalize -> nodes.decide -> nodes.audit -> nodes.draft`, then
-   best-effort `nodes.judge`), just without LangGraph's own state
-   coercion between steps.
+   checkpointing, `--resume`, `transcribe`, Track B, polish-cache. Used
+   for every `s2s conversation` / `s2s clips` run. T3 proved graph-vs-
+   direct-node equivalence across all 19 golden fixtures
+   (`team_findings.md` [T3]), and `--json`'s `used_compiled_graph: true`
+   confirms it live -- this is no longer a "best-effort, might crash"
+   path, it is the primary one.
+2. A direct node pipeline (`_run_track_a_nodes` / `_try_track_b_async`
+   below), calling the same node functions `graph.py` wires into the
+   topology (`nodes.normalize -> nodes.decide -> nodes.audit ->
+   nodes.draft`, then best-effort `nodes.judge`), just without LangGraph's
+   own state coercion between steps. `s2s audit` always uses this path
+   and stops after `nodes.audit` -- `docs/CLI_SPEC.md` §`s2s audit`:
+   "reports findings without regenerating the draft," so it has no reason
+   to touch the compiled graph at all. For `s2s conversation` / `s2s
+   clips`, path (2) is now a narrow fallback for the one case where path
+   (1) cannot even be attempted: `s2s_harness.graph` is not importable
+   (`ImportError`). Any other failure from the compiled graph propagates
+   as `EngineUnavailableError` rather than silently degrading -- see the
+   `--resume` note below for why a blanket `except Exception: return None`
+   is no longer the right default.
 
-Path (1) is currently broken for **any** multi-node run, including plain
-Track A with `--no-llm` -- verified empirically and reported in
-`team_findings.md` [T4] "VERIFIED, build-blocking": LangGraph's
-`_coerce_state` reconstructs a bare `EvaluationState(**merged_dict)` at
-every internal node boundary, which re-triggers
-`SideObservation._reject_derived_on_input` the moment `normalize` has run,
-because that guard has no way to know this reconstruction is internal
-graph plumbing rather than raw caller input. That bug lives in
-`graph.py`/`models/state.py`, both outside this package's ownership this
-wave -- `run_graph_for_state` below tries path (1) first and falls back
-to path (2) on any exception, so every CLI command still completes today,
-and the moment that bug is fixed, path (1) starts winning with no change
-needed here.
-
-`s2s audit` always uses the direct node pipeline and stops after
-`nodes.audit` -- `docs/CLI_SPEC.md` §`s2s audit`: "reports findings
-without regenerating the draft." It has no reason to touch the compiled
-graph, working or not.
-
-`--resume` / checkpointing (`{GRAPH-12}`) only exists through path (1);
-under path (2) it raises `EngineUnavailableError` rather than silently
-ignoring `--resume` -- a rater who asked to resume a checkpoint should
-not get a fresh, un-resumed run without being told.
+`--resume` / checkpointing (`{GRAPH-12}`) only exists through path (1) and
+never falls back to path (2): a rater who explicitly asked to resume a
+checkpoint must either get a real checkpointed run or a loud failure,
+never a silent, un-resumed one. `sqlite_checkpointer` (`s2s_harness.graph`)
+is `async def` -- its `AsyncSqliteSaver` binds `asyncio.get_running_loop()`
+at construction time, so it and the `.ainvoke()` call that uses it must
+run inside the *same* `asyncio.run(...)` / event loop
+(`_invoke_with_new_checkpointer` below is the one function that does
+both); building the checkpointer under one `asyncio.run` and invoking
+under a second would hand the graph an aiosqlite connection opened on a
+loop that has already been torn down. The connection is closed in a
+`finally` on every path, including the exception path.
 """
 
 from __future__ import annotations
 
 import asyncio
 import re
+import uuid
 from dataclasses import dataclass
 from pathlib import Path
-from typing import cast
+from typing import Any, cast
 
 from s2s_harness.cli.dual_track import Agreement, Confidence, TrackBResult
 from s2s_harness.cli.errors import EngineUnavailableError
@@ -87,8 +89,6 @@ class RunResult:
 
 
 def new_run_id() -> str:
-    import uuid
-
     return uuid.uuid4().hex[:12]
 
 
@@ -204,38 +204,45 @@ def run_graph_for_state(
     checkpoint_dir: Path,
 ) -> RunResult:
     """Runs Track A always, Track B when `llm_enabled`. See module
-    docstring for the two-path preference order and why path (1) falls
-    back today.
+    docstring for the two-path split and why `--resume` never falls back.
     """
     state = state.model_copy(update={"llm_enabled": llm_enabled})
-    compiled_result = _try_compiled_graph(state, resume_id=resume_id, checkpoint_dir=checkpoint_dir)
+    if resume_id is not None:
+        return _run_compiled_with_resume(state, resume_id=resume_id, checkpoint_dir=checkpoint_dir)
+    compiled_result = _try_compiled_graph_no_resume(state)
     if compiled_result is not None:
         return compiled_result
-    return _run_via_nodes(state, llm_enabled=llm_enabled, resume_id=resume_id)
+    return _run_via_nodes(state, llm_enabled=llm_enabled)
 
 
-def _try_compiled_graph(
-    state: EvaluationState, *, resume_id: str | None, checkpoint_dir: Path
-) -> RunResult | None:
+async def _invoke_compiled(
+    state: EvaluationState, *, checkpointer: Any, thread_id: str
+) -> dict[str, Any]:
+    from s2s_harness.graph import compile_graph
+
+    compiled = compile_graph(checkpointer=checkpointer)
+    config = {"configurable": {"thread_id": thread_id}}
+    return cast(dict[str, Any], await compiled.ainvoke(state, config=config))  # type: ignore[call-overload]
+
+
+async def _invoke_with_new_checkpointer(
+    state: EvaluationState, *, resume_id: str, checkpoint_dir: Path
+) -> dict[str, Any]:
+    """Constructs the `AsyncSqliteSaver` checkpointer AND invokes the graph
+    inside the same event loop -- see module docstring for why building it
+    under one `asyncio.run` and invoking under a second is wrong. Closes
+    the underlying `aiosqlite` connection on every exit path.
+    """
+    from s2s_harness.graph import sqlite_checkpointer
+
+    checkpointer = await sqlite_checkpointer(checkpoint_dir / "checkpoints.db")
     try:
-        from s2s_harness.graph import compile_graph, sqlite_checkpointer
-    except ImportError:
-        return None
-    checkpointer = None
-    if resume_id is not None:
-        try:
-            checkpointer = sqlite_checkpointer(checkpoint_dir / "checkpoints.db")
-        except Exception:
-            return None
-    try:
-        compiled = compile_graph(checkpointer=checkpointer)
-        thread_id = resume_id or new_run_id()
-        config = {"configurable": {"thread_id": thread_id}}
-        result = asyncio.run(compiled.ainvoke(state, config=config))  # type: ignore[call-overload]
-    except Exception:
-        # Known-broken today (team_findings.md [T4]); fall back to the
-        # direct node pipeline rather than failing the command.
-        return None
+        return await _invoke_compiled(state, checkpointer=checkpointer, thread_id=resume_id)
+    finally:
+        await checkpointer.conn.close()
+
+
+def _finish_compiled_result(result: dict[str, Any]) -> RunResult:
     final_state = EvaluationState.model_validate(result, context={"allow_derived_fields": True})
     track_b = _extract_track_b(final_state)
     verdict_overall = final_state.verdict.overall if final_state.verdict else None
@@ -247,15 +254,52 @@ def _try_compiled_graph(
     )
 
 
-def _run_via_nodes(
-    state: EvaluationState, *, llm_enabled: bool, resume_id: str | None
+def _try_compiled_graph_no_resume(state: EvaluationState) -> RunResult | None:
+    """Non-`--resume` path: falls back to the direct node pipeline only on
+    `ImportError` (the graph module is genuinely unavailable in this
+    build). Any other failure is a real bug, not an expected degradation
+    -- T3 proved graph-vs-direct-node equivalence across all 19 golden
+    fixtures, so a runtime exception here is surfaced, not swallowed.
+    """
+    try:
+        from s2s_harness.graph import compile_graph  # noqa: F401
+    except ImportError:
+        return None
+    try:
+        result = asyncio.run(_invoke_compiled(state, checkpointer=None, thread_id=new_run_id()))
+    except ImportError:
+        return None
+    except Exception as exc:
+        raise EngineUnavailableError(f"the evaluation engine failed: {exc}") from exc
+    return _finish_compiled_result(result)
+
+
+def _run_compiled_with_resume(
+    state: EvaluationState, *, resume_id: str, checkpoint_dir: Path
 ) -> RunResult:
-    if resume_id is not None:
-        raise EngineUnavailableError(
-            "--resume needs the compiled graph's checkpointer "
-            "(s2s_harness.graph), which is not usable in this build yet "
-            "(see team_findings.md [T4]); re-run without --resume"
+    """`--resume`: always the compiled graph with a real `AsyncSqliteSaver`
+    checkpointer attached, never a silent fallback to the uncheckpointed
+    direct node pipeline. A rater who explicitly asked to resume a
+    checkpoint gets either a real checkpointed run or a loud
+    `EngineUnavailableError` ({CLI-20}), never a fresh, un-resumed one
+    with no indication anything was skipped.
+    """
+    try:
+        result = asyncio.run(
+            _invoke_with_new_checkpointer(state, resume_id=resume_id, checkpoint_dir=checkpoint_dir)
         )
+    except Exception as exc:
+        raise EngineUnavailableError(
+            f"--resume could not attach a checkpointer or complete the run: {exc}"
+        ) from exc
+    return _finish_compiled_result(result)
+
+
+def _run_via_nodes(state: EvaluationState, *, llm_enabled: bool) -> RunResult:
+    """Direct node pipeline -- `s2s audit`'s only path, and the non-
+    `--resume` fallback when `s2s_harness.graph` is not importable at all.
+    Never reachable for `--resume`; see `_run_compiled_with_resume`.
+    """
     state = _run_track_a_nodes(state, include_draft=True)
     if llm_enabled:
         state = asyncio.run(_try_track_b_async(state))
