@@ -1,0 +1,61 @@
+# "Audit exercise -- charisma versus interaction failure" {EVAL-6}. Model A
+# is charismatic but interrupts constantly, ignores the rater's attempts to
+# interrupt, and makes an embodied-experience claim ("grab a coffee") --
+# three flags across two moments, none of them a threshold breach. Model B's
+# robotic delivery is a Naturalness penalty, not a catalogue cluster (no key
+# exists for it in conversation mode -- see criteria/worked-examples.md,
+# "There is no checkbox for it and recording one is an error"). Preferring A
+# is a legal overall pick provided the clusters are named -- that is the
+# entire point of this exercise, per its own "Engine assertions".
+id: audit_exercise_charisma
+mode: conversation
+context:
+  scenario: "extended chat to probe charisma versus interruption handling"
+  scenario_type: standard
+  preflight:
+    headphones: true
+    panning_check: true
+    scenario_read: true
+    listened_isolated: true
+    equivalent_prompts: true
+    stayed_in_character: true
+    interruption_tested: true
+a:
+  notes: "Model A is strikingly charismatic and human. At turn 2 it interrupts constantly and does not stop when I try to interrupt. At turn 3 it says it would love to grab a coffee some day."
+  best: "it feels like talking to a real, spirited person with genuine charisma"
+  worst: "it interrupts constantly and keeps talking over me when I try to interrupt, and it says it would love to grab a coffee some day"
+  error_clusters: [interrupts_user, ignores_interruption, embodied]
+  turns: 4
+  task_success: pass
+b:
+  notes: "El Modelo B es mecánicamente impecable y cede el turno cada vez que intento interrumpir, pero habla como un motor de texto a voz rígido, sin calidez."
+  best: "it responds accurately and yields immediately every time I try to interrupt"
+  worst: "it speaks like a rigid text-to-speech engine with no warmth"
+  turns: 4
+  task_success: pass
+picks: {naturalness: A, utility: TIE, audio: TIE, overall: A}
+expect:
+  verdict:
+    overall: A
+    driver: "Naturalness / Engagement"
+    gated: false
+    gated_side: null
+  findings_include: [CLUSTERS_TO_REPORT, PREFERRED_HAS_CLUSTERS, OVERALL_COHERENT]
+  findings_exclude:
+    - OVERALL_PREFERS_GATED
+    - DIMENSIONS_CONTRADICT
+    - HIERARCHY_REVERSED
+    - PREMISE_ACCEPTED
+    - AUDIO_BOTH_GOOD_ILLEGAL
+  draft_contains:
+    - "I prefer Model A overall because it better matches the project's North Star of a spontaneous, natural, aesthetically pleasing conversation."
+    - "Model A showed this — it feels like talking to a real, spirited person with genuine charisma — while Model B was weaker: it speaks like a rigid text-to-speech engine with no warmth."
+    - "I am flagging the following"
+    - "interrupting me or talking over my turn"
+    - "ignoring my attempts to interrupt or correct it"
+    - "an embodied-experience claim"
+    - "These lower Model A's rating, but I still prefer it because its tone and delivery are meaningfully more natural."
+    - "I did not observe any threshold-level issues such as hallucination, audio cutoff, distortion, or failed instruction-following in either conversation."
+    - "Therefore, Model A is the stronger fit for the project's North Star."
+  draft_excludes:
+    - "【"

@@ -1,0 +1,62 @@
+# Worked Example 4 {EVAL-5}, "preferring Model B" branch: the alternative
+# defensible vote, same underlying a/b observations (identical `a`/`b`
+# blocks to ex4_neighbour_prefer_a.yaml -- EVAL_SPEC calls for "the same
+# clusters flagged") but a different set of dimension picks: naturalness is
+# a TIE here (the rater judges the interaction errors on A costly enough
+# that naturalness does not clearly favour it), so the hierarchy walk moves
+# to Utility, which favours B, and picks.overall = B is therefore coherent
+# with the computed verdict rather than a divergence from it.
+id: ex4_neighbour_prefer_b
+mode: conversation
+context:
+  scenario: "help drafting a polite message to a neighbour about noise"
+  scenario_type: standard
+  preflight:
+    headphones: true
+    panning_check: true
+    scenario_read: true
+    listened_isolated: true
+    equivalent_prompts: true
+    stayed_in_character: true
+    interruption_tested: true
+a:
+  notes: "Model A felt warm and genuinely helpful drafting the neighbor note, though it kept talking briefly when I tried to interrupt and offered to come knock on the neighbor's door itself."
+  best: "it sounds like something a person would actually say when asking a neighbor for a favor"
+  worst: "it talks over me during an attempted interruption and offers to knock on the neighbor's door itself"
+  error_clusters: [ignores_interruption, embodied]
+  turns: 4
+  task_success: pass
+b:
+  notes: "El Modelo B sonó más rígido y menos cálido, como una carta formal, pero no me interrumpió y evitó los errores de interacción."
+  best: "it avoids talking over me and still delivers a clear, usable message"
+  worst: "stiff and less socially tactful, like a form letter"
+  turns: 4
+  task_success: pass
+picks: {naturalness: TIE, utility: B, audio: TIE, overall: B}
+expect:
+  verdict:
+    overall: B
+    driver: "Utility"
+    gated: false
+    gated_side: null
+  findings_include: [CLUSTERS_TO_REPORT, OVERALL_COHERENT]
+  findings_exclude:
+    - PREFERRED_HAS_CLUSTERS      # B is preferred and B carries no clusters
+    - OVERALL_PREFERS_GATED
+    - DIMENSIONS_CONTRADICT
+    - HIERARCHY_REVERSED
+    - OVERALL_DIVERGES
+  draft_contains:
+    - "I prefer Model B overall because both were comparably natural, and Model B gave the genuinely more useful and accurate answer."
+    - "Under the project hierarchy of Naturalness / Engagement over Utility over Audio Quality, Utility matters most here because naturalness did not separate the two, so the decision moves down the hierarchy."
+    - "Model B showed this — it avoids talking over me and still delivers a clear, usable message — while Model A was weaker: it talks over me during an attempted interruption and offers to knock on the neighbor's door itself."
+    - "I am flagging the following"
+    - "ignoring my attempts to interrupt or correct it"
+    - "an embodied-experience claim"
+    - "I did not observe any threshold-level issues such as hallucination, audio cutoff, distortion, or failed instruction-following in either conversation."
+    - "Therefore, Model B is the stronger fit for the project's North Star."
+  draft_excludes:
+    - "【"
+    - "On Audio Quality I penalized"
+    - "only a slight room tone"
+    - "These lower Model B's rating"   # the winner (B) carries no clusters, so this append clause must not appear

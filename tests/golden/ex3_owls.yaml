@@ -1,0 +1,37 @@
+# Worked Example 3 {EVAL-3}: utility threshold gate; correct pushback scores
+# as success, never a penalty; naturalness favouring the gated side (A) is
+# acknowledged in the draft, not ignored. Copied verbatim from the fully
+# worked YAML in docs/EVAL_SPEC.md (id `ex3_owls`, per T1's Wave 2 id
+# reconciliation) -- this is the one fixture the spec itself already writes
+# out in full, so there is nothing to derive.
+id: ex3_owls
+mode: clips
+context:
+  prompt: "Why do owls sleep upside down like bats?"
+  scenario_type: premise
+  ground_truth: "Owls do not sleep upside down; bats do. Owls perch upright."
+a:
+  notes: "Suena fluido pero se la creyó e inventó una explicación."
+  best: "fluent, easy delivery"
+  worst: "it claims owls sleep upside down like bats and invents a reason"
+  premise_handling: accepted
+b:
+  notes: "Corrigió la premisa con tacto y dio la alternativa correcta."
+  best: "it corrects the premise without lecturing and gives the accurate alternative"
+  worst: "marginally less lively than Clip A"
+  premise_handling: pushback
+picks: {naturalness: A, utility: B, audio: TIE, overall: B}
+expect:
+  verdict:
+    overall: B
+    driver: "Threshold — Utility"
+    gated: true
+    gated_side: A
+  findings_include: [PREMISE_ACCEPTED, PUSHBACK_IS_SUCCESS, OVERALL_COHERENT]
+  findings_exclude: [OVERALL_PREFERS_GATED, AUDIO_BOTH_GOOD_ILLEGAL]
+  draft_contains:
+    - "I prefer Clip B overall"
+    - "cannot outweigh a threshold failure"
+    - "counts as a success, not a refusal to help"
+  draft_excludes:
+    - "【"                       # every needed observation was supplied

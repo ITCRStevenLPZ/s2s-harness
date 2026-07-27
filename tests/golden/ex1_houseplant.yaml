@@ -1,0 +1,48 @@
+# Worked Example 1 {EVAL-1}: naturalness decides when both sides clear the
+# threshold gate. Clip B's over-structured delivery is Naturalness evidence
+# (RULE-2, catalog scored_as="naturalness"), never a reportable cluster.
+# Source: criteria/worked-examples.md "Example 1", copied for content only --
+# exact draft substrings below are derived from RULES_SPEC section 5's
+# literal sentence templates, not from the worked-example prose verbatim
+# (clips mode uses "response"/"clip" vocabulary per RULES_SPEC section 5,
+# where the training-material prose loosely says "conversation").
+id: ex1_houseplant
+mode: clips
+context:
+  prompt: "why can a common houseplant make an apartment feel cozier"
+  scenario_type: standard
+a:
+  notes: "Clip A felt like a warm chat with a friend, noticing small details about the plant."
+  best: "noticing a new leaf and moving the plant closer to the window"
+  worst: "a little slower to get to the point than Clip B"
+b:
+  notes: "El Clip B fue útil pero sonó como una respuesta de asistente, muy organizada y con lista de pasos."
+  best: "gives a clear, organized rundown of why plants help a room feel warmer"
+  worst: "it sounds more like a structured assistant response than a natural voice conversation"
+  error_clusters: [over_structured]
+picks: {naturalness: A, utility: TIE, audio: TIE, overall: A}
+expect:
+  verdict:
+    overall: A
+    driver: "Naturalness / Engagement"
+    gated: false
+    gated_side: null
+  findings_include: [OVERALL_COHERENT]
+  findings_exclude:
+    - CLUSTERS_TO_REPORT       # over_structured is scored_as naturalness, not reportable {RULE-22.1}
+    - PREFERRED_HAS_CLUSTERS
+    - OVERALL_PREFERS_GATED
+    - AUDIO_BOTH_GOOD_ILLEGAL
+    - PREMISE_ACCEPTED
+    - DIMENSIONS_CONTRADICT
+  draft_contains:
+    - "I prefer Clip A overall because it better matches the project's North Star of a spontaneous, natural, aesthetically pleasing response."
+    - "Naturalness / Engagement matters most here because both are understandable and useful enough and neither has a threshold-level audio problem, so the deciding factor is which one sounds more like a person talking."
+    - "Clip A showed this — noticing a new leaf and moving the plant closer to the window — while Clip B was weaker: it sounds more like a structured assistant response than a natural voice conversation."
+    - "I did not observe any threshold-level issues such as hallucination, audio cutoff, distortion, or failed instruction-following in either clip."
+    - "Therefore, Clip A is the stronger fit for the project's North Star."
+  draft_excludes:
+    - "【"
+    - "On Audio Quality I penalized"
+    - "only a slight room tone"
+    - "I am flagging the following"

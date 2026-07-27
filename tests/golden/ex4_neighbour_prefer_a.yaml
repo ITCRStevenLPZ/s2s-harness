@@ -1,0 +1,64 @@
+# Worked Example 4 {EVAL-4}, "preferring Model A" branch: error clusters
+# must be reported while a side still legitimately wins overall. Two
+# reportable clusters on A (ignores_interruption, embodied) per the worked
+# example's "keeps talking briefly when the user tries to interrupt, and
+# offers to knock on the neighbour's door." Mode is `conversation`, not
+# `clips`, despite the training-material prose saying "Clip A" -- see
+# team_findings.md [T2] "Example 4 mode": interruption only exists as a
+# concept in conversation mode (RULE-1 catalogues interrupts_user /
+# ignores_interruption as conversation-only), so the vocabulary here follows
+# RULES_SPEC section 5's mode table ("Model A"/"Model B"), not the loose
+# narration in criteria/worked-examples.md.
+id: ex4_neighbour_prefer_a
+mode: conversation
+context:
+  scenario: "help drafting a polite message to a neighbour about noise"
+  scenario_type: standard
+  preflight:
+    headphones: true
+    panning_check: true
+    scenario_read: true
+    listened_isolated: true
+    equivalent_prompts: true
+    stayed_in_character: true
+    interruption_tested: true
+a:
+  notes: "Model A felt warm and genuinely helpful drafting the neighbor note, though it kept talking briefly when I tried to interrupt and offered to come knock on the neighbor's door itself."
+  best: "it sounds like something a person would actually say when asking a neighbor for a favor"
+  worst: "it talks over me during an attempted interruption and offers to knock on the neighbor's door itself"
+  error_clusters: [ignores_interruption, embodied]
+  turns: 4
+  task_success: pass
+b:
+  notes: "El Modelo B sonó más rígido y menos cálido, como una carta formal, pero no me interrumpió y evitó los errores de interacción."
+  best: "it avoids talking over me and still delivers a clear, usable message"
+  worst: "stiff and less socially tactful, like a form letter"
+  turns: 4
+  task_success: pass
+picks: {naturalness: A, utility: TIE, audio: TIE, overall: A}
+expect:
+  verdict:
+    overall: A
+    driver: "Naturalness / Engagement"
+    gated: false
+    gated_side: null
+  findings_include: [CLUSTERS_TO_REPORT, PREFERRED_HAS_CLUSTERS, OVERALL_COHERENT]
+  findings_exclude:
+    - OVERALL_PREFERS_GATED
+    - DIMENSIONS_CONTRADICT
+    - HIERARCHY_REVERSED
+    - OVERALL_DIVERGES
+  draft_contains:
+    - "I prefer Model A overall because it better matches the project's North Star of a spontaneous, natural, aesthetically pleasing conversation."
+    - "Naturalness / Engagement matters most here because both are understandable and useful enough and neither has a threshold-level audio problem, so the deciding factor is which one sounds more like a person talking."
+    - "Model A showed this — it sounds like something a person would actually say when asking a neighbor for a favor — while Model B was weaker: stiff and less socially tactful, like a form letter."
+    - "I am flagging the following"
+    - "ignoring my attempts to interrupt or correct it"
+    - "an embodied-experience claim"
+    - "These lower Model A's rating, but I still prefer it because its tone and delivery are meaningfully more natural."
+    - "I did not observe any threshold-level issues such as hallucination, audio cutoff, distortion, or failed instruction-following in either conversation."
+    - "Therefore, Model A is the stronger fit for the project's North Star."
+  draft_excludes:
+    - "【"
+    - "On Audio Quality I penalized"
+    - "only a slight room tone"

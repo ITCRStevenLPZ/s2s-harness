@@ -1,0 +1,42 @@
+# Worked Example 2 {EVAL-2}: audio threshold gate. Gated on Clip B
+# (Threshold — Audio Quality). picks.audio is deliberately set to "TIE"
+# ("Both Good") so AUDIO_BOTH_GOOD_ILLEGAL {RULE-19} is exercised directly,
+# per this fixture's own row in EVAL_SPEC ("Both Good becomes illegal").
+# The closing threshold sentence (RULE-32, "gated on the loser only" branch)
+# must not re-list "audio cut off mid-word" a second time -- the exact
+# draft_contains string below only matches if the sentence ends right after
+# "in either clip." with nothing re-listed before the period.
+id: ex2_cutoff
+mode: clips
+context:
+  prompt: "advice for relaxing before an intense workday"
+  scenario_type: standard
+a:
+  notes: "Clip A gave calm, complete relaxation advice and sounded natural throughout."
+  best: "a complete, calm, natural response with no obvious audio artifacts"
+  worst: "a bit generic in the middle"
+b:
+  notes: "Clip B sonaba bien al principio pero se corta a mitad de palabra al final y tiene un pequeño clic audible justo antes de cortarse."
+  best: "still somewhat useful before it cuts off"
+  worst: "cuts off mid-word at the end and also has an audible click right before it stops"
+  threshold_audio: [cutoff]
+picks: {naturalness: A, utility: A, audio: TIE, overall: A}
+expect:
+  verdict:
+    overall: A
+    driver: "Threshold — Audio Quality"
+    gated: true
+    gated_side: B
+  findings_include: [AUDIO_BOTH_GOOD_ILLEGAL, OVERALL_COHERENT]
+  findings_exclude: [OVERALL_PREFERS_GATED, UTILITY_PICK_CONTRADICTS]
+  draft_contains:
+    - "Clip B has a clear issue that crosses the project's threshold — audio cut off mid-word — and a side with that kind of problem should not be preferred while the other one is clean."
+    - "Under the project hierarchy of Naturalness / Engagement over Utility over Audio Quality, the threshold requirement on Audio Quality matters most here because naturalness only carries its full weight once both sides clear the minimum bar for accuracy and audio, and here one of them does not."
+    - "Clip A showed this — a complete, calm, natural response with no obvious audio artifacts — while Clip B was weaker: cuts off mid-word at the end and also has an audible click right before it stops."
+    - "On Audio Quality I penalized accordingly:"
+    - "so 'Both Good' is not appropriate here."
+    - "Beyond that, I observed no other threshold-level issues in either clip."
+    - "Therefore, Clip A is the stronger fit for the project's North Star."
+  draft_excludes:
+    - "【"
+    - "I am flagging the following"
