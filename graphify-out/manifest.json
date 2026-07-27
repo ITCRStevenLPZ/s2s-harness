@@ -285,8 +285,8 @@
     "semantic_hash": ""
   },
   "/Users/stevenlpz/LabelerGuideAgents/s2s-harness/tests/golden/ex2_cutoff.yaml": {
-    "mtime": 1785126056.9481602,
-    "ast_hash": "26722f1ad7c741b6b5bb1f3b29b16180",
+    "mtime": 1785126728.6217415,
+    "ast_hash": "bdea4f4048983fb9cda5c9e79ecfab00",
     "semantic_hash": ""
   },
   "/Users/stevenlpz/LabelerGuideAgents/s2s-harness/tests/golden/ex3_owls.yaml": {
@@ -305,8 +305,8 @@
     "semantic_hash": ""
   },
   "/Users/stevenlpz/LabelerGuideAgents/s2s-harness/tests/golden/contradiction_dimensions_split.yaml": {
-    "mtime": 1785126135.0134578,
-    "ast_hash": "33213006b678647c5c60cacf2bcc9712",
+    "mtime": 1785126745.7761755,
+    "ast_hash": "ae7b9e8a3801a11c093e6fecc64630e5",
     "semantic_hash": ""
   },
   "/Users/stevenlpz/LabelerGuideAgents/s2s-harness/tests/golden/contradiction_prefers_gated.yaml": {

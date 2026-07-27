@@ -8,6 +8,11 @@
 # hierarchy walk, here B via the Naturalness pick), not the rater's raw
 # overall pick -- the contradiction itself is reported as a Finding, not
 # rewritten into the draft.
+# HIERARCHY_REVERSED {RULE-21} also fires here (picks.overall in {A,B},
+# picks.naturalness == the other side, ungated) -- flagged by
+# T6-fixtures-required in team_findings.md, not the DIMENSIONS_CONTRADICT
+# reading being wrong, just previously unasserted. Both codes are true of
+# this same state simultaneously; asserting both is the honest read.
 id: contradiction_dimensions_split
 mode: clips
 context:
@@ -28,7 +33,7 @@ expect:
     driver: "Naturalness / Engagement"
     gated: false
     gated_side: null
-  findings_include: [DIMENSIONS_CONTRADICT]
+  findings_include: [DIMENSIONS_CONTRADICT, HIERARCHY_REVERSED]
   findings_exclude: [OVERALL_COHERENT, OVERALL_PREFERS_GATED]
   draft_contains:
     - "I prefer Clip B overall because it better matches the project's North Star of a spontaneous, natural, aesthetically pleasing response."
