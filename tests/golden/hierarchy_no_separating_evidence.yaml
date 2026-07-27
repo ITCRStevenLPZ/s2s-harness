@@ -1,0 +1,62 @@
+# Coverage-threshold fixture ({EVAL-24}/{EVAL-25}, docs/EVAL_SPEC.md 1.4.0).
+# Closes the last remaining {EVAL-24} gap COVERAGE.md found: {RULE-15}'s
+# Step 2 "no-separating-evidence" fallback, where `verdict.overall` becomes
+# "TIE"/"BAD" from the hierarchy walk running out of rungs, not from a
+# threshold gate. Distinct from `both_sides_breach` (EVAL-13), which also
+# ends up with `picks.overall: BAD` but reaches that as the RATER's own
+# divergent vote after {RULE-12}'s both-breach gate falls through to a
+# Utility-decides Step 2 branch -- there, `verdict.overall` is "B", not
+# "TIE"/"BAD"; the hierarchy walk itself never runs out of dimensions.
+#
+# Naturalness TIE (not BAD) chosen deliberately: both clips are genuinely
+# comparable here with no threshold breach on either side, which fits
+# "Both Good" ({CRIT-3}'s option, RULE-25's `{outcome}` mapping) far more
+# naturally than "Both Bad" would -- nothing about either side reads as a
+# failure. `picks.utility`/`picks.audio` are also both TIE, so the walk has
+# no dimension left to fall back to and reaches the fallback branch itself,
+# not one of the earlier Step 2 branches.
+#
+# This also exercises {RULE-25}'s TIE/BAD early-return paragraph for the
+# first time in the golden suite. `both_sides_breach` reaches a TIE/BAD
+# *rater pick* but its computed `verdict.overall` is "B", so `build_draft`
+# there runs the normal eight-sentence path, never this early return.
+# draft_contains below is transcribed byte-for-byte from RULES_SPEC.md
+# 1.2.0 section 5 "Early returns" ({RULE-25}), substituting {A}="Clip A",
+# {B}="Clip B" (mode-aware display, draft.py's own vocabulary rule) and
+# {outcome}="Both Good" (naturalness is TIE, per RULE-25's own mapping) --
+# not obtained by running the engine.
+id: hierarchy_no_separating_evidence
+mode: clips
+context:
+  prompt: "tips for keeping a small kitchen herb garden alive"
+  scenario_type: standard
+a:
+  notes: "Clip A gave a solid, natural-sounding answer that covered the basics without any real complaints."
+  best: "clear, natural delivery"
+  worst: "nothing stood out as a problem"
+b:
+  notes: "El Clip B tambien sono natural y cubrio la misma informacion basica, muy parecido al Clip A."
+  best: "equally clear and natural delivery"
+  worst: "nothing stood out as a problem either"
+picks: {naturalness: TIE, utility: TIE, audio: TIE, overall: TIE}
+expect:
+  verdict:
+    overall: TIE
+    driver: "No separating evidence"
+    gated: false
+    gated_side: null
+  findings_include: [OVERALL_COHERENT]
+  findings_exclude:
+    - OVERALL_PREFERS_GATED
+    - OVERALL_DIVERGES
+    - DIMENSIONS_CONTRADICT
+    - HIERARCHY_REVERSED
+    - AUDIO_BOTH_GOOD_ILLEGAL
+    - PREMISE_ACCEPTED
+  draft_contains:
+    - "Neither Clip A nor Clip B comes out clearly ahead on this pass, so the vote stands as 'Both Good.'"
+    - "【name what specifically made the two sides feel equivalent here — the same strengths, or the same failure, on both】"
+    - "Before finalizing, extend the conversation a turn or two if this is a live exchange, or relisten to both sides once more, in case a differentiator was missed."
+  draft_excludes:
+    - "I prefer"
+    - "Therefore,"

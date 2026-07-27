@@ -5,7 +5,7 @@ Reconciles `tests/golden/*.yaml` against `criteria/project-criteria.md`
 `docs/RULES_SPEC.md` section 4 (`{RULE-16}`..`{RULE-23}`, 34 codes total),
 and against every threshold-gate / hierarchy-walk branch in section 3
 (`{RULE-10}`..`{RULE-15}`, 9 branches), per the coverage bar in
-`docs/EVAL_SPEC.md` `## Coverage threshold {EVAL-24}` (v1.3.0).
+`docs/EVAL_SPEC.md` `## Coverage threshold {EVAL-24}` (v1.4.0).
 
 Method: this matrix was built by reading each fixture's `expect:` block and
 each fixture's authoring comment, then reading `criteria/project-criteria.md`
@@ -61,6 +61,21 @@ mechanical check exists to catch: the Step 2 "no-separating-evidence"
 (`TIE`/`BAD`) branch has **no covering fixture anywhere in the suite**. See
 the `{EVAL-24}` mechanical check section below for the full accounting.
 
+**Audit log (round 4, this version):** closed that last gap. New fixture
+`hierarchy_no_separating_evidence` (`docs/EVAL_SPEC.md` 1.4.0, `EVAL-25`)
+exercises `{RULE-15}`'s Step 2 no-separating-evidence fallback directly
+(`picks: {naturalness: TIE, utility: TIE, audio: TIE}`, neither side
+gated) and, as a side effect, is the first fixture in the suite to
+exercise `{RULE-25}`'s TIE/BAD early-return paragraph — transcribed
+byte-for-byte from `RULES_SPEC.md` 1.2.0 section 5, not obtained by
+running the engine; it passed against the hand-derived string on the
+first run. `docs/EVAL_SPEC.md` was orphaned (`T1-spec-gaps` terminated) so
+the new required-fixture row was added directly, additively, per the
+lead's instruction. Every row and section below that referenced the
+no-separating-evidence gap as `NOT COVERED` is updated in this pass; the
+`{EVAL-24}` mechanical check is re-run in full and now reports the gate
+MET.
+
 ## Fixture inventory
 
 | id | Owner | EVAL id | Source |
@@ -83,14 +98,15 @@ the `{EVAL-24}` mechanical check section below for the full accounting.
 | `contradiction_utility_pick` | T7 | `EVAL-21` | Coverage-threshold fixture, closes `UTILITY_PICK_CONTRADICTS` |
 | `contradiction_success_fail_preferred` | T7 | `EVAL-22` | Coverage-threshold fixture, closes `SUCCESS_FAIL_PREFERRED` |
 | `hierarchy_audio_decides` | T7 | `EVAL-23` | Coverage-threshold fixture, closes the Step 2 audio-decides branch |
+| `hierarchy_no_separating_evidence` | T6 | `EVAL-25` | Coverage-threshold fixture, closes the Step 2 no-separating-evidence branch and the `{RULE-25}` TIE/BAD early-return paragraph |
 
 ## `criteria/project-criteria.md` clause coverage
 
 | Clause | Covering fixtures | Notes |
 |---|---|---|
 | `{CRIT-1}` North Star | `ex1_houseplant`, `ex2_cutoff`, `ex4_neighbour_prefer_a/b`, `audit_exercise_charisma`, `both_sides_breach`, `contradiction_dimensions_split`, `slight_noise_not_penalized`, `turns_short_and_mismatched`, `contradiction_preflight_and_turns`, `contradiction_success_fail_preferred`, `hierarchy_audio_decides` | Sentence 1 / Sentence 8 draft templates cite "the project's North Star" in every fixture whose verdict is decided. Not independently testable as its own code path; it is prose the draft always carries. |
-| `{CRIT-2}` Hierarchy | `ex1_houseplant` (Naturalness decides), `ex4_neighbour_prefer_b`/`both_sides_breach` (Utility decides after Naturalness ties), `hierarchy_audio_decides` (Audio decides after Naturalness and Utility both tie, no threshold gate), `ex2_cutoff`/`ex3_owls`/`contradiction_prefers_gated`/`contradiction_audio_pick`/`contradiction_utility_pick` (threshold displaces naturalness) | The Step 2 "no-separating-evidence" fallback (Naturalness TIE/BAD, Utility inconclusive, Audio inconclusive too — the walk reaches `Both Good`/`Both Bad` on its own, not via a threshold gate) is **NOT COVERED** by any fixture. See the `{EVAL-24}` mechanical check below — this is the one in-scope branch gap. |
-| `{CRIT-3}` Dimensions and options | All 18 fixtures exercise `A`/`B`/`TIE` picks; `both_sides_breach` exercises `BAD` for `picks.overall`; `contradiction_success_fail_preferred` exercises `task_success: fail` | `Pick.BAD` for a *dimension* pick (`naturalness`/`utility`/`audio` == `"BAD"`, i.e. "Both Bad" on a single dimension rather than overall) is still **NOT COVERED** by any fixture — distinct from `verdict.overall == "BAD"`, which is also not reached by any fixture (the same gap named under `{CRIT-2}` above). |
+| `{CRIT-2}` Hierarchy | `ex1_houseplant` (Naturalness decides), `ex4_neighbour_prefer_b`/`both_sides_breach` (Utility decides after Naturalness ties), `hierarchy_audio_decides` (Audio decides after Naturalness and Utility both tie, no threshold gate), `hierarchy_no_separating_evidence` (Naturalness, Utility and Audio all tie — the walk reaches "Both Good" on its own, not via a threshold gate), `ex2_cutoff`/`ex3_owls`/`contradiction_prefers_gated`/`contradiction_audio_pick`/`contradiction_utility_pick` (threshold displaces naturalness) | Fully covered — all nine `{RULE-10}`..`{RULE-15}` branches now have a fixture. |
+| `{CRIT-3}` Dimensions and options | All 19 fixtures exercise `A`/`B`/`TIE` picks; `both_sides_breach` exercises `BAD` for `picks.overall`; `contradiction_success_fail_preferred` exercises `task_success: fail`; `hierarchy_no_separating_evidence` exercises `verdict.overall == "TIE"` computed by the engine itself | `Pick.BAD` for a *dimension* pick (`naturalness`/`utility`/`audio` == `"BAD"`, i.e. "Both Bad" on a single dimension rather than overall) is still **NOT COVERED** by any fixture, and `verdict.overall == "BAD"` (as opposed to `"TIE"`) is also not reached by any fixture — `hierarchy_no_separating_evidence` deliberately exercises the `TIE` arm of `{RULE-15}`'s fallback, not `BAD` (see that fixture's own comment for why); neither gap is required by `{EVAL-24}`, which only requires the branch to be reached at all, not both of its `if/else` outcomes. |
 | `{CRIT-4}` Threshold breaches | `ex2_cutoff` (`cutoff` and `clicks`, both on `b.threshold_audio`), `ex3_owls` ("accepting a false premise", via the derived `premise_redteam` key — not the raw `false_premise` key, which no fixture sets directly), `contradiction_prefers_gated` (`hallucination`), `contradiction_both_good_audio` (`clicks`), `both_sides_breach` (`instruction_failure`, `distortion`), `contradiction_audio_pick` (`distortion`, a second instance), `contradiction_utility_pick` (`instruction_failure`, a second instance) | `dropout` (threshold_audio), the raw `false_premise` key (as opposed to its derived `premise_redteam` sibling) and the derived `notable_noise` are **NOT COVERED** by any fixture. |
 | `{CRIT-5}` Audio tolerance | `ex2_cutoff`, `contradiction_both_good_audio` (illegal "Both Good"), `slight_noise_not_penalized` (tolerance, no penalty) | Fully covered both directions (penalized vs tolerated). |
 | `{CRIT-6}` Error clusters | `ex1_houseplant` (`over_structured` is Naturalness evidence, not a cluster), `ex4_neighbour_prefer_a/b` (`ignores_interruption`, `embodied`), `audit_exercise_charisma` (`interrupts_user`, `ignores_interruption`, `embodied`) | `repetitive`, `degradation`, `awkward_silence` and `speech_recognition` clusters are **NOT COVERED** by any fixture. `robotic_intonation` (clips-mode Naturalness evidence, `over_structured`'s sibling) is also **NOT COVERED** directly, though the same carve-out mechanism is proven by `over_structured` in `ex1_houseplant`. None of these are error-severity findings and none are `{RULE-n}` §3 branches, so they are outside `{EVAL-24}`'s "must" set, but are recorded here per `CLAUDE.md`'s coverage-manifest mandate. |
@@ -112,7 +128,7 @@ the `{EVAL-24}` mechanical check section below for the full accounting.
 | `{RULE-15}` Step 2, naturalness-unset (`picks.naturalness is None`) | `empty_state` | covered |
 | `{RULE-15}` Step 2, utility-decides (naturalness inconclusive, `picks.utility in {A,B}`) | `ex4_neighbour_prefer_b`, `both_sides_breach` | covered |
 | `{RULE-15}` Step 2, audio-decides (naturalness and utility both inconclusive, `picks.audio in {A,B}`) | `hierarchy_audio_decides` | covered |
-| `{RULE-15}` Step 2, no-separating-evidence fallback (naturalness TIE/BAD, utility inconclusive, audio inconclusive too — `verdict.overall` becomes `TIE`/`BAD` from the walk itself) | — | **NOT COVERED** — verified by checking every fixture's `picks` block: every ungated fixture in the suite has `picks.naturalness` set to `"A"` or `"B"`, or (for `hierarchy_audio_decides`) resolves via the audio-decides branch instead. None reach this fallback. This is one of the nine branches `{EVAL-24}` requires; see the mechanical check below. |
+| `{RULE-15}` Step 2, no-separating-evidence fallback (naturalness TIE/BAD, utility inconclusive, audio inconclusive too — `verdict.overall` becomes `TIE`/`BAD` from the walk itself) | `hierarchy_no_separating_evidence` | covered (`picks: {naturalness: TIE, utility: TIE, audio: TIE}`, neither side gated; exercises the `TIE` arm — `verdict.overall == "TIE"`, `driver == "No separating evidence"` — not the `BAD` arm, which remains unexercised but is not separately required by `{EVAL-24}`, which asks only that the branch be reached) |
 
 ## `{EVAL-24}` coverage threshold — mechanical check
 
@@ -140,29 +156,25 @@ severity.** All 12 checked, all 12 covered:
 | 11 | `DIMENSIONS_CONTRADICT` | `contradiction_dimensions_split` |
 | 12 | `SUCCESS_FAIL_PREFERRED` | `contradiction_success_fail_preferred` |
 
-**Threshold-gate / hierarchy-walk branches: 9 total.** 8 of 9 checked and
-covered; **1 of 9 (`{RULE-15}` no-separating-evidence fallback) is `NOT
-COVERED`** — see the branch table above for the verification method.
+**Threshold-gate / hierarchy-walk branches: 9 total.** All 9 checked and
+covered as of `hierarchy_no_separating_evidence` (`EVAL-25`) — see the
+branch table above.
 
-**Result: the `{EVAL-24}` gate is NOT MET.** All 12 in-scope error-severity
-codes have a covering fixture — the six the lead listed
-(`SETUP_HEADPHONES`, `TURNS_MISMATCH`, `PROMPTS_NOT_EQUIVALENT`,
-`AUDIO_PICK_CONTRADICTS`, `UTILITY_PICK_CONTRADICTS`,
-`SUCCESS_FAIL_PREFERRED`) are now closed by the five new fixtures. But
-`{EVAL-24}`'s "must" set is error codes **and** branches, and one branch —
-the Step 2 fallback that produces `verdict.overall in {"TIE","BAD"}` without
-going through a threshold gate — has no fixture anywhere in the current
-18-fixture suite. This is a real, previously-unreported gap, not a
-restatement of one already known: the earlier "no worked example covers
-TIE or BAD" note in `team_plan.md`'s Phase A gap list was about the trace
-text (`{RULE-25}`, closed by T1 with a manual demonstration from T5, not a
-fixture) — this is the first time the *branch itself* has been confirmed
-uncovered by any golden fixture. Closing it needs one more adversarial
-fixture (e.g. `picks: {naturalness: TIE, utility: TIE, audio: TIE, ...}`,
-ungated, asserting `verdict.overall in {"TIE","BAD"}` and the `{RULE-25}`
-tie-paragraph `draft_contains` substrings) — outside `T6-fixtures-required`'s
-file ownership to author, reported here and to the lead rather than
-actioned.
+**Result: the `{EVAL-24}` gate is MET.** All 12 in-scope error-severity
+codes have a covering fixture, and all 9 in-scope `{RULE-10}`..`{RULE-15}`
+branches now do too. The last gap — the Step 2 fallback that produces
+`verdict.overall in {"TIE","BAD"}` without going through a threshold gate —
+was closed by `hierarchy_no_separating_evidence`, which also became the
+first fixture in the suite to exercise `{RULE-25}`'s TIE/BAD early-return
+paragraph directly (the earlier "no worked example covers TIE or BAD" note
+in `team_plan.md`'s Phase A gap list was about the trace *text*, closed by
+T1 with a manual demonstration from T5, not a fixture — this closes the
+*fixture* gap, a separate thing). Only the `BAD` arm of the fallback
+(`naturalness == "BAD"` rather than `"TIE"`) remains unexercised by any
+fixture; `{EVAL-24}` requires the branch to be reached, not both of its
+internal outcomes, so this does not reopen the gate, but it is recorded
+honestly in the branch table and the gaps summary below rather than
+silently folded into "covered."
 
 ## `RULES_SPEC.md` section 4 finding-code coverage (34 codes)
 
@@ -244,13 +256,17 @@ actioned.
 
 ## Summary of gaps
 
-**In scope for `{EVAL-24}` (error codes and §3 branches) — one open item:**
-
-- The `{RULE-15}` Step 2 "no-separating-evidence" fallback branch (naturalness `TIE`/`BAD`, utility and audio both inconclusive too, `verdict.overall` becomes `TIE`/`BAD` from the hierarchy walk itself, not a threshold gate). No fixture reaches it. This is the one thing standing between the suite and a met `{EVAL-24}` gate.
-
-All 12 error-severity codes and the other 8 of 9 `{RULE-10}`..`{RULE-15}`
+**In scope for `{EVAL-24}` (error codes and §3 branches) — zero open
+items.** All 12 error-severity codes and all 9 `{RULE-10}`..`{RULE-15}`
 branches are covered as of this round; see the mechanical check above for
-the full accounting.
+the full accounting. One sub-branch nuance, not itself a gate failure, is
+recorded for honesty: `{RULE-15}`'s no-separating-evidence fallback has two
+possible outcomes (`verdict.overall == "TIE"` or `"BAD"`, chosen by whether
+`picks.naturalness` was `TIE` or `BAD`); `hierarchy_no_separating_evidence`
+exercises only the `TIE` arm. `{EVAL-24}` requires the branch to be reached
+at all, not both of its internal outcomes, so this is not an open gate
+item — but a second fixture for the `BAD` arm would strengthen coverage
+further.
 
 **Out of scope for `{EVAL-24}` (warning/info/ok codes), recorded honestly
 per `CLAUDE.md`'s coverage-manifest mandate, not required to close:**
@@ -264,9 +280,11 @@ per `CLAUDE.md`'s coverage-manifest mandate, not required to close:**
 - `repetitive`, `degradation`, `awkward_silence`, `speech_recognition` error clusters; `robotic_intonation` (clips-mode Naturalness evidence).
 - `EVIDENCE_MISSING`, `PROMPT_MISSING`, `AUDIO_BOTH_CLEAN` fire inside `empty_state` but are not asserted by name.
 
-None of these are silently assumed covered elsewhere in this document.
-Closing the in-scope gap requires one new adversarial fixture; closing the
-out-of-scope ones requires further fixtures or expanded `expect:` blocks —
-both outside `T6-fixtures-required`'s file ownership (`ex1`..`ex4b`,
-`audit_exercise_charisma`) to author, and are reported to
-`T7-fixtures-adversarial` and the lead rather than actioned here.
+None of these are silently assumed covered elsewhere in this document. All
+of them are out of `{EVAL-24}`'s "must" set; closing any of them requires
+further fixtures or expanded `expect:` blocks, which is beyond
+`T6-fixtures-required`'s ownership of its six required fixtures
+(`ex1`..`ex4b`, `audit_exercise_charisma`) plus the one coverage-threshold
+fixture (`hierarchy_no_separating_evidence`) it authored under the lead's
+explicit round-4 instruction. Reported to `T7-fixtures-adversarial` and the
+lead rather than actioned here.
