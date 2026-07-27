@@ -85,7 +85,7 @@ The workspace uses an entity-relationship knowledge graph tracked at `graphify-o
 * Use `graphify path "<A>" "<B>"` to trace dependencies across subsystems, and `graphify explain "<concept>"` to extract isolated architectural logic.
 * Traverse components through `graphify-out/wiki/index.md` instead of brute-force navigation.
 * Never parse raw graph artifacts (`graph.json`, `manifest.json`) directly. Read them entirely through CLI queries.
-* **Bootstrap condition:** `graphify-out/` does not exist yet in this greenfield workspace. The first dispatched task (a single low-complexity Sonnet subagent) must run `graphify init .` followed by `graphify update .` before any other discovery work proceeds. Until that index exists, the hook will not fire and the mandate above is inert.
+* **Bootstrap condition:** `graphify-out/` does not exist yet in this greenfield workspace. The first dispatched task (a single low-complexity Sonnet subagent) must run `graphify update .` before any other discovery work proceeds. Until that index exists, the hook will not fire and the mandate above is inert.
 * **Spec-first caveat:** graphify indexes code, and this repo currently has none. Until implementation begins, `docs/` and `criteria/` remain the primary read path and graphify is for spec and fixture structure only.
 
 ### Graph freshness mandate (definition of done)
@@ -191,9 +191,9 @@ Before executing any modification plan, read the relevant spec under `docs/` and
 `tests/golden/` encodes the four worked examples from the training material and is a hard merge gate to `main`. It is not advisory tooling. A failing or unrun tier blocks the merge regardless of how confident the change looks in isolation.
 
 * **Both tiers required, every merge to main. No merge without BOTH green.**
-  * `uv run test:golden` — Tier 1, fast, fully deterministic. Null STT provider, stubbed polish, no network. Runs in seconds at zero API cost. Every fixture runs twice, once with `--no-llm` and once with the stub, and both must produce identical verdicts, identical hierarchy attribution, and identical placeholder sets. Covers 100% of rules-engine branches per `tests/golden/COVERAGE.md`.
-  * `uv run test:golden:real` — Tier 2, the full path against the real Anthropic API and the real Gemini or GCP speech provider. Pre-merge gate only. Proves the integration works, not just the stubs, and asserts the polish invariant directly: the polished text introduces no observation absent from the deterministic draft, changes no verdict, and preserves every `【placeholder】` verbatim.
-  * `uv run test:golden:all` runs both. Neither tier substitutes for the other.
+  * `uv run test-golden` — Tier 1, fast, fully deterministic. Null STT provider, stubbed polish, no network. Runs in seconds at zero API cost. Every fixture runs twice, once with `--no-llm` and once with the stub, and both must produce identical verdicts, identical hierarchy attribution, and identical placeholder sets. Covers 100% of rules-engine branches per `tests/golden/COVERAGE.md`.
+  * `uv run test-golden-real` — Tier 2, the full path against the real Anthropic API and the real Gemini or GCP speech provider. Pre-merge gate only. Proves the integration works, not just the stubs, and asserts the polish invariant directly: the polished text introduces no observation absent from the deterministic draft, changes no verdict, and preserves every `【placeholder】` verbatim.
+  * `uv run test-golden-all` runs both. Neither tier substitutes for the other.
 * **A rate limit is not a defect:** Tier 2 failing with a genuine 429 or quota exhaustion from Anthropic or GCP means "re-run when quota recovers." It is NOT a code defect and MUST NEVER be treated as a reason to skip the gate, merge anyway, or weaken the assertion to tolerate it. Tier 2 fails loudly by design. A run must never report green when it did not actually verify the integration.
 * **Golden-flip rule:** if a change flips one of the four worked examples, the change is wrong until proven otherwise by a corresponding change in `criteria/`. A fixture edit with no criteria change to point at is rejected on sight.
 * **Spec-sync mandate:** every new behavior and every fix must add or update fixtures in the same change. A feature without a fixture is INCOMPLETE, not "done pending tests." Do not report it complete.
@@ -253,7 +253,7 @@ A subagent returns a diff and a one-paragraph rationale, not a transcript. The o
 * **Type everything.** Pydantic models for state, `Literal` for enums, no bare dicts crossing a node boundary.
 * **Tests before behavior changes.** See the golden-flip rule above.
 * **Spanish and English inputs both matter.** The rater takes notes in either. Every scanner pattern, phrase hint, and test fixture must cover both.
-* **Definition of done:** `uv run lint`, `uv run mypy`, `uv run test:golden:all` green; `graphify update .` run; `COVERAGE.md` reconciled; specs under `docs/` updated in the same change.
+* **Definition of done:** `uv run lint`, `uv run mypy`, `uv run test-golden-all` green; `graphify update .` run; `COVERAGE.md` reconciled; specs under `docs/` updated in the same change.
 
 ### Do not
 
