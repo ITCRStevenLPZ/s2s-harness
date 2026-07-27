@@ -5,6 +5,17 @@ description = "Rating harness for the Live S2S Arena / Stereo Headphone Check Pr
 requires-python = ">=3.12"
 dependencies = [
     "langgraph>=0.2",
+    # SqliteSaver checkpointing behind `--resume` ({GRAPH-12}); ships as a
+    # separate distribution from `langgraph` itself. Core, not an extra --
+    # `--resume` is a standard CLI capability (docs/GRAPH_SPEC.md section 4),
+    # not an optional external integration like the STT/audio extras below,
+    # and the dependency itself is lightweight (sqlite, no network, no
+    # platform-specific binary). Flagged by T3 in team_findings.md
+    # ("[T3] mypy: a second, narrower false positive..." entry area),
+    # verified resolvable via `uv pip install --dry-run
+    # langgraph-checkpoint-sqlite` (resolves langgraph-checkpoint-sqlite
+    # 3.1.0, not guessed) before adding.
+    "langgraph-checkpoint-sqlite>=3.1",
     "pydantic>=2.7",
     "typer>=0.12",
     "rich>=13.7",
