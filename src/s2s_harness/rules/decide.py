@@ -10,19 +10,19 @@ table (`rules/` may import `models/`, never the reverse).
 
 All trace strings below are transcribed verbatim from RULES_SPEC.md
 section 3 (T1's Step 1 templates and the "Step 2 trace templates" block
-that closed spec gaps 2 and 3, see `team_findings.md`), with one flagged
-exception:
+that closed spec gaps 2 and 3, see `team_findings.md`).
 
-CONFLICT, not improvised (see `team_findings.md`, "[T3] CONFLICT
-flagged... gap-2's `{pick}` vs `{RULE-41}` purity"): the spec defines
-`{pick}` / `{A}` / `{B}` as "the full display of whichever side the
-branch names (e.g. 'Model A' / 'Clip B')", which needs `TaskContext.mode`
--- an input `decide(a, b, picks) -> Verdict` does not take, and
-`{RULE-41}` (section 7, same document) forbids reading anything beyond
-`a.threshold_all`, `b.threshold_all` and `picks`. Resolved for this
-deliverable by emitting the bare side letter ("A" / "B") everywhere the
-template names a side. This is pending T1 ratification; every other word
-of every trace string here is unchanged from the spec.
+**Trace side-references** (RULES_SPEC section 3, the paragraph right
+after `{RULE-47}`): every `{A}`, `{B}` and `{pick}` in a trace string
+renders as the bare side letter -- `"A"` or `"B"` -- never a mode-aware
+form like `"Model A"` or `"Clip B"`. This closes the conflict flagged by
+T3 mid-implementation (`decide(a, b, picks) -> Verdict` has no
+`TaskContext` argument, and `{RULE-41}` restricts it to a pure function
+of `(a.threshold_all, b.threshold_all, picks)`, so it cannot know
+conversation-vs-clips mode and must not guess). T1 ratified this
+resolution directly in the spec; it is no longer provisional. Mode-aware
+display is a rendering concern for a layer that does receive
+`TaskContext` -- `draft.py` or a node/UI layer -- never `decide` itself.
 """
 
 from __future__ import annotations
@@ -144,10 +144,9 @@ def _other(side: Side) -> Side:
 def _gated_verdict(breach_side: Side, breach_all: list[str], picks: Picks) -> Verdict:
     """RULES_SPEC section 3, cases `thr_a > 0, thr_b == 0` and its mirror.
 
-    {RULE-10} / {RULE-11}, verbatim trace text except for the `{A}`/`{B}`
-    substitution -- see the module docstring's CONFLICT note: bare side
-    letters are used here, not a mode-aware "Model A" / "Clip A" display,
-    because `decide` has no `TaskContext` to read one from.
+    {RULE-10} / {RULE-11}, verbatim trace text: `{A}`/`{B}` render as the
+    bare side letter per the "Trace side-references" rule in the module
+    docstring, ratified by T1 directly in the spec.
     """
     clean_side = _other(breach_side)
     joined = _joined(breach_all)
@@ -177,8 +176,8 @@ def _gated_verdict(breach_side: Side, breach_all: list[str], picks: Picks) -> Ve
 
 def _both_breach_trace(a_threshold_all: list[str], b_threshold_all: list[str]) -> str:
     """{RULE-12}, both sides breach. Verbatim from RULES_SPEC section 3
-    (gap 3, closed by T1), except for the `{A}`/`{B}` bare-letter
-    substitution -- see the module docstring's CONFLICT note.
+    (gap 3, closed by T1). `{A}`/`{B}` render as the bare side letter per
+    the "Trace side-references" rule in the module docstring.
     """
     joined_a = _joined(a_threshold_all)
     joined_b = _joined(b_threshold_all)
@@ -197,8 +196,8 @@ def _hierarchy_walk(picks: Picks, trace: list[str]) -> Verdict:
     branch below appends exactly one more line before returning, per the
     spec's "each branch appends its own trace line." Trace text is
     verbatim from the "Step 2 trace templates" block (gap 2, closed by
-    T1), except for the `{pick}` bare-letter substitution -- see the
-    module docstring's CONFLICT note.
+    T1). `{pick}` renders as the bare side letter per the "Trace
+    side-references" rule in the module docstring.
     """
     if picks.naturalness in ("A", "B"):
         trace.append(
