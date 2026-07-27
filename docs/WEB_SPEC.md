@@ -1,6 +1,6 @@
 # Web specification
 
-Version: 1.0.0
+Version: 1.1.0
 Last updated: 2026-07-27
 
 ID convention: `**WEB-n.**` leading tag at the start of each normative paragraph, sequential in document order, gaps allowed for later insertions. This matches `docs/DEPLOY_SPEC.md`'s placement convention rather than `docs/GRAPH_SPEC.md`'s trailing `{GRAPH-n}` tags, because this document is new and DEPLOY_SPEC is the more recent precedent in `docs/`.
