@@ -19,6 +19,19 @@ stt-gemini = ["google-genai>=0.3"]
 stt-gcp = ["google-cloud-speech>=2.26"]
 audio = ["sounddevice>=0.4", "soundfile>=0.12"]
 polish = ["anthropic>=0.34"]
+# Firebase ID-token verification for the hosted bridge (docs/DEPLOY_SPEC.md's
+# Firebase Auth section). google.oauth2.id_token.verify_firebase_token, part
+# of plain google-auth, is sufficient: the bridge only ever verifies tokens
+# minted by Firebase Auth, it never mints custom tokens, manages users, or
+# reads Firebase user records, so the full firebase-admin SDK (which adds
+# that surface plus its own credential-management stack) would be more than
+# this needs. The [requests] extra supplies the HTTP transport
+# verify_firebase_token requires (google.auth.transport.requests.Request);
+# plain google-auth does not bundle an HTTP transport itself. Optional, not
+# a core dependency, because this is only imported by src/s2s_harness/bridge
+# when `s2s serve` runs the deployed auth path -- the CLI, rules engine and
+# graph never need it.
+bridge-auth = ["google-auth[requests]>=2.28"]
 
 # PEP 735 dependency group, not an extra: `uv sync` installs it by default
 # (unless run with --no-dev), so `uv run lint` / `uv run mypy` work out of a
