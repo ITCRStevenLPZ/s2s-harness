@@ -1,16 +1,16 @@
 # Graph Report - s2s-harness  (2026-07-26)
 
 ## Corpus Check
-- 54 files · ~88,847 words
+- 54 files · ~89,857 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 707 nodes · 994 edges · 52 communities (43 shown, 9 thin omitted)
+- 709 nodes · 996 edges · 52 communities (43 shown, 9 thin omitted)
 - Extraction: 90% EXTRACTED · 10% INFERRED · 0% AMBIGUOUS · INFERRED: 101 edges (avg confidence: 0.51)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `a95e3dd7`
+- Built from commit: `b0aa7fd6`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -70,25 +70,25 @@
 ## God Nodes (most connected - your core abstractions)
 1. `Team Findings: Wave 1` - 41 edges
 2. `SideObservation` - 34 edges
-3. `Team Findings: Phase 3` - 26 edges
+3. `Team Findings: Phase 3` - 27 edges
 4. `str` - 25 edges
 5. `EvaluationState` - 23 edges
 6. `Project criteria — source of truth` - 23 edges
 7. `Verdict` - 21 edges
 8. `2. Nodes` - 19 edges
 9. `5. `draft` — the justification builder` - 19 edges
-10. `4. `audit` — findings` - 18 edges
+10. `audit()` - 18 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `run_pipeline()` --calls--> `audit()`  [INFERRED]
   tests/golden/_golden_lib.py → src/s2s_harness/rules/audit.py
+- `run_pipeline()` --calls--> `decide()`  [INFERRED]
+  tests/golden/_golden_lib.py → src/s2s_harness/rules/decide.py
 - `run_pipeline()` --calls--> `build_draft()`  [INFERRED]
   tests/golden/_golden_lib.py → src/s2s_harness/rules/draft.py
 - `Finding` --uses--> `SideObservation`  [INFERRED]
   tests/golden/_golden_lib.py → src/s2s_harness/models/state.py
 - `Any` --uses--> `SideObservation`  [INFERRED]
-  tests/golden/_golden_lib.py → src/s2s_harness/models/state.py
-- `EvaluationState` --uses--> `SideObservation`  [INFERRED]
   tests/golden/_golden_lib.py → src/s2s_harness/models/state.py
 
 ## Import Cycles
@@ -198,7 +198,7 @@ Nodes (3): Accuracy details, Constraints, What you are building
 
 ### Community 29 - "Community 29"
 Cohesion: 0.06
-Nodes (71): BaseModel, Finding, build_initial_state(), load_fixture(), Shared golden-fixture loading and execution helpers.  Owned by T7-fixtures-adver, `EvaluationState` per docs/EVAL_SPEC.md's fixture schema.      Top-level `mode`, `EvaluationState` per docs/EVAL_SPEC.md's fixture schema.      Top-level `mode`, normalize -> decide -> audit -> build_draft, per GRAPH_SPEC section 2's     node (+63 more)
+Nodes (66): BaseModel, Finding, build_initial_state(), load_fixture(), Shared golden-fixture loading and execution helpers.  Owned by T7-fixtures-adver, `EvaluationState` per docs/EVAL_SPEC.md's fixture schema.      Top-level `mode`, `EvaluationState` per docs/EVAL_SPEC.md's fixture schema.      Top-level `mode`, normalize -> decide -> audit -> build_draft, per GRAPH_SPEC section 2's     node (+58 more)
 
 ### Community 30 - "Community 30"
 Cohesion: 0.05
@@ -233,8 +233,8 @@ Cohesion: 0.29
 Nodes (6): Cross-package invariants that only a test can enforce.  CLAUDE.md design rule 1, `rules.catalog.Mode` and `models.state.Mode` must never drift apart.      Both p, `rules.catalog.Mode` and `models.state.Mode` must never drift apart.      Both p, `models.state`'s hardcoded fail-closed default key sets must never     drift fro, test_catalogue_key_defaults_identical_across_layers(), test_mode_literal_identical_across_layers()
 
 ### Community 43 - "Community 43"
-Cohesion: 0.20
-Nodes (31): EvaluationState, _audio(), audit(), _error_clusters(), _evidence(), _finding(), _joined_clusters(), _joined_thresholds() (+23 more)
+Cohesion: 0.19
+Nodes (32): EvaluationState, _audio(), audit(), _error_clusters(), _evidence(), _finding(), _joined_clusters(), _joined_thresholds() (+24 more)
 
 ### Community 44 - "Community 44"
 Cohesion: 0.15
@@ -246,15 +246,15 @@ Nodes (15): Correction carried from reconnaissance, Current Status, Goal, Ground
 
 ### Community 46 - "Community 46"
 Cohesion: 0.07
-Nodes (26): [lead] Carried over from Wave 1, [lead] Reconnaissance corrections, [T1] CONFLICT RESOLVED — @T2-fixtures @T4-audit — `{RULE-43}` vs `NOTES_MISSING`, RULES_SPEC/EVAL_SPEC now 1.2.0, [T1] CONFLICT RESOLVED — @T3-normalize-decide's `{pick}` vs `{RULE-41}` purity, [T1] Filename reconciliation needed — @T7-fixtures-adversarial, please confirm or correct, [T1] Gap 2 CLOSED — Step 2 hierarchy-walk trace strings (RULES_SPEC §3, still under `{RULE-15}`), [T1] Gap 3 CLOSED — both-sides-breach trace (RULES_SPEC §3, `{RULE-12}`), [T1] Gap 4 CLOSED — @T4-audit and @T2-fixtures, `Finding.label` (RULES_SPEC new §4.9, new `{RULE-46}`) (+18 more)
+Nodes (27): [lead] Carried over from Wave 1, [lead] Reconnaissance corrections, [T1] CONFLICT RESOLVED — @T2-fixtures @T4-audit — `{RULE-43}` vs `NOTES_MISSING`, RULES_SPEC/EVAL_SPEC now 1.2.0, [T1] CONFLICT RESOLVED — @T3-normalize-decide's `{pick}` vs `{RULE-41}` purity, [T1] Filename reconciliation needed — @T7-fixtures-adversarial, please confirm or correct, [T1] Gap 2 CLOSED — Step 2 hierarchy-walk trace strings (RULES_SPEC §3, still under `{RULE-15}`), [T1] Gap 3 CLOSED — both-sides-breach trace (RULES_SPEC §3, `{RULE-12}`), [T1] Gap 4 CLOSED — @T4-audit and @T2-fixtures, `Finding.label` (RULES_SPEC new §4.9, new `{RULE-46}`) (+19 more)
 
 ### Community 48 - "Community 48"
 Cohesion: 0.09
 Nodes (52): _artifact_noun(), build_draft(), _clusters_display(), frag(), gap(), _interaction_noun(), _join_english(), _joined_threshold() (+44 more)
 
 ### Community 49 - "Community 49"
-Cohesion: 0.16
-Nodes (20): _both_breach_trace(), _display_for(), gate_name(), _gated_verdict(), _hierarchy_walk(), _join_english(), _joined(), _other() (+12 more)
+Cohesion: 0.14
+Nodes (25): Picks, _both_breach_trace(), decide(), _display_for(), gate_name(), _gated_verdict(), _hierarchy_walk(), _join_english() (+17 more)
 
 ### Community 50 - "Community 50"
 Cohesion: 0.14
@@ -265,7 +265,7 @@ Cohesion: 0.13
 Nodes (20): fixture_paths(), All golden fixtures, sorted for a deterministic collection order., All golden fixtures, sorted for a deterministic collection order., _check_draft(), _check_findings(), _check_verdict(), _custom_checks(), _fixture_id() (+12 more)
 
 ## Knowledge Gaps
-- **373 isolated node(s):** `$schema`, `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS`, `defaultMode`, `PreToolUse`, `superpowers@claude-plugins-official` (+368 more)
+- **374 isolated node(s):** `$schema`, `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS`, `defaultMode`, `PreToolUse`, `superpowers@claude-plugins-official` (+369 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **9 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -276,8 +276,8 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.036) - this node is a cross-community bridge._
 - **Why does `str` connect `Community 48` to `Community 29`?**
   _High betweenness centrality (0.020) - this node is a cross-community bridge._
-- **Why does `run_pipeline()` connect `Community 29` to `Community 48`, `Community 51`, `Community 43`?**
-  _High betweenness centrality (0.017) - this node is a cross-community bridge._
+- **Why does `run_pipeline()` connect `Community 29` to `Community 48`, `Community 49`, `Community 43`, `Community 51`?**
+  _High betweenness centrality (0.018) - this node is a cross-community bridge._
 - **Are the 27 inferred relationships involving `SideObservation` (e.g. with `Finding` and `Pattern`) actually correct?**
   _`SideObservation` has 27 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 3 inferred relationships involving `str` (e.g. with `EvaluationState` and `SideObservation`) actually correct?**
@@ -285,4 +285,4 @@ _Questions this graph is uniquely positioned to answer:_
 - **Are the 20 inferred relationships involving `EvaluationState` (e.g. with `Finding` and `Pattern`) actually correct?**
   _`EvaluationState` has 20 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `$schema`, `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS`, `defaultMode` to the rest of the system?**
-  _468 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _470 weakly-connected nodes found - possible documentation gaps or missing edges._

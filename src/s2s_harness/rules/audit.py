@@ -179,8 +179,7 @@ def _setup_and_consistency(state: EvaluationState) -> list[Finding]:
             _finding(
                 "SETUP_PANNING",
                 "warning",
-                "The panning / audio-position check was not confirmed before this "
-                "session.",
+                "The panning / audio-position check was not confirmed before this session.",
             )
         )
 
@@ -328,8 +327,7 @@ def _evidence(state: EvaluationState) -> list[Finding]:
             _finding(
                 "PROMPT_MISSING",
                 "warning",
-                "Clips mode requires the shared prompt to be recorded, and it "
-                "is currently empty.",
+                "Clips mode requires the shared prompt to be recorded, and it is currently empty.",
             )
         )
 
@@ -552,8 +550,7 @@ def _overall_coherence(state: EvaluationState, verdict: Verdict) -> list[Finding
             _finding(
                 "OVERALL_COHERENT",
                 "ok",
-                f"The overall pick matches the hierarchy walk's result "
-                f"({verdict.overall}).",
+                f"The overall pick matches the hierarchy walk's result ({verdict.overall}).",
             )
         )
 

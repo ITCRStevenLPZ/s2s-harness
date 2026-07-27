@@ -763,7 +763,7 @@
       "label": "_evidence()",
       "file_type": "code",
       "source_file": "src/s2s_harness/rules/audit.py",
-      "source_location": "L283",
+      "source_location": "L282",
       "id": "rules_audit_evidence",
       "community": 43,
       "norm_label": "_evidence()"
@@ -772,7 +772,7 @@
       "label": "_scenario_inversion()",
       "file_type": "code",
       "source_file": "src/s2s_harness/rules/audit.py",
-      "source_location": "L355",
+      "source_location": "L353",
       "id": "rules_audit_scenario_inversion",
       "community": 43,
       "norm_label": "_scenario_inversion()"
@@ -781,7 +781,7 @@
       "label": "_audio()",
       "file_type": "code",
       "source_file": "src/s2s_harness/rules/audit.py",
-      "source_location": "L432",
+      "source_location": "L430",
       "id": "rules_audit_audio",
       "community": 43,
       "norm_label": "_audio()"
@@ -790,7 +790,7 @@
       "label": "_utility()",
       "file_type": "code",
       "source_file": "src/s2s_harness/rules/audit.py",
-      "source_location": "L497",
+      "source_location": "L495",
       "id": "rules_audit_utility",
       "community": 43,
       "norm_label": "_utility()"
@@ -799,7 +799,7 @@
       "label": "_overall_coherence()",
       "file_type": "code",
       "source_file": "src/s2s_harness/rules/audit.py",
-      "source_location": "L520",
+      "source_location": "L518",
       "id": "rules_audit_overall_coherence",
       "community": 43,
       "norm_label": "_overall_coherence()"
@@ -808,7 +808,7 @@
       "label": "Verdict",
       "file_type": "code",
       "source_file": "src/s2s_harness/rules/audit.py",
-      "source_location": "L520",
+      "source_location": "L518",
       "id": "src_s2s_harness_rules_audit_py_verdict",
       "community": 43,
       "norm_label": "verdict"
@@ -817,7 +817,7 @@
       "label": "_error_clusters()",
       "file_type": "code",
       "source_file": "src/s2s_harness/rules/audit.py",
-      "source_location": "L622",
+      "source_location": "L619",
       "id": "rules_audit_error_clusters",
       "community": 43,
       "norm_label": "_error_clusters()"
@@ -826,7 +826,7 @@
       "label": "_skip()",
       "file_type": "code",
       "source_file": "src/s2s_harness/rules/audit.py",
-      "source_location": "L661",
+      "source_location": "L658",
       "id": "rules_audit_skip",
       "community": 43,
       "norm_label": "_skip()"
@@ -835,7 +835,7 @@
       "label": "audit()",
       "file_type": "code",
       "source_file": "src/s2s_harness/rules/audit.py",
-      "source_location": "L680",
+      "source_location": "L677",
       "id": "rules_audit_audit",
       "community": 43,
       "norm_label": "audit()"
@@ -853,8 +853,8 @@
       "label": "Run every RULES_SPEC section 4 check and return the sorted findings.      Subsec",
       "file_type": "rationale",
       "source_file": "src/s2s_harness/rules/audit.py",
-      "source_location": "L681",
-      "id": "rules_audit_rationale_681",
+      "source_location": "L678",
+      "id": "rules_audit_rationale_678",
       "community": 43,
       "norm_label": "run every rules_spec section 4 check and return the sorted findings.      subsec"
     },
@@ -1089,7 +1089,7 @@
       "source_file": "src/s2s_harness/rules/decide.py",
       "source_location": "L144",
       "id": "picks",
-      "community": 29,
+      "community": 49,
       "norm_label": "picks"
     },
     {
@@ -1098,7 +1098,7 @@
       "source_file": "src/s2s_harness/rules/decide.py",
       "source_location": "L144",
       "id": "src_s2s_harness_rules_decide_py_verdict",
-      "community": 29,
+      "community": 49,
       "norm_label": "verdict"
     },
     {
@@ -1125,7 +1125,7 @@
       "source_file": "src/s2s_harness/rules/decide.py",
       "source_location": "L257",
       "id": "rules_decide_decide",
-      "community": 29,
+      "community": 49,
       "norm_label": "decide()"
     },
     {
@@ -1215,7 +1215,7 @@
       "source_file": "src/s2s_harness/rules/decide.py",
       "source_location": "L258",
       "id": "rules_decide_rationale_258",
-      "community": 29,
+      "community": 49,
       "norm_label": "rules_spec section 3, the full `decide` procedure. {rule-10}..{rule-15}      {ru"
     },
     {
@@ -3523,6 +3523,15 @@
       "norm_label": "[t1] filename reconciliation needed \u2014 @t7-fixtures-adversarial, please confirm or correct"
     },
     {
+      "label": "[T7] Status report to lead, plus the five coverage-threshold fixtures landed and renamed to T1's ids",
+      "file_type": "document",
+      "source_file": ".claude/team-runs/2026-07-27-phase3-engine/team_findings.md",
+      "source_location": "L446",
+      "id": "2026_07_27_phase3_engine_team_findings_t7_status_report_to_lead_plus_the_five_coverage_threshold_fixtures_landed_and_renamed_to_t1_s_ids",
+      "community": 46,
+      "norm_label": "[t7] status report to lead, plus the five coverage-threshold fixtures landed and renamed to t1's ids"
+    },
+    {
       "label": "team_plan.md",
       "file_type": "document",
       "source_file": ".claude/team-runs/2026-07-27-phase3-engine/team_plan.md",
@@ -5530,6 +5539,15 @@
       "norm_label": "front ends"
     },
     {
+      "label": "Run every RULES_SPEC section 4 check and return the sorted findings.      Subsec",
+      "file_type": "rationale",
+      "source_file": "src/s2s_harness/rules/audit.py",
+      "source_location": "L681",
+      "community": 43,
+      "norm_label": "run every rules_spec section 4 check and return the sorted findings.      subsec",
+      "id": "rules_audit_rationale_681"
+    },
+    {
       "label": "All golden fixtures, sorted for a deterministic collection order.",
       "file_type": "rationale",
       "source_file": "tests/golden/_golden_lib.py",
@@ -5579,7 +5597,7 @@
       "file_type": "rationale",
       "source_file": "src/s2s_harness/rules/decide.py",
       "source_location": "L259",
-      "community": 29,
+      "community": 49,
       "norm_label": "rules_spec section 3, the full `decide` procedure. {rule-10}..{rule-15}      {ru",
       "id": "rules_decide_rationale_259"
     },
@@ -9426,6 +9444,16 @@
       "confidence_score": 1.0,
       "source": "rules_audit_rationale_672",
       "target": "rules_audit_audit"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/s2s_harness/rules/audit.py",
+      "source_location": "L678",
+      "weight": 1.0,
+      "source": "rules_audit_rationale_678",
+      "target": "rules_audit_audit",
+      "confidence_score": 1.0
     },
     {
       "relation": "rationale_for",
@@ -13770,9 +13798,9 @@
       "source_file": ".claude/team-runs/2026-07-27-phase3-engine/team_findings.md",
       "source_location": "L440",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_07_27_phase3_engine_team_findings_team_findings_phase_3",
-      "target": "2026_07_27_phase3_engine_team_findings_t1_filename_reconciliation_needed_t7_fixtures_adversarial_please_confirm_or_correct",
-      "confidence_score": 1.0
+      "target": "2026_07_27_phase3_engine_team_findings_t1_filename_reconciliation_needed_t7_fixtures_adversarial_please_confirm_or_correct"
     },
     {
       "relation": "contains",
@@ -13963,6 +13991,16 @@
       "confidence_score": 1.0,
       "source": "2026_07_27_phase3_engine_team_findings_team_findings_phase_3",
       "target": "2026_07_27_phase3_engine_team_findings_t6_took_over_the_required_fixtures_half_of_stalled_t2_fixtures_all_six_already_existed_and_check_out"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/team-runs/2026-07-27-phase3-engine/team_findings.md",
+      "source_location": "L446",
+      "weight": 1.0,
+      "source": "2026_07_27_phase3_engine_team_findings_team_findings_phase_3",
+      "target": "2026_07_27_phase3_engine_team_findings_t7_status_report_to_lead_plus_the_five_coverage_threshold_fixtures_landed_and_renamed_to_t1_s_ids",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -16596,5 +16634,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "a95e3dd743287c4cd00045c5a360e5dec68188f3"
+  "built_at_commit": "b0aa7fd68771f2c7e0321789cb7ff7de2cf12085"
 }

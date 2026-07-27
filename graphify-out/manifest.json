@@ -240,8 +240,8 @@
     "semantic_hash": ""
   },
   "/Users/stevenlpz/LabelerGuideAgents/s2s-harness/src/s2s_harness/rules/audit.py": {
-    "mtime": 1785125903.3917506,
-    "ast_hash": "fa8b672e9b13e5794d29604d0952de81",
+    "mtime": 1785127301.0481992,
+    "ast_hash": "82900a7cf4bd22b3fd889d495d2074cf",
     "semantic_hash": ""
   },
   "/Users/stevenlpz/LabelerGuideAgents/s2s-harness/src/s2s_harness/rules/decide.py": {
@@ -255,8 +255,8 @@
     "semantic_hash": ""
   },
   "/Users/stevenlpz/LabelerGuideAgents/s2s-harness/.claude/team-runs/2026-07-27-phase3-engine/team_findings.md": {
-    "mtime": 1785127179.7670028,
-    "ast_hash": "cb5371a1d9164e2b87486e943a291102",
+    "mtime": 1785127243.6611252,
+    "ast_hash": "a3af5d9581d8732acc3815b553108c4f",
     "semantic_hash": ""
   },
   "/Users/stevenlpz/LabelerGuideAgents/s2s-harness/.claude/team-runs/2026-07-27-phase3-engine/team_plan.md": {
@@ -265,8 +265,8 @@
     "semantic_hash": ""
   },
   "/Users/stevenlpz/LabelerGuideAgents/s2s-harness/.claude/team-runs/2026-07-27-phase3-engine/team_progress.md": {
-    "mtime": 1785127167.1150181,
-    "ast_hash": "35239b076dcde5e5cb6afc4f1d6e6730",
+    "mtime": 1785127304.505349,
+    "ast_hash": "c4c62fccba951adacc00eeeb4d92ef00",
     "semantic_hash": ""
   },
   "/Users/stevenlpz/LabelerGuideAgents/s2s-harness/src/s2s_harness/rules/draft.py": {
