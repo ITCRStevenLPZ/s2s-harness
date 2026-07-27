@@ -1008,7 +1008,7 @@
       "source_file": "src/s2s_harness/rules/decide.py",
       "source_location": "L1",
       "id": "rules_decide",
-      "community": 29,
+      "community": 49,
       "norm_label": "decide.py"
     },
     {
@@ -1017,7 +1017,7 @@
       "source_file": "src/s2s_harness/rules/decide.py",
       "source_location": "L76",
       "id": "rules_decide_gate_name",
-      "community": 29,
+      "community": 49,
       "norm_label": "gate_name()"
     },
     {
@@ -1026,7 +1026,7 @@
       "source_file": "src/s2s_harness/rules/decide.py",
       "source_location": "L76",
       "id": "src_s2s_harness_rules_decide_py_str",
-      "community": 29,
+      "community": 49,
       "norm_label": "str"
     },
     {
@@ -1035,7 +1035,7 @@
       "source_file": "src/s2s_harness/rules/decide.py",
       "source_location": "L94",
       "id": "rules_decide_display_for",
-      "community": 29,
+      "community": 49,
       "norm_label": "_display_for()"
     },
     {
@@ -1044,7 +1044,7 @@
       "source_file": "src/s2s_harness/rules/decide.py",
       "source_location": "L114",
       "id": "rules_decide_join_english",
-      "community": 29,
+      "community": 49,
       "norm_label": "_join_english()"
     },
     {
@@ -1053,7 +1053,7 @@
       "source_file": "src/s2s_harness/rules/decide.py",
       "source_location": "L131",
       "id": "rules_decide_joined",
-      "community": 29,
+      "community": 49,
       "norm_label": "_joined()"
     },
     {
@@ -1062,7 +1062,7 @@
       "source_file": "src/s2s_harness/rules/decide.py",
       "source_location": "L140",
       "id": "rules_decide_other",
-      "community": 29,
+      "community": 49,
       "norm_label": "_other()"
     },
     {
@@ -1071,7 +1071,7 @@
       "source_file": "src/s2s_harness/rules/decide.py",
       "source_location": "L140",
       "id": "src_s2s_harness_rules_decide_py_side",
-      "community": 29,
+      "community": 49,
       "norm_label": "side"
     },
     {
@@ -1080,7 +1080,7 @@
       "source_file": "src/s2s_harness/rules/decide.py",
       "source_location": "L144",
       "id": "rules_decide_gated_verdict",
-      "community": 29,
+      "community": 49,
       "norm_label": "_gated_verdict()"
     },
     {
@@ -1089,7 +1089,7 @@
       "source_file": "src/s2s_harness/rules/decide.py",
       "source_location": "L144",
       "id": "picks",
-      "community": 29,
+      "community": 49,
       "norm_label": "picks"
     },
     {
@@ -1098,7 +1098,7 @@
       "source_file": "src/s2s_harness/rules/decide.py",
       "source_location": "L144",
       "id": "src_s2s_harness_rules_decide_py_verdict",
-      "community": 29,
+      "community": 49,
       "norm_label": "verdict"
     },
     {
@@ -1107,7 +1107,7 @@
       "source_file": "src/s2s_harness/rules/decide.py",
       "source_location": "L177",
       "id": "rules_decide_both_breach_trace",
-      "community": 29,
+      "community": 49,
       "norm_label": "_both_breach_trace()"
     },
     {
@@ -1116,7 +1116,7 @@
       "source_file": "src/s2s_harness/rules/decide.py",
       "source_location": "L192",
       "id": "rules_decide_hierarchy_walk",
-      "community": 29,
+      "community": 49,
       "norm_label": "_hierarchy_walk()"
     },
     {
@@ -1125,7 +1125,7 @@
       "source_file": "src/s2s_harness/rules/decide.py",
       "source_location": "L257",
       "id": "rules_decide_decide",
-      "community": 29,
+      "community": 49,
       "norm_label": "decide()"
     },
     {
@@ -1143,7 +1143,7 @@
       "source_file": "src/s2s_harness/rules/decide.py",
       "source_location": "L1",
       "id": "rules_decide_rationale_1",
-      "community": 29,
+      "community": 49,
       "norm_label": "the threshold gate and the hierarchy walk.  implements rules_spec.md section 3,"
     },
     {
@@ -1152,7 +1152,7 @@
       "source_file": "src/s2s_harness/rules/decide.py",
       "source_location": "L77",
       "id": "rules_decide_rationale_77",
-      "community": 29,
+      "community": 49,
       "norm_label": "rules_spec section 3, `gate_name`. {rule-14}      maps a breaching side's flag m"
     },
     {
@@ -1161,7 +1161,7 @@
       "source_file": "src/s2s_harness/rules/decide.py",
       "source_location": "L95",
       "id": "rules_decide_rationale_95",
-      "community": 29,
+      "community": 49,
       "norm_label": "look up a threshold key's display string in either catalogue.      both `sideobs"
     },
     {
@@ -1170,7 +1170,7 @@
       "source_file": "src/s2s_harness/rules/decide.py",
       "source_location": "L115",
       "id": "rules_decide_rationale_115",
-      "community": 29,
+      "community": 49,
       "norm_label": "render a list of display strings as one english clause.      rules_spec section"
     },
     {
@@ -1179,7 +1179,7 @@
       "source_file": "src/s2s_harness/rules/decide.py",
       "source_location": "L132",
       "id": "rules_decide_rationale_132",
-      "community": 29,
+      "community": 49,
       "norm_label": "`{joined ...}` as used in the rule-10/rule-11/rule-12 templates.      preserves"
     },
     {
@@ -1188,7 +1188,7 @@
       "source_file": "src/s2s_harness/rules/decide.py",
       "source_location": "L145",
       "id": "rules_decide_rationale_145",
-      "community": 29,
+      "community": 49,
       "norm_label": "rules_spec section 3, cases `thr_a > 0, thr_b == 0` and its mirror.      {rule-1"
     },
     {
@@ -1197,7 +1197,7 @@
       "source_file": "src/s2s_harness/rules/decide.py",
       "source_location": "L178",
       "id": "rules_decide_rationale_178",
-      "community": 29,
+      "community": 49,
       "norm_label": "{rule-12}, both sides breach. verbatim from rules_spec section 3     (gap 3, clo"
     },
     {
@@ -1206,7 +1206,7 @@
       "source_file": "src/s2s_harness/rules/decide.py",
       "source_location": "L193",
       "id": "rules_decide_rationale_193",
-      "community": 29,
+      "community": 49,
       "norm_label": "rules_spec section 3, step 2. {rule-15}      `trace` already carries the step 1"
     },
     {
@@ -1215,7 +1215,7 @@
       "source_file": "src/s2s_harness/rules/decide.py",
       "source_location": "L258",
       "id": "rules_decide_rationale_258",
-      "community": 29,
+      "community": 49,
       "norm_label": "rules_spec section 3, the full `decide` procedure. {rule-10}..{rule-15}      {ru"
     },
     {
@@ -1674,7 +1674,7 @@
       "source_file": "src/s2s_harness/rules/scanner.py",
       "source_location": "L1",
       "id": "rules_scanner",
-      "community": 49,
+      "community": 29,
       "norm_label": "scanner.py"
     },
     {
@@ -1683,7 +1683,7 @@
       "source_file": "src/s2s_harness/rules/scanner.py",
       "source_location": "L42",
       "id": "rules_scanner_scanentry",
-      "community": 49,
+      "community": 29,
       "norm_label": "_scanentry"
     },
     {
@@ -1692,7 +1692,7 @@
       "source_file": "src/s2s_harness/rules/scanner.py",
       "source_location": "L50",
       "id": "rules_scanner_compile",
-      "community": 49,
+      "community": 29,
       "norm_label": "_compile()"
     },
     {
@@ -1701,7 +1701,7 @@
       "source_file": "src/s2s_harness/rules/scanner.py",
       "source_location": "L50",
       "id": "src_s2s_harness_rules_scanner_py_str",
-      "community": 49,
+      "community": 29,
       "norm_label": "str"
     },
     {
@@ -1719,7 +1719,7 @@
       "source_file": "src/s2s_harness/rules/scanner.py",
       "source_location": "L63",
       "id": "rules_scanner_entry",
-      "community": 49,
+      "community": 29,
       "norm_label": "_entry()"
     },
     {
@@ -1728,7 +1728,7 @@
       "source_file": "src/s2s_harness/rules/scanner.py",
       "source_location": "L322",
       "id": "rules_scanner_flag_already_set",
-      "community": 49,
+      "community": 29,
       "norm_label": "_flag_already_set()"
     },
     {
@@ -1755,7 +1755,7 @@
       "source_file": "src/s2s_harness/rules/scanner.py",
       "source_location": "L337",
       "id": "rules_scanner_mode_allows",
-      "community": 49,
+      "community": 29,
       "norm_label": "_mode_allows()"
     },
     {
@@ -1764,7 +1764,7 @@
       "source_file": "src/s2s_harness/rules/scanner.py",
       "source_location": "L362",
       "id": "rules_scanner_scan",
-      "community": 49,
+      "community": 29,
       "norm_label": "scan()"
     },
     {
@@ -1791,7 +1791,7 @@
       "source_file": "src/s2s_harness/rules/scanner.py",
       "source_location": "L1",
       "id": "rules_scanner_rationale_1",
-      "community": 49,
+      "community": 29,
       "norm_label": "bilingual signal detection: `scan(state) -> list[suggestion]`.  implements `docs"
     },
     {
@@ -1800,7 +1800,7 @@
       "source_file": "src/s2s_harness/rules/scanner.py",
       "source_location": "L51",
       "id": "rules_scanner_rationale_51",
-      "community": 49,
+      "community": 29,
       "norm_label": "case-insensitive alternation over literal fragments ({rule-34}).      fragments"
     },
     {
@@ -1809,7 +1809,7 @@
       "source_file": "src/s2s_harness/rules/scanner.py",
       "source_location": "L323",
       "id": "rules_scanner_rationale_323",
-      "community": 49,
+      "community": 29,
       "norm_label": "{rule-36}: \"a suggestion is produced only when the corresponding     flag is cur"
     },
     {
@@ -1818,7 +1818,7 @@
       "source_file": "src/s2s_harness/rules/scanner.py",
       "source_location": "L338",
       "id": "rules_scanner_rationale_338",
-      "community": 49,
+      "community": 29,
       "norm_label": "error-cluster catalogue keys are mode-scoped (rules_spec section 1     `modes` c"
     },
     {
@@ -1827,7 +1827,7 @@
       "source_file": "src/s2s_harness/rules/scanner.py",
       "source_location": "L363",
       "id": "rules_scanner_rationale_363",
-      "community": 49,
+      "community": 29,
       "norm_label": "rules_spec section 6, `scan(state) -> list[suggestion]`.      {rule-36}: only su"
     },
     {
@@ -3469,10 +3469,19 @@
       "norm_label": "[t6] `tests/golden/coverage.md` written"
     },
     {
-      "label": "[T4] Re-verified against RULES_SPEC 1.2.0's {RULE-43} scoping \u2014 no code change needed",
+      "label": "[T6] Lead caught a real COVERAGE.md drift; audited all 45 claims, fixed the one wrong one",
       "file_type": "document",
       "source_file": ".claude/team-runs/2026-07-27-phase3-engine/team_findings.md",
       "source_location": "L253",
+      "id": "2026_07_27_phase3_engine_team_findings_t6_lead_caught_a_real_coverage_md_drift_audited_all_45_claims_fixed_the_one_wrong_one",
+      "community": 46,
+      "norm_label": "[t6] lead caught a real coverage.md drift; audited all 45 claims, fixed the one wrong one"
+    },
+    {
+      "label": "[T4] Re-verified against RULES_SPEC 1.2.0's {RULE-43} scoping \u2014 no code change needed",
+      "file_type": "document",
+      "source_file": ".claude/team-runs/2026-07-27-phase3-engine/team_findings.md",
+      "source_location": "L305",
       "id": "2026_07_27_phase3_engine_team_findings_t4_re_verified_against_rules_spec_1_2_0_s_rule_43_scoping_no_code_change_needed",
       "community": 46,
       "norm_label": "[t4] re-verified against rules_spec 1.2.0's {rule-43} scoping \u2014 no code change needed"
@@ -3481,10 +3490,28 @@
       "label": "[T5] draft.py + scanner.py complete; carry-over splice finding confirmed with rendered evidence",
       "file_type": "document",
       "source_file": ".claude/team-runs/2026-07-27-phase3-engine/team_findings.md",
-      "source_location": "L271",
+      "source_location": "L323",
       "id": "2026_07_27_phase3_engine_team_findings_t5_draft_py_scanner_py_complete_carry_over_splice_finding_confirmed_with_rendered_evidence",
       "community": 46,
       "norm_label": "[t5] draft.py + scanner.py complete; carry-over splice finding confirmed with rendered evidence"
+    },
+    {
+      "label": "[T7] Took over the adversarial-fixtures half of stalled T7; found the prior instance had already finished, just never committed or reported",
+      "file_type": "document",
+      "source_file": ".claude/team-runs/2026-07-27-phase3-engine/team_findings.md",
+      "source_location": "L353",
+      "id": "2026_07_27_phase3_engine_team_findings_t7_took_over_the_adversarial_fixtures_half_of_stalled_t7_found_the_prior_instance_had_already_finished_just_never_committed_or_reported",
+      "community": 46,
+      "norm_label": "[t7] took over the adversarial-fixtures half of stalled t7; found the prior instance had already finished, just never committed or reported"
+    },
+    {
+      "label": "[T1] User ruled on the coverage-honesty question \u2014 @T7-fixtures-adversarial @T6-fixtures-required, `EVAL_SPEC.md` now 1.3.0",
+      "file_type": "document",
+      "source_file": ".claude/team-runs/2026-07-27-phase3-engine/team_findings.md",
+      "source_location": "L421",
+      "id": "2026_07_27_phase3_engine_team_findings_t1_user_ruled_on_the_coverage_honesty_question_t7_fixtures_adversarial_t6_fixtures_required_eval_spec_md_now_1_3_0",
+      "community": 46,
+      "norm_label": "[t1] user ruled on the coverage-honesty question \u2014 @t7-fixtures-adversarial @t6-fixtures-required, `eval_spec.md` now 1.3.0"
     },
     {
       "label": "team_plan.md",
@@ -4696,7 +4723,7 @@
       "label": "Golden fixtures",
       "file_type": "document",
       "source_file": "docs/EVAL_SPEC.md",
-      "source_location": "L14",
+      "source_location": "L16",
       "id": "docs_eval_spec_golden_fixtures",
       "community": 8,
       "norm_label": "golden fixtures"
@@ -4705,7 +4732,7 @@
       "label": "Required fixtures",
       "file_type": "document",
       "source_file": "docs/EVAL_SPEC.md",
-      "source_location": "L52",
+      "source_location": "L54",
       "id": "docs_eval_spec_required_fixtures",
       "community": 8,
       "norm_label": "required fixtures"
@@ -4714,16 +4741,25 @@
       "label": "Adversarial fixtures",
       "file_type": "document",
       "source_file": "docs/EVAL_SPEC.md",
-      "source_location": "L63",
+      "source_location": "L65",
       "id": "docs_eval_spec_adversarial_fixtures",
       "community": 8,
       "norm_label": "adversarial fixtures"
     },
     {
+      "label": "Coverage threshold {EVAL-24}",
+      "file_type": "document",
+      "source_file": "docs/EVAL_SPEC.md",
+      "source_location": "L82",
+      "id": "docs_eval_spec_coverage_threshold_eval_24",
+      "community": 8,
+      "norm_label": "coverage threshold {eval-24}"
+    },
+    {
       "label": "Regression policy {EVAL-14}",
       "file_type": "document",
       "source_file": "docs/EVAL_SPEC.md",
-      "source_location": "L75",
+      "source_location": "L93",
       "id": "docs_eval_spec_regression_policy_eval_14",
       "community": 8,
       "norm_label": "regression policy {eval-14}"
@@ -4732,7 +4768,7 @@
       "label": "Determinism test {EVAL-15}",
       "file_type": "document",
       "source_file": "docs/EVAL_SPEC.md",
-      "source_location": "L81",
+      "source_location": "L99",
       "id": "docs_eval_spec_determinism_test_eval_15",
       "community": 8,
       "norm_label": "determinism test {eval-15}"
@@ -4741,7 +4777,7 @@
       "label": "Token-boundary test {EVAL-16}",
       "file_type": "document",
       "source_file": "docs/EVAL_SPEC.md",
-      "source_location": "L85",
+      "source_location": "L103",
       "id": "docs_eval_spec_token_boundary_test_eval_16",
       "community": 8,
       "norm_label": "token-boundary test {eval-16}"
@@ -4750,7 +4786,7 @@
       "label": "STT tests {EVAL-17}",
       "file_type": "document",
       "source_file": "docs/EVAL_SPEC.md",
-      "source_location": "L89",
+      "source_location": "L107",
       "id": "docs_eval_spec_stt_tests_eval_17",
       "community": 8,
       "norm_label": "stt tests {eval-17}"
@@ -4759,7 +4795,7 @@
       "label": "What is not tested {EVAL-18}",
       "file_type": "document",
       "source_file": "docs/EVAL_SPEC.md",
-      "source_location": "L93",
+      "source_location": "L111",
       "id": "docs_eval_spec_what_is_not_tested_eval_18",
       "community": 8,
       "norm_label": "what is not tested {eval-18}"
@@ -5344,7 +5380,7 @@
       "label": "Fixture inventory",
       "file_type": "document",
       "source_file": "tests/golden/COVERAGE.md",
-      "source_location": "L22",
+      "source_location": "L39",
       "id": "golden_coverage_fixture_inventory",
       "community": 50,
       "norm_label": "fixture inventory"
@@ -5353,7 +5389,7 @@
       "label": "`criteria/project-criteria.md` clause coverage",
       "file_type": "document",
       "source_file": "tests/golden/COVERAGE.md",
-      "source_location": "L40",
+      "source_location": "L57",
       "id": "golden_coverage_criteria_project_criteria_md_clause_coverage",
       "community": 50,
       "norm_label": "`criteria/project-criteria.md` clause coverage"
@@ -5362,7 +5398,7 @@
       "label": "`RULES_SPEC.md` section 4 finding-code coverage (34 codes)",
       "file_type": "document",
       "source_file": "tests/golden/COVERAGE.md",
-      "source_location": "L56",
+      "source_location": "L73",
       "id": "golden_coverage_rules_spec_md_section_4_finding_code_coverage_34_codes",
       "community": 50,
       "norm_label": "`rules_spec.md` section 4 finding-code coverage (34 codes)"
@@ -5371,7 +5407,7 @@
       "label": "4.1 Setup and consistency \u2014 conversation mode only (`{RULE-16}`)",
       "file_type": "document",
       "source_file": "tests/golden/COVERAGE.md",
-      "source_location": "L58",
+      "source_location": "L75",
       "id": "golden_coverage_4_1_setup_and_consistency_conversation_mode_only_rule_16",
       "community": 50,
       "norm_label": "4.1 setup and consistency \u2014 conversation mode only (`{rule-16}`)"
@@ -5380,7 +5416,7 @@
       "label": "4.2 Evidence \u2014 both modes (`{RULE-17}`)",
       "file_type": "document",
       "source_file": "tests/golden/COVERAGE.md",
-      "source_location": "L72",
+      "source_location": "L89",
       "id": "golden_coverage_4_2_evidence_both_modes_rule_17",
       "community": 50,
       "norm_label": "4.2 evidence \u2014 both modes (`{rule-17}`)"
@@ -5389,7 +5425,7 @@
       "label": "4.3 Scenario inversion (`{RULE-18}`)",
       "file_type": "document",
       "source_file": "tests/golden/COVERAGE.md",
-      "source_location": "L82",
+      "source_location": "L99",
       "id": "golden_coverage_4_3_scenario_inversion_rule_18",
       "community": 50,
       "norm_label": "4.3 scenario inversion (`{rule-18}`)"
@@ -5398,7 +5434,7 @@
       "label": "4.4 Audio (`{RULE-19}`)",
       "file_type": "document",
       "source_file": "tests/golden/COVERAGE.md",
-      "source_location": "L92",
+      "source_location": "L109",
       "id": "golden_coverage_4_4_audio_rule_19",
       "community": 50,
       "norm_label": "4.4 audio (`{rule-19}`)"
@@ -5407,7 +5443,7 @@
       "label": "4.5 Utility (`{RULE-20}`)",
       "file_type": "document",
       "source_file": "tests/golden/COVERAGE.md",
-      "source_location": "L101",
+      "source_location": "L118",
       "id": "golden_coverage_4_5_utility_rule_20",
       "community": 50,
       "norm_label": "4.5 utility (`{rule-20}`)"
@@ -5416,7 +5452,7 @@
       "label": "4.6 Overall coherence (`{RULE-21}`)",
       "file_type": "document",
       "source_file": "tests/golden/COVERAGE.md",
-      "source_location": "L107",
+      "source_location": "L124",
       "id": "golden_coverage_4_6_overall_coherence_rule_21",
       "community": 50,
       "norm_label": "4.6 overall coherence (`{rule-21}`)"
@@ -5425,7 +5461,7 @@
       "label": "4.7 Error clusters (`{RULE-22}`)",
       "file_type": "document",
       "source_file": "tests/golden/COVERAGE.md",
-      "source_location": "L119",
+      "source_location": "L136",
       "id": "golden_coverage_4_7_error_clusters_rule_22",
       "community": 50,
       "norm_label": "4.7 error clusters (`{rule-22}`)"
@@ -5434,7 +5470,7 @@
       "label": "4.8 Skip (`{RULE-23}`)",
       "file_type": "document",
       "source_file": "tests/golden/COVERAGE.md",
-      "source_location": "L128",
+      "source_location": "L145",
       "id": "golden_coverage_4_8_skip_rule_23",
       "community": 50,
       "norm_label": "4.8 skip (`{rule-23}`)"
@@ -5443,7 +5479,7 @@
       "label": "Summary of gaps",
       "file_type": "document",
       "source_file": "tests/golden/COVERAGE.md",
-      "source_location": "L134",
+      "source_location": "L151",
       "id": "golden_coverage_summary_of_gaps",
       "community": 50,
       "norm_label": "summary of gaps"
@@ -5516,7 +5552,7 @@
       "file_type": "rationale",
       "source_file": "src/s2s_harness/rules/decide.py",
       "source_location": "L179",
-      "community": 29,
+      "community": 49,
       "norm_label": "{rule-12}, both sides breach. verbatim from rules_spec section 3     (gap 3, clo",
       "id": "rules_decide_rationale_179"
     },
@@ -5525,7 +5561,7 @@
       "file_type": "rationale",
       "source_file": "src/s2s_harness/rules/decide.py",
       "source_location": "L194",
-      "community": 29,
+      "community": 49,
       "norm_label": "rules_spec section 3, step 2. {rule-15}      `trace` already carries the step 1",
       "id": "rules_decide_rationale_194"
     },
@@ -5534,7 +5570,7 @@
       "file_type": "rationale",
       "source_file": "src/s2s_harness/rules/decide.py",
       "source_location": "L259",
-      "community": 29,
+      "community": 49,
       "norm_label": "rules_spec section 3, the full `decide` procedure. {rule-10}..{rule-15}      {ru",
       "id": "rules_decide_rationale_259"
     },
@@ -5651,7 +5687,7 @@
       "file_type": "rationale",
       "source_file": "src/s2s_harness/rules/scanner.py",
       "source_location": "L321",
-      "community": 49,
+      "community": 29,
       "norm_label": "{rule-36}: \"a suggestion is produced only when the corresponding     flag is cur",
       "id": "rules_scanner_rationale_321"
     },
@@ -5660,7 +5696,7 @@
       "file_type": "rationale",
       "source_file": "src/s2s_harness/rules/scanner.py",
       "source_location": "L336",
-      "community": 49,
+      "community": 29,
       "norm_label": "error-cluster catalogue keys are mode-scoped (rules_spec section 1     `modes` c",
       "id": "rules_scanner_rationale_336"
     },
@@ -5669,7 +5705,7 @@
       "file_type": "rationale",
       "source_file": "src/s2s_harness/rules/scanner.py",
       "source_location": "L357",
-      "community": 49,
+      "community": 29,
       "norm_label": "rules_spec section 6, `scan(state) -> list[suggestion]`.      {rule-36}: only su",
       "id": "rules_scanner_rationale_357"
     },
@@ -11922,9 +11958,9 @@
       "source_file": "tests/golden/_golden_lib.py",
       "source_location": "L49",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "golden_golden_lib_rationale_49",
-      "target": "golden_golden_lib_fixture_paths",
-      "confidence_score": 1.0
+      "target": "golden_golden_lib_fixture_paths"
     },
     {
       "relation": "imports",
@@ -11944,9 +11980,9 @@
       "source_file": "tests/test_determinism.py",
       "source_location": "L25",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tests_test_determinism",
-      "target": "golden_golden_lib_fixture_paths",
-      "confidence_score": 1.0
+      "target": "golden_golden_lib_fixture_paths"
     },
     {
       "relation": "references",
@@ -12107,9 +12143,9 @@
       "source_file": "tests/golden/_golden_lib.py",
       "source_location": "L61",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "golden_golden_lib_rationale_61",
-      "target": "golden_golden_lib_build_initial_state",
-      "confidence_score": 1.0
+      "target": "golden_golden_lib_build_initial_state"
     },
     {
       "relation": "calls",
@@ -12171,9 +12207,9 @@
       "source_file": "tests/golden/_golden_lib.py",
       "source_location": "L77",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "golden_golden_lib_rationale_77",
-      "target": "golden_golden_lib_run_pipeline",
-      "confidence_score": 1.0
+      "target": "golden_golden_lib_run_pipeline"
     },
     {
       "relation": "calls",
@@ -12259,9 +12295,9 @@
       "source_file": "tests/test_determinism.py",
       "source_location": "L25",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tests_test_determinism",
-      "target": "golden_golden_lib_run_fixture",
-      "confidence_score": 1.0
+      "target": "golden_golden_lib_run_fixture"
     },
     {
       "relation": "calls",
@@ -12481,9 +12517,9 @@
       "source_file": "tests/test_determinism.py",
       "source_location": "L34",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tests_test_determinism",
-      "target": "tests_test_determinism_snapshot",
-      "confidence_score": 1.0
+      "target": "tests_test_determinism_snapshot"
     },
     {
       "relation": "contains",
@@ -12491,9 +12527,9 @@
       "source_file": "tests/test_determinism.py",
       "source_location": "L50",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tests_test_determinism",
-      "target": "tests_test_determinism_test_fixture_is_deterministic_across_fifty_runs",
-      "confidence_score": 1.0
+      "target": "tests_test_determinism_test_fixture_is_deterministic_across_fifty_runs"
     },
     {
       "relation": "rationale_for",
@@ -12501,9 +12537,9 @@
       "source_file": "tests/test_determinism.py",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tests_test_determinism_rationale_1",
-      "target": "tests_test_determinism",
-      "confidence_score": 1.0
+      "target": "tests_test_determinism"
     },
     {
       "relation": "rationale_for",
@@ -12511,9 +12547,9 @@
       "source_file": "tests/test_determinism.py",
       "source_location": "L35",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tests_test_determinism_rationale_35",
-      "target": "tests_test_determinism_snapshot",
-      "confidence_score": 1.0
+      "target": "tests_test_determinism_snapshot"
     },
     {
       "relation": "references",
@@ -12522,9 +12558,9 @@
       "source_file": "tests/test_determinism.py",
       "source_location": "L34",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tests_test_determinism_snapshot",
-      "target": "tests_test_determinism_py_any",
-      "confidence_score": 1.0
+      "target": "tests_test_determinism_py_any"
     },
     {
       "relation": "references",
@@ -12533,9 +12569,9 @@
       "source_file": "tests/test_determinism.py",
       "source_location": "L34",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tests_test_determinism_snapshot",
-      "target": "tests_test_determinism_py_str",
-      "confidence_score": 1.0
+      "target": "tests_test_determinism_py_str"
     },
     {
       "relation": "calls",
@@ -12544,9 +12580,9 @@
       "source_file": "tests/test_determinism.py",
       "source_location": "L54",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tests_test_determinism_test_fixture_is_deterministic_across_fifty_runs",
-      "target": "tests_test_determinism_snapshot",
-      "confidence_score": 1.0
+      "target": "tests_test_determinism_snapshot"
     },
     {
       "relation": "references",
@@ -12555,9 +12591,9 @@
       "source_file": "tests/test_determinism.py",
       "source_location": "L50",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tests_test_determinism_test_fixture_is_deterministic_across_fifty_runs",
-      "target": "tests_test_determinism_py_path",
-      "confidence_score": 1.0
+      "target": "tests_test_determinism_py_path"
     },
     {
       "relation": "contains",
@@ -13793,6 +13829,16 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": ".claude/team-runs/2026-07-27-phase3-engine/team_findings.md",
+      "source_location": "L421",
+      "weight": 1.0,
+      "source": "2026_07_27_phase3_engine_team_findings_team_findings_phase_3",
+      "target": "2026_07_27_phase3_engine_team_findings_t1_user_ruled_on_the_coverage_honesty_question_t7_fixtures_adversarial_t6_fixtures_required_eval_spec_md_now_1_3_0",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/team-runs/2026-07-27-phase3-engine/team_findings.md",
       "source_location": "L95",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -13873,6 +13919,16 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": ".claude/team-runs/2026-07-27-phase3-engine/team_findings.md",
+      "source_location": "L253",
+      "weight": 1.0,
+      "source": "2026_07_27_phase3_engine_team_findings_team_findings_phase_3",
+      "target": "2026_07_27_phase3_engine_team_findings_t6_lead_caught_a_real_coverage_md_drift_audited_all_45_claims_fixed_the_one_wrong_one",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/team-runs/2026-07-27-phase3-engine/team_findings.md",
       "source_location": "L230",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -13888,6 +13944,16 @@
       "confidence_score": 1.0,
       "source": "2026_07_27_phase3_engine_team_findings_team_findings_phase_3",
       "target": "2026_07_27_phase3_engine_team_findings_t6_took_over_the_required_fixtures_half_of_stalled_t2_fixtures_all_six_already_existed_and_check_out"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/team-runs/2026-07-27-phase3-engine/team_findings.md",
+      "source_location": "L301",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "2026_07_27_phase3_engine_team_findings_team_findings_phase_3",
+      "target": "2026_07_27_phase3_engine_team_findings_t7_took_over_the_adversarial_fixtures_half_of_stalled_t7_found_the_prior_instance_had_already_finished_just_never_committed_or_reported"
     },
     {
       "relation": "contains",
@@ -15253,6 +15319,16 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/EVAL_SPEC.md",
+      "source_location": "L82",
+      "weight": 1.0,
+      "source": "docs_eval_spec_evaluation_and_regression_specification",
+      "target": "docs_eval_spec_coverage_threshold_eval_24",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/EVAL_SPEC.md",
       "source_location": "L72",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -16501,5 +16577,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "0a550fac8e5aa066ace40cb3838e9fc0684130d3"
+  "built_at_commit": "58ff00add7ac868f7023a0113512f73c790c01bc"
 }

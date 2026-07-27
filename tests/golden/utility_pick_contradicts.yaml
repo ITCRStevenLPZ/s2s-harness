@@ -1,0 +1,38 @@
+# Coverage-threshold fixture (new user requirement). Provisional id EVAL-21
+# -- swap for T1-spec-gaps's assigned id once broadcast in team_findings.md.
+#
+# Exercises `UTILITY_PICK_CONTRADICTS` {RULE-20}, section 4.5: "the side
+# picked for Utility carries `threshold_utility` flags." Clip A's
+# `instruction_failure` flag also gates the overall verdict via Step 1
+# (RULE-10); `picks.overall` is the clean side (B) so `OVERALL_PREFERS_GATED`
+# stays silent and only the utility-pick contradiction is under test.
+id: utility_pick_contradicts
+mode: clips
+context:
+  prompt: "summarize the plot of a short story in three sentences"
+  scenario_type: standard
+a:
+  notes: "Clip A sonaba seguro, pero solo dio dos oraciones y se salto la instruccion de dar tres."
+  best: "confident, fluent delivery"
+  worst: "only gives two sentences, skipping the explicit three-sentence instruction"
+  threshold_utility: [instruction_failure]
+b:
+  notes: "Clip B followed the three-sentence instruction exactly and covered the key plot points."
+  best: "delivers exactly three sentences, hitting the key plot points cleanly"
+  worst: "a little dry in tone"
+picks: {naturalness: TIE, utility: A, audio: TIE, overall: B}
+expect:
+  verdict:
+    overall: B
+    driver: "Threshold — Utility"
+    gated: true
+    gated_side: A
+  findings_include: [UTILITY_PICK_CONTRADICTS]
+  findings_exclude:
+    - OVERALL_PREFERS_GATED
+    - AUDIO_BOTH_GOOD_ILLEGAL
+  draft_contains:
+    - "Clip A has a clear issue that crosses the project's threshold — failure to follow the instruction — and a side with that kind of problem should not be preferred while the other one is clean."
+    - "Therefore, Clip B is the stronger fit for the project's North Star."
+  draft_excludes:
+    - "【"

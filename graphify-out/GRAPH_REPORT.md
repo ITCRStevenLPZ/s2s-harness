@@ -1,16 +1,16 @@
 # Graph Report - s2s-harness  (2026-07-26)
 
 ## Corpus Check
-- 54 files · ~83,814 words
+- 54 files · ~88,589 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 702 nodes · 989 edges · 52 communities (43 shown, 9 thin omitted)
+- 706 nodes · 993 edges · 52 communities (43 shown, 9 thin omitted)
 - Extraction: 90% EXTRACTED · 10% INFERRED · 0% AMBIGUOUS · INFERRED: 101 edges (avg confidence: 0.51)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `0a550fac`
+- Built from commit: `58ff00ad`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -71,9 +71,9 @@
 1. `Team Findings: Wave 1` - 41 edges
 2. `SideObservation` - 34 edges
 3. `str` - 25 edges
-4. `EvaluationState` - 23 edges
-5. `Project criteria — source of truth` - 23 edges
-6. `Team Findings: Phase 3` - 22 edges
+4. `Team Findings: Phase 3` - 25 edges
+5. `EvaluationState` - 23 edges
+6. `Project criteria — source of truth` - 23 edges
 7. `Verdict` - 21 edges
 8. `2. Nodes` - 19 edges
 9. `5. `draft` — the justification builder` - 19 edges
@@ -82,13 +82,13 @@
 ## Surprising Connections (you probably didn't know these)
 - `run_pipeline()` --calls--> `audit()`  [INFERRED]
   tests/golden/_golden_lib.py → src/s2s_harness/rules/audit.py
+- `run_pipeline()` --calls--> `decide()`  [INFERRED]
+  tests/golden/_golden_lib.py → src/s2s_harness/rules/decide.py
 - `run_pipeline()` --calls--> `build_draft()`  [INFERRED]
   tests/golden/_golden_lib.py → src/s2s_harness/rules/draft.py
 - `Finding` --uses--> `SideObservation`  [INFERRED]
   tests/golden/_golden_lib.py → src/s2s_harness/models/state.py
 - `Any` --uses--> `SideObservation`  [INFERRED]
-  tests/golden/_golden_lib.py → src/s2s_harness/models/state.py
-- `EvaluationState` --uses--> `SideObservation`  [INFERRED]
   tests/golden/_golden_lib.py → src/s2s_harness/models/state.py
 
 ## Import Cycles
@@ -129,8 +129,8 @@ Cohesion: 0.11
 Nodes (18): 1. Scope, 1. Scope {STT-1}, 2. Provider interface, 2. Provider interface {STT-2}, 3. `GeminiTranscriber`, 3. `GeminiTranscriber` {STT-5}, 4. `GoogleCloudSTT`, 4. `GoogleCloudSTT` {STT-6} (+10 more)
 
 ### Community 8 - "Community 8"
-Cohesion: 0.13
-Nodes (14): Adversarial fixtures, Determinism test, Determinism test {EVAL-15}, Evaluation and regression specification, Golden fixtures, Regression policy, Regression policy {EVAL-14}, Required fixtures (+6 more)
+Cohesion: 0.12
+Nodes (15): Adversarial fixtures, Coverage threshold {EVAL-24}, Determinism test, Determinism test {EVAL-15}, Evaluation and regression specification, Golden fixtures, Regression policy, Regression policy {EVAL-14} (+7 more)
 
 ### Community 9 - "Community 9"
 Cohesion: 0.06
@@ -198,7 +198,7 @@ Nodes (3): Accuracy details, Constraints, What you are building
 
 ### Community 29 - "Community 29"
 Cohesion: 0.06
-Nodes (76): BaseModel, Finding, build_initial_state(), load_fixture(), Shared golden-fixture loading and execution helpers.  Owned by T7-fixtures-adver, `EvaluationState` per docs/EVAL_SPEC.md's fixture schema.      Top-level `mode`, `EvaluationState` per docs/EVAL_SPEC.md's fixture schema.      Top-level `mode`, normalize -> decide -> audit -> build_draft, per GRAPH_SPEC section 2's     node (+68 more)
+Nodes (66): BaseModel, Finding, build_initial_state(), load_fixture(), Shared golden-fixture loading and execution helpers.  Owned by T7-fixtures-adver, `EvaluationState` per docs/EVAL_SPEC.md's fixture schema.      Top-level `mode`, `EvaluationState` per docs/EVAL_SPEC.md's fixture schema.      Top-level `mode`, normalize -> decide -> audit -> build_draft, per GRAPH_SPEC section 2's     node (+58 more)
 
 ### Community 30 - "Community 30"
 Cohesion: 0.05
@@ -245,16 +245,16 @@ Cohesion: 0.12
 Nodes (15): Correction carried from reconnaissance, Current Status, Goal, Ground rules for every teammate, Non-negotiable design rules (from CLAUDE.md), Phase A: Close the spec gaps [T1] — blocks others, do first, Phase B: Fixtures [T2], Phase C: normalize + decide [T3] (+7 more)
 
 ### Community 46 - "Community 46"
-Cohesion: 0.09
-Nodes (22): [lead] Carried over from Wave 1, [lead] Reconnaissance corrections, [T1] CONFLICT RESOLVED — @T2-fixtures @T4-audit — `{RULE-43}` vs `NOTES_MISSING`, RULES_SPEC/EVAL_SPEC now 1.2.0, [T1] CONFLICT RESOLVED — @T3-normalize-decide's `{pick}` vs `{RULE-41}` purity, [T1] Gap 2 CLOSED — Step 2 hierarchy-walk trace strings (RULES_SPEC §3, still under `{RULE-15}`), [T1] Gap 3 CLOSED — both-sides-breach trace (RULES_SPEC §3, `{RULE-12}`), [T1] Gap 4 CLOSED — @T4-audit and @T2-fixtures, `Finding.label` (RULES_SPEC new §4.9, new `{RULE-46}`), [T1] Gap 7 (new, surfaced by T3) CLOSED — `joined()` list-join format, new `{RULE-47}` (+14 more)
+Cohesion: 0.08
+Nodes (25): [lead] Carried over from Wave 1, [lead] Reconnaissance corrections, [T1] CONFLICT RESOLVED — @T2-fixtures @T4-audit — `{RULE-43}` vs `NOTES_MISSING`, RULES_SPEC/EVAL_SPEC now 1.2.0, [T1] CONFLICT RESOLVED — @T3-normalize-decide's `{pick}` vs `{RULE-41}` purity, [T1] Gap 2 CLOSED — Step 2 hierarchy-walk trace strings (RULES_SPEC §3, still under `{RULE-15}`), [T1] Gap 3 CLOSED — both-sides-breach trace (RULES_SPEC §3, `{RULE-12}`), [T1] Gap 4 CLOSED — @T4-audit and @T2-fixtures, `Finding.label` (RULES_SPEC new §4.9, new `{RULE-46}`), [T1] Gap 7 (new, surfaced by T3) CLOSED — `joined()` list-join format, new `{RULE-47}` (+17 more)
 
 ### Community 48 - "Community 48"
 Cohesion: 0.09
 Nodes (52): _artifact_noun(), build_draft(), _clusters_display(), frag(), gap(), _interaction_noun(), _join_english(), _joined_threshold() (+44 more)
 
 ### Community 49 - "Community 49"
-Cohesion: 0.19
-Nodes (15): _compile(), _entry(), _flag_already_set(), _mode_allows(), Bilingual signal detection: `scan(state) -> list[Suggestion]`.  Implements `docs, {RULE-36}: "a suggestion is produced only when the corresponding     flag is cur, {RULE-36}: "a suggestion is produced only when the corresponding     flag is cur, Error-cluster catalogue keys are mode-scoped (RULES_SPEC section 1     `Modes` c (+7 more)
+Cohesion: 0.14
+Nodes (25): Picks, _both_breach_trace(), decide(), _display_for(), gate_name(), _gated_verdict(), _hierarchy_walk(), _join_english() (+17 more)
 
 ### Community 50 - "Community 50"
 Cohesion: 0.14
@@ -265,7 +265,7 @@ Cohesion: 0.13
 Nodes (20): fixture_paths(), All golden fixtures, sorted for a deterministic collection order., All golden fixtures, sorted for a deterministic collection order., _check_draft(), _check_findings(), _check_verdict(), _custom_checks(), _fixture_id() (+12 more)
 
 ## Knowledge Gaps
-- **368 isolated node(s):** `$schema`, `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS`, `defaultMode`, `PreToolUse`, `superpowers@claude-plugins-official` (+363 more)
+- **372 isolated node(s):** `$schema`, `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS`, `defaultMode`, `PreToolUse`, `superpowers@claude-plugins-official` (+367 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **9 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -276,7 +276,7 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.036) - this node is a cross-community bridge._
 - **Why does `str` connect `Community 48` to `Community 29`?**
   _High betweenness centrality (0.020) - this node is a cross-community bridge._
-- **Why does `run_pipeline()` connect `Community 29` to `Community 48`, `Community 51`, `Community 43`?**
+- **Why does `run_pipeline()` connect `Community 29` to `Community 48`, `Community 49`, `Community 43`, `Community 51`?**
   _High betweenness centrality (0.018) - this node is a cross-community bridge._
 - **Are the 27 inferred relationships involving `SideObservation` (e.g. with `Finding` and `Pattern`) actually correct?**
   _`SideObservation` has 27 INFERRED edges - model-reasoned connections that need verification._
@@ -285,4 +285,4 @@ _Questions this graph is uniquely positioned to answer:_
 - **Are the 20 inferred relationships involving `EvaluationState` (e.g. with `Finding` and `Pattern`) actually correct?**
   _`EvaluationState` has 20 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `$schema`, `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS`, `defaultMode` to the rest of the system?**
-  _463 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _467 weakly-connected nodes found - possible documentation gaps or missing edges._

@@ -1,0 +1,43 @@
+# Coverage-threshold fixture (new user requirement). Provisional id EVAL-20
+# -- swap for T1-spec-gaps's assigned id once broadcast in team_findings.md.
+#
+# Exercises `AUDIO_PICK_CONTRADICTS` {RULE-19}, section 4.4: "the side picked
+# for Audio is the one with `threshold_audio` while the other is clean."
+# Distinct from `contradiction_both_good_audio.yaml` (EVAL-7), which fires
+# `AUDIO_BOTH_GOOD_ILLEGAL` on a TIE pick -- here the rater explicitly picks
+# the flagged side (A) for Audio Quality, not a tie. Clip A's single
+# `distortion` flag also gates the overall verdict via Step 1 (RULE-10);
+# `picks.overall` is set to the clean side (B) specifically so
+# `OVERALL_PREFERS_GATED` stays silent and only the audio-pick contradiction
+# is under test.
+id: audio_pick_contradicts
+mode: clips
+context:
+  prompt: "explain the steps to reset a home wifi router"
+  scenario_type: standard
+a:
+  notes: "Clip A gave a clear, step-by-step answer, but partway through the audio distorts noticeably, almost like a robotic buzz."
+  best: "walks through the steps in a logical, easy-to-follow order"
+  worst: "the audio distorts noticeably partway through, a robotic buzzing quality"
+  threshold_audio: [distortion]
+b:
+  notes: "El Clip B sono limpio de principio a fin, sin problemas de audio."
+  best: "clean, steady audio throughout with no artifacts"
+  worst: "a little less detailed than Clip A on one of the steps"
+picks: {naturalness: TIE, utility: TIE, audio: A, overall: B}
+expect:
+  verdict:
+    overall: B
+    driver: "Threshold — Audio Quality"
+    gated: true
+    gated_side: A
+  findings_include: [AUDIO_PICK_CONTRADICTS]
+  findings_exclude:
+    - AUDIO_BOTH_GOOD_ILLEGAL
+    - AUDIO_BOTH_CLEAN
+    - OVERALL_PREFERS_GATED
+  draft_contains:
+    - "Clip A has a clear issue that crosses the project's threshold — distortion or robotic artifacts — and a side with that kind of problem should not be preferred while the other one is clean."
+    - "Therefore, Clip B is the stronger fit for the project's North Star."
+  draft_excludes:
+    - "【"

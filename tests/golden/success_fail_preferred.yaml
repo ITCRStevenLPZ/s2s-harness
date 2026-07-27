@@ -1,0 +1,56 @@
+# Coverage-threshold fixture (new user requirement). Provisional id EVAL-22
+# -- swap for T1-spec-gaps's assigned id once broadcast in team_findings.md.
+#
+# Exercises `SUCCESS_FAIL_PREFERRED` {RULE-21}, section 4.6: "conversation
+# mode, preferred side marked `fail`." No threshold flags on either side and
+# turn counts equal at the 4-turn minimum, so the vote is decided cleanly by
+# Naturalness with nothing else contending for a finding -- the only
+# incoherence here is preferring a side the rater themselves marked as
+# failing the task, which the pick/task_success combination alone must
+# still be legal input (state.py has no cross-field validator forbidding it;
+# that is exactly why this needs an audit-level finding rather than a
+# schema-level rejection).
+id: success_fail_preferred
+mode: conversation
+context:
+  scenario: "asking for step-by-step directions to a nearby park"
+  scenario_type: standard
+  preflight:
+    headphones: true
+    panning_check: true
+    scenario_read: true
+    listened_isolated: true
+    equivalent_prompts: true
+    stayed_in_character: true
+    interruption_tested: true
+a:
+  notes: "Model A sounded genuinely warm and conversational, but it never actually finished giving the directions before the turns ran out."
+  best: "warm, natural, back-and-forth tone the whole time"
+  worst: "never completes the directions; the task itself was not accomplished"
+  turns: 4
+  task_success: fail
+b:
+  notes: "El Modelo B sono un poco mas robotico, pero termino de dar las indicaciones completas."
+  best: "delivers the complete set of directions clearly"
+  worst: "a bit more mechanical in tone than Model A"
+  turns: 4
+  task_success: pass
+picks: {naturalness: A, utility: TIE, audio: TIE, overall: A}
+expect:
+  verdict:
+    overall: A
+    driver: "Naturalness / Engagement"
+    gated: false
+    gated_side: null
+  findings_include: [SUCCESS_FAIL_PREFERRED]
+  findings_exclude:
+    - SETUP_HEADPHONES
+    - TURNS_BELOW_MIN
+    - TURNS_MISMATCH
+    - PROMPTS_NOT_EQUIVALENT
+    - OVERALL_PREFERS_GATED
+  draft_contains:
+    - "I prefer Model A overall because it better matches the project's North Star of a spontaneous, natural, aesthetically pleasing conversation."
+    - "Therefore, Model A is the stronger fit for the project's North Star."
+  draft_excludes:
+    - "【"

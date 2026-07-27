@@ -1,0 +1,67 @@
+# Coverage-threshold fixture (new user requirement, CLAUDE.md "Two-tier
+# test gate": every error-severity finding code needs a fixture). Provisional
+# id, EVAL-19 -- T1-spec-gaps is writing the normative EVAL_SPEC rows for
+# this batch; swap this for T1's assigned id once broadcast in
+# team_findings.md, do not treat this number as final.
+#
+# Exercises the three RULES_SPEC section 4.1 {RULE-16} error-severity codes
+# that had no fixture: SETUP_HEADPHONES, TURNS_MISMATCH, PROMPTS_NOT_EQUIVALENT.
+# All three conditions are independent booleans/comparisons read directly off
+# `context.preflight` / `a.turns` / `b.turns` -- audit.py's
+# `_setup_and_consistency` never short-circuits one on another -- so per the
+# team lead's instruction they share one conversation-mode fixture rather
+# than three near-identical files.
+# TURNS_MISMATCH (not TURNS_BELOW_MIN) specifically requires BOTH sides at
+# or above the 4-turn minimum with DIFFERENT counts -- turns: 5 and 7 below,
+# both >= 4 -- distinct from turns_short_and_mismatched.yaml (EVAL-10), which
+# deliberately keeps one side under 4 so TURNS_BELOW_MIN's combined-fact
+# branch fires instead ({RULE-16}'s own "exactly one of the three" design).
+# panning_check / listened_isolated / stayed_in_character / interruption_tested
+# are left true so only the three codes under test fire from section 4.1.
+id: preflight_setup_and_turns_mismatch
+mode: conversation
+context:
+  scenario: "casual chat about weekend plans, used to probe setup compliance"
+  scenario_type: standard
+  preflight:
+    headphones: false
+    panning_check: true
+    scenario_read: true
+    listened_isolated: true
+    equivalent_prompts: false
+    stayed_in_character: true
+    interruption_tested: true
+a:
+  notes: "Model A kept up a warm, easy back-and-forth the whole time."
+  best: "it remembers what I said two turns earlier and builds on it naturally"
+  worst: "a touch slow to respond once or twice"
+  turns: 5
+  task_success: pass
+b:
+  notes: "El Modelo B tambien sono natural, aunque un poco menos calido que A."
+  best: "gives clear, direct answers without sounding scripted"
+  worst: "slightly less warm than Model A"
+  turns: 7
+  task_success: pass
+picks: {naturalness: A, utility: TIE, audio: TIE, overall: A}
+expect:
+  verdict:
+    overall: A
+    driver: "Naturalness / Engagement"
+    gated: false
+    gated_side: null
+  findings_include: [SETUP_HEADPHONES, TURNS_MISMATCH, PROMPTS_NOT_EQUIVALENT]
+  findings_exclude:
+    - TURNS_BELOW_MIN
+    - TURNS_OK
+    - SETUP_PANNING
+    - PERSONA_NOT_HELD
+    - NO_INTERRUPTION_TEST
+    - AUDIO_NOT_ISOLATED
+    - OVERALL_PREFERS_GATED
+  draft_contains:
+    - "I prefer Model A overall because it better matches the project's North Star of a spontaneous, natural, aesthetically pleasing conversation."
+    - "I did not observe any threshold-level issues such as hallucination, audio cutoff, distortion, or failed instruction-following in either conversation."
+    - "Therefore, Model A is the stronger fit for the project's North Star."
+  draft_excludes:
+    - "【"

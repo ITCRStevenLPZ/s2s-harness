@@ -1,0 +1,50 @@
+# Coverage-threshold fixture (new user requirement). Provisional id EVAL-23
+# -- swap for T1-spec-gaps's assigned id once broadcast in team_findings.md.
+#
+# Exercises {RULE-15}'s fourth Step 2 branch: Naturalness ties, Utility does
+# not resolve either (also a TIE), so the walk reaches the third and last
+# rung, Audio Quality, and that pick decides. No side carries a threshold
+# flag -- Step 1 passes clean and falls through -- so this is the walk
+# actually reaching the audio-decides branch on its own merits, not a
+# threshold gate dressed up as one. Every other fixture in this suite that
+# reaches "Audio Quality" as a driver does so through a threshold gate
+# (`gate_name`, {RULE-14}); this is the first to reach it through the
+# ungated hierarchy walk.
+id: hierarchy_audio_decides
+mode: clips
+context:
+  prompt: "walk through the steps to reset a home wifi router"
+  scenario_type: standard
+a:
+  notes: "Clip A gave a warm, clear read of the steps with clean, crisp audio throughout."
+  best: "a warmer, clearer read of the steps than Clip B"
+  worst: "slightly slower pacing than Clip B"
+b:
+  notes: "El Clip B fue igual de util y natural, pero el audio sono un poco delgado y metalico, sin llegar a ser un problema serio."
+  best: "reads the steps efficiently, no wasted words"
+  worst: "thin, slightly tinny audio quality, though nothing crosses into a threshold problem"
+picks: {naturalness: TIE, utility: TIE, audio: A, overall: A}
+expect:
+  verdict:
+    overall: A
+    driver: "Audio Quality"
+    gated: false
+    gated_side: null
+  findings_include: [OVERALL_COHERENT]
+  findings_exclude:
+    - AUDIO_BOTH_GOOD_ILLEGAL
+    - AUDIO_PICK_CONTRADICTS
+    - AUDIO_BOTH_CLEAN
+    - OVERALL_PREFERS_GATED
+  trace_contains:
+    - "Threshold gate passed: neither side shows hallucination, false-premise acceptance, an instruction failure, or a jarring audio problem. Naturalness carries its full weight."
+    - "Hierarchy walk: neither Naturalness / Engagement nor Utility separated the two sides, so the decision moves to Audio Quality, the last rung of the hierarchy. A was picked for Audio Quality, and that pick decides the vote."
+  trace_excludes:
+    - "Hierarchy walk: Naturalness / Engagement did not separate the two sides, so the decision moves down to Utility."
+  draft_contains:
+    - "I prefer Clip A overall because naturalness and utility were comparable, and Clip A delivered clearly cleaner audio."
+    - "Under the project hierarchy of Naturalness / Engagement over Utility over Audio Quality, Audio Quality matters most here because naturalness did not separate the two, so the decision moves down the hierarchy."
+    - "I did not observe any threshold-level issues such as hallucination, audio cutoff, distortion, or failed instruction-following in either clip."
+    - "Therefore, Clip A is the stronger fit for the project's North Star."
+  draft_excludes:
+    - "【"
