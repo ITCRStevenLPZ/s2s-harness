@@ -328,9 +328,37 @@ with a canned response that disagrees with Track A's verdict; the
 degradation test relies on `S2S_LLM_PROVIDER` being unset, `complete()`'s
 own documented "legitimate Track-A-only steady state," not a mock.
 
-This section will need a follow-up once T3 lands the graph/node layer and
-a `judge_verdict`-shaped field exists on whatever state object the graph
-actually threads through nodes (`EvaluationState` or a superset) — at that
-point an end-to-end disagreement/degradation fixture through the real
-graph becomes possible and should be added, with this section updated to
-point at it rather than superseded silently.
+**Update, same wave, after T3 landed the graph (Phase C):** the graph now
+exists (`src/s2s_harness/graph.py`, `docs/GRAPH_SPEC.md` {GRAPH-18}/{GRAPH-19}),
+and Track B's `judge` node does append a durable `LLM_JUDGE_VERDICT`
+`Finding` — but the follow-up flagged above (a typed `llm_verdict` field on
+`EvaluationState`) still has not happened, deliberately: it requires
+editing `src/s2s_harness/models/state.py`, guarded off-limits for the
+whole team this wave regardless of file ownership. `nodes/compare.py`
+feature-detects the gap (`HAS_LLM_VERDICT_FIELDS`) and appends an honest
+`TRACK_COMPARE_UNAVAILABLE` info Finding instead of fabricating a
+comparison. So the gap this section originally described is still open,
+for the reason originally given — this is not new information, just
+confirmation it did not silently resolve itself. The tests above remain
+the correct coverage for this wave; an end-to-end fixture through the real
+compiled graph becomes possible, and should be added, whenever a future
+wave adds that field.
+
+## Wave 3b: `transcribe` / `has_audio` — deliberately uncovered, not a gap
+
+No golden fixture sets `context.audio_inputs` (Preflight equivalent for
+this note: verified by reading all 19 fixture files — none set it, all
+implicitly exercise the `has_audio: False -> scan` arm of the conditional
+edge, `docs/GRAPH_SPEC.md` §3). The `has_audio: True -> transcribe` arm has
+**no covering fixture, and cannot get one this wave**: `nodes/transcribe.py`
+raises `NotImplementedError` unconditionally whenever `audio_inputs` is
+non-empty, naming the gap explicitly rather than guessing at an unbuilt
+`src/s2s_harness/stt/` package (Phase 6, `docs/BUILD_PLAN.md`, deferred,
+no owner in `team_plan.md`'s roster this wave). A fixture that set
+`audio_inputs` would therefore assert a crash, not a behavior — recording
+that honestly here rather than adding one, per this file's own principle
+that a fixture must describe required behavior, not current behavior for
+its own sake (see the file header's "Method" note). Not in scope for
+`{EVAL-24}`'s coverage threshold (that gate covers `RULES_SPEC.md` §3/§4
+only, not graph-level node reachability). Revisit when Phase 6 lands a
+real `stt/` package and `transcribe`'s body is replaced.
