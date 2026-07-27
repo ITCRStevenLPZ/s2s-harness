@@ -1,7 +1,11 @@
 # Web specification
 
-Version: 1.1.0
+Version: 1.2.0
 Last updated: 2026-07-27
+
+Change note (1.1.0): Adds mobile support (§12, WEB-37 through WEB-43) as a first-class requirement per explicit user request, not a later responsive-design pass. Purely additive: no prior clause is amended, deprecated or reworded to add it.
+
+Change note (1.2.0): Adds §13 (WEB-44, WEB-45) covering what the frontend assumes about its own origin and Firebase Auth's authorized-domains configuration, following the user's request for custom domains on Firebase Hosting under `softical.tech` in addition to the default `*.web.app` domain. Cross-references `docs/DEPLOY_SPEC.md` DEPLOY-34 through DEPLOY-36 (2.1.0) rather than restating the domain-provisioning mechanics, which belong to that document. Purely additive.
 
 ID convention: `**WEB-n.**` leading tag at the start of each normative paragraph, sequential in document order, gaps allowed for later insertions. This matches `docs/DEPLOY_SPEC.md`'s placement convention rather than `docs/GRAPH_SPEC.md`'s trailing `{GRAPH-n}` tags, because this document is new and DEPLOY_SPEC is the more recent precedent in `docs/`.
 
@@ -151,6 +155,14 @@ Mobile is a first-class requirement, not a later responsive-design pass. This se
 
 ---
 
+## 13. Custom domains and Auth configuration
+
+**WEB-44.** The frontend does not derive which Firebase Auth domain it trusts from `window.location` at runtime — it is configured at build time via `VITE_FIREBASE_AUTH_DOMAIN` (`.env.example`, T4-owned) and that value must equal whichever domain is actually serving the sign-in flow at the moment a rater loads the page. Per `docs/DEPLOY_SPEC.md` DEPLOY-34, that is `<site>.web.app` or `<site>.firebaseapp.com` by default with no DNS setup required; per DEPLOY-35, once a custom domain under `softical.tech` is provisioned and live, it can serve the same app instead of or alongside the default domain. This document does not own domain provisioning or the build-time injection of `VITE_FIREBASE_AUTH_DOMAIN` — those are DEPLOY-34/35 and T4's build configuration respectively — but the frontend's correctness genuinely depends on that value matching reality, so the dependency is recorded here rather than left implicit in a config file no one reads until something breaks.
+
+**WEB-45.** What breaks when the domain and the Auth configuration disagree, and how it must present to the rater, so the failure is not mistaken for a bug in this app's own code. Per `docs/DEPLOY_SPEC.md` DEPLOY-36: adding a domain to Firebase Hosting does not automatically add it to Firebase Auth's authorized-domains list, and the resulting mismatch fails silently through the page-load and API-rewrite layers — the SPA loads, `/api/**` calls succeed — and only surfaces when the rater actually attempts to sign in, as an `auth/unauthorized-domain` error from the Firebase Auth SDK. The sign-in screen (WEB-5) must catch this specific SDK error code and render an explanation that names it as a domain-configuration problem, not a generic "sign-in failed, try again" message: retrying does not fix a missing authorized-domain entry, and presenting it as a transient failure only costs the rater a few retries before they give up or file a confusing bug report. This is the client-side half of DEPLOY-36's own warning that the natural place to go looking for this failure, `bridge/auth.py`'s token verification, is not where the problem is; the client must not compound that misdirection by hiding the one piece of information (the specific SDK error code) that would have pointed a maintainer at the real cause immediately. This is the same principle as WEB-9's distinct 403 handling: a configuration or authorization state that will not resolve by retrying gets a named explanation, never a generic error.
+
+---
+
 ## Traceability
 
-This spec is new; it supersedes no existing clause. It should be read alongside `docs/BRIDGE_SPEC.md` (endpoint shapes, migration-of-artifacts section) and `docs/GRAPH_SPEC.md` §1 and §5 (state schema and mode differences), both of which this document defers to on data shape. `docs/DEPLOY_SPEC.md` governs the Hosting rewrite, the same-origin consequence referenced in WEB-6, and the 401-vs-403 semantics referenced in WEB-9.
+This spec is new; it supersedes no existing clause. It should be read alongside `docs/BRIDGE_SPEC.md` (endpoint shapes, migration-of-artifacts section) and `docs/GRAPH_SPEC.md` §1 and §5 (state schema and mode differences), both of which this document defers to on data shape. `docs/DEPLOY_SPEC.md` governs the Hosting rewrite, the same-origin consequence referenced in WEB-6, the 401-vs-403 semantics referenced in WEB-9, and the domain provisioning and Auth authorized-domains requirement referenced in WEB-44 and WEB-45 (DEPLOY-34 through DEPLOY-36).
