@@ -1,7 +1,11 @@
 # Evaluation and regression specification
 
-Version: 1.0.0
+Version: 1.2.0
 Last updated: 2026-07-26
+
+**Wave 2, second pass:** updated the `empty_state` / `EVAL-12` row to match `RULES_SPEC` 1.2.0's narrowed `{RULE-43}` — `NOTES_MISSING` is expected to fire on that fixture and belongs in `findings_include`, not `findings_exclude`. No assertion about `decide()` itself changed.
+
+**Wave 2 fix (this version):** reconciled the `ex3` fixture id — the worked YAML below said `ex3_owls_false_premise`, the required-fixtures table said `ex3_owls`. Standardized on `ex3_owls`, matching the naming convention of every other row in that table (`ex1_houseplant`, `ex2_cutoff`, `ex4_neighbour_prefer_a/b`, `audit_exercise_charisma` — short and thematic, not restating the `scenario_type` field that is already `premise` in the fixture body). No assertion, verdict or finding changed.
 
 **ID convention:** `EVAL-n` trailing tag `{EVAL-n}`, assigned once per required fixture (in table order), then once per adversarial fixture (in table order), then once per test-category subsection (in document order). IDs are additive only; no fixture assertion below was reworded, reordered or removed to add them.
 
@@ -12,7 +16,7 @@ The four worked examples in the project training material are the specification 
 `tests/golden/*.yaml`. Each file holds the input state and the expected outputs.
 
 ```yaml
-id: ex3_owls_false_premise
+id: ex3_owls
 mode: clips
 context:
   prompt: "Why do owls sleep upside down like bats?"
@@ -65,7 +69,7 @@ expect:
 | `contradiction_dimensions_split` | `DIMENSIONS_CONTRADICT` fires when the loser wins 2 of 3 | `EVAL-9` |
 | `turns_short_and_mismatched` | One error carrying both facts, not two | `EVAL-10` |
 | `slight_noise_not_penalized` | Verdict identical to the clean-audio variant; no audio flag added | `EVAL-11` |
-| `empty_state` | `decide` returns `overall=None`, raises nothing, produces zero errors | `EVAL-12` |
+| `empty_state` | `decide` returns `overall=None`, raises nothing; zero flag/pick-derived error findings per the narrowed `{RULE-43}` — `NOTES_MISSING` (and any other §4.1/§4.2 evidence/setup gate the fixture's mode triggers) is expected to fire and must appear in `findings_include`, not `findings_exclude` | `EVAL-12` |
 | `both_sides_breach` | Falls through to the hierarchy; `Both Bad` defensible | `EVAL-13` |
 
 ## Regression policy {EVAL-14}

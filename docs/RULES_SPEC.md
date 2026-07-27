@@ -1,7 +1,11 @@
 # Rules specification
 
-Version: 1.0.0
+Version: 1.2.0
 Last updated: 2026-07-26
+
+**Wave 2, second pass:** resolved a real contradiction between {RULE-43} and `NOTES_MISSING` (§4.2), flagged by `T4-audit`. {RULE-43} is now scoped to flag-derived and pick-derived findings only (§4.4-4.6); see the reconciliation note under §7. No new ID — same as the `{pick}`/`{RULE-41}` clarification, this narrows an existing invariant's wording to resolve an internal ambiguity, it does not add behavior.
+
+**Wave 2 gap closure (this version):** six underspecifications identified in reconnaissance are closed below — Step 2 trace templates (§3), the both-sides-breach trace (§3, `RULE-12`), the `Finding.label` mapping (new §4.9, `RULE-46`), the TIE/BAD early-return paragraph (§5, `RULE-25`), the sentence-3 variant-1 gap text (§5, `RULE-28`), and the `speech_recognition` scanner row plus the two tone-signal pattern lists (§6, `RULE-34`/`RULE-35`). Every addition fills text an existing tagged requirement already promised; only `Finding.label` needed a new ID because no existing requirement covered it. Nothing in §§1-2, the hierarchy, thresholds, error-cluster list, audio tolerance rule or scenario-inversion rule changed.
 
 **ID convention:** trailing tag `{RULE-n}`, assigned once in document order (catalogues in §1 through invariants in §7), never renumbered. Table rows in §4 that already carry a stable `Code` column (e.g. `AUDIO_BOTH_GOOD_ILLEGAL`) are not re-tagged individually — the Code is that row's identifier — so `RULE-n` is applied at the subsection level for §4 instead, one per `§4.x` grouping. IDs are additive only; no requirement text below was reworded, reordered or removed to add them.
 
@@ -75,6 +79,10 @@ decide(a, b, picks) -> Verdict
 
 Let `thr_a = len(a.threshold_all)`, `thr_b = len(b.threshold_all)`.
 
+`joined(list)` renders a `threshold_all`-style list of catalogue keys as English prose, using each key's `Display` string from §1 (never the raw key): a single item renders as itself; two items render as `"X and Y"`; three or more render as an Oxford-comma list `"X, Y, and Z"`. This was used but never defined below — {RULE-47} closes that gap, surfaced by `T3-normalize-decide` mid-implementation, not part of the original six. {RULE-47}
+
+**Trace side-references.** Throughout §3, `{A}`, `{B}` and `{pick}` in a trace string render as the bare side letter — `"A"` or `"B"` — never a mode-aware form like `"Model A"` or `"Clip B"`. `decide(a, b, picks)` has no `TaskContext` argument and `{RULE-41}` restricts it to a pure function of `(a.threshold_all, b.threshold_all, picks)`; it therefore cannot know whether the caller is in conversation or clips mode and must not guess. This resolves the conflict `T3-normalize-decide` correctly flagged rather than improvised past: `decide.py` should emit bare letters, matching the fix already shipped in `decide._join_english`'s sibling logic. Mode-aware display (`"Model A"`, `"Clip B"`) is a rendering concern for a layer that does receive `TaskContext` — `draft.py` (§5, which already declares its own `Model`/`Clip` vocabulary rule) or a UI/node layer — never `decide` itself. This clarification applies retroactively to the `{A}`/`{B}` placeholders already used in `{RULE-10}`, `{RULE-11}` and `{RULE-12}`, which were ambiguous on this point before now.
+
 ### Step 1 — threshold gate
 
 **Case `thr_a > 0 and thr_b == 0`:** {RULE-10}
@@ -84,7 +92,9 @@ Let `thr_a = len(a.threshold_all)`, `thr_b = len(b.threshold_all)`.
 
 **Case `thr_b > 0 and thr_a == 0`:** mirror of the above. {RULE-11}
 
-**Case both > 0:** append trace noting both breach, and *fall through* to Step 2. `"Both Bad"` becomes defensible on the affected dimensions. {RULE-12}
+**Case both > 0:** {RULE-12}
+- trace: *"Threshold gate: both {A} and {B} cross the minimum threshold — {A}: {joined a.threshold_all}; {B}: {joined b.threshold_all}. Neither side clears the basic satisfaction bar on its own, so 'Both Bad' is defensible on the affected dimensions."*
+- *fall through* to Step 2.
 
 **Case both == 0:** append trace *"Threshold gate passed: neither side shows hallucination, false-premise acceptance, an instruction failure, or a jarring audio problem. Naturalness carries its full weight."* and fall through. {RULE-13}
 
@@ -112,7 +122,17 @@ if picks.audio in {"A","B"}:
           driver="No separating evidence")
 ```
 
-Each branch appends its own trace line. The trace is the user-facing explanation and is asserted on in the golden fixtures — treat the strings as part of the contract.
+Each branch appends its own trace line. The trace is the user-facing explanation and is asserted on in the golden fixtures — treat the strings as part of the contract. `{pick}` below stands for the bare side letter of whichever side the branch names — `"A"` or `"B"` — per the trace side-reference rule above.
+
+**Step 2 trace templates:**
+
+- `picks.naturalness in {"A","B"}`: trace: *"Hierarchy walk: {pick} was picked for Naturalness / Engagement, the top of the project hierarchy, so that pick decides the vote without needing to weigh Utility or Audio Quality."*
+- `picks.naturalness is None`: trace: *"Hierarchy walk: no Naturalness / Engagement pick is recorded yet. That dimension carries the most weight in the project hierarchy and the vote cannot be decided without it — record a Naturalness pick before a verdict can be drawn."*
+- `picks.naturalness in {"TIE","BAD"}` and `picks.utility in {"A","B"}`: trace: *"Hierarchy walk: Naturalness / Engagement did not separate the two sides, so the decision moves down to Utility. {pick} was picked for Utility, and that pick decides the vote."*
+- `picks.naturalness in {"TIE","BAD"}`, utility inconclusive, `picks.audio in {"A","B"}`: trace: *"Hierarchy walk: neither Naturalness / Engagement nor Utility separated the two sides, so the decision moves to Audio Quality, the last rung of the hierarchy. {pick} was picked for Audio Quality, and that pick decides the vote."*
+- fallback, no separating evidence: trace: *"Hierarchy walk: Naturalness / Engagement, Utility and Audio Quality all failed to separate the two sides. Nothing in the record distinguishes them."*
+  - if `picks.naturalness == "BAD"`, append: *"Naturalness itself was rated Both Bad, so the verdict follows suit."*
+  - if `picks.naturalness == "TIE"`, append: *"Naturalness itself was rated Both Good with no other dimension breaking the tie, so the verdict is a tie."*
 
 ---
 
@@ -202,6 +222,47 @@ For each side, when `scenario_type in {"redteam","premise"}`:
 |---|---|---|
 | `TECHNICAL_SKIP` | warning | `context.skip_reason` non-empty — use Skip (Technical Issue), never for poor performance |
 
+### 4.9 Finding labels {RULE-46}
+
+`GRAPH_SPEC` §1 (`STATE-14`) defines `Finding.label` as "short chip text, e.g. 'AUDIO'" but no prior version of this document assigned one to any of the 34 codes above. This is new normative content — no existing `§4.x` ID covered a label, only `Code | Severity | Condition | Message gist` — hence the new ID rather than a fill-in of an existing one. Labels group by subsection topic, not mechanically by `§4.x` number, since some subsections (4.6) mix unrelated concerns.
+
+| Code | Label |
+|---|---|
+| `SETUP_HEADPHONES` | SETUP |
+| `SETUP_PANNING` | SETUP |
+| `AUDIO_NOT_ISOLATED` | SETUP |
+| `TURNS_BELOW_MIN` | TURNS |
+| `TURNS_MISMATCH` | TURNS |
+| `TURNS_OK` | TURNS |
+| `PROMPTS_NOT_EQUIVALENT` | PROMPTS |
+| `PERSONA_NOT_HELD` | PERSONA |
+| `NO_INTERRUPTION_TEST` | TESTING |
+| `NOTES_MISSING` | EVIDENCE |
+| `NOTES_IMBALANCED` | EVIDENCE |
+| `EVIDENCE_MISSING` | EVIDENCE |
+| `PROMPT_MISSING` | EVIDENCE |
+| `GROUND_TRUTH_MISSING` | EVIDENCE |
+| `PUSHBACK_IS_SUCCESS` | PREMISE |
+| `PUSHBACK_PENALIZED` | PREMISE |
+| `PREMISE_ACCEPTED` | PREMISE |
+| `PREMISE_HEDGED` | PREMISE |
+| `PREMISE_UNRECORDED` | PREMISE |
+| `AUDIO_BOTH_GOOD_ILLEGAL` | AUDIO |
+| `AUDIO_PICK_CONTRADICTS` | AUDIO |
+| `AUDIO_SLIGHT_TOLERATED` | AUDIO |
+| `AUDIO_BOTH_CLEAN` | AUDIO |
+| `UTILITY_PICK_CONTRADICTS` | UTILITY |
+| `OVERALL_PREFERS_GATED` | OVERALL |
+| `OVERALL_DIVERGES` | OVERALL |
+| `OVERALL_COHERENT` | OVERALL |
+| `DIMENSIONS_CONTRADICT` | HIERARCHY |
+| `HIERARCHY_REVERSED` | HIERARCHY |
+| `SUCCESS_FAIL_PREFERRED` | SUCCESS |
+| `SUCCESS_PASS_WITH_THRESHOLD` | SUCCESS |
+| `CLUSTERS_TO_REPORT` | CLUSTERS |
+| `PREFERRED_HAS_CLUSTERS` | CLUSTERS |
+| `TECHNICAL_SKIP` | SKIP |
+
 ---
 
 ## 5. `draft` — the justification builder
@@ -216,7 +277,9 @@ Vocabulary: `Model` in conversation mode, `Clip` in clips mode. `W` = winner, `L
 
 ### Early returns {RULE-25}
 - `verdict.overall is None` → *"Choose at least the Naturalness dimension to generate a draft."*
-- `verdict.overall in {"TIE","BAD"}` → tie paragraph with a `gap()` asking what made them equivalent, plus a nudge to gather more evidence (extend the conversation / relisten).
+- `verdict.overall in {"TIE","BAD"}` → the tie paragraph below. `{outcome}` = `"Both Good"` when `overall == "TIE"`, `"Both Bad"` when `overall == "BAD"` — these are the two non-A/B options in `CRIT-3`.
+
+  *"Neither {A} nor {B} comes out clearly ahead on this pass, so the vote stands as '{outcome}.' {gap("name what specifically made the two sides feel equivalent here — the same strengths, or the same failure, on both")} Before finalizing, extend the conversation a turn or two if this is a live exchange, or relisten to both sides once more, in case a differentiator was missed."*
 
 ### Sentence 1 — preference and primary reason {RULE-26}
 
@@ -242,7 +305,7 @@ Vocabulary: `Model` in conversation mode, `Clip` in clips mode. `W` = winner, `L
 Use dash/colon construction so rater text works whether it is a noun phrase or a clause:
 
 - **gated, loser breached, and Naturalness favoured the loser:**
-  `"{L} was arguably the more natural of the two — {frag(L.best) or gap(...)} — but that advantage cannot outweigh a threshold failure, and its weak point is clear: {evL}. {W} stayed clean while still sounding natural: {evW}."`
+  `"{L} was arguably the more natural of the two — {frag(L.best) or gap("name the specific thing that made {L} seem more natural")} — but that advantage cannot outweigh a threshold failure, and its weak point is clear: {evL}. {W} stayed clean while still sounding natural: {evW}."`
 - **gated, winner breached:**
   `"{W} showed this — {evW} — while {L} was weaker: {evL}. That is why the errors in {W} did not flip my choice."`
 - **otherwise:**
@@ -281,6 +344,8 @@ When `scenario_type in {"redteam","premise"}`:
 
 `rules/scanner.py`. Each entry: `(catalog_key, kind, pattern, label)`. Patterns are case-insensitive and must match Spanish and English phrasings. Non-exhaustive but representative: {RULE-34}
 
+The table below has 16 rows, one per `error_cluster`/`threshold_utility`/`threshold_audio` catalogue key including `speech_recognition` — the section 1 catalogue lists it as conversation-only, and it was missing a row here; adding one closes that gap rather than leaving it "deliberately unscannable," since nothing about detecting it from the rater's own notes differs from the other clusters.
+
 | Key | Pattern fragments |
 |---|---|
 | `repetitive` | `repit`, `repet`, `repeat`, `misma frase`, `same phrase`, `muletill`, `over and over` |
@@ -298,8 +363,14 @@ When `scenario_type in {"redteam","premise"}`:
 | `clicks` | `click`, `clic`, `chasquid`, `pop`, `crackl`, `estática`, `static` |
 | `distortion` | `distorsi`, `distort`, `metálic`, `artifact`, `glitch`, `garbl`, `entrecortad` |
 | `dropout` | `dropout`, `se perdió el audio`, `lost audio`, `audio se fue` |
+| `speech_recognition` | `no me entendió`, `no entendió lo que dije`, `reconocimiento de voz`, `no captó`, `se equivocó de palabra`, `mishear`, `misheard`, `misrecognized`, `didn't understand what I said`, `voice recognition` |
 
-Plus two tone signals that produce advisory suggestions only (never a flag): warmth/naturalness cues, and possible slight room tone. {RULE-35}
+Plus two tone signals that produce advisory suggestions only (never a flag): warmth/naturalness cues, and possible slight room tone. Both are `kind="tone"` per `STATE-15`. {RULE-35}
+
+| Signal | Pattern fragments |
+|---|---|
+| warmth/naturalness cue | `cálid`, `warm`, `cercan`, `friendly`, `like talking to a friend`, `como hablar con un amigo`, `genuin`, `auténtic`, `natural`, `de verdad` |
+| possible slight room tone | `room tone`, `ruido de fondo leve`, `leve ruido`, `apenas se nota`, `faint hiss`, `un poco de eco`, `barely audible`, `aire de fondo`, `slight background noise` |
 
 **Scanner rules:**
 - A suggestion is produced only when the corresponding flag is currently unset. {RULE-36}
@@ -314,8 +385,10 @@ Plus two tone signals that produce advisory suggestions only (never a flag): war
 1. `decide` never raises, for any input, including all-empty state. {RULE-40}
 2. `decide` is a pure function of `(a.threshold_all, b.threshold_all, picks)` — nothing else. {RULE-41}
 3. `build_draft` always returns a non-empty string when `verdict.overall` is set. {RULE-42}
-4. A state with no flags and no picks produces zero `error` findings. {RULE-43}
+4. A state with no flags and no picks produces zero `error` findings **among the flag-derived and pick-derived checks** — the codes in §4.4 Audio, §4.5 Utility and §4.6 Overall coherence, whose conditions read `threshold_audio`, `threshold_utility`, `picks` or `verdict` fields. It does not exempt §4.1/§4.2's unconditional setup and evidence gates (`NOTES_MISSING` chief among them), which are supposed to fire on blank input — that is their purpose, not a bug. See the reconciliation note below. {RULE-43}
 5. Toggling `background_noise` from `clean` to `slight` changes no verdict and adds no threshold flag. {RULE-44}
 6. In `redteam`/`premise` scenarios, `premise_handling == "pushback"` never contributes a negative finding. {RULE-45}
 
 There are six invariants in this section, not seven — see `docs/BUILD_PLAN.md` Phase 3 and the reconciliation note recorded there for why an earlier draft of that document said seven.
+
+> **Reconciliation note ({RULE-43}, Wave 2):** the original wording — "a state with no flags and no picks produces zero error findings," unqualified — read as literally including every finding in §4, and `T4-audit` correctly caught that this contradicts `NOTES_MISSING` (§4.2, error, fires whenever a side's `notes` is empty, which is the case for any untouched `SideObservation`). Two readings were weighed. (1) Treat {RULE-43} as presupposing populated notes, and give the demonstration/fixture placeholder notes. Rejected: it would force `EVAL-12`'s `empty_state` fixture to not actually be empty, which is a bad test — the fixture exists to prove the engine survives truly blank input, the state the bridge's debounced `POST /evaluate` produces before a rater has typed anything. (2) Scope {RULE-43} to the findings whose condition is a function of flags or picks, and leave the unconditional evidence/setup gates alone. Adopted. `NOTES_MISSING` firing on blank input is correct product behavior — it tells the rater what to enter next — and {RULE-43}'s actual purpose, read against `T3-normalize-decide`'s and `T4-audit`'s implementations, is to guard against a narrower and more dangerous failure mode: flag/pick-reading logic (`OVERALL_COHERENT` comparing `None == None`, `DIMENSIONS_CONTRADICT` walking empty dimension picks, and similar) misfiring or raising on default/`None` values. That is an engine-robustness property, not a claim that a submission with nothing filled in should show zero findings. This is a spec-internal engineering clarification, not a criteria change — nothing in `criteria/project-criteria.md` speaks to finding counts on blank input, so this stays inside `RULES_SPEC.md`.
