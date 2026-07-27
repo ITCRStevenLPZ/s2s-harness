@@ -101,6 +101,14 @@ Reviewed T4's `pyproject.toml` `[build-system]` addition they flagged for my awa
 
 Ready for shutdown once `graphify update .` is confirmed run and the lead has no further findings for me.
 
+### [T1 -> lead] BLOCKED on git commit/push — no Bash tool this session, cannot fabricate a SHA
+
+Step 1 (CLI-16) was already done before this request landed — confirmed again just now, `docs/CLI_SPEC.md`'s `--version` row matches T4's contract exactly (bare version string, exit 0, `importlib.metadata.version("s2s-harness")`, no invented semantics beyond what T4 sent, `-V` deliberately dropped per my earlier logged reasoning since no other option in that table has a short form).
+
+Steps 2-4 (`git add`/`commit`/`push`, report SHA) are **not possible for me**. My tool set this entire session has been Read, Edit, Write, Grep, Glob only — no Bash, confirmed repeatedly in this log (`[T1] No Bash tool available this session`, several times). I have no way to stage, commit, or push, and I will not report a fabricated SHA. This is the same tooling gap that has blocked `graphify update .` and every `SendMessage` attempt for me all wave — I flagged it as early as my first `Transcript` handoff attempt and again before Phase-1 sign-off. Every other teammate in this log (T2 through T5) has Bash; I am the exception.
+
+**What I need from you:** either (a) route the commit through a teammate who has Bash (T2, T3, T4, or T5 have all demonstrated `git`/Bash access in this log — any of them can `git add criteria/project-criteria.md criteria/worked-examples.md docs/BUILD_PLAN.md docs/CLI_SPEC.md docs/EVAL_SPEC.md docs/GRAPH_SPEC.md docs/RULES_SPEC.md docs/STT_SPEC.md && git commit -m "..." && git push` on my behalf, explicitly excluding CLAUDE.md as instructed), or (b) grant me a Bash tool for this session if that's possible on your end. My working tree changes themselves are final and complete — this is purely a tooling-access blocker, not unfinished content.
+
 ### [wave0-bootstrap] graphify CLI surface differs from CLAUDE.md
 
 - There is **no `graphify init` subcommand**. Available: install/uninstall/path/explain/diagnose/clone/merge-*/add/watch/update/cluster-only/label/query/affected/save-result/check-update/tree/extract/global/benchmark/export/hook.
@@ -333,3 +341,11 @@ Verified T2 pushed `rules/` shortly after (`81fcb3a Add rules catalogues`) befor
 Ran `graphify update .` then `git add graphify-out/ && git commit` for a routine reindex commit. The resulting commit (`eb18312`) turned out to include T5's already-staged Phase 5 files (Dockerfile, deploy/terraform/, docs/DEPLOY_SPEC.md, etc.) that I never touched or intended to commit -- confirmed by `git diff --cached` showing nothing beyond `graphify-out/` at the moment I ran `git add`, yet the pushed commit's diffstat shows 23 files including T5's. This repo is one shared working tree across concurrent teammate sessions, not per-teammate clones: T5 had run their own `git add` on their files in their session before committing, and my subsequent bare `git commit` (no pathspec) committed everything currently in the shared index, not just what I had just staged.
 
 T5's own entry above ("[T5] `git add` my owned files... shared working-directory race") independently confirms the same event from their side and already made the right call: not rewriting history, since the content is correct, already verified by T5 (docker build, terraform validate/fmt all clean per their earlier findings), and already pushed/shared -- an amend or rebase here would be more destructive than a misattributed commit message. Corroborating from my side: `git show --stat eb18312` also shows exactly T5's files, nothing altered, nothing of mine lost. No further action needed. Process note for the rest of this wave: `git diff --cached --stat` immediately before any bare `git commit` in this shared tree, every time, since staging is shared state across sessions even though each teammate's own edits are not.
+
+### [T4] Accepted gap: branch protection on main is not enforced (escalated, decision recorded)
+
+Escalated to the lead and the user. Decision: leave `main` unprotected for now, do not make the repo public, do not work around the 403. Full writeup lives in `VERSIONING.md` under "Known gap: branch protection on main is not enforced" -- summary:
+
+- Cause: `gh api PUT .../branches/main/protection` returns 403 "Upgrade to GitHub Pro or make this repository public to enable this feature" -- classic branch protection is gated to GitHub Pro/Team/Enterprise for private repos on this account's plan.
+- Consequence: CLAUDE.md's "No merge without BOTH green" is convention, not mechanical enforcement, until this is revisited. `ci.yml`/`tier2.yml` still run and report real status on every PR; nothing blocks a merge on red.
+- Remediation options: upgrade to GitHub Pro/Team and configure required status checks (`lint and mypy`, `Tier 1 golden fixtures`, `determinism suite`, `token-boundary check`, `terraform validate / plan (deploy/)`, `tier2`), or make the repo public after an explicit review of `criteria/` and `docs/DEPLOY_SPEC.md`.

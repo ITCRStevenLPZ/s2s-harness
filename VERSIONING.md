@@ -78,3 +78,33 @@ implemented and green against the golden suite), MINOR bumps may include
 what would later count as a MAJOR change, per the SemVer §4 pre-1.0
 allowance. This relaxation ends the moment `docs/BUILD_PLAN.md` Phase 3 is
 marked done.
+
+## Known gap: branch protection on `main` is not enforced
+
+Accepted and documented in Wave 1 rather than worked around; recorded here
+so it cannot be silently forgotten.
+
+- **Status**: `main` currently has no branch protection rule. Anyone with
+  push access can push directly, and a PR can be merged without either CI
+  tier reporting green.
+- **Cause**: `gh api PUT repos/.../branches/main/protection` returns
+  `403 Upgrade to GitHub Pro or make this repository public to enable this
+  feature`. Classic branch protection is gated behind GitHub Pro/Team/
+  Enterprise for private repositories on this account's current plan.
+- **Consequence**: CLAUDE.md's two-tier test gate ("No merge without BOTH
+  green") is currently enforced by convention only, not mechanically.
+  `ci.yml` and `tier2.yml` still run and still report a real pass/fail
+  status on every PR -- what is missing is GitHub blocking the merge button
+  when either is red. A reviewer must check status manually before merging.
+- **Explicitly rejected workaround**: making the repository public to
+  unlock branch protection. Not done, and should not be done without first
+  reviewing what `criteria/` and `docs/DEPLOY_SPEC.md` would expose.
+- **Remediation, when revisited**:
+  1. Upgrade the GitHub account or organization to Pro/Team, which unlocks
+     branch protection on private repositories at no other cost, then
+     configure required status checks for `lint and mypy`,
+     `Tier 1 golden fixtures`, `determinism suite`, `token-boundary check`,
+     `terraform validate / plan (deploy/)`, and `tier2`.
+  2. Or make the repository public, after an explicit review of
+     `criteria/` and `docs/DEPLOY_SPEC.md` for anything that should stay
+     private, then run the same `gh api` configuration.
