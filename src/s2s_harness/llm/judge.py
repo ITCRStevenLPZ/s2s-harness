@@ -110,8 +110,7 @@ class JudgeVerdict(BaseModel):
     def _driver_matches_overall(self) -> JudgeVerdict:
         if self.overall in ("A", "B") and self.driver not in _DRIVER_LABELS:
             raise ValueError(
-                f"driver must be one of {_DRIVER_LABELS} when overall is A/B, "
-                f"got {self.driver!r}"
+                f"driver must be one of {_DRIVER_LABELS} when overall is A/B, got {self.driver!r}"
             )
         if not self.driver.strip():
             raise ValueError("driver must not be empty")
@@ -199,8 +198,8 @@ def _build_system_prompt(mode: Mode) -> str:
         "UNLESS the notes explicitly argue, with evidence, that the "
         "breach is minor and naturalness still wins (CRIT-4) -- weigh "
         "such an argument if the notes make it, do not require it.\n\n"
-        "AUDIO TOLERANCE (CRIT-5): slight room tone or faint \"air\" is "
-        "NOT a penalty. \"Both Good\" on Audio Quality is illegal when "
+        'AUDIO TOLERANCE (CRIT-5): slight room tone or faint "air" is '
+        'NOT a penalty. "Both Good" on Audio Quality is illegal when '
         "either side has a noticeable artifact.\n\n"
         f"{_catalogue_glossary(mode)}\n\n"
         "SCENARIO INVERSION (CRIT-7): in hallucination-fishing / redteam "
@@ -210,11 +209,11 @@ def _build_system_prompt(mode: Mode) -> str:
         "You read only the rater's own notes and the structured record "
         "below -- never audio, and there is none available to you.\n\n"
         "Produce: overall (A, B, TIE for Both Good, or BAD for Both "
-        "Bad), driver (exactly one of \"Naturalness / Engagement\", "
-        "\"Utility\", \"Audio Quality\" when overall is A or B; a short "
+        'Bad), driver (exactly one of "Naturalness / Engagement", '
+        '"Utility", "Audio Quality" when overall is A or B; a short '
         "phrase explaining why neither separated when overall is TIE or "
         "BAD), confidence (0.0 to 1.0, your own calibrated certainty), "
-        "reasoning (2-5 sentences, first person plural \"we\" avoided -- "
+        'reasoning (2-5 sentences, first person plural "we" avoided -- '
         "write as a neutral observer, not as the rater -- covering: the "
         "preference, which hierarchy level decided it and why, specific "
         "evidence from both sides, and an explicit threshold statement), "

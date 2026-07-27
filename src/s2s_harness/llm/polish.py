@@ -162,7 +162,7 @@ def _build_system_prompt(mode: Mode) -> str:
         "while the other is clean should not be preferred unless the "
         "draft explicitly argues, with evidence, that the breach is "
         "minor and naturalness still wins.\n\n"
-        "AUDIO TOLERANCE (CRIT-5): slight room tone or faint \"air\" is "
+        'AUDIO TOLERANCE (CRIT-5): slight room tone or faint "air" is '
         "NOT a penalty; clicks, pops, cutoffs, distortion and dropouts "
         "ARE. State explicitly whether audio was penalized.\n\n"
         "ERROR CLUSTERS to name explicitly when the draft or notes "
@@ -292,8 +292,6 @@ async def polish(state: EvaluationState, draft: str) -> PolishOutcome:
         return PolishOutcome(text=draft, used_llm=False, skipped_reason=exc.reason)
 
     if not _gaps_preserved(draft, response.text):
-        return PolishOutcome(
-            text=draft, used_llm=False, skipped_reason=REASON_PLACEHOLDER_DROPPED
-        )
+        return PolishOutcome(text=draft, used_llm=False, skipped_reason=REASON_PLACEHOLDER_DROPPED)
 
     return PolishOutcome(text=response.text, used_llm=True)

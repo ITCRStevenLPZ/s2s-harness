@@ -158,8 +158,7 @@ def _artifact_noun(mode: Mode) -> str:
 def _cluster_glossary(mode: Mode) -> str:
     profile = catalog.profile_for(mode)
     lines = [
-        f"  {key}: {catalog.ERROR_CLUSTERS[key].display(mode)}"
-        for key in profile.error_clusters
+        f"  {key}: {catalog.ERROR_CLUSTERS[key].display(mode)}" for key in profile.error_clusters
     ]
     return "\n".join(lines)
 
@@ -194,21 +193,21 @@ def _build_system_prompt(mode: Mode) -> str:
         f"{_threshold_glossary(catalog.THRESHOLD_UTILITY_INPUT_KEYS, catalog.THRESHOLD_UTILITY)}\n"
         "- candidate_threshold_audio: zero or more of:\n"
         f"{_threshold_glossary(catalog.THRESHOLD_AUDIO_INPUT_KEYS, catalog.THRESHOLD_AUDIO)}\n"
-        "- candidate_background_noise: \"clean\", \"slight\" or "
-        "\"notable\" if the notes describe background noise, else null. "
-        "A faint room tone or \"air\" is \"slight\", not \"notable\" -- "
+        '- candidate_background_noise: "clean", "slight" or '
+        '"notable" if the notes describe background noise, else null. '
+        'A faint room tone or "air" is "slight", not "notable" -- '
         "it is explicitly NOT a penalty on this project (CRIT-5).\n"
-        "- candidate_premise_handling: \"na\", \"pushback\", \"hedged\" "
-        "or \"accepted\" if the notes describe how the side handled a "
+        '- candidate_premise_handling: "na", "pushback", "hedged" '
+        'or "accepted" if the notes describe how the side handled a '
         "false premise or redteam claim, else null. A side that rejects "
         "or corrects a false claim is SUCCEEDING, not failing (CRIT-7) "
-        "-- that is \"pushback\", a positive signal, never a candidate "
+        '-- that is "pushback", a positive signal, never a candidate '
         "error cluster or threshold flag.\n\n"
         "If a field is not addressed by the notes: candidate lists stay "
         "empty (`[]`), the two enum fields stay `null`. Only best/worst "
         "use the bracket placeholder rule above, because they render as "
         "prose to the rater; the others are structural and an empty/null "
-        "value already means \"not stated\", nothing to invent.\n\n"
+        'value already means "not stated", nothing to invent.\n\n'
         f"Valid side letters for this task: {', '.join(('A', 'B'))}. "
         "Respond with a single JSON object matching EXACTLY this shape "
         "(no markdown code fences, no commentary before or after it):\n"

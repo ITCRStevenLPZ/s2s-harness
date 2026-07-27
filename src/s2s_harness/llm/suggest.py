@@ -103,6 +103,7 @@ class _MalformedSuggestOutput(Exception):
 # Prompt construction
 # ---------------------------------------------------------------------------
 
+
 def _kind_for(mode: Mode) -> dict[str, str]:
     profile = catalog.profile_for(mode)
     mapping: dict[str, str] = {}
