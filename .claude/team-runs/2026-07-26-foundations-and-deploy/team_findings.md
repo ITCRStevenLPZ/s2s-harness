@@ -109,6 +109,14 @@ Steps 2-4 (`git add`/`commit`/`push`, report SHA) are **not possible for me**. M
 
 **What I need from you:** either (a) route the commit through a teammate who has Bash (T2, T3, T4, or T5 have all demonstrated `git`/Bash access in this log — any of them can `git add criteria/project-criteria.md criteria/worked-examples.md docs/BUILD_PLAN.md docs/CLI_SPEC.md docs/EVAL_SPEC.md docs/GRAPH_SPEC.md docs/RULES_SPEC.md docs/STT_SPEC.md && git commit -m "..." && git push` on my behalf, explicitly excluding CLAUDE.md as instructed), or (b) grant me a Bash tool for this session if that's possible on your end. My working tree changes themselves are final and complete — this is purely a tooling-access blocker, not unfinished content.
 
+### [T1 -> lead] Inconsistency fixed; STILL BLOCKED on commit/push — restating plainly, this is not evasion
+
+Fixed: `docs/CLI_SPEC.md` line 6 now reads `` `CLI-16` (`--version`) `` — the stray `/-V` is gone, matching line 34's reasoning. Verified by re-reading the line after the edit. That was the only outstanding content issue; nothing else in my owned files has changed since my last full report.
+
+On the commit: I am not withholding effort, retrying, or waiting for something to resolve itself. **I do not have a Bash tool in this session, full stop.** My complete tool list, as given to me for this entire conversation, is: Read, Edit, Write, Grep, Glob. There is no `git`, no shell, no way to stage, commit, or push a single byte. I cannot "try harder" at a tool that was never provided to me — this is a capability gap in how this session was configured, not a task I am failing to execute. I flagged this the first time it blocked a `SendMessage` handoff, again when it blocked `graphify update .`, and again on the first commit request. Restating it a fourth time because the request is now repeating without acknowledging the constraint.
+
+**All 8 files are correct, complete, and unstaged on disk right now:** `criteria/project-criteria.md`, `criteria/worked-examples.md`, `docs/BUILD_PLAN.md`, `docs/CLI_SPEC.md`, `docs/EVAL_SPEC.md`, `docs/GRAPH_SPEC.md`, `docs/RULES_SPEC.md`, `docs/STT_SPEC.md`. Anyone with Bash access — T2, T3, T4, and T5 have all shown `git`/shell usage in this log — can commit them verbatim with the message the lead already provided. I cannot self-serve this. If the lead has a way to attach a Bash-capable tool to my session, I'll run it myself the instant it's available; until then this needs to be done by someone else or by the lead directly, since routing it through me again will produce the same result.
+
 ### [wave0-bootstrap] graphify CLI surface differs from CLAUDE.md
 
 - There is **no `graphify init` subcommand**. Available: install/uninstall/path/explain/diagnose/clone/merge-*/add/watch/update/cluster-only/label/query/affected/save-result/check-update/tree/extract/global/benchmark/export/hook.
@@ -349,3 +357,10 @@ Escalated to the lead and the user. Decision: leave `main` unprotected for now, 
 - Cause: `gh api PUT .../branches/main/protection` returns 403 "Upgrade to GitHub Pro or make this repository public to enable this feature" -- classic branch protection is gated to GitHub Pro/Team/Enterprise for private repos on this account's plan.
 - Consequence: CLAUDE.md's "No merge without BOTH green" is convention, not mechanical enforcement, until this is revisited. `ci.yml`/`tier2.yml` still run and report real status on every PR; nothing blocks a merge on red.
 - Remediation options: upgrade to GitHub Pro/Team and configure required status checks (`lint and mypy`, `Tier 1 golden fixtures`, `determinism suite`, `token-boundary check`, `terraform validate / plan (deploy/)`, `tier2`), or make the repo public after an explicit review of `criteria/` and `docs/DEPLOY_SPEC.md`.
+
+### [lead] Two corrections to the record (self-reported, not deliverable-affecting)
+
+- The "-V inconsistency in CLI_SPEC line 6" the lead flagged mid-wave was already fixed by T1-criteria-keeper before it idled; the lead had read a stale version. T1's replacement worker verified and correctly made no edit rather than manufacturing one to match a stale report. No defect ever existed.
+- The "no uv.lock" gap the lead relayed to T4-ci-dev was also stale, sourced from T5-gcp-deploy's early baseline scan and relayed without re-checking against T4's push. T4's uv.lock-already-committed rebuttal was correct.
+
+Neither correction changes any deliverable; recorded so the durable record reflects the lead's own errors alongside teammates', not only the latter.
