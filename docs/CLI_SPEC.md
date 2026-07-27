@@ -1,9 +1,11 @@
 # CLI specification
 
-Version: 1.0.0
-Last updated: 2026-07-26
+Version: 1.1.0
+Last updated: 2026-07-27
 
 **ID convention:** `CLI-n`, assigned once per command (in the order listed in §Commands) then once per global option (in table order), then once per exit code. Placement is `{CLI-n}` as a trailing tag on the `s2s ...` command lines in the fenced block, and a bare `` `CLI-n` `` value in a dedicated `ID` table column for the Global options and Exit codes tables — both forms are equally greppable via `CLI-[0-9]+`; the difference is only whether the surrounding row already has its own column structure to use. `CLI-16` (`--version`) was filled in from T4-ci-dev's versioning contract; see `VERSIONING.md`. IDs are additive only; no command or option semantics below were changed to add them.
+
+**Amended 2026-07-27 (`--resume` failure behavior, T4-cli).** `--resume` (`CLI-13`) and the provider-failure exit code (`CLI-20`) are clarified below for a corner case this document previously left silent, and which a real implementation bug (`src/s2s_harness/cli/runner.py`, fixed at commit `5c9b126`, see `.claude/team-runs/2026-07-27-wave3b-dual-track/team_progress.md` [T4]) made silently wrong in practice rather than merely undocumented: a `--resume` run whose checkpointer failed to attach used to complete anyway as an ordinary, un-resumed run — no error, no indication anything had been skipped. That silent-fallback behavior is superseded, not merely fixed in code: `--resume` now either resumes for real against a persisted checkpoint or exits 3 (`CLI-20`) with a clear message; it never again completes quietly as if nothing were wrong. The row and table text below are unchanged except for the additive clarifying sentences this amendment adds — nothing already there was reworded to make room for it, per this document's own ID-convention discipline above.
 
 Typer + Rich. The CLI is the primary interface; the HTML front ends are a convenience layer over the same graph.
 
@@ -28,7 +30,7 @@ s2s selftest          run the golden fixtures and report                        
 | `--keep-audio` | Do not delete temp recordings. | `CLI-10` |
 | `--json` | Emit the full state as JSON on stdout; suppress the pretty view. | `CLI-11` |
 | `--out DIR` | Write `run.json` + `justification.md` to DIR. | `CLI-12` |
-| `--resume RUN_ID` | Reload a checkpoint and re-run from the first changed input. | `CLI-13` |
+| `--resume RUN_ID` | Reload a checkpoint and re-run from the first changed input. **Amended 2026-07-27:** if the checkpoint cannot be attached or the resumed run otherwise fails, exits 3 (`CLI-20`) with a clear message rather than silently completing a fresh, un-resumed run — see the amendment note above. | `CLI-13` |
 | `--lang es\|en` | Force interface language for prompts. Justification output is always English. | `CLI-14` |
 | `--strict` | Treat every warning as blocking (useful for self-training). | `CLI-15` |
 | `--version` | Print the installed package version to stdout as a bare string (e.g. `0.1.0`) and exit 0 immediately, no other side effects — evaluated before subcommand dispatch, works with no other arguments (`s2s --version`), does not touch config, STT, LLM or any state file. Available on the top-level `s2s` command, not per-subcommand. Source of truth is `importlib.metadata.version("s2s-harness")`, which reads `[project] version` in `pyproject.toml` — never a second hardcoded constant in the CLI layer. See `VERSIONING.md` for the SemVer scheme this value follows. No short form: no other global option in this table has one, so `-V` is deliberately omitted to keep the convention uniform rather than introduce a one-off exception. | `CLI-16` |
@@ -87,4 +89,4 @@ Prints from `criteria/`, not from memory. `s2s criteria hierarchy`, `s2s criteri
 | 0 | Completed, no blocking errors | `CLI-17` |
 | 1 | Completed, blocking errors present (or any warning under `--strict`) | `CLI-18` |
 | 2 | Invalid input / state validation failure | `CLI-19` |
-| 3 | Provider failure (STT or model) | `CLI-20` |
+| 3 | Provider failure (STT or model). **Amended 2026-07-27:** also covers the evaluation engine itself — a `--resume` run that cannot attach its checkpointer, and (outside `--resume`) any unexpected failure from the compiled graph other than the graph module being unavailable, both exit here rather than silently falling back to an alternate execution path. See the amendment note under §ID convention. | `CLI-20` |
