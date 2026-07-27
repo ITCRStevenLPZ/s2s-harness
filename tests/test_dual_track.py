@@ -41,16 +41,24 @@ matches the shape `uv run mypy src/s2s_harness/llm/` reports clean against
 as of this commit. If these tests start failing on a signature mismatch,
 re-read the relevant role module's docstring first -- it is usually
 explicit about which shape is current and why.
+
+Uses `s2s_harness.llm.reset_client_cache` (T2's public test-only hook,
+`client.py`'s own docstring: "Test-only escape hatch... Production code
+never calls this") to inject a stub client for the disagreement case and
+to force the "no provider configured" path for the degradation case,
+rather than reaching into `s2s_harness.llm.client`'s private module
+globals directly.
 """
 
 from __future__ import annotations
 
 import asyncio
 import json
+from dataclasses import dataclass
 from typing import Any
 
-from s2s_harness.llm import client as llm_client
-from s2s_harness.llm.client import CompletionResult
+from s2s_harness.llm import reset_client_cache
+from s2s_harness.llm.client import LLMOutcome
 from s2s_harness.llm.interpret import interpret
 from s2s_harness.llm.judge import _DRIVER_LABELS, judge
 from s2s_harness.llm.polish import polish
@@ -65,26 +73,30 @@ from tests.golden._golden_lib import GOLDEN_DIR, build_initial_state, load_fixtu
 _FIXTURE_PATH = GOLDEN_DIR / "ex1_houseplant.yaml"
 
 # `LlmDegraded("disabled", ...)` is what `s2s_harness.llm.client.complete()`
-# raises when `S2S_LLM_PROVIDER` is unset (`_get_client()` returns `None`);
-# every role now propagates `exc.reason` verbatim, so this is the one
-# string all four `Outcome.skipped_reason`s converge on below.
+# raises when no client is configured (`reset_client_cache(None,
+# resolved=False)` plus `S2S_LLM_PROVIDER` unset -> `_get_client()` returns
+# `None`); every role now propagates `exc.reason` verbatim, so this is the
+# one string all four `Outcome.skipped_reason`s converge on below.
 _REASON_DISABLED = "disabled"
 
 
-def _reset_llm_client_cache(monkeypatch: Any) -> None:
-    """`s2s_harness.llm.client._get_client()` memoizes the resolved client
-    in module globals `_client`/`_client_resolved` (a deliberate
-    process-wide cache, per that function's own docstring). Reset both,
-    and clear the provider env var, so this test's outcome does not
-    depend on what an earlier test in the same pytest session already
-    resolved and cached, or on the ambient shell environment.
+@dataclass
+class _StubClient:
+    """Duck-typed to `LLMClient`'s `.complete()`/`.provider_name` shape,
+    injected via `reset_client_cache` -- no network, no cache, no SDK.
+    `provider_name` must be a real `LLMProviderName` because `complete()`
+    uses it to look up a default model string when the caller passes
+    `model=None`.
     """
-    monkeypatch.setattr(llm_client, "_client", None, raising=False)
-    monkeypatch.setattr(llm_client, "_client_resolved", False, raising=False)
-    monkeypatch.delenv("S2S_LLM_PROVIDER", raising=False)
+
+    response_text: str
+    provider_name: str = "openrouter"
+
+    def complete(self, **_kwargs: Any) -> LLMOutcome:
+        return LLMOutcome(ok=True, text=self.response_text, skipped_reason="", cached=False)
 
 
-def test_track_b_disagreement_is_surfaced_not_forced_to_agree(monkeypatch: Any) -> None:
+def test_track_b_disagreement_is_surfaced_not_forced_to_agree() -> None:
     """`team_plan.md`: "Disagreement between tracks is the product, not a
     bug. Surface it." This proves the two tracks are computed
     independently and CAN differ for the same input -- `judge` does not
@@ -111,13 +123,14 @@ def test_track_b_disagreement_is_surfaced_not_forced_to_agree(monkeypatch: Any) 
     }
     assert disagreeing_payload["driver"] in _DRIVER_LABELS
 
-    async def _fake_complete(**kwargs: Any) -> CompletionResult:
-        assert kwargs["role"] == "judge"
-        return CompletionResult(text=json.dumps(disagreeing_payload), data=None, cached=False)
-
-    monkeypatch.setattr("s2s_harness.llm.judge.complete", _fake_complete)
-
-    outcome = asyncio.run(judge(state))
+    stub_client = _StubClient(response_text=json.dumps(disagreeing_payload))
+    reset_client_cache(stub_client, resolved=True)
+    try:
+        outcome = asyncio.run(judge(state))
+    finally:
+        # Do not leak the stub into whichever test runs next in this
+        # process -- back to "re-resolve from env on next use."
+        reset_client_cache(None, resolved=False)
 
     assert outcome.skipped_reason == ""
     assert outcome.value is not None
@@ -137,7 +150,8 @@ def test_all_llm_roles_degrade_and_track_a_still_completes(monkeypatch: Any) -> 
     configured, `complete()`'s own documented degrade path) and Track A
     still produces a complete result.
     """
-    _reset_llm_client_cache(monkeypatch)
+    reset_client_cache(None, resolved=False)
+    monkeypatch.delenv("S2S_LLM_PROVIDER", raising=False)
 
     data, track_a_verdict, findings, draft = run_fixture(_FIXTURE_PATH)
     assert track_a_verdict.overall == "A"
