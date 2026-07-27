@@ -1,7 +1,7 @@
 # Architecture
 
-Version: 1.1.0
-Last updated: 2026-07-26
+Version: 1.2.0
+Last updated: 2026-07-27
 
 ## Shape
 
@@ -68,13 +68,19 @@ Three consequences:
 
 `rules/` being pure is what makes the golden fixtures meaningful: they call the engine with a fixture state and assert on the verdict, with no mocking of anything.
 
+**Confirmed unchanged by Wave 3a:** the Firebase ID-token verification module (`src/s2s_harness/bridge/auth.py` per `docs/DEPLOY_SPEC.md`) is bridge-layer code, exactly like the API-key module it replaces was. It lives in `bridge/` and is bound by the same row as everything else in that layer — it may import `nodes/` and `models/`, and it may not import `rules/` directly. Authentication is a transport concern regardless of which mechanism performs it; nothing about swapping a shared secret for a verified token changes which layer that concern lives in. This table needed no edit for Wave 3a; this note exists so a reader does not have to independently re-derive that conclusion.
+
 ## Data flow in one sentence
 
 Raw observations (typed or spoken) become a validated `EvaluationState`; the engine derives a `Verdict` and a list of `Finding`s from it without ever consulting a model; the draft builder turns those into English; the model, optionally and once, makes that English better.
 
 ## What is deliberately absent
 
-- **No database.** Each evaluation is a run. Records are written as JSON + markdown to `runs/` if the rater asks; nothing persists otherwise.
-- **Deprecated (local-only scope; superseded for hosted deployment by `docs/DEPLOY_SPEC.md` DEPLOY-9 through DEPLOY-15).** Originally: "No auth, no multi-user. Single rater, local machine." This remains exactly true when the bridge runs locally via `s2s serve` — nothing about local usage changed. It is superseded only for the Cloud Run hosted deployment, which is still single-rater (multi-user support is still absent, see `docs/DEPLOY_SPEC.md` DEPLOY-26) but requires an app-level API key because the surface is no longer loopback-only. See `docs/DEPLOY_SPEC.md` for the full hosted-deployment auth and network posture.
+- **No database.** Each evaluation is a run. Records are written as JSON + markdown to `runs/` if the rater asks; nothing persists otherwise. **This stays true after Wave 3a's Firebase adoption, and is worth stating plainly rather than leaving implicit:** the user chose Firebase Auth specifically *without* Firestore. Firebase Auth is a stateless-to-this-app identity check — it verifies who is signing in, it is not a data store this application reads or writes. "We use Firebase" invites a future reader to assume Firestore is available by extension; it is not, and adding it would silently reverse a deliberate architectural decision recorded in `docs/DEPLOY_SPEC.md` and `.claude/team-runs/2026-07-27-wave3a-specs/team_plan.md`. If a future wave wants persistence, that is a new decision requiring its own review, not a natural extension of "we already have a Firebase project."
+- **Deprecated (local-only scope; superseded for hosted deployment).** Originally: "No auth, no multi-user. Single rater, local machine." This remains exactly true when the bridge runs locally via `s2s serve` — nothing about local usage changed. The hosted-deployment auth mechanism has been revisited twice; the chain below is the whole history, given once so a reader does not have to reconcile two separately-dated notes:
+  1. **Wave 1** specified an app-level shared-secret API key (the original DEPLOY-9 through DEPLOY-15).
+  2. **Wave 3a, current,** deprecates that key mechanism in `docs/DEPLOY_SPEC.md` in favor of Firebase ID-token verification restricted to the `@softical.tech` domain. *(T1: your new `DEPLOY-n` id(s) go here once assigned; flagged directly and in `team_findings.md`.)*
+
+  Multi-user support is still absent either way — see `docs/DEPLOY_SPEC.md` DEPLOY-26, unchanged across both waves. See `docs/DEPLOY_SPEC.md` for the full current hosted-deployment auth and network posture.
 - **No clip audio analysis in the default path.** See `docs/STT_SPEC.md` §6. Unchanged by hosting; `docs/DEPLOY_SPEC.md` DEPLOY-26 confirms this stays binding in the deployed configuration.
 - **No agent framework at runtime.** The `.claude/agents/` roster is for *building* this repo with Claude Code. The shipped application is a graph, not an agent swarm — agents add nondeterminism and cost to a problem that has neither.
