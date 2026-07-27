@@ -3,9 +3,16 @@
 # ("Both Good") so AUDIO_BOTH_GOOD_ILLEGAL {RULE-19} is exercised directly,
 # per this fixture's own row in EVAL_SPEC ("Both Good becomes illegal").
 # The closing threshold sentence (RULE-32, "gated on the loser only" branch)
-# must not re-list "audio cut off mid-word" a second time -- the exact
+# must not re-list either flagged category a second time -- the exact
 # draft_contains string below only matches if the sentence ends right after
 # "in either clip." with nothing re-listed before the period.
+# Clip B carries BOTH `cutoff` and `clicks` on threshold_audio, matching
+# criteria/worked-examples.md Example 2's prose exactly ("cuts off abruptly
+# and has a small pop") -- flagging only `cutoff` would under-represent the
+# source worked example. Sentence 1's joined() list is therefore the
+# two-item form per {RULE-47}: "X and Y", using each key's Display string
+# from RULES_SPEC section 1 ("audio cut off mid-word", "audible clicks or
+# pops"), not the raw keys.
 id: ex2_cutoff
 mode: clips
 context:
@@ -19,7 +26,7 @@ b:
   notes: "Clip B sonaba bien al principio pero se corta a mitad de palabra al final y tiene un pequeño clic audible justo antes de cortarse."
   best: "still somewhat useful before it cuts off"
   worst: "cuts off mid-word at the end and also has an audible click right before it stops"
-  threshold_audio: [cutoff]
+  threshold_audio: [cutoff, clicks]
 picks: {naturalness: A, utility: A, audio: TIE, overall: A}
 expect:
   verdict:
@@ -30,7 +37,7 @@ expect:
   findings_include: [AUDIO_BOTH_GOOD_ILLEGAL, OVERALL_COHERENT]
   findings_exclude: [OVERALL_PREFERS_GATED, UTILITY_PICK_CONTRADICTS]
   draft_contains:
-    - "Clip B has a clear issue that crosses the project's threshold — audio cut off mid-word — and a side with that kind of problem should not be preferred while the other one is clean."
+    - "Clip B has a clear issue that crosses the project's threshold — audio cut off mid-word and audible clicks or pops — and a side with that kind of problem should not be preferred while the other one is clean."
     - "Under the project hierarchy of Naturalness / Engagement over Utility over Audio Quality, the threshold requirement on Audio Quality matters most here because naturalness only carries its full weight once both sides clear the minimum bar for accuracy and audio, and here one of them does not."
     - "Clip A showed this — a complete, calm, natural response with no obvious audio artifacts — while Clip B was weaker: cuts off mid-word at the end and also has an audible click right before it stops."
     - "On Audio Quality I penalized accordingly:"

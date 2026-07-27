@@ -19,6 +19,23 @@ An honest gap is listed as **NOT COVERED**. A matrix with no gaps would be
 lying; see CLAUDE.md: "A matrix that silently drifts is worse than no
 matrix, because it looks true when it is not."
 
+**Audit log (2026-07-26, post-review):** the lead caught a real drift on
+first review — this row's `ex2_cutoff` cell claimed `clicks` coverage while
+the fixture only flagged `cutoff`. `ex2_cutoff.yaml` was corrected to flag
+`[cutoff, clicks]` (matching `criteria/worked-examples.md` Example 2's prose,
+"cuts off abruptly and has a small pop", which the fixture's `best`/`worst`
+text already carried but the flag did not), and its `expect.draft_contains`
+sentence-1 string was re-derived by hand from `RULES_SPEC.md` section 3's
+`joined()` two-item format ({RULE-47}), not by running the engine and
+copying its output. Every other cell asserting a fixture's flags, picks, or
+preflight fields was then re-checked line-by-line against the actual YAML
+files (via direct reads and a `grep`/small script pass over all 13
+fixtures, not by re-running the engine's decisions) — 45 distinct claims
+audited across the 11 `{CRIT-n}` clause rows and the 34 finding-code rows,
+1 wrong (the `clicks` cell, now fixed) and 1 ambiguously worded (the
+`{CRIT-4}` `ex3_owls` cell, now clarified to name `premise_redteam`
+explicitly rather than implying the raw `false_premise` key fires).
+
 ## Fixture inventory
 
 | id | Owner | EVAL id | Source |
@@ -44,7 +61,7 @@ matrix, because it looks true when it is not."
 | `{CRIT-1}` North Star | `ex1_houseplant`, `ex2_cutoff`, `ex4_neighbour_prefer_a/b`, `audit_exercise_charisma`, `both_sides_breach`, `contradiction_dimensions_split`, `slight_noise_not_penalized`, `turns_short_and_mismatched` | Sentence 1 / Sentence 8 draft templates cite "the project's North Star" in every fixture whose verdict is decided. Not independently testable as its own code path; it is prose the draft always carries. |
 | `{CRIT-2}` Hierarchy | `ex1_houseplant` (Naturalness decides), `ex4_neighbour_prefer_b`/`both_sides_breach` (Utility decides after Naturalness ties), `ex2_cutoff`/`ex3_owls`/`contradiction_prefers_gated` (threshold displaces naturalness) | Audio-decides branch (Naturalness and Utility both tie, Audio breaks it) has **NOT COVERED** — no fixture reaches the third rung of Step 2 without a threshold gate. |
 | `{CRIT-3}` Dimensions and options | All 13 fixtures exercise `A`/`B`/`TIE` picks; `both_sides_breach` exercises `BAD` for `picks.overall` | `Pick.BAD` for a *dimension* pick (`naturalness`/`utility`/`audio` == `"BAD"`, i.e. "Both Bad" on a single dimension rather than overall) is **NOT COVERED** by any fixture. `task_success == "fail"` is also **NOT COVERED** — no fixture uses it. |
-| `{CRIT-4}` Threshold breaches | `ex2_cutoff` (`cutoff`, `clicks`), `ex3_owls` (`false_premise` via `premise_redteam`), `contradiction_prefers_gated` (`hallucination`), `contradiction_both_good_audio` (`clicks`), `both_sides_breach` (`instruction_failure`, `distortion`) | `dropout` (threshold_audio) and the derived `notable_noise` are **NOT COVERED** by any fixture. |
+| `{CRIT-4}` Threshold breaches | `ex2_cutoff` (`cutoff` and `clicks`, both on `b.threshold_audio`), `ex3_owls` ("accepting a false premise", via the derived `premise_redteam` key — not the raw `false_premise` key, which no fixture sets directly), `contradiction_prefers_gated` (`hallucination`), `contradiction_both_good_audio` (`clicks`), `both_sides_breach` (`instruction_failure`, `distortion`) | `dropout` (threshold_audio), the raw `false_premise` key (as opposed to its derived `premise_redteam` sibling) and the derived `notable_noise` are **NOT COVERED** by any fixture. |
 | `{CRIT-5}` Audio tolerance | `ex2_cutoff`, `contradiction_both_good_audio` (illegal "Both Good"), `slight_noise_not_penalized` (tolerance, no penalty) | Fully covered both directions (penalized vs tolerated). |
 | `{CRIT-6}` Error clusters | `ex1_houseplant` (`over_structured` is Naturalness evidence, not a cluster), `ex4_neighbour_prefer_a/b` (`ignores_interruption`, `embodied`), `audit_exercise_charisma` (`interrupts_user`, `ignores_interruption`, `embodied`) | `repetitive`, `degradation`, `awkward_silence` and `speech_recognition` clusters are **NOT COVERED** by any required or adversarial fixture. `robotic_intonation` (clips-mode Naturalness evidence, `over_structured`'s sibling) is also **NOT COVERED** directly, though the same carve-out mechanism is proven by `over_structured` in `ex1_houseplant`. |
 | `{CRIT-7}` Scenario awareness / pushback | `ex3_owls` (`PUSHBACK_IS_SUCCESS`) | `PREMISE_HEDGED` and `PREMISE_UNRECORDED` (both `{RULE-18}` §4.3) are **NOT COVERED**. |
