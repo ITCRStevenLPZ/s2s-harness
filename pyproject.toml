@@ -18,7 +18,20 @@ dependencies = [
 stt-gemini = ["google-genai>=0.3"]
 stt-gcp = ["google-cloud-speech>=2.26"]
 audio = ["sounddevice>=0.4", "soundfile>=0.12"]
+# Deprecated (Wave 3b, 2026-07-27): this extra named the single sanctioned
+# LLM call site (CLAUDE.md design rule 2, now superseded). Kept in place,
+# not deleted, per the deprecation rule -- see the `llm` extra below for
+# what replaced it: OpenRouter (via the `openai` SDK, custom base_url) and
+# Gemini AI Studio (via `google-genai`, the same package `stt-gemini`
+# above already depends on for transcription -- the two features share the
+# SDK, not the extra, since a rater may want one without the other).
 polish = ["anthropic>=0.34"]
+# `src/s2s_harness/llm/` -- the four LLM roles (interpret, suggest, judge,
+# polish). openai>=1.50 is a floor chosen for the modern `base_url` +
+# `OpenAI`-client shape `providers/openrouter.py` uses against OpenRouter
+# (https://openrouter.ai/docs/community/openai-sdk); google-genai's floor
+# matches `stt-gemini` above since both use the same package.
+llm = ["openai>=1.50", "google-genai>=0.3"]
 # Firebase ID-token verification for the hosted bridge (docs/DEPLOY_SPEC.md's
 # Firebase Auth section). google.oauth2.id_token.verify_firebase_token, part
 # of plain google-auth, is sufficient: the bridge only ever verifies tokens
@@ -88,7 +101,14 @@ strict_equality = true
 warn_unused_ignores = true
 no_implicit_optional = true
 
-# The rules layer must stay pure. See CLAUDE.md and tests/test_token_boundary.py.
+# The rules and models layers must stay pure. See CLAUDE.md design rule 1
+# and tests/test_token_boundary.py.
 [tool.s2s]
 pure_modules = ["s2s_harness.rules", "s2s_harness.models"]
+# Deprecated (Wave 3b, 2026-07-27): the single-call-site model is
+# superseded by CLAUDE.md design rule 2 -- LLM code now lives throughout
+# s2s_harness.llm/ with four call sites, enumerated in llm_roles below.
+# Kept in place, not deleted, per the deprecation rule.
 sanctioned_llm_call_site = "s2s_harness/nodes/polish.py"
+llm_package = "s2s_harness/llm"
+llm_roles = ["interpret", "suggest", "judge", "polish"]

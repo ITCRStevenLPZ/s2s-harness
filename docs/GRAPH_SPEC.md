@@ -1,7 +1,9 @@
 # Graph specification
 
-Version: 1.0.0
-Last updated: 2026-07-26
+Version: 1.1.0
+Last updated: 2026-07-27
+
+**Wave 3b (this version):** corrected the node table's `polish` LLM column and the `polish` {GRAPH-8} section header, both of which asserted or implied `polish` is the graph's only LLM call site. That claim is superseded by CLAUDE.md design rule 2 (amended the same day) — LLM code now lives in `src/s2s_harness/llm/` with four roles. Nothing about `polish`'s own behavior below changed; the correction is scoped to the "only one" framing. The new `interpret`/`suggest`/`judge` nodes, the Track B branch, and the `compare` node are deliberately not specified here — that is T3's Phase C design work, to be folded in as new `GRAPH-n` entries once landed, per this document's own additive-IDs convention.
 
 **ID convention:** `STATE-n` tags each `Literal` alias and each model/class in §1, in document order, as a trailing comment on the class/alias line. `GRAPH-n` tags each node in §2 (one per row/description pair), the edge topology and `should_polish` predicate in §3, and — extending past the literal task scope because both are load-bearing requirements of this spec — checkpointing in §4 and the mode-difference table in §5. IDs are additive only; no model field, node behavior or edge was reworded, reordered or removed to add them.
 
@@ -148,7 +150,7 @@ Nodes return `dict` partial updates; LangGraph merges them. Only `normalize` may
 | `decide` | `a`, `b`, `picks` | `verdict` | no |
 | `audit` | everything | `findings` | no |
 | `draft` | everything | `draft` | no |
-| `polish` | `draft`, `findings`, state | `polished`, `llm_skipped_reason` | **yes — the only one** |
+| `polish` | `draft`, `findings`, state | `polished`, `llm_skipped_reason` | **yes** — deprecated note: this column previously read "yes — the only one," asserting `polish` was the sole LLM call site in the graph. That claim is superseded by CLAUDE.md design rule 2 (amended Wave 3b, 2026-07-27): `src/s2s_harness/llm/` now hosts four LLM roles (`interpret`, `suggest`, `judge`, `polish`), and this table's node rows for `interpret`/`suggest`/`judge` are pending T3's Phase C node-wrapper and edge-topology work (Track B branch, `compare` node) — not authored here so as not to preempt that design. `polish` remains the only node that rewrites the draft's *text*; see CLAUDE.md rule 2 for the per-role contract. |
 | `render` | everything | side effects only | no |
 
 ### `ingest` {GRAPH-1}
@@ -177,6 +179,8 @@ Implements `docs/RULES_SPEC.md` §4. Returns findings sorted `error → warning 
 Implements `docs/RULES_SPEC.md` §5. Always returns a complete string. Emits `【placeholder】` markers for missing rater observations.
 
 ### `polish` {GRAPH-8}
+**Note (Wave 3b, 2026-07-27):** this section still describes only the `polish` node, which remains accurate for `polish` itself. It no longer describes the graph's *only* LLM node — `interpret`, `suggest` and `judge` are three more, specified by CLAUDE.md design rule 2 and pending their own `GRAPH-n` entries from T3's Phase C work. Nothing below this note is deprecated; it is simply no longer the whole LLM story.
+
 Skipped, with `llm_skipped_reason` set, when any of:
 - `llm_enabled` is `False` (`--no-llm`)
 - any finding has `severity == "error"` (do not spend tokens on a justification that should not be submitted)

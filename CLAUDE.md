@@ -25,22 +25,31 @@ Normative requirements live in `docs/RULES_SPEC.md` and the sibling specs. Proje
 
 These are architectural constraints, not preferences. Violating any of them is a build failure. Each rule names the mechanism that catches its violation. An unenforced rule is a suggestion, and suggestions decay across sessions.
 
-1. **The rules engine contains zero LLM calls.** Every gate, threshold check, hierarchy walk and contradiction test is pure, deterministic Python. Same input to the same verdict, forever. If you find yourself reaching for a model to decide something, the rule is underspecified. Go fix `docs/RULES_SPEC.md` instead of papering over it with inference.
-   *Enforced by:* `token-auditor` plus an import-boundary test in `tests/test_layering.py`.
+**Amended 2026-07-27 (Wave 3b).** The owner rejected the original one-sanctioned-call-site architecture. LLM assistance and the deterministic rules engine now run as two balanced tracks over the same state — Track A (deterministic, always on) and Track B (LLM, four roles) — not one track with a single narrow LLM escape hatch. Rule 2 below is superseded and marked `Deprecated` in place rather than deleted, per this file's own deprecation rule. Rule 1 survives but is narrowed to name exactly the boundary that is still load-bearing. Rules 3, 4 and 6 are unchanged in substance but now bind a wider surface; each says so inline. If any other text in this file still reads as if only `polish` may call a model, that text is the bug, not this section.
 
-2. **Exactly one sanctioned LLM call site: the `polish` node** (`src/s2s_harness/nodes/polish.py`). It rewrites an already-complete deterministic draft into better prose. It may not add facts, change the verdict, or introduce observations absent from the rater's notes.
-   *Enforced by:* `token-auditor` greps the tree on every wave; any model call outside that path fails the build. Tier 2 of the test gate asserts the invariant against a real model response.
+1. **`src/s2s_harness/rules/` and `src/s2s_harness/models/` contain zero LLM calls, no network I/O, no clock, no randomness.** Every gate, threshold check, hierarchy walk and contradiction test is pure, deterministic Python. Same input to the same verdict, forever. If you find yourself reaching for a model to decide something inside those two packages, the rule is underspecified. Go fix `docs/RULES_SPEC.md` instead of papering over it with inference.
+   This used to read simply "the rules engine contains zero LLM calls," which a future maintainer could over-generalize into "no LLM calls anywhere in the codebase." It was never that broad, and Wave 3b makes the narrower reading explicit: this is not a general restriction on LLM usage — `src/s2s_harness/llm/` and the four LLM roles exist deliberately, see rule 2. What survives is narrower and load-bearing: it is what makes Track A's verdict reproducible, which is what makes the 19 golden fixtures and the determinism suite (`tests/test_determinism.py`) mean anything. A verdict that can depend on a model call is not fixture-testable the same way, and the two-tier test gate below assumes Track A is not.
+   *Enforced by:* `token-auditor`; `scripts/token_boundary_check.py` and `tests/test_token_boundary.py`, reworked in Wave 3b from "only `nodes/polish.py` may import an LLM SDK" to "`rules/` and `models/` may not" (weaker claim, still catches the failure that matters — someone silently making a verdict non-reproducible by fixing a rules bug with a model call); `tests/test_layering.py`'s cross-layer consistency tests, which continue to guard the same `rules/`/`models/` boundary from the other direction (the two packages may not import each other either).
 
-3. **The deterministic draft is always produced,** whether or not the LLM runs. `--no-llm` must yield a complete, submittable-quality justification. The model is an enhancement, never a dependency.
-   *Enforced by:* every golden fixture runs twice in Tier 1, with and without `--no-llm`.
+2. **Deprecated — "exactly one sanctioned LLM call site: the `polish` node."** Superseded 2026-07-27 (Wave 3b). LLM code now lives in `src/s2s_harness/llm/` (`client.py`, `providers/`), and there are four sanctioned call sites, one per LLM role, each with its own contract:
+   - `interpret` — reads free-form rater notes, proposes structured best/worst/candidate flags. Proposed, not written; shown to the rater the way `scan`'s suggestions are.
+   - `suggest` — notes plus the catalogue, emits `Suggestion[]` in the same shape `scan` emits, merged and deduped with the regex results. Never auto-applied.
+   - `judge` — reads the full state and criteria, produces its own verdict, reasoning and confidence, shown beside Track A's. Disagreement between the two is surfaced, not resolved for the rater.
+   - `polish` — rewrites the already-complete deterministic draft into better prose. It is still the only one of the four that touches the draft's *text*.
+   None of the four may add a fact, change Track A's verdict, or introduce an observation absent from the rater's notes. That constraint — not the call-site count — is what was actually protecting output quality, and it is restated per-role above and in rule 4 rather than lost.
+   *Enforced by (was):* `token-auditor` grepping the tree for any LLM SDK import outside `nodes/polish.py`, plus a Tier 2 assertion of the polish invariant against a real model response.
+   *Enforced by (now):* there is no longer a single-file import restriction to enforce — rule 1's boundary is the one `token-auditor` and `scripts/token_boundary_check.py` check going forward. The no-invented-facts / no-verdict-change / placeholder-preservation contract for all four roles is enforced per-role by each role's own fixture coverage (tracked in `tests/golden/COVERAGE.md`) and, for `polish` specifically, by the pre-existing Tier 2 real-model assertion.
 
-4. **Never invent observations.** Where the rater has not supplied a needed detail, both the deterministic builder and the polish prompt emit a bracketed placeholder in the exact form `【what the rater must add】`. Rendering highlights these. A draft with placeholders is correct output, not a bug.
+3. **The deterministic draft (Track A) is always produced,** whether or not any LLM role runs. `--no-llm` must yield a complete, submittable-quality justification. The model is an enhancement, never a dependency. This was already true when only `polish` could touch the draft; it now applies to all four roles — `interpret` or `suggest` failing or being disabled must not block `scan`'s regex suggestions from working, and `judge` failing must not block Track A's verdict from rendering.
+   *Enforced by:* every golden fixture runs twice in Tier 1, with and without `--no-llm`; a Wave 3b degradation fixture additionally covers every LLM call failing at once with Track A still producing a complete result (see `tests/golden/COVERAGE.md`).
+
+4. **Never invent observations.** Where the rater has not supplied a needed detail, the deterministic builder and all four LLM roles emit a bracketed placeholder in the exact form `【what the rater must add】`. Rendering highlights these. A draft with placeholders is correct output, not a bug. This bound only `polish` before Wave 3b; it now binds `interpret`, `suggest` and `judge` too, since all three can surface text back to the rater.
    *Enforced by:* placeholder-format assertion in the golden suite; the CJK bracket pair is exact and is part of the guarded set.
 
 5. **Criteria live in `criteria/`, not in code.** The rules engine reads its thresholds, cluster names and hierarchy from that directory. Changing project criteria means changing `criteria/project-criteria.md` and the constants derived from it, never hardcoding a new rule inline.
    *Enforced by:* `criteria-keeper` review plus a no-magic-literals check over `src/s2s_harness/rules/`.
 
-6. **The rater's ears are the source of truth.** Speech-to-text transcribes *the rater's spoken notes*. It never listens to the model clips and never produces an audio-quality judgement. See `docs/STT_SPEC.md` for the one narrow, off-by-default exception and why it is advisory only.
+6. **The rater's ears are the source of truth.** Speech-to-text transcribes *the rater's spoken notes*. It never listens to the model clips and never produces an audio-quality judgement. See `docs/STT_SPEC.md` for the one narrow, off-by-default exception and why it is advisory only. This now also binds `judge`: it reads the rater's notes and structured state, never audio. `docs/STT_SPEC.md` section 6 is unchanged by Wave 3b.
    *Enforced by:* the STT adapter interface accepts only a rater-notes channel; fixture coverage in both languages.
 
 **Standing instruction:** when a rule appears to conflict with the task, stop and say so. Do not improvise a resolution. Underspecification is a spec bug. Fix `docs/`, then implement.
@@ -139,7 +148,7 @@ Note that any guarded-set change carries C = 5 and therefore lands at S ≥ 8 ev
 Model assignment is explicit and is not overridable via alias.
 
 * **Opus or Fable (orchestrator only):** cross-stack judgment, criteria review, architectural contract layout, plan approval, final verdicts. Never writes, edits, or runs mutating Bash commands itself.
-* **Sonnet (all implementation, exclusively):** rules engine, state schema, LangGraph nodes, STT adapters, CLI, bridge, web front ends, polish prompt authoring, fixture authoring, and all drafting of `criteria/` changes. Used both as solo subagents and as team members. Implementation workers must never be upgraded to Opus or Fable and must never fall back to Haiku.
+* **Sonnet (all implementation, exclusively):** rules engine, state schema, LangGraph nodes, STT adapters, CLI, bridge, web front ends, LLM role prompt authoring (`interpret`, `suggest`, `judge`, `polish` — widened from "polish prompt authoring" in Wave 3b, see design rule 2), fixture authoring, and all drafting of `criteria/` changes. Used both as solo subagents and as team members. Implementation workers must never be upgraded to Opus or Fable and must never fall back to Haiku.
 * **Haiku (mechanical, non-authoring tasks only):** running the golden suite and reporting pass or fail, running the `token-auditor` grep, running `graphify update .`. A Haiku task that produces a source diff is a routing error. If a mechanical task turns out to require a judgement call, it escalates to Sonnet rather than guessing.
 
 **Escalate on a predicate, not a feeling.** Work routes up a tier only when a checkable condition fires: the change touches `criteria/`; a golden fixture flips; a `Literal` gains or loses a member; the auditor grep fails; a threshold constant changes value. Anything that matches no predicate stays at its assigned tier.
@@ -175,14 +184,14 @@ Before executing any modification plan, read the relevant spec under `docs/` and
 * The audio tolerance rule, including the illegality of `Both Good` when either side has a noticeable artifact.
 * The error cluster list and the report-but-do-not-disqualify semantics.
 * The scenario inversion rule for hallucination-fishing and false-premise cases.
-* The single-call-site invariant and the contents of `src/s2s_harness/nodes/polish.py`.
+* Deprecated: "the single-call-site invariant." Superseded by design rule 1's `rules/`+`models/` purity boundary and design rule 2's per-role no-invented-facts / no-verdict-change / placeholder-preservation contract, both guarded here in its place — see the design rules section above for the full amendment.
 * The `--no-llm` completeness guarantee.
 * The exact placeholder token form `【...】`.
 * Anything under `criteria/`, and any golden fixture under `tests/golden/`.
 
 **Deprecation rule:** never delete a requirement entry from a spec. If a requirement becomes obsolete, mark it `Deprecated` in place and bump the document's Version header. The same applies to criteria clauses, which carry an audit trail back to the training material.
 
-**Hard constraints, non-negotiable regardless of task:** no network calls in `src/s2s_harness/rules/`; no model call outside `polish.py`; no bare dicts crossing a node boundary; Spanish and English coverage in every scanner pattern, phrase hint, and fixture.
+**Hard constraints, non-negotiable regardless of task:** no network calls, model calls, clock or randomness in `src/s2s_harness/rules/` or `src/s2s_harness/models/` (design rule 1; this replaces the pre-Wave-3b "no model call outside `polish.py`" phrasing, which is deprecated in place above); no bare dicts crossing a node boundary; Spanish and English coverage in every scanner pattern, phrase hint, and fixture.
 
 ---
 
@@ -191,10 +200,10 @@ Before executing any modification plan, read the relevant spec under `docs/` and
 `tests/golden/` encodes the four worked examples from the training material and is a hard merge gate to `main`. It is not advisory tooling. A failing or unrun tier blocks the merge regardless of how confident the change looks in isolation.
 
 * **Both tiers required, every merge to main. No merge without BOTH green.**
-  * `uv run test-golden` — Tier 1, fast, fully deterministic. Null STT provider, stubbed polish, no network. Runs in seconds at zero API cost. Every fixture runs twice, once with `--no-llm` and once with the stub, and both must produce identical verdicts, identical hierarchy attribution, and identical placeholder sets. Covers every error-severity finding code and every threshold and hierarchy branch per `tests/golden/COVERAGE.md`; info and ok severity codes are out of scope, and `COVERAGE.md` is the authoritative record of what is covered and what is not.
-  * `uv run test-golden-real` — Tier 2, the full path against the real Anthropic API and the real Gemini or GCP speech provider. Pre-merge gate only. Proves the integration works, not just the stubs, and asserts the polish invariant directly: the polished text introduces no observation absent from the deterministic draft, changes no verdict, and preserves every `【placeholder】` verbatim.
+  * `uv run test-golden` — Tier 1, fast, fully deterministic. Null STT provider, stubbed LLM roles, no network. Runs in seconds at zero API cost. Every fixture runs twice, once with `--no-llm` and once with the stub, and both must produce identical verdicts, identical hierarchy attribution, and identical placeholder sets. Covers every error-severity finding code and every threshold and hierarchy branch per `tests/golden/COVERAGE.md`; info and ok severity codes are out of scope, and `COVERAGE.md` is the authoritative record of what is covered and what is not.
+  * `uv run test-golden-real` — Tier 2, the full path against the real provider (`S2S_LLM_PROVIDER=openrouter` or `gemini`, see `.env.example` — the `anthropic`/`ANTHROPIC_API_KEY` path is deprecated in place, superseded by these two per Wave 3b) and the real Gemini or GCP speech provider. Pre-merge gate only. Proves the integration works, not just the stubs, and asserts the polish invariant directly: the polished text introduces no observation absent from the deterministic draft, changes no verdict, and preserves every `【placeholder】` verbatim.
   * `uv run test-golden-all` runs both. Neither tier substitutes for the other.
-* **A rate limit is not a defect:** Tier 2 failing with a genuine 429 or quota exhaustion from Anthropic or GCP means "re-run when quota recovers." It is NOT a code defect and MUST NEVER be treated as a reason to skip the gate, merge anyway, or weaken the assertion to tolerate it. Tier 2 fails loudly by design. A run must never report green when it did not actually verify the integration.
+* **A rate limit is not a defect:** Tier 2 failing with a genuine 429 or quota exhaustion from OpenRouter, Gemini, or GCP means "re-run when quota recovers." It is NOT a code defect and MUST NEVER be treated as a reason to skip the gate, merge anyway, or weaken the assertion to tolerate it. Tier 2 fails loudly by design. A run must never report green when it did not actually verify the integration.
 * **Golden-flip rule:** if a change flips one of the four worked examples, the change is wrong until proven otherwise by a corresponding change in `criteria/`. A fixture edit with no criteria change to point at is rejected on sight.
 * **Spec-sync mandate:** every new behavior and every fix must add or update fixtures in the same change. A feature without a fixture is INCOMPLETE, not "done pending tests." Do not report it complete.
 * **Coverage-manifest mandate:** every new rule branch, error cluster, or front-end flow must be added to `tests/golden/COVERAGE.md` in the SAME change that introduces it, never a follow-up. `COVERAGE.md` reconciles fixtures against `criteria/project-criteria.md` clause by clause, which is what makes a coverage claim auditable instead of unverifiable. A matrix that silently drifts is worse than no matrix, because it looks true when it is not.
@@ -261,7 +270,7 @@ A subagent returns a diff and a one-paragraph rationale, not a transcript. The o
 * Widen a `Literal` to `str` to make a test pass.
 * Add a dependency to the rules layer.
 * Edit a golden fixture to match new behavior without a criteria change to point at.
-* Let the polish node see anything the deterministic draft did not already contain.
+* Let any LLM role (`interpret`, `suggest`, `judge`, `polish`) surface an observation the rater's notes did not already contain.
 * Simulate an agent team with sequential solo subagents.
 * Leave a teammate idle-but-running at the end of a wave.
 

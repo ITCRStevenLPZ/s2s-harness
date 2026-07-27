@@ -288,3 +288,49 @@ further fixtures or expanded `expect:` blocks, which is beyond
 fixture (`hierarchy_no_separating_evidence`) it authored under the lead's
 explicit round-4 instruction. Reported to `T7-fixtures-adversarial` and the
 lead rather than actioned here.
+
+## Wave 3b (2026-07-27) dual-track coverage — not `tests/golden/*.yaml`
+
+`.claude/team-runs/2026-07-27-wave3b-dual-track/team_plan.md` Phase E
+asked for "fixtures for Track B disagreement and the degradation path."
+Both exist as of this change, in `tests/test_dual_track.py`
+(`test_track_b_disagreement_is_surfaced_not_forced_to_agree`,
+`test_all_llm_roles_degrade_and_track_a_still_completes`), **not** as new
+entries in `tests/golden/*.yaml`, and this section records why so the
+absence does not read as a silently dropped requirement — the same
+coverage-manifest discipline this file already applies to warning/info/ok
+codes above.
+
+`tests/golden/_golden_lib.py`'s `run_pipeline`/`run_fixture` wire a
+fixture through `normalize -> decide -> audit -> build_draft`
+(`s2s_harness.rules.*` only) and assert against `EvaluationState` plus
+`Verdict`/`Finding`/`draft` — Track A, exclusively. There is no field in
+`EvaluationState` to hold a Track B (`judge`) verdict: `JudgeVerdict` is
+deliberately never written to `EvaluationState.verdict`
+(`src/s2s_harness/llm/judge.py`'s own docstring says a `judge_verdict`
+field is future node/state design work), and `src/s2s_harness/models/` is
+guarded off-limits for every teammate this wave regardless of file
+ownership (`team_plan.md`'s "Do not touch" list), so no one on this team
+could add that field even if the design were finalized. A YAML fixture
+with an `expect.judge_verdict:` block would therefore assert against a
+field that does not exist — the same "matrix that silently drifts" failure
+mode this file's own audit log (round 2, round 3) has caught twice before,
+just inverted: fabricating coverage instead of denying it.
+
+`tests/test_dual_track.py` instead calls Track A
+(`tests/golden.run_fixture`, reusing `ex1_houseplant.yaml` rather than
+inventing new state-construction code) and Track B's landed role functions
+(`s2s_harness.llm.judge.judge`, `.interpret.interpret`, `.suggest.suggest`,
+`.polish.polish`) side by side, directly, asserting on their return values
+rather than on `EvaluationState`. Both tests are Tier-1-safe (no network,
+no real provider): the disagreement test stubs the LLM completion call
+with a canned response that disagrees with Track A's verdict; the
+degradation test relies on `S2S_LLM_PROVIDER` being unset, `complete()`'s
+own documented "legitimate Track-A-only steady state," not a mock.
+
+This section will need a follow-up once T3 lands the graph/node layer and
+a `judge_verdict`-shaped field exists on whatever state object the graph
+actually threads through nodes (`EvaluationState` or a superset) — at that
+point an end-to-end disagreement/degradation fixture through the real
+graph becomes possible and should be added, with this section updated to
+point at it rather than superseded silently.
