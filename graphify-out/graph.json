@@ -1480,10 +1480,19 @@
       "norm_label": "[t1] phase 1 fully closed \u2014 cli-16 filled, final report to lead"
     },
     {
-      "label": "[wave0-bootstrap] graphify CLI surface differs from CLAUDE.md",
+      "label": "[T1 -> lead] BLOCKED on git commit/push \u2014 no Bash tool this session, cannot fabricate a SHA",
       "file_type": "document",
       "source_file": ".claude/team-runs/2026-07-26-foundations-and-deploy/team_findings.md",
       "source_location": "L104",
+      "id": "2026_07_26_foundations_and_deploy_team_findings_t1_lead_blocked_on_git_commit_push_no_bash_tool_this_session_cannot_fabricate_a_sha",
+      "community": 30,
+      "norm_label": "[t1 -> lead] blocked on git commit/push \u2014 no bash tool this session, cannot fabricate a sha"
+    },
+    {
+      "label": "[wave0-bootstrap] graphify CLI surface differs from CLAUDE.md",
+      "file_type": "document",
+      "source_file": ".claude/team-runs/2026-07-26-foundations-and-deploy/team_findings.md",
+      "source_location": "L112",
       "id": "2026_07_26_foundations_and_deploy_team_findings_wave0_bootstrap_graphify_cli_surface_differs_from_claude_md",
       "community": 30,
       "norm_label": "[wave0-bootstrap] graphify cli surface differs from claude.md"
@@ -1492,7 +1501,7 @@
       "label": "[T5] Deploy-surface baseline",
       "file_type": "document",
       "source_file": ".claude/team-runs/2026-07-26-foundations-and-deploy/team_findings.md",
-      "source_location": "L111",
+      "source_location": "L119",
       "id": "2026_07_26_foundations_and_deploy_team_findings_t5_deploy_surface_baseline",
       "community": 30,
       "norm_label": "[t5] deploy-surface baseline"
@@ -1501,7 +1510,7 @@
       "label": "[T5] Terraform provider schema verified before writing (not guessed)",
       "file_type": "document",
       "source_file": ".claude/team-runs/2026-07-26-foundations-and-deploy/team_findings.md",
-      "source_location": "L119",
+      "source_location": "L127",
       "id": "2026_07_26_foundations_and_deploy_team_findings_t5_terraform_provider_schema_verified_before_writing_not_guessed",
       "community": 30,
       "norm_label": "[t5] terraform provider schema verified before writing (not guessed)"
@@ -1510,7 +1519,7 @@
       "label": "[T5] Docker build succeeded; bridge module intentionally does not exist yet",
       "file_type": "document",
       "source_file": ".claude/team-runs/2026-07-26-foundations-and-deploy/team_findings.md",
-      "source_location": "L123",
+      "source_location": "L131",
       "id": "2026_07_26_foundations_and_deploy_team_findings_t5_docker_build_succeeded_bridge_module_intentionally_does_not_exist_yet",
       "community": 30,
       "norm_label": "[t5] docker build succeeded; bridge module intentionally does not exist yet"
@@ -1519,7 +1528,7 @@
       "label": "[T5 <-> T4-ci-dev] WIF and registry naming confirmed",
       "file_type": "document",
       "source_file": ".claude/team-runs/2026-07-26-foundations-and-deploy/team_findings.md",
-      "source_location": "L127",
+      "source_location": "L135",
       "id": "2026_07_26_foundations_and_deploy_team_findings_t5_t4_ci_dev_wif_and_registry_naming_confirmed",
       "community": 30,
       "norm_label": "[t5 <-> t4-ci-dev] wif and registry naming confirmed"
@@ -1528,7 +1537,7 @@
       "label": "[T5] T1's reply on ID-scheme placement (read from team_findings.md, T1 cannot SendMessage this session)",
       "file_type": "document",
       "source_file": ".claude/team-runs/2026-07-26-foundations-and-deploy/team_findings.md",
-      "source_location": "L138",
+      "source_location": "L146",
       "id": "2026_07_26_foundations_and_deploy_team_findings_t5_t1_s_reply_on_id_scheme_placement_read_from_team_findings_md_t1_cannot_sendmessage_this_session",
       "community": 30,
       "norm_label": "[t5] t1's reply on id-scheme placement (read from team_findings.md, t1 cannot sendmessage this session)"
@@ -1537,7 +1546,7 @@
       "label": "[T2] catalog.py built, RULES_SPEC section 1 done, 18/18 entries",
       "file_type": "document",
       "source_file": ".claude/team-runs/2026-07-26-foundations-and-deploy/team_findings.md",
-      "source_location": "L144",
+      "source_location": "L152",
       "id": "2026_07_26_foundations_and_deploy_team_findings_t2_catalog_py_built_rules_spec_section_1_done_18_18_entries",
       "community": 30,
       "norm_label": "[t2] catalog.py built, rules_spec section 1 done, 18/18 entries"
@@ -1546,7 +1555,7 @@
       "label": "[T2] Slash-in-table ambiguity resolved by inference, flagging for awareness",
       "file_type": "document",
       "source_file": ".claude/team-runs/2026-07-26-foundations-and-deploy/team_findings.md",
-      "source_location": "L150",
+      "source_location": "L158",
       "id": "2026_07_26_foundations_and_deploy_team_findings_t2_slash_in_table_ambiguity_resolved_by_inference_flagging_for_awareness",
       "community": 30,
       "norm_label": "[t2] slash-in-table ambiguity resolved by inference, flagging for awareness"
@@ -1555,7 +1564,7 @@
       "label": "[T2] Key names for T3 -- SendMessage unavailable, same as T1's finding above",
       "file_type": "document",
       "source_file": ".claude/team-runs/2026-07-26-foundations-and-deploy/team_findings.md",
-      "source_location": "L158",
+      "source_location": "L166",
       "id": "2026_07_26_foundations_and_deploy_team_findings_t2_key_names_for_t3_sendmessage_unavailable_same_as_t1_s_finding_above",
       "community": 30,
       "norm_label": "[t2] key names for t3 -- sendmessage unavailable, same as t1's finding above"
@@ -1564,7 +1573,7 @@
       "label": "[T4] uv run task-name investigation (empirical, not guessed)",
       "file_type": "document",
       "source_file": ".claude/team-runs/2026-07-26-foundations-and-deploy/team_findings.md",
-      "source_location": "L171",
+      "source_location": "L179",
       "id": "2026_07_26_foundations_and_deploy_team_findings_t4_uv_run_task_name_investigation_empirical_not_guessed",
       "community": 30,
       "norm_label": "[t4] uv run task-name investigation (empirical, not guessed)"
@@ -1573,7 +1582,7 @@
       "label": "[T2] Key names for T3, resend attempt + layering contract answer -- SendMessage still errors for me",
       "file_type": "document",
       "source_file": ".claude/team-runs/2026-07-26-foundations-and-deploy/team_findings.md",
-      "source_location": "L181",
+      "source_location": "L189",
       "id": "2026_07_26_foundations_and_deploy_team_findings_t2_key_names_for_t3_resend_attempt_layering_contract_answer_sendmessage_still_errors_for_me",
       "community": 30,
       "norm_label": "[t2] key names for t3, resend attempt + layering contract answer -- sendmessage still errors for me"
@@ -1582,7 +1591,7 @@
       "label": "[T3] No SendMessage tool this session either -- same gap T1/T2/T4 hit",
       "file_type": "document",
       "source_file": ".claude/team-runs/2026-07-26-foundations-and-deploy/team_findings.md",
-      "source_location": "L195",
+      "source_location": "L203",
       "id": "2026_07_26_foundations_and_deploy_team_findings_t3_no_sendmessage_tool_this_session_either_same_gap_t1_t2_t4_hit",
       "community": 30,
       "norm_label": "[t3] no sendmessage tool this session either -- same gap t1/t2/t4 hit"
@@ -1591,7 +1600,7 @@
       "label": "[T3] Catalogue-key validation: models/ stays dependency-free, contract confirmed by T2 independently",
       "file_type": "document",
       "source_file": ".claude/team-runs/2026-07-26-foundations-and-deploy/team_findings.md",
-      "source_location": "L199",
+      "source_location": "L207",
       "id": "2026_07_26_foundations_and_deploy_team_findings_t3_catalogue_key_validation_models_stays_dependency_free_contract_confirmed_by_t2_independently",
       "community": 30,
       "norm_label": "[t3] catalogue-key validation: models/ stays dependency-free, contract confirmed by t2 independently"
@@ -1600,7 +1609,7 @@
       "label": "[T3] Transcript: kept in models/state.py, flagging an open conflict with T1's ratified STT_SPEC resolution",
       "file_type": "document",
       "source_file": ".claude/team-runs/2026-07-26-foundations-and-deploy/team_findings.md",
-      "source_location": "L218",
+      "source_location": "L226",
       "id": "2026_07_26_foundations_and_deploy_team_findings_t3_transcript_kept_in_models_state_py_flagging_an_open_conflict_with_t1_s_ratified_stt_spec_resolution",
       "community": 30,
       "norm_label": "[t3] transcript: kept in models/state.py, flagging an open conflict with t1's ratified stt_spec resolution"
@@ -1609,7 +1618,7 @@
       "label": "[T3] Derived fields: threshold_all/audio_penalized rejected via model_fields_set, with_derived + model_copy is normalize's bypass",
       "file_type": "document",
       "source_file": ".claude/team-runs/2026-07-26-foundations-and-deploy/team_findings.md",
-      "source_location": "L224",
+      "source_location": "L232",
       "id": "2026_07_26_foundations_and_deploy_team_findings_t3_derived_fields_threshold_all_audio_penalized_rejected_via_model_fields_set_with_derived_model_copy_is_normalize_s_bypass",
       "community": 30,
       "norm_label": "[t3] derived fields: threshold_all/audio_penalized rejected via model_fields_set, with_derived + model_copy is normalize's bypass"
@@ -1618,7 +1627,7 @@
       "label": "[T3] Proofs, lint, mypy -- all green",
       "file_type": "document",
       "source_file": ".claude/team-runs/2026-07-26-foundations-and-deploy/team_findings.md",
-      "source_location": "L234",
+      "source_location": "L242",
       "id": "2026_07_26_foundations_and_deploy_team_findings_t3_proofs_lint_mypy_all_green",
       "community": 30,
       "norm_label": "[t3] proofs, lint, mypy -- all green"
@@ -1627,7 +1636,7 @@
       "label": "[T2] Definitive splice verdicts, all 18 entries -- no hedging, per lead's direct instruction",
       "file_type": "document",
       "source_file": ".claude/team-runs/2026-07-26-foundations-and-deploy/team_findings.md",
-      "source_location": "L238",
+      "source_location": "L246",
       "id": "2026_07_26_foundations_and_deploy_team_findings_t2_definitive_splice_verdicts_all_18_entries_no_hedging_per_lead_s_direct_instruction",
       "community": 30,
       "norm_label": "[t2] definitive splice verdicts, all 18 entries -- no hedging, per lead's direct instruction"
@@ -1636,7 +1645,7 @@
       "label": "[T2] Mode duplication (rules/catalog.py:37, models/state.py:66) -- resolved, tests/test_layering.py written",
       "file_type": "document",
       "source_file": ".claude/team-runs/2026-07-26-foundations-and-deploy/team_findings.md",
-      "source_location": "L278",
+      "source_location": "L286",
       "id": "2026_07_26_foundations_and_deploy_team_findings_t2_mode_duplication_rules_catalog_py_37_models_state_py_66_resolved_tests_test_layering_py_written",
       "community": 30,
       "norm_label": "[t2] mode duplication (rules/catalog.py:37, models/state.py:66) -- resolved, tests/test_layering.py written"
@@ -1645,7 +1654,7 @@
       "label": "[T3] Lead review defect fixed: unknown-flag-key validator was fail-open, now fail-closed",
       "file_type": "document",
       "source_file": ".claude/team-runs/2026-07-26-foundations-and-deploy/team_findings.md",
-      "source_location": "L288",
+      "source_location": "L296",
       "id": "2026_07_26_foundations_and_deploy_team_findings_t3_lead_review_defect_fixed_unknown_flag_key_validator_was_fail_open_now_fail_closed",
       "community": 30,
       "norm_label": "[t3] lead review defect fixed: unknown-flag-key validator was fail-open, now fail-closed"
@@ -1654,7 +1663,7 @@
       "label": "[T4] Real CI run result and branch-protection blocker",
       "file_type": "document",
       "source_file": ".claude/team-runs/2026-07-26-foundations-and-deploy/team_findings.md",
-      "source_location": "L307",
+      "source_location": "L315",
       "id": "2026_07_26_foundations_and_deploy_team_findings_t4_real_ci_run_result_and_branch_protection_blocker",
       "community": 30,
       "norm_label": "[t4] real ci run result and branch-protection blocker"
@@ -1663,7 +1672,7 @@
       "label": "[T4 <-> T5-gcp-deploy] WIF/registry contract, T4 side confirmed",
       "file_type": "document",
       "source_file": ".claude/team-runs/2026-07-26-foundations-and-deploy/team_findings.md",
-      "source_location": "L315",
+      "source_location": "L323",
       "id": "2026_07_26_foundations_and_deploy_team_findings_t4_t5_gcp_deploy_wif_registry_contract_t4_side_confirmed",
       "community": 30,
       "norm_label": "[t4 <-> t5-gcp-deploy] wif/registry contract, t4 side confirmed"
@@ -1672,10 +1681,28 @@
       "label": "[T3] Committed and pushed models/state.py; transient CI red explained, self-resolved",
       "file_type": "document",
       "source_file": ".claude/team-runs/2026-07-26-foundations-and-deploy/team_findings.md",
-      "source_location": "L323",
+      "source_location": "L331",
       "id": "2026_07_26_foundations_and_deploy_team_findings_t3_committed_and_pushed_models_state_py_transient_ci_red_explained_self_resolved",
       "community": 30,
       "norm_label": "[t3] committed and pushed models/state.py; transient ci red explained, self-resolved"
+    },
+    {
+      "label": "[T3] Same shared-working-directory race T5 independently reported, my side of it",
+      "file_type": "document",
+      "source_file": ".claude/team-runs/2026-07-26-foundations-and-deploy/team_findings.md",
+      "source_location": "L339",
+      "id": "2026_07_26_foundations_and_deploy_team_findings_t3_same_shared_working_directory_race_t5_independently_reported_my_side_of_it",
+      "community": 30,
+      "norm_label": "[t3] same shared-working-directory race t5 independently reported, my side of it"
+    },
+    {
+      "label": "[T4] Accepted gap: branch protection on main is not enforced (escalated, decision recorded)",
+      "file_type": "document",
+      "source_file": ".claude/team-runs/2026-07-26-foundations-and-deploy/team_findings.md",
+      "source_location": "L345",
+      "id": "2026_07_26_foundations_and_deploy_team_findings_t4_accepted_gap_branch_protection_on_main_is_not_enforced_escalated_decision_recorded",
+      "community": 30,
+      "norm_label": "[t4] accepted gap: branch protection on main is not enforced (escalated, decision recorded)"
     },
     {
       "label": "team_plan.md",
@@ -2189,6 +2216,15 @@
       "id": "versioning_pre_1_0_note",
       "community": 36,
       "norm_label": "pre-1.0 note"
+    },
+    {
+      "label": "Known gap: branch protection on `main` is not enforced",
+      "file_type": "document",
+      "source_file": "VERSIONING.md",
+      "source_location": "L82",
+      "id": "versioning_known_gap_branch_protection_on_main_is_not_enforced",
+      "community": 36,
+      "norm_label": "known gap: branch protection on `main` is not enforced"
     },
     {
       "label": "project-criteria.md",
@@ -5838,6 +5874,16 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": ".claude/team-runs/2026-07-26-foundations-and-deploy/team_findings.md",
+      "source_location": "L104",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "2026_07_26_foundations_and_deploy_team_findings_team_findings_wave_1",
+      "target": "2026_07_26_foundations_and_deploy_team_findings_t1_lead_blocked_on_git_commit_push_no_bash_tool_this_session_cannot_fabricate_a_sha"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/team-runs/2026-07-26-foundations-and-deploy/team_findings.md",
       "source_location": "L59",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -5990,9 +6036,9 @@
       "source_file": ".claude/team-runs/2026-07-26-foundations-and-deploy/team_findings.md",
       "source_location": "L323",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "2026_07_26_foundations_and_deploy_team_findings_team_findings_wave_1",
-      "target": "2026_07_26_foundations_and_deploy_team_findings_t3_committed_and_pushed_models_state_py_transient_ci_red_explained_self_resolved",
-      "confidence_score": 1.0
+      "target": "2026_07_26_foundations_and_deploy_team_findings_t3_committed_and_pushed_models_state_py_transient_ci_red_explained_self_resolved"
     },
     {
       "relation": "contains",
@@ -6038,11 +6084,31 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": ".claude/team-runs/2026-07-26-foundations-and-deploy/team_findings.md",
+      "source_location": "L339",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "2026_07_26_foundations_and_deploy_team_findings_team_findings_wave_1",
+      "target": "2026_07_26_foundations_and_deploy_team_findings_t3_same_shared_working_directory_race_t5_independently_reported_my_side_of_it"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/team-runs/2026-07-26-foundations-and-deploy/team_findings.md",
       "source_location": "L183",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "2026_07_26_foundations_and_deploy_team_findings_team_findings_wave_1",
       "target": "2026_07_26_foundations_and_deploy_team_findings_t3_transcript_kept_in_models_state_py_flagging_an_open_conflict_with_t1_s_ratified_stt_spec_resolution"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/team-runs/2026-07-26-foundations-and-deploy/team_findings.md",
+      "source_location": "L345",
+      "weight": 1.0,
+      "source": "2026_07_26_foundations_and_deploy_team_findings_team_findings_wave_1",
+      "target": "2026_07_26_foundations_and_deploy_team_findings_t4_accepted_gap_branch_protection_on_main_is_not_enforced_escalated_decision_recorded",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -6603,6 +6669,16 @@
       "confidence_score": 1.0,
       "source": "versioning",
       "target": "versioning_versioning"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "VERSIONING.md",
+      "source_location": "L82",
+      "weight": 1.0,
+      "source": "versioning_versioning",
+      "target": "versioning_known_gap_branch_protection_on_main_is_not_enforced",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -8586,5 +8662,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "5a61c1950bede129fe33513371c62fdb0790bb12"
+  "built_at_commit": "6ac2d6fc23e555d5d60f658f5e61d08d28931add"
 }

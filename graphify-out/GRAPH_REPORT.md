@@ -1,16 +1,16 @@
 # Graph Report - s2s-harness  (2026-07-26)
 
 ## Corpus Check
-- 42 files · ~55,427 words
+- 42 files · ~56,890 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 458 nodes · 443 edges · 44 communities (36 shown, 8 thin omitted)
+- 462 nodes · 447 edges · 44 communities (36 shown, 8 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `5a61c195`
+- Built from commit: `6ac2d6fc`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -60,7 +60,7 @@
 - [[_COMMUNITY_Community 43|Community 43]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `Team Findings: Wave 1` - 36 edges
+1. `Team Findings: Wave 1` - 39 edges
 2. `Project criteria — source of truth` - 23 edges
 3. `2. Nodes` - 19 edges
 4. `5. `draft` — the justification builder` - 19 edges
@@ -186,7 +186,7 @@ Nodes (27): BaseModel, bool, EvaluationState, Finding, Picks, Preflight, Pydanti
 
 ### Community 30 - "Community 30"
 Cohesion: 0.05
-Nodes (36): [lead] Baseline reconnaissance (pre-wave), [T1] CLI_SPEC nit fixed; [T1 -> T4-ci-dev] requesting the --version contract directly (SendMessage still unavailable to me), [T1] Confirmed T2's catalog.py already cites the RULE-n IDs I assigned, [T1] ID-scheme conventions adopted (stated at top of each file, per-file), [T1] Lead approved all three Phase-1 decisions; declining T2's RULES_SPEC wording-tightening suggestion, [T1] No Bash tool in this session — cannot run `graphify update .`, [T1] Phase 1 complete — diff summary and rationale, awaiting lead review, [T1] Phase 1 fully closed — CLI-16 filled, final report to lead (+28 more)
+Nodes (39): [lead] Baseline reconnaissance (pre-wave), [T1] CLI_SPEC nit fixed; [T1 -> T4-ci-dev] requesting the --version contract directly (SendMessage still unavailable to me), [T1] Confirmed T2's catalog.py already cites the RULE-n IDs I assigned, [T1] ID-scheme conventions adopted (stated at top of each file, per-file), [T1] Lead approved all three Phase-1 decisions; declining T2's RULES_SPEC wording-tightening suggestion, [T1 -> lead] BLOCKED on git commit/push — no Bash tool this session, cannot fabricate a SHA, [T1] No Bash tool in this session — cannot run `graphify update .`, [T1] Phase 1 complete — diff summary and rationale, awaiting lead review (+31 more)
 
 ### Community 31 - "Community 31"
 Cohesion: 0.22
@@ -209,8 +209,8 @@ Cohesion: 0.33
 Nodes (5): [0.1.0] - 2026-07-26, Added, Changelog, Fixed, [Unreleased]
 
 ### Community 36 - "Community 36"
-Cohesion: 0.33
-Nodes (5): Pre-1.0 note, Release procedure, Scheme, Versioning, What bumps which number
+Cohesion: 0.29
+Nodes (6): Known gap: branch protection on `main` is not enforced, Pre-1.0 note, Release procedure, Scheme, Versioning, What bumps which number
 
 ### Community 37 - "Community 37"
 Cohesion: 0.29
@@ -221,7 +221,7 @@ Cohesion: 0.12
 Nodes (15): 1. Catalogues, 2. Normalization, 3. `decide` — the hierarchy walk, 6. `scan` — bilingual signal detection, 7. Invariants for the golden fixtures, Error clusters — shared, Error clusters — shared {RULE-1}, Rules specification (+7 more)
 
 ## Knowledge Gaps
-- **309 isolated node(s):** `$schema`, `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS`, `defaultMode`, `PreToolUse`, `superpowers@claude-plugins-official` (+304 more)
+- **313 isolated node(s):** `$schema`, `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS`, `defaultMode`, `PreToolUse`, `superpowers@claude-plugins-official` (+308 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **8 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -232,13 +232,13 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.009) - this node is a cross-community bridge._
 - **Why does `5. `draft` — the justification builder` connect `Community 9` to `Community 43`?**
   _High betweenness centrality (0.007) - this node is a cross-community bridge._
-- **Why does `4. `audit` — findings` connect `Community 1` to `Community 43`?**
-  _High betweenness centrality (0.007) - this node is a cross-community bridge._
 - **What connects `$schema`, `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS`, `defaultMode` to the rest of the system?**
-  _341 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _345 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
   _Cohesion score 0.09523809523809523 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**
   _Cohesion score 0.11764705882352941 - nodes in this community are weakly interconnected._
 - **Should `Community 2` be split into smaller, more focused modules?**
   _Cohesion score 0.11764705882352941 - nodes in this community are weakly interconnected._
+- **Should `Community 3` be split into smaller, more focused modules?**
+  _Cohesion score 0.07407407407407407 - nodes in this community are weakly interconnected._
