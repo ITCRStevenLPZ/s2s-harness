@@ -1,5 +1,8 @@
 # Build plan
 
+Version: 1.0.0
+Last updated: 2026-07-26
+
 Ordered so that the engine is provably correct before anything is wired to it. Each phase ends with something runnable and tested.
 
 Delegate each phase to the agent named in its heading. Read that phase's spec before writing code.
@@ -31,7 +34,9 @@ Deliverables:
 - `rules/normalize.py`, `rules/decide.py`, `rules/audit.py`, `rules/draft.py`, `rules/scanner.py`
 - Exactly the rules in `RULES_SPEC` §§2–6 — no extras, no shortcuts.
 
-Done when: every fixture in `EVAL_SPEC` passes, `test_determinism` passes, and the seven invariants in `RULES_SPEC` §7 hold.
+Done when: every fixture in `EVAL_SPEC` passes, `test_determinism` passes, and the six invariants in `RULES_SPEC` §7 hold.
+
+> Reconciliation note: an earlier draft of this line said "the seven invariants". `RULES_SPEC` §7's heading number (`7.`) is the section number, not an invariant count — the section has always enumerated six (`RULE-40` through `RULE-45`). No seventh invariant was ever dropped; this was a miscount in this file, corrected here rather than by adding an invariant to reach the stated number.
 
 **Build the fixtures first.** Write `tests/golden/*.yaml` from the worked examples before writing `decide`, so the engine is developed against the known-correct answers rather than validated after the fact.
 

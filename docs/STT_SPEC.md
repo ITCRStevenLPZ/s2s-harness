@@ -1,12 +1,17 @@
 # Speech-to-text specification
 
+Version: 1.0.0
+Last updated: 2026-07-26
+
+**ID convention:** `STT-n` trailing tag `{STT-n}`, one to two per `##` section depending on how many distinct requirements it states, assigned once in document order. IDs are additive only; no requirement text below was reworded, reordered or removed to add them.
+
 The rater dictates their observations instead of typing them. Richer notes get captured, faster, while the audio is still fresh — and richer notes are the single biggest lever on justification quality, because every sentence the engine writes is built from what the rater actually recorded.
 
 Credentials are supplied by the operator and are **not** in this repo.
 
 ---
 
-## 1. Scope
+## 1. Scope {STT-1}
 
 | In scope | Out of scope |
 |---|---|
@@ -16,7 +21,7 @@ Credentials are supplied by the operator and are **not** in this repo.
 
 ---
 
-## 2. Provider interface
+## 2. Provider interface {STT-2}
 
 `src/s2s_harness/stt/base.py`
 
@@ -44,12 +49,13 @@ class TranscriptionProvider(Protocol):
         phrase_hints: list[str],
     ) -> Transcript: ...
 ```
+{STT-3}
 
-Selection via `S2S_STT_PROVIDER` in `{gemini, gcp, null}`, default `null`. Unknown value → hard error at startup, never a silent fallback.
+Selection via `S2S_STT_PROVIDER` in `{gemini, gcp, null}`, default `null`. Unknown value → hard error at startup, never a silent fallback. {STT-4}
 
 ---
 
-## 3. `GeminiTranscriber`
+## 3. `GeminiTranscriber` {STT-5}
 
 SDK: `google-genai`. Auth: `GEMINI_API_KEY`.
 
@@ -59,7 +65,7 @@ SDK: `google-genai`. Auth: `GEMINI_API_KEY`.
 - Word timings: request them when the model supports it; tolerate their absence.
 - Retry: 2 attempts with exponential backoff on transient errors; on final failure raise `TranscriptionError` with the file path — never return an empty transcript that silently becomes empty notes.
 
-## 4. `GoogleCloudSTT`
+## 4. `GoogleCloudSTT` {STT-6}
 
 SDK: `google-cloud-speech` v2. Auth: `GOOGLE_APPLICATION_CREDENTIALS` pointing at a service-account JSON.
 
@@ -67,7 +73,7 @@ SDK: `google-cloud-speech` v2. Auth: `GOOGLE_APPLICATION_CREDENTIALS` pointing a
 - Attach the phrase hints as a `SpeechAdaptation` phrase set with a moderate boost (≈15). Over-boosting causes the recognizer to hallucinate the boosted terms into unrelated audio — which in this application would fabricate flags. Keep the boost conservative and verify against the fixture recordings.
 - Files over ~60 s go through `BatchRecognize`; shorter ones use the synchronous path.
 
-## 5. Phrase hints
+## 5. Phrase hints {STT-7}
 
 `src/s2s_harness/stt/phrase_hints.py`. These are the terms that decide whether the scanner fires, so recognition accuracy on them is worth more than general WER.
 
@@ -85,13 +91,13 @@ The project requires that the rater's own ears produce the audio-quality judgeme
 
 Therefore:
 
-- **No provider ever receives a model clip in the default path.** Only the rater's dictated notes.
-- An optional `ClipAnalyzer` adapter may be built behind the `S2S_EXPERIMENTAL_CLIP_ANALYSIS` flag, **off by default**. If built, it is bound by three rules: its output enters state as `Suggestion` objects only, never as flags; every suggestion it produces is labelled as machine-detected in the UI; and it may not contribute to `Verdict` or to any `Finding`. It is a second opinion that prompts the rater to relisten, never a substitute for listening.
-- The transcript is never fed to the rules engine as prose to be interpreted. It becomes `notes`, and `notes` are read by regex only.
+- **No provider ever receives a model clip in the default path.** Only the rater's dictated notes. {STT-8}
+- An optional `ClipAnalyzer` adapter may be built behind the `S2S_EXPERIMENTAL_CLIP_ANALYSIS` flag, **off by default**. If built, it is bound by three rules: its output enters state as `Suggestion` objects only, never as flags; every suggestion it produces is labelled as machine-detected in the UI; and it may not contribute to `Verdict` or to any `Finding`. It is a second opinion that prompts the rater to relisten, never a substitute for listening. {STT-9}
+- The transcript is never fed to the rules engine as prose to be interpreted. It becomes `notes`, and `notes` are read by regex only. {STT-10}
 
 ---
 
-## 7. Audio capture
+## 7. Audio capture {STT-11}
 
 `s2s ... --dictate` records from the default input device via `sounddevice`, writes 16 kHz mono WAV to a temp path, and passes it to the provider. Press Enter to stop. `--notes-a PATH` / `--notes-b PATH` skip recording and transcribe an existing file (m4a, mp3, wav, flac).
 
@@ -101,7 +107,7 @@ Temp recordings are deleted after transcription unless `--keep-audio` is passed.
 
 ---
 
-## 8. Failure behavior
+## 8. Failure behavior {STT-12}
 
 | Failure | Behavior |
 |---|---|
@@ -112,6 +118,6 @@ Temp recordings are deleted after transcription unless `--keep-audio` is passed.
 
 ---
 
-## 9. Cost note
+## 9. Cost note {STT-13}
 
 Transcription is billed by the provider, separately from the single completion in `polish`. A dictated evaluation therefore costs one STT call per side plus one short completion. This is still the cheapest configuration that captures good notes, because the alternative — the rater typing less because typing is slow — degrades every downstream sentence.

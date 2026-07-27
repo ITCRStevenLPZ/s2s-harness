@@ -1,31 +1,37 @@
 # CLI specification
 
+Version: 1.0.0
+Last updated: 2026-07-26
+
+**ID convention:** `CLI-n`, assigned once per command (in the order listed in §Commands) then once per global option (in table order), then once per exit code. Placement is `{CLI-n}` as a trailing tag on the `s2s ...` command lines in the fenced block, and a bare `` `CLI-n` `` value in a dedicated `ID` table column for the Global options and Exit codes tables — both forms are equally greppable via `CLI-[0-9]+`; the difference is only whether the surrounding row already has its own column structure to use. `CLI-16` (`--version`) was filled in from T4-ci-dev's versioning contract; see `VERSIONING.md`. IDs are additive only; no command or option semantics below were changed to add them.
+
 Typer + Rich. The CLI is the primary interface; the HTML front ends are a convenience layer over the same graph.
 
 ## Commands
 
 ```
-s2s conversation      evaluate a ≥4-turn conversation with Model A and Model B
-s2s clips             compare two single audio responses to one prompt
-s2s audit FILE        re-audit a saved run, or a justification you wrote by hand
-s2s serve             start the local bridge for the HTML front ends
-s2s criteria [TOPIC]  print the project criteria (hierarchy, clusters, examples, thresholds)
-s2s selftest          run the golden fixtures and report
+s2s conversation      evaluate a ≥4-turn conversation with Model A and Model B   {CLI-1}
+s2s clips             compare two single audio responses to one prompt          {CLI-2}
+s2s audit FILE        re-audit a saved run, or a justification you wrote by hand {CLI-3}
+s2s serve             start the local bridge for the HTML front ends            {CLI-4}
+s2s criteria [TOPIC]  print the project criteria (hierarchy, clusters, examples, thresholds)  {CLI-5}
+s2s selftest          run the golden fixtures and report                        {CLI-6}
 ```
 
 ## Global options
 
-| Option | Effect |
-|---|---|
-| `--no-llm` | Skip `polish` entirely. The deterministic draft is the output. |
-| `--dictate` | Record notes from the mic for each side. |
-| `--notes-a PATH` / `--notes-b PATH` | Transcribe existing audio files instead of typing. |
-| `--keep-audio` | Do not delete temp recordings. |
-| `--json` | Emit the full state as JSON on stdout; suppress the pretty view. |
-| `--out DIR` | Write `run.json` + `justification.md` to DIR. |
-| `--resume RUN_ID` | Reload a checkpoint and re-run from the first changed input. |
-| `--lang es\|en` | Force interface language for prompts. Justification output is always English. |
-| `--strict` | Treat every warning as blocking (useful for self-training). |
+| Option | Effect | ID |
+|---|---|---|
+| `--no-llm` | Skip `polish` entirely. The deterministic draft is the output. | `CLI-7` |
+| `--dictate` | Record notes from the mic for each side. | `CLI-8` |
+| `--notes-a PATH` / `--notes-b PATH` | Transcribe existing audio files instead of typing. | `CLI-9` |
+| `--keep-audio` | Do not delete temp recordings. | `CLI-10` |
+| `--json` | Emit the full state as JSON on stdout; suppress the pretty view. | `CLI-11` |
+| `--out DIR` | Write `run.json` + `justification.md` to DIR. | `CLI-12` |
+| `--resume RUN_ID` | Reload a checkpoint and re-run from the first changed input. | `CLI-13` |
+| `--lang es\|en` | Force interface language for prompts. Justification output is always English. | `CLI-14` |
+| `--strict` | Treat every warning as blocking (useful for self-training). | `CLI-15` |
+| `--version` | Print the installed package version to stdout as a bare string (e.g. `0.1.0`) and exit 0 immediately, no other side effects — evaluated before subcommand dispatch, works with no other arguments (`s2s --version`), does not touch config, STT, LLM or any state file. Available on the top-level `s2s` command, not per-subcommand. Source of truth is `importlib.metadata.version("s2s-harness")`, which reads `[project] version` in `pyproject.toml` — never a second hardcoded constant in the CLI layer. See `VERSIONING.md` for the SemVer scheme this value follows. No short form: no other global option in this table has one, so `-V` is deliberately omitted to keep the convention uniform rather than introduce a one-off exception. | `CLI-16` |
 
 ## Interactive flow
 
@@ -76,9 +82,9 @@ Prints from `criteria/`, not from memory. `s2s criteria hierarchy`, `s2s criteri
 
 ## Exit codes
 
-| Code | Meaning |
-|---|---|
-| 0 | Completed, no blocking errors |
-| 1 | Completed, blocking errors present (or any warning under `--strict`) |
-| 2 | Invalid input / state validation failure |
-| 3 | Provider failure (STT or model) |
+| Code | Meaning | ID |
+|---|---|---|
+| 0 | Completed, no blocking errors | `CLI-17` |
+| 1 | Completed, blocking errors present (or any warning under `--strict`) | `CLI-18` |
+| 2 | Invalid input / state validation failure | `CLI-19` |
+| 3 | Provider failure (STT or model) | `CLI-20` |

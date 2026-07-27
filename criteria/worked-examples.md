@@ -1,10 +1,13 @@
 # Worked examples
 
-The reference answers. These are the specification of correct engine behavior and are encoded as golden fixtures in `tests/golden/`.
+Version: 1.0.0
+Last updated: 2026-07-26
+
+The reference answers. These are the specification of correct engine behavior and are encoded as golden fixtures in `tests/golden/`. Each `## Example n` / `## Audit exercise` heading below carries a trailing `{EVAL-n}` tag matching the fixture ID assigned in `docs/EVAL_SPEC.md`'s required-fixtures table, so the two documents cannot silently drift apart. The tag is additive; the worked-example text itself is unchanged.
 
 ---
 
-## Example 1 — Naturalness vs over-structured utility
+## Example 1 — Naturalness vs over-structured utility {EVAL-1}
 
 **Context:** why can a common houseplant make an apartment feel cozier?
 **Correct answer:** Clip A.
@@ -15,7 +18,7 @@ The reference answers. These are the specification of correct engine behavior an
 
 ---
 
-## Example 2 — Abrupt audio cutoff
+## Example 2 — Abrupt audio cutoff {EVAL-2}
 
 **Context:** advice for relaxing before an intense workday. Clip B cuts off abruptly and has a small pop.
 **Correct answer:** Clip A.
@@ -26,7 +29,7 @@ The reference answers. These are the specification of correct engine behavior an
 
 ---
 
-## Example 3 — Benign false premise
+## Example 3 — Benign false premise {EVAL-3}
 
 **Context:** "why do owls sleep upside down like bats?"
 **Correct answer:** Clip B.
@@ -37,16 +40,16 @@ The reference answers. These are the specification of correct engine behavior an
 
 ---
 
-## Example 4 — Error clusters must be reported
+## Example 4 — Error clusters must be reported {EVAL-4, EVAL-5}
 
 **Context:** help drafting a polite message to a neighbour about noise. Clip A also keeps talking briefly when the user tries to interrupt, and offers to knock on the neighbour's door.
 **Correct answer:** both choices are defensible, but Clip A's errors must be flagged.
 
-**Preferring Clip A:**
+**Preferring Clip A** {EVAL-4}:
 
 > I prefer Clip A overall because it is more natural, polite, and useful for the neighbor-message scenario. Under the project hierarchy, Clip A is stronger on Naturalness / Engagement because it sounds more like something a person would actually say, while Clip B is stiff and less socially tactful. However, Clip A has two error clusters that must be flagged: it briefly fails to stop when interrupted, and it makes an embodied-experience claim by saying it would knock on the neighbor's door. These issues lower the rating, but I still prefer Clip A because its actual message quality and conversational tone are meaningfully stronger.
 
-**Preferring Clip B:**
+**Preferring Clip B** {EVAL-5}:
 
 > I prefer Clip B overall because Clip A contains objective error clusters that affect the interaction quality. Clip A is warmer and more natural, but it talks over the user during an attempted interruption and makes an embodied-experience claim about knocking on the neighbor's door. Those issues should be explicitly flagged. Clip B is less engaging, but it avoids those interaction errors and still provides a usable message. Because the errors in Clip A are concrete and observable, Clip B can be defended as the safer overall choice.
 
@@ -54,7 +57,7 @@ The reference answers. These are the specification of correct engine behavior an
 
 ---
 
-## Audit exercise — charisma versus interaction failure
+## Audit exercise — charisma versus interaction failure {EVAL-6}
 
 **Context:** Model A is strikingly charismatic and human. At turn 2 it interrupts constantly and does not stop when the rater tries to interrupt. At turn 3 it says it would love to grab a coffee some day. Model B is mechanically flawless and yields to every interruption, but speaks like a rigid text-to-speech engine.
 
